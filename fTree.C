@@ -175,14 +175,43 @@ void fTree::Loop()
     formatHist(dijetMass_EBEE,"m_{jj} (GeV/c^{2})","Number Of Events");
     formatHist(jetPhoEtaDiff_EBEE,"|#bar{#eta_{j}} - #eta_{#gamma#gamma}|","Number Of Events");
     formatHist(jetPhoDPhi_EBEE,"#Delta#varphi(dijet,diphoton)","Number Of Events");
-     
-    // now calculate the variables for the cuts
-    // double jetDEta = fabs( leadingJet.Eta() - subleadingJet.Eta() );
-    // double dijetMass = dijet.M();
-    // double jetAvgEta = ( leadingJet.Eta() + subleadingJet.Eta() ) / 2.;
-    // double diphotonEta = diphoton.Eta();
-    // double jetPhoEtaDiff = fabs( jetAvgEta - diphotonEta );
-    // double jetPhoDPhi = fabs( diphoton.DeltaPhi(dijet) ); // which has higher phi doesn't matter here
+
+    // book conversion based histos
+
+    TH1D* nTwoProngConversions_EBEB = createTH1D("nTwoProngConversions_EBEB","nTwoProngConversions_EBEB",11,-0.5,10.5,"Number of Conversions","Number of Events");
+    TH1D* nOneProngConversions_EBEB = createTH1D("nOneProngConversions_EBEB","nOneProngConversions_EBEB",11,-0.5,10.5,"Number of Conversions","Number of Events");
+    TH2D* twoProngConversionRZMap_EBEB = createTH2D("twoProngConversionRZMap_EBEB","twoProngConversionRZMap_EBEB",100,-300.,300.,240,0.,120.,"z (mm)","r (mm)");
+    TH2D* twoProngConversionRPhiMap_EBEB = createTH2D("twoProngConversionRPhiMap_EBEB","twoProngConversionRPhiMap_EBEB",100,-3.1416,3.1416,240,0.,120.,"#varphi","r (mm)");
+    TH2D* oneProngConversionRZMap_EBEB = createTH2D("oneProngConversionRZMap_EBEB","oneProngConversionRZMap_EBEB",100,-300.,300.,240,0.,120.,"z (mm)","r (mm)");
+    TH2D* oneProngConversionRPhiMap_EBEB = createTH2D("oneProngConversionRPhiMap_EBEB","oneProngConversionRPhiMap_EBEB",100,-3.1416,3.1416,240,0.,120.,"#varphi","r (mm)");
+    TH1D* pairCotThetaSeparation_EBEB = createTH1D("pairCotThetaSeparation_EBEB","pairCotThetaSeparation_EBEB",100,-8.,2.,"pairCotThetaSeparation","Number of Conversions");
+    TH1D* dPhiTracksAtVtx_EBEB = createTH1D("dPhiTracksAtVtx_EBEB","dPhiTracksAtVtx_EBEB",100,-3.1416,3.1416,"#Delta#varphi of Tracks At Vtx","Number of Conversions");
+    TH1D* photonConvdR_EBEB = createTH1D("photonConvdR_EBEB","photonConvdR_EBEB",100,0.,0.2,"#DeltaR(conversion,#gamma)","Number of Conversions");
+    TH1D* nSharedHits_EBEB = createTH1D("nSharedHits_EBEB","nSharedHits_EBEB",21,-0.5,20.5,"Number of Shared Hits","Number of Conversions");
+
+
+    TH1D* nTwoProngConversions_EBEE = createTH1D("nTwoProngConversions_EBEE","nTwoProngConversions_EBEE",11,-0.5,10.5,"Number of Conversions","Number of Events");
+    TH1D* nOneProngConversions_EBEE = createTH1D("nOneProngConversions_EBEE","nOneProngConversions_EBEE",11,-0.5,10.5,"Number of Conversions","Number of Events");
+    TH2D* twoProngConversionRZMap_EBEE = createTH2D("twoProngConversionRZMap_EBEE","twoProngConversionRZMap_EBEE",100,-300.,300.,240,0.,120.,"z (mm)","r (mm)");
+    TH2D* twoProngConversionRPhiMap_EBEE = createTH2D("twoProngConversionRPhiMap_EBEE","twoProngConversionRPhiMap_EBEE",100,-3.1416,3.1416,240,0.,120.,"#varphi","r (mm)");
+    TH2D* oneProngConversionRZMap_EBEE = createTH2D("oneProngConversionRZMap_EBEE","oneProngConversionRZMap_EBEE",100,-300.,300.,240,0.,120.,"z (mm)","r (mm)");
+    TH2D* oneProngConversionRPhiMap_EBEE = createTH2D("oneProngConversionRPhiMap_EBEE","oneProngConversionRPhiMap_EBEE",100,-3.1416,3.1416,240,0.,120.,"#varphi","r (mm)");
+    TH1D* pairCotThetaSeparation_EBEE = createTH1D("pairCotThetaSeparation_EBEE","pairCotThetaSeparation_EBEE",100,-8.,2.,"pairCotThetaSeparation","Number of Conversions");
+    TH1D* dPhiTracksAtVtx_EBEE = createTH1D("dPhiTracksAtVtx_EBEE","dPhiTracksAtVtx_EBEE",100,-3.1416,3.1416,"#Delta#varphi of Tracks At Vtx","Number of Conversions");
+    TH1D* photonConvdR_EBEE = createTH1D("photonConvdR_EBEE","photonConvdR_EBEE",100,0.,0.2,"#DeltaR(conversion,#gamma)","Number of Conversions");
+    TH1D* nSharedHits_EBEE = createTH1D("nSharedHits_EBEE","nSharedHits_EBEE",21,-0.5,20.5,"Number of Shared Hits","Number of Conversions");
+
+    // conversion vertex maps based on eta location and not on event type
+    TH2D* twoProngConversionRZMap_EB = createTH2D("twoProngConversionRZMap_EB","twoProngConversionRZMap_EB",100,-300.,300.,240,0.,120.,"z (mm)","r (mm)");
+    TH2D* twoProngConversionRPhiMap_EB = createTH2D("twoProngConversionRPhiMap_EB","twoProngConversionRPhiMap_EB",100,-3.1416,3.1416,240,0.,120.,"#varphi","r (mm)");
+    TH2D* oneProngConversionRZMap_EB = createTH2D("oneProngConversionRZMap_EB","oneProngConversionRZMap_EB",100,-300.,300.,240,0.,120.,"z (mm)","r (mm)");
+    TH2D* oneProngConversionRPhiMap_EB = createTH2D("oneProngConversionRPhiMap_EB","oneProngConversionRPhiMap_EB",100,-3.1416,3.1416,240,0.,120.,"#varphi","r (mm)");
+
+    TH2D* twoProngConversionRZMap_EE = createTH2D("twoProngConversionRZMap_EE","twoProngConversionRZMap_EE",100,-300.,300.,240,0.,120.,"z (mm)","r (mm)");
+    TH2D* twoProngConversionRPhiMap_EE = createTH2D("twoProngConversionRPhiMap_EE","twoProngConversionRPhiMap_EE",100,-3.1416,3.1416,240,0.,120.,"#varphi","r (mm)");
+    TH2D* oneProngConversionRZMap_EE = createTH2D("oneProngConversionRZMap_EE","oneProngConversionRZMap_EE",100,-300.,300.,240,0.,120.,"z (mm)","r (mm)");
+    TH2D* oneProngConversionRPhiMap_EE = createTH2D("oneProngConversionRPhiMap_EE","oneProngConversionRPhiMap_EE",100,-3.1416,3.1416,240,0.,120.,"#varphi","r (mm)");
+
 
     gROOT->SetBatch();
 
@@ -340,6 +369,7 @@ void fTree::Loop()
             } // end ET cuts for VBF tag
         } // end haveTwoJets block
 
+        // now other plots
         if (EBEB){
             leadingPhoPt_EBEB->Fill(Photon1_pt);
             subleadingPhoPt_EBEB->Fill(Photon2_pt);
@@ -348,7 +378,24 @@ void fTree::Loop()
             leadingPhoPhi_EBEB->Fill(Photon1_phi);
             subleadingPhoPhi_EBEB->Fill(Photon2_phi);
             ggMass_EBEB->Fill(Diphoton_Minv);
-        }
+
+            // conversion stuff
+            nTwoProngConversions_EBEB->Fill(1.*ConvInfo1_r->size());
+            nOneProngConversions_EBEB->Fill(1.*ConvInfo_OneLeg1_r->size());
+            for (unsigned int i=0; i<ConvInfo1_r->size(); i++){
+                twoProngConversionRZMap_EBEB->Fill(ConvInfo1_z->at(i),ConvInfo1_r->at(i));
+                twoProngConversionRPhiMap_EBEB->Fill(ConvInfo1_phi->at(i),ConvInfo1_r->at(i));
+                pairCotThetaSeparation_EBEB->Fill(ConvInfo1_pairCotThetaSeparation->at(i));
+                dPhiTracksAtVtx_EBEB->Fill(ConvInfo1_dPhiTracksAtVtx->at(i));
+                photonConvdR_EBEB->Fill(ConvInfo1_dRToSc->at(i));
+                nSharedHits_EBEB->Fill(1.*ConvInfo1_nSharedHits->at(i));
+            }
+            for (unsigned int i=0; i<ConvInfo_OneLeg1_r->size(); i++){
+                oneProngConversionRZMap_EBEB->Fill(ConvInfo_OneLeg1_z->at(i),ConvInfo_OneLeg1_r->at(i));
+                oneProngConversionRPhiMap_EBEB->Fill(ConvInfo_OneLeg1_phi->at(i),ConvInfo_OneLeg1_r->at(i));
+            }
+        } // end EBEB block
+
         else if (EBEE){
             leadingPhoPt_EBEE->Fill(Photon1_pt);
             subleadingPhoPt_EBEE->Fill(Photon2_pt);
@@ -357,10 +404,74 @@ void fTree::Loop()
             leadingPhoPhi_EBEE->Fill(Photon1_phi);
             subleadingPhoPhi_EBEE->Fill(Photon2_phi);
             ggMass_EBEE->Fill(Diphoton_Minv);
-        }
-      // cout << Photon1_pt << " " << Photon2_pt << endl;
+            // conversion stuff
+            nTwoProngConversions_EBEE->Fill(1.*ConvInfo1_r->size());
+            nOneProngConversions_EBEE->Fill(1.*ConvInfo_OneLeg1_r->size());
+            for (unsigned int i=0; i<ConvInfo1_r->size(); i++){
+                twoProngConversionRZMap_EBEE->Fill(ConvInfo1_z->at(i),ConvInfo1_r->at(i));
+                twoProngConversionRPhiMap_EBEE->Fill(ConvInfo1_phi->at(i),ConvInfo1_r->at(i));
+                pairCotThetaSeparation_EBEE->Fill(ConvInfo1_pairCotThetaSeparation->at(i));
+                dPhiTracksAtVtx_EBEE->Fill(ConvInfo1_dPhiTracksAtVtx->at(i));
+                photonConvdR_EBEE->Fill(ConvInfo1_dRToSc->at(i));
+                nSharedHits_EBEE->Fill(1.*ConvInfo1_nSharedHits->at(i));
+            }
+            for (unsigned int i=0; i<ConvInfo_OneLeg1_r->size(); i++){
+                oneProngConversionRZMap_EBEE->Fill(ConvInfo_OneLeg1_z->at(i),ConvInfo_OneLeg1_r->at(i));
+                oneProngConversionRPhiMap_EBEE->Fill(ConvInfo_OneLeg1_phi->at(i),ConvInfo_OneLeg1_r->at(i));
+            }
+        } // end EBEE block
 
-    }
+        // fill EB and EE based conversion maps
+            // twoProngConversionRZMap_EB->Write();
+            // twoProngConversionRPhiMap_EB->Write();
+            // oneProngConversionRZMap_EB->Write();
+            // oneProngConversionRPhiMap_EB->Write();
+            // twoProngConversionRZMap_EE->Write();
+            // twoProngConversionRPhiMap_EE->Write();
+            // oneProngConversionRZMap_EE->Write();
+            // oneProngConversionRPhiMap_EE->Write();
+        if( isEB(Photon1_scEta) ){
+            for (unsigned int i=0; i<ConvInfo1_r->size(); i++){
+                twoProngConversionRZMap_EB->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
+                twoProngConversionRPhiMap_EB->Fill( ConvInfo1_phi->at(i), ConvInfo1_r->at(i) );
+            }
+            for (unsigned int i=0; i<ConvInfo_OneLeg1_r->size(); i++){
+                oneProngConversionRZMap_EB->Fill( ConvInfo_OneLeg1_z->at(i), ConvInfo_OneLeg1_r->at(i) );
+                oneProngConversionRPhiMap_EB->Fill( ConvInfo_OneLeg1_phi->at(i), ConvInfo_OneLeg1_r->at(i) );
+            }
+        }
+        else if ( isEE(Photon1_scEta) ){
+            for (unsigned int i=0; i<ConvInfo1_r->size(); i++){
+                twoProngConversionRZMap_EE->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
+                twoProngConversionRPhiMap_EE->Fill( ConvInfo1_phi->at(i), ConvInfo1_r->at(i) );
+            }
+            for (unsigned int i=0; i<ConvInfo_OneLeg1_r->size(); i++){
+                oneProngConversionRZMap_EE->Fill( ConvInfo_OneLeg1_z->at(i), ConvInfo_OneLeg1_r->at(i) );
+                oneProngConversionRPhiMap_EE->Fill( ConvInfo_OneLeg1_phi->at(i), ConvInfo_OneLeg1_r->at(i) );
+            }
+        }
+
+        if( isEB(Photon2_scEta) ){
+            for (unsigned int i=0; i<ConvInfo2_r->size(); i++){
+                twoProngConversionRZMap_EB->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
+                twoProngConversionRPhiMap_EB->Fill( ConvInfo2_phi->at(i), ConvInfo2_r->at(i) );
+            }
+            for (unsigned int i=0; i<ConvInfo_OneLeg2_r->size(); i++){
+                oneProngConversionRZMap_EB->Fill( ConvInfo_OneLeg2_z->at(i), ConvInfo_OneLeg2_r->at(i) );
+                oneProngConversionRPhiMap_EB->Fill( ConvInfo_OneLeg2_phi->at(i), ConvInfo_OneLeg2_r->at(i) );
+            }
+        }
+        else if ( isEE(Photon2_scEta) ){
+            for (unsigned int i=0; i<ConvInfo2_r->size(); i++){
+                twoProngConversionRZMap_EE->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
+                twoProngConversionRPhiMap_EE->Fill( ConvInfo2_phi->at(i), ConvInfo2_r->at(i) );
+            }
+            for (unsigned int i=0; i<ConvInfo_OneLeg2_r->size(); i++){
+                oneProngConversionRZMap_EE->Fill( ConvInfo_OneLeg2_z->at(i), ConvInfo_OneLeg2_r->at(i) );
+                oneProngConversionRPhiMap_EE->Fill( ConvInfo_OneLeg2_phi->at(i), ConvInfo_OneLeg2_r->at(i) );
+            }
+        }
+    } // end event loop
 
     // TCanvas c("c","",800,800);
     // c.cd();
@@ -485,5 +596,34 @@ void fTree::Loop()
     leadingPhoPhi_VBFTagged_EBEE->Write();
     subleadingPhoPhi_VBFTagged_EBEE->Write();
     ggMass_VBFTagged_EBEE->Write();
+
+    nTwoProngConversions_EBEB->Write();
+    nOneProngConversions_EBEB->Write();
+    twoProngConversionRZMap_EBEB->Write();
+    twoProngConversionRPhiMap_EBEB->Write();
+    oneProngConversionRZMap_EBEB->Write();
+    oneProngConversionRPhiMap_EBEB->Write();
+    pairCotThetaSeparation_EBEB->Write();
+    dPhiTracksAtVtx_EBEB->Write();
+    photonConvdR_EBEB->Write();
+    nSharedHits_EBEB->Write();
+    nTwoProngConversions_EBEE->Write();
+    nOneProngConversions_EBEE->Write();
+    twoProngConversionRZMap_EBEE->Write();
+    twoProngConversionRPhiMap_EBEE->Write();
+    oneProngConversionRZMap_EBEE->Write();
+    oneProngConversionRPhiMap_EBEE->Write();
+    pairCotThetaSeparation_EBEE->Write();
+    dPhiTracksAtVtx_EBEE->Write();
+    photonConvdR_EBEE->Write();
+    nSharedHits_EBEE->Write();
+    twoProngConversionRZMap_EB->Write();
+    twoProngConversionRPhiMap_EB->Write();
+    oneProngConversionRZMap_EB->Write();
+    oneProngConversionRPhiMap_EB->Write();
+    twoProngConversionRZMap_EE->Write();
+    twoProngConversionRPhiMap_EE->Write();
+    oneProngConversionRZMap_EE->Write();
+    oneProngConversionRPhiMap_EE->Write();
     f.Close();
-}
+} // end fTree::Loop() method

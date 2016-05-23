@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Thu Apr 14 13:00:03 2016 by ROOT version 6.02/13
+// Thu May 19 15:57:23 2016 by ROOT version 6.02/13
 // from TTree fTree/PhotonTree
-// found on file: root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/Merged/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD/merged.root
+// found on file: root://cmsxrootd.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ConversionInfo/Merged/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD/merged.root
 //////////////////////////////////////////////////////////
 
 #ifndef fTree_h
@@ -13,6 +13,11 @@
 #include <TFile.h>
 
 // Header file for the classes stored in the TTree if any.
+#include "vector"
+#include "vector"
+#include "vector"
+#include "vector"
+#include "vector"
 
 class fTree {
 public :
@@ -603,6 +608,74 @@ public :
    Double_t        JetInfo_energy[26];   //[nJets]
    Bool_t          JetInfo_passLooseID[26];   //[nJets]
    Bool_t          JetInfo_passTightID[26];   //[nJets]
+   vector<double>  *ConvInfo1_x;
+   vector<double>  *ConvInfo1_y;
+   vector<double>  *ConvInfo1_z;
+   vector<double>  *ConvInfo1_r;
+   vector<double>  *ConvInfo1_phi;
+   vector<double>  *ConvInfo1_dPhiTracksAtVtx;
+   vector<double>  *ConvInfo1_nTracks;
+   vector<double>  *ConvInfo1_dxy;
+   vector<double>  *ConvInfo1_dz;
+   vector<double>  *ConvInfo1_pairCotThetaSeparation;
+   vector<double>  *ConvInfo1_photonPt;
+   vector<double>  *ConvInfo1_dRToSc;
+   vector<unsigned char> *ConvInfo1_nSharedHits;
+   vector<double>  *ConvInfo1_MVAout;
+   vector<vector<float> > *ConvInfo1_oneLegMVA;
+   vector<vector<unsigned char> > *ConvInfo1_nHitsBeforeVtx;
+   vector<vector<int> > *ConvInfo1_quality;
+   vector<double>  *ConvInfo2_x;
+   vector<double>  *ConvInfo2_y;
+   vector<double>  *ConvInfo2_z;
+   vector<double>  *ConvInfo2_r;
+   vector<double>  *ConvInfo2_phi;
+   vector<double>  *ConvInfo2_dPhiTracksAtVtx;
+   vector<double>  *ConvInfo2_nTracks;
+   vector<double>  *ConvInfo2_dxy;
+   vector<double>  *ConvInfo2_dz;
+   vector<double>  *ConvInfo2_pairCotThetaSeparation;
+   vector<double>  *ConvInfo2_photonPt;
+   vector<double>  *ConvInfo2_dRToSc;
+   vector<unsigned char> *ConvInfo2_nSharedHits;
+   vector<double>  *ConvInfo2_MVAout;
+   vector<vector<float> > *ConvInfo2_oneLegMVA;
+   vector<vector<unsigned char> > *ConvInfo2_nHitsBeforeVtx;
+   vector<vector<int> > *ConvInfo2_quality;
+   vector<double>  *ConvInfo_OneLeg1_x;
+   vector<double>  *ConvInfo_OneLeg1_y;
+   vector<double>  *ConvInfo_OneLeg1_z;
+   vector<double>  *ConvInfo_OneLeg1_r;
+   vector<double>  *ConvInfo_OneLeg1_phi;
+   vector<double>  *ConvInfo_OneLeg1_dPhiTracksAtVtx;
+   vector<double>  *ConvInfo_OneLeg1_nTracks;
+   vector<double>  *ConvInfo_OneLeg1_dxy;
+   vector<double>  *ConvInfo_OneLeg1_dz;
+   vector<double>  *ConvInfo_OneLeg1_pairCotThetaSeparation;
+   vector<double>  *ConvInfo_OneLeg1_photonPt;
+   vector<double>  *ConvInfo_OneLeg1_dRToSc;
+   vector<unsigned char> *ConvInfo_OneLeg1_nSharedHits;
+   vector<double>  *ConvInfo_OneLeg1_MVAout;
+   vector<vector<float> > *ConvInfo_OneLeg1_oneLegMVA;
+   vector<vector<unsigned char> > *ConvInfo_OneLeg1_nHitsBeforeVtx;
+   vector<vector<int> > *ConvInfo_OneLeg1_quality;
+   vector<double>  *ConvInfo_OneLeg2_x;
+   vector<double>  *ConvInfo_OneLeg2_y;
+   vector<double>  *ConvInfo_OneLeg2_z;
+   vector<double>  *ConvInfo_OneLeg2_r;
+   vector<double>  *ConvInfo_OneLeg2_phi;
+   vector<double>  *ConvInfo_OneLeg2_dPhiTracksAtVtx;
+   vector<double>  *ConvInfo_OneLeg2_nTracks;
+   vector<double>  *ConvInfo_OneLeg2_dxy;
+   vector<double>  *ConvInfo_OneLeg2_dz;
+   vector<double>  *ConvInfo_OneLeg2_pairCotThetaSeparation;
+   vector<double>  *ConvInfo_OneLeg2_photonPt;
+   vector<double>  *ConvInfo_OneLeg2_dRToSc;
+   vector<unsigned char> *ConvInfo_OneLeg2_nSharedHits;
+   vector<double>  *ConvInfo_OneLeg2_MVAout;
+   vector<vector<float> > *ConvInfo_OneLeg2_oneLegMVA;
+   vector<vector<unsigned char> > *ConvInfo_OneLeg2_nHitsBeforeVtx;
+   vector<vector<int> > *ConvInfo_OneLeg2_quality;
    Double_t        Diphoton_Minv;
    Double_t        Diphoton_qt;
    Double_t        Diphoton_deltaPhi;
@@ -653,6 +726,74 @@ public :
    TBranch        *b_JetInfo_energy;   //!
    TBranch        *b_JetInfo_passLooseID;   //!
    TBranch        *b_JetInfo_passTightID;   //!
+   TBranch        *b_ConvInfo1_x;   //!
+   TBranch        *b_ConvInfo1_y;   //!
+   TBranch        *b_ConvInfo1_z;   //!
+   TBranch        *b_ConvInfo1_r;   //!
+   TBranch        *b_ConvInfo1_phi;   //!
+   TBranch        *b_ConvInfo1_dPhiTracksAtVtx;   //!
+   TBranch        *b_ConvInfo1_nTracks;   //!
+   TBranch        *b_ConvInfo1_dxy;   //!
+   TBranch        *b_ConvInfo1_dz;   //!
+   TBranch        *b_ConvInfo1_pairCotThetaSeparation;   //!
+   TBranch        *b_ConvInfo1_photonPt;   //!
+   TBranch        *b_ConvInfo1_dRToSc;   //!
+   TBranch        *b_ConvInfo1_nSharedHits;   //!
+   TBranch        *b_ConvInfo1_MVAout;   //!
+   TBranch        *b_ConvInfo1_oneLegMVA;   //!
+   TBranch        *b_ConvInfo1_nHitsBeforeVtx;   //!
+   TBranch        *b_ConvInfo1_quality;   //!
+   TBranch        *b_ConvInfo2_x;   //!
+   TBranch        *b_ConvInfo2_y;   //!
+   TBranch        *b_ConvInfo2_z;   //!
+   TBranch        *b_ConvInfo2_r;   //!
+   TBranch        *b_ConvInfo2_phi;   //!
+   TBranch        *b_ConvInfo2_dPhiTracksAtVtx;   //!
+   TBranch        *b_ConvInfo2_nTracks;   //!
+   TBranch        *b_ConvInfo2_dxy;   //!
+   TBranch        *b_ConvInfo2_dz;   //!
+   TBranch        *b_ConvInfo2_pairCotThetaSeparation;   //!
+   TBranch        *b_ConvInfo2_photonPt;   //!
+   TBranch        *b_ConvInfo2_dRToSc;   //!
+   TBranch        *b_ConvInfo2_nSharedHits;   //!
+   TBranch        *b_ConvInfo2_MVAout;   //!
+   TBranch        *b_ConvInfo2_oneLegMVA;   //!
+   TBranch        *b_ConvInfo2_nHitsBeforeVtx;   //!
+   TBranch        *b_ConvInfo2_quality;   //!
+   TBranch        *b_ConvInfo_OneLeg1_x;   //!
+   TBranch        *b_ConvInfo_OneLeg1_y;   //!
+   TBranch        *b_ConvInfo_OneLeg1_z;   //!
+   TBranch        *b_ConvInfo_OneLeg1_r;   //!
+   TBranch        *b_ConvInfo_OneLeg1_phi;   //!
+   TBranch        *b_ConvInfo_OneLeg1_dPhiTracksAtVtx;   //!
+   TBranch        *b_ConvInfo_OneLeg1_nTracks;   //!
+   TBranch        *b_ConvInfo_OneLeg1_dxy;   //!
+   TBranch        *b_ConvInfo_OneLeg1_dz;   //!
+   TBranch        *b_ConvInfo_OneLeg1_pairCotThetaSeparation;   //!
+   TBranch        *b_ConvInfo_OneLeg1_photonPt;   //!
+   TBranch        *b_ConvInfo_OneLeg1_dRToSc;   //!
+   TBranch        *b_ConvInfo_OneLeg1_nSharedHits;   //!
+   TBranch        *b_ConvInfo_OneLeg1_MVAout;   //!
+   TBranch        *b_ConvInfo_OneLeg1_oneLegMVA;   //!
+   TBranch        *b_ConvInfo_OneLeg1_nHitsBeforeVtx;   //!
+   TBranch        *b_ConvInfo_OneLeg1_quality;   //!
+   TBranch        *b_ConvInfo_OneLeg2_x;   //!
+   TBranch        *b_ConvInfo_OneLeg2_y;   //!
+   TBranch        *b_ConvInfo_OneLeg2_z;   //!
+   TBranch        *b_ConvInfo_OneLeg2_r;   //!
+   TBranch        *b_ConvInfo_OneLeg2_phi;   //!
+   TBranch        *b_ConvInfo_OneLeg2_dPhiTracksAtVtx;   //!
+   TBranch        *b_ConvInfo_OneLeg2_nTracks;   //!
+   TBranch        *b_ConvInfo_OneLeg2_dxy;   //!
+   TBranch        *b_ConvInfo_OneLeg2_dz;   //!
+   TBranch        *b_ConvInfo_OneLeg2_pairCotThetaSeparation;   //!
+   TBranch        *b_ConvInfo_OneLeg2_photonPt;   //!
+   TBranch        *b_ConvInfo_OneLeg2_dRToSc;   //!
+   TBranch        *b_ConvInfo_OneLeg2_nSharedHits;   //!
+   TBranch        *b_ConvInfo_OneLeg2_MVAout;   //!
+   TBranch        *b_ConvInfo_OneLeg2_oneLegMVA;   //!
+   TBranch        *b_ConvInfo_OneLeg2_nHitsBeforeVtx;   //!
+   TBranch        *b_ConvInfo_OneLeg2_quality;   //!
    TBranch        *b_Diphoton;   //!
    TBranch        *b_DiphotonVtx2;   //!
    TBranch        *b_DiphotonVtx3;   //!
@@ -676,11 +817,11 @@ fTree::fTree(TTree *tree) : fChain(0)
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/Merged/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD/merged.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("root://cmsxrootd.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ConversionInfo/Merged/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD/merged.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/Merged/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD/merged.root");
+         f = new TFile("root://cmsxrootd.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ConversionInfo/Merged/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD/merged.root");
       }
-      TDirectory * dir = (TDirectory*)f->Get("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/Merged/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD/merged.root:/diphotonAnalyzer");
+      TDirectory * dir = (TDirectory*)f->Get("root://cmsxrootd.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ConversionInfo/Merged/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD/merged.root:/diphotonAnalyzer");
       dir->GetObject("fTree",tree);
 
    }
@@ -722,6 +863,75 @@ void fTree::Init(TTree *tree)
    // Init() will be called many times when running on PROOF
    // (once per file to be processed).
 
+   // Set object pointer
+   ConvInfo1_x = 0;
+   ConvInfo1_y = 0;
+   ConvInfo1_z = 0;
+   ConvInfo1_r = 0;
+   ConvInfo1_phi = 0;
+   ConvInfo1_dPhiTracksAtVtx = 0;
+   ConvInfo1_nTracks = 0;
+   ConvInfo1_dxy = 0;
+   ConvInfo1_dz = 0;
+   ConvInfo1_pairCotThetaSeparation = 0;
+   ConvInfo1_photonPt = 0;
+   ConvInfo1_dRToSc = 0;
+   ConvInfo1_nSharedHits = 0;
+   ConvInfo1_MVAout = 0;
+   ConvInfo1_oneLegMVA = 0;
+   ConvInfo1_nHitsBeforeVtx = 0;
+   ConvInfo1_quality = 0;
+   ConvInfo2_x = 0;
+   ConvInfo2_y = 0;
+   ConvInfo2_z = 0;
+   ConvInfo2_r = 0;
+   ConvInfo2_phi = 0;
+   ConvInfo2_dPhiTracksAtVtx = 0;
+   ConvInfo2_nTracks = 0;
+   ConvInfo2_dxy = 0;
+   ConvInfo2_dz = 0;
+   ConvInfo2_pairCotThetaSeparation = 0;
+   ConvInfo2_photonPt = 0;
+   ConvInfo2_dRToSc = 0;
+   ConvInfo2_nSharedHits = 0;
+   ConvInfo2_MVAout = 0;
+   ConvInfo2_oneLegMVA = 0;
+   ConvInfo2_nHitsBeforeVtx = 0;
+   ConvInfo2_quality = 0;
+   ConvInfo_OneLeg1_x = 0;
+   ConvInfo_OneLeg1_y = 0;
+   ConvInfo_OneLeg1_z = 0;
+   ConvInfo_OneLeg1_r = 0;
+   ConvInfo_OneLeg1_phi = 0;
+   ConvInfo_OneLeg1_dPhiTracksAtVtx = 0;
+   ConvInfo_OneLeg1_nTracks = 0;
+   ConvInfo_OneLeg1_dxy = 0;
+   ConvInfo_OneLeg1_dz = 0;
+   ConvInfo_OneLeg1_pairCotThetaSeparation = 0;
+   ConvInfo_OneLeg1_photonPt = 0;
+   ConvInfo_OneLeg1_dRToSc = 0;
+   ConvInfo_OneLeg1_nSharedHits = 0;
+   ConvInfo_OneLeg1_MVAout = 0;
+   ConvInfo_OneLeg1_oneLegMVA = 0;
+   ConvInfo_OneLeg1_nHitsBeforeVtx = 0;
+   ConvInfo_OneLeg1_quality = 0;
+   ConvInfo_OneLeg2_x = 0;
+   ConvInfo_OneLeg2_y = 0;
+   ConvInfo_OneLeg2_z = 0;
+   ConvInfo_OneLeg2_r = 0;
+   ConvInfo_OneLeg2_phi = 0;
+   ConvInfo_OneLeg2_dPhiTracksAtVtx = 0;
+   ConvInfo_OneLeg2_nTracks = 0;
+   ConvInfo_OneLeg2_dxy = 0;
+   ConvInfo_OneLeg2_dz = 0;
+   ConvInfo_OneLeg2_pairCotThetaSeparation = 0;
+   ConvInfo_OneLeg2_photonPt = 0;
+   ConvInfo_OneLeg2_dRToSc = 0;
+   ConvInfo_OneLeg2_nSharedHits = 0;
+   ConvInfo_OneLeg2_MVAout = 0;
+   ConvInfo_OneLeg2_oneLegMVA = 0;
+   ConvInfo_OneLeg2_nHitsBeforeVtx = 0;
+   ConvInfo_OneLeg2_quality = 0;
    // Set branch addresses and branch pointers
    if (!tree) return;
    fChain = tree;
@@ -752,6 +962,74 @@ void fTree::Init(TTree *tree)
    fChain->SetBranchAddress("JetInfo.energy", JetInfo_energy, &b_JetInfo_energy);
    fChain->SetBranchAddress("JetInfo.passLooseID", JetInfo_passLooseID, &b_JetInfo_passLooseID);
    fChain->SetBranchAddress("JetInfo.passTightID", JetInfo_passTightID, &b_JetInfo_passTightID);
+   fChain->SetBranchAddress("ConvInfo1.x", &ConvInfo1_x, &b_ConvInfo1_x);
+   fChain->SetBranchAddress("ConvInfo1.y", &ConvInfo1_y, &b_ConvInfo1_y);
+   fChain->SetBranchAddress("ConvInfo1.z", &ConvInfo1_z, &b_ConvInfo1_z);
+   fChain->SetBranchAddress("ConvInfo1.r", &ConvInfo1_r, &b_ConvInfo1_r);
+   fChain->SetBranchAddress("ConvInfo1.phi", &ConvInfo1_phi, &b_ConvInfo1_phi);
+   fChain->SetBranchAddress("ConvInfo1.dPhiTracksAtVtx", &ConvInfo1_dPhiTracksAtVtx, &b_ConvInfo1_dPhiTracksAtVtx);
+   fChain->SetBranchAddress("ConvInfo1.nTracks", &ConvInfo1_nTracks, &b_ConvInfo1_nTracks);
+   fChain->SetBranchAddress("ConvInfo1.dxy", &ConvInfo1_dxy, &b_ConvInfo1_dxy);
+   fChain->SetBranchAddress("ConvInfo1.dz", &ConvInfo1_dz, &b_ConvInfo1_dz);
+   fChain->SetBranchAddress("ConvInfo1.pairCotThetaSeparation", &ConvInfo1_pairCotThetaSeparation, &b_ConvInfo1_pairCotThetaSeparation);
+   fChain->SetBranchAddress("ConvInfo1.photonPt", &ConvInfo1_photonPt, &b_ConvInfo1_photonPt);
+   fChain->SetBranchAddress("ConvInfo1.dRToSc", &ConvInfo1_dRToSc, &b_ConvInfo1_dRToSc);
+   fChain->SetBranchAddress("ConvInfo1.nSharedHits", &ConvInfo1_nSharedHits, &b_ConvInfo1_nSharedHits);
+   fChain->SetBranchAddress("ConvInfo1.MVAout", &ConvInfo1_MVAout, &b_ConvInfo1_MVAout);
+   fChain->SetBranchAddress("ConvInfo1.oneLegMVA", &ConvInfo1_oneLegMVA, &b_ConvInfo1_oneLegMVA);
+   fChain->SetBranchAddress("ConvInfo1.nHitsBeforeVtx", &ConvInfo1_nHitsBeforeVtx, &b_ConvInfo1_nHitsBeforeVtx);
+   fChain->SetBranchAddress("ConvInfo1.quality", &ConvInfo1_quality, &b_ConvInfo1_quality);
+   fChain->SetBranchAddress("ConvInfo2.x", &ConvInfo2_x, &b_ConvInfo2_x);
+   fChain->SetBranchAddress("ConvInfo2.y", &ConvInfo2_y, &b_ConvInfo2_y);
+   fChain->SetBranchAddress("ConvInfo2.z", &ConvInfo2_z, &b_ConvInfo2_z);
+   fChain->SetBranchAddress("ConvInfo2.r", &ConvInfo2_r, &b_ConvInfo2_r);
+   fChain->SetBranchAddress("ConvInfo2.phi", &ConvInfo2_phi, &b_ConvInfo2_phi);
+   fChain->SetBranchAddress("ConvInfo2.dPhiTracksAtVtx", &ConvInfo2_dPhiTracksAtVtx, &b_ConvInfo2_dPhiTracksAtVtx);
+   fChain->SetBranchAddress("ConvInfo2.nTracks", &ConvInfo2_nTracks, &b_ConvInfo2_nTracks);
+   fChain->SetBranchAddress("ConvInfo2.dxy", &ConvInfo2_dxy, &b_ConvInfo2_dxy);
+   fChain->SetBranchAddress("ConvInfo2.dz", &ConvInfo2_dz, &b_ConvInfo2_dz);
+   fChain->SetBranchAddress("ConvInfo2.pairCotThetaSeparation", &ConvInfo2_pairCotThetaSeparation, &b_ConvInfo2_pairCotThetaSeparation);
+   fChain->SetBranchAddress("ConvInfo2.photonPt", &ConvInfo2_photonPt, &b_ConvInfo2_photonPt);
+   fChain->SetBranchAddress("ConvInfo2.dRToSc", &ConvInfo2_dRToSc, &b_ConvInfo2_dRToSc);
+   fChain->SetBranchAddress("ConvInfo2.nSharedHits", &ConvInfo2_nSharedHits, &b_ConvInfo2_nSharedHits);
+   fChain->SetBranchAddress("ConvInfo2.MVAout", &ConvInfo2_MVAout, &b_ConvInfo2_MVAout);
+   fChain->SetBranchAddress("ConvInfo2.oneLegMVA", &ConvInfo2_oneLegMVA, &b_ConvInfo2_oneLegMVA);
+   fChain->SetBranchAddress("ConvInfo2.nHitsBeforeVtx", &ConvInfo2_nHitsBeforeVtx, &b_ConvInfo2_nHitsBeforeVtx);
+   fChain->SetBranchAddress("ConvInfo2.quality", &ConvInfo2_quality, &b_ConvInfo2_quality);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.x", &ConvInfo_OneLeg1_x, &b_ConvInfo_OneLeg1_x);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.y", &ConvInfo_OneLeg1_y, &b_ConvInfo_OneLeg1_y);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.z", &ConvInfo_OneLeg1_z, &b_ConvInfo_OneLeg1_z);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.r", &ConvInfo_OneLeg1_r, &b_ConvInfo_OneLeg1_r);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.phi", &ConvInfo_OneLeg1_phi, &b_ConvInfo_OneLeg1_phi);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.dPhiTracksAtVtx", &ConvInfo_OneLeg1_dPhiTracksAtVtx, &b_ConvInfo_OneLeg1_dPhiTracksAtVtx);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.nTracks", &ConvInfo_OneLeg1_nTracks, &b_ConvInfo_OneLeg1_nTracks);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.dxy", &ConvInfo_OneLeg1_dxy, &b_ConvInfo_OneLeg1_dxy);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.dz", &ConvInfo_OneLeg1_dz, &b_ConvInfo_OneLeg1_dz);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.pairCotThetaSeparation", &ConvInfo_OneLeg1_pairCotThetaSeparation, &b_ConvInfo_OneLeg1_pairCotThetaSeparation);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.photonPt", &ConvInfo_OneLeg1_photonPt, &b_ConvInfo_OneLeg1_photonPt);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.dRToSc", &ConvInfo_OneLeg1_dRToSc, &b_ConvInfo_OneLeg1_dRToSc);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.nSharedHits", &ConvInfo_OneLeg1_nSharedHits, &b_ConvInfo_OneLeg1_nSharedHits);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.MVAout", &ConvInfo_OneLeg1_MVAout, &b_ConvInfo_OneLeg1_MVAout);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.oneLegMVA", &ConvInfo_OneLeg1_oneLegMVA, &b_ConvInfo_OneLeg1_oneLegMVA);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.nHitsBeforeVtx", &ConvInfo_OneLeg1_nHitsBeforeVtx, &b_ConvInfo_OneLeg1_nHitsBeforeVtx);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.quality", &ConvInfo_OneLeg1_quality, &b_ConvInfo_OneLeg1_quality);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.x", &ConvInfo_OneLeg2_x, &b_ConvInfo_OneLeg2_x);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.y", &ConvInfo_OneLeg2_y, &b_ConvInfo_OneLeg2_y);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.z", &ConvInfo_OneLeg2_z, &b_ConvInfo_OneLeg2_z);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.r", &ConvInfo_OneLeg2_r, &b_ConvInfo_OneLeg2_r);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.phi", &ConvInfo_OneLeg2_phi, &b_ConvInfo_OneLeg2_phi);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.dPhiTracksAtVtx", &ConvInfo_OneLeg2_dPhiTracksAtVtx, &b_ConvInfo_OneLeg2_dPhiTracksAtVtx);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.nTracks", &ConvInfo_OneLeg2_nTracks, &b_ConvInfo_OneLeg2_nTracks);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.dxy", &ConvInfo_OneLeg2_dxy, &b_ConvInfo_OneLeg2_dxy);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.dz", &ConvInfo_OneLeg2_dz, &b_ConvInfo_OneLeg2_dz);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.pairCotThetaSeparation", &ConvInfo_OneLeg2_pairCotThetaSeparation, &b_ConvInfo_OneLeg2_pairCotThetaSeparation);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.photonPt", &ConvInfo_OneLeg2_photonPt, &b_ConvInfo_OneLeg2_photonPt);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.dRToSc", &ConvInfo_OneLeg2_dRToSc, &b_ConvInfo_OneLeg2_dRToSc);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.nSharedHits", &ConvInfo_OneLeg2_nSharedHits, &b_ConvInfo_OneLeg2_nSharedHits);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.MVAout", &ConvInfo_OneLeg2_MVAout, &b_ConvInfo_OneLeg2_MVAout);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.oneLegMVA", &ConvInfo_OneLeg2_oneLegMVA, &b_ConvInfo_OneLeg2_oneLegMVA);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.nHitsBeforeVtx", &ConvInfo_OneLeg2_nHitsBeforeVtx, &b_ConvInfo_OneLeg2_nHitsBeforeVtx);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.quality", &ConvInfo_OneLeg2_quality, &b_ConvInfo_OneLeg2_quality);
    fChain->SetBranchAddress("Diphoton", &Diphoton_Minv, &b_Diphoton);
    fChain->SetBranchAddress("DiphotonVtx2", &DiphotonVtx2_Minv, &b_DiphotonVtx2);
    fChain->SetBranchAddress("DiphotonVtx3", &DiphotonVtx3_Minv, &b_DiphotonVtx3);
