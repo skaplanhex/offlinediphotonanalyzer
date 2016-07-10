@@ -8,7 +8,7 @@
 
 
 
-void fTree::Loop()
+void fTree::Loop(TString outfilename)
 {
 //   In a ROOT session, you can do:
 //      root> .L fTree.C
@@ -34,13 +34,22 @@ void fTree::Loop()
 //    fChain->GetEntry(jentry);       //read all branches
 //by  b_branchname->GetEntry(ientry); //read only this branch
 
+    // std::ofstream massFile;
+    // massFile.open("masses.txt");
+
+    Double_t bins_30003500[6] = {0.,650.,1150.,1800.,2600.,13000.};
+    Double_t bins[7] = {0.,650.,1150.,1800.,2600.,3500.,13000.};
+
     TH1D* leadingPhoPt_EBEB = createTH1D("leadingPhoPt_EBEB","leadingPhoPt_EBEB",300.,0.,1500.,"Leading Photon pT (GeV/c)","Events");
     TH1D* subleadingPhoPt_EBEB = createTH1D("subleadingPhoPt_EBEB","subleadingPhoPt_EBEB",300,0.,1500.,"Subleading Photon pT (GeV/c)","Events");
     TH1D* leadingPhoEta_EBEB = createTH1D("leadingPhoEta_EBEB","leadingPhoEta_EBEB",100,-5.,5.,"Leading Photon #eta","Events");
     TH1D* subleadingPhoEta_EBEB = createTH1D("subleadingPhoEta_EBEB","subleadingPhoEta_EBEB",100,-5.,5.,"Subleading Photon #eta","Events");
     TH1D* leadingPhoPhi_EBEB = createTH1D("leadingPhoPhi_EBEB","leadingPhoPhi_EBEB",100,-3.141593,-3.141593,"Leading Photon #phi","Events");
     TH1D* subleadingPhoPhi_EBEB = createTH1D("subleadingPhoPhi_EBEB","subleadingPhoPhi_EBEB",100,-3.141593,-3.141593,"Subleading Photon #phi","Events");
-    TH1D* ggMass_EBEB = createTH1D("ggMass_EBEB","ggMass_EBEB",151,-10.,3010.,"m_{#gamma#gamma} (GeV/c^{2})","Events");
+    TH1D* ggMass_EBEB = createTH1D("ggMass_EBEB","ggMass_EBEB",651,-10.,13000.,"m_{#gamma#gamma} (GeV/c^{2})","Events");
+    TH1D* ggMass_EBEB_JPBinning = createTH1D("ggMass_EBEB_JPBinning","ggMass_EBEB",34,320.,1000.,"m_{#gamma#gamma} (GeV/c^{2})","Events");
+    TH1D* ggMass_EBEB_30003500varbin = createTH1D("ggMass_EBEB_30003500varbin","ggMass_EBEB_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} (GeV/c^{2})","Events");
+    TH1D* ggMass_EBEB_varbin = createTH1D("ggMass_EBEB_varbin","ggMass_EBEB_varbin",6,bins,"m_{#gamma#gamma} (GeV/c^{2})","Events");
 
     TH1D* leadingPhoPt_EBEE = createTH1D("leadingPhoPt_EBEE","leadingPhoPt_EBEE",300.,0.,1500.,"Leading Photon pT (GeV/c)","Events");
     TH1D* subleadingPhoPt_EBEE = createTH1D("subleadingPhoPt_EBEE","subleadingPhoPt_EBEE",300,0.,1500.,"Subleading Photon pT (GeV/c)","Events");
@@ -48,7 +57,9 @@ void fTree::Loop()
     TH1D* subleadingPhoEta_EBEE = createTH1D("subleadingPhoEta_EBEE","subleadingPhoEta_EBEE",100,-5.,5.,"Subleading Photon #eta","Events");
     TH1D* leadingPhoPhi_EBEE = createTH1D("leadingPhoPhi_EBEE","leadingPhoPhi_EBEE",100,-3.141593,-3.141593,"Leading Photon #phi","Events");
     TH1D* subleadingPhoPhi_EBEE = createTH1D("subleadingPhoPhi_EBEE","subleadingPhoPhi_EBEE",100,-3.141593,-3.141593,"Subleading Photon #phi","Events");
-    TH1D* ggMass_EBEE = createTH1D("ggMass_EBEE","ggMass_EBEE",151,-10.,3010.,"m_{#gamma#gamma} (GeV/c^{2})","Events");
+    TH1D* ggMass_EBEE = createTH1D("ggMass_EBEE","ggMass_EBEE",651,-10.,13000.,"m_{#gamma#gamma} (GeV/c^{2})","Events");
+    TH1D* ggMass_EBEE_30003500varbin = createTH1D("ggMass_EBEE_30003500varbin","ggMass_EBEE_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} (GeV/c^{2})","Events");
+    TH1D* ggMass_EBEE_varbin = createTH1D("ggMass_EBEE_varbin","ggMass_EBEE_varbin",6,bins,"m_{#gamma#gamma} (GeV/c^{2})","Events");
 
     // VBF tagged histograms
     TH1D* leadingPhoPt_VBFTagged_EBEB = createTH1D("leadingPhoPt_VBFTagged_EBEB","leadingPhoPt_VBFTagged_EBEB",300.,0.,1500.,"Leading Photon pT (GeV/c)","Events");
@@ -203,10 +214,14 @@ void fTree::Loop()
         if (ientry < 0) break;
         nb = fChain->GetEntry(jentry);   nbytes += nb;
         // if (Cut(ientry) < 0) continue;
+
+        // current file:
+        // fChain->GetCurrentFile()->GetName();
+
         if (jentry % 1000 == 0) cout << "Now looking at event #" << jentry << endl;
         // Photon1 is the leading photon, Photon2 is the second leading
         // if (jentry>10) return;
-        if (!TrigHLT_HLT_DoublePhoton60_v1) continue;
+        if (!TrigHLT_HLT_DoublePhoton60_v1) continue; // only admit events that pass HLT_DoublePhoton_60 
         bool EBEB = isEBEB(Photon1_scEta,Photon2_scEta); // fabs is taken in the helper function!
         bool EBEE = isEBEE(Photon1_scEta,Photon2_scEta);
 
@@ -357,6 +372,10 @@ void fTree::Loop()
             leadingPhoPhi_EBEB->Fill(Photon1_scPhi);
             subleadingPhoPhi_EBEB->Fill(Photon2_scPhi);
             ggMass_EBEB->Fill(Diphoton_Minv);
+            ggMass_EBEB_JPBinning->Fill(Diphoton_Minv);
+            ggMass_EBEB_30003500varbin->Fill(Diphoton_Minv);
+            ggMass_EBEB_varbin->Fill(Diphoton_Minv);
+            // if (700. <= Diphoton_Minv && Diphoton_Minv <= 800.) massFile << Diphoton_Minv << "\n";
         } // end EBEB block
 
         else if (EBEE){
@@ -367,248 +386,250 @@ void fTree::Loop()
             leadingPhoPhi_EBEE->Fill(Photon1_scPhi);
             subleadingPhoPhi_EBEE->Fill(Photon2_scPhi);
             ggMass_EBEE->Fill(Diphoton_Minv);
+            ggMass_EBEE_30003500varbin->Fill(Diphoton_Minv);
+            ggMass_EBEE_varbin->Fill(Diphoton_Minv);
         } // end EBEE block
 
         // fill conversion plots for all eta
 
         // leading photon contribution
-        nConversions_allConvType_allEta->Fill( 1.*ConvInfo1_r->size() );
-        int nHighPurity = 0;
-        int nArbitratedMerged = 0;
-        int nGenTracksOnly = 0;
-        for (unsigned int i=0; i<ConvInfo1_r->size(); i++){
-            if (ConvInfo1_vtxChi2->at(i) > 16.2662) continue;
+        // nConversions_allConvType_allEta->Fill( 1.*ConvInfo1_r->size() );
+        // int nHighPurity = 0;
+        // int nArbitratedMerged = 0;
+        // int nGenTracksOnly = 0;
+        // for (unsigned int i=0; i<ConvInfo1_r->size(); i++){
+        //     if (ConvInfo1_vtxChi2->at(i) > 16.2662) continue;
 
-            conversionRadius_allConvType_allEta->Fill( ConvInfo1_r->at(i) );
-            twoProngConversionXYMap_allConvType_allEta->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
-            twoProngConversionRZMap_allConvType_allEta->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
+        //     conversionRadius_allConvType_allEta->Fill( ConvInfo1_r->at(i) );
+        //     twoProngConversionXYMap_allConvType_allEta->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
+        //     twoProngConversionRZMap_allConvType_allEta->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
 
-            bool isHighPurity = ConvInfo1_quality->at(i).at(4);
-            bool isArbitratedMerged = ConvInfo1_quality->at(i).at(2);
-            bool isGeneralTracksOnly = ConvInfo1_quality->at(i).at(0);
+        //     bool isHighPurity = ConvInfo1_quality->at(i).at(4);
+        //     bool isArbitratedMerged = ConvInfo1_quality->at(i).at(2);
+        //     bool isGeneralTracksOnly = ConvInfo1_quality->at(i).at(0);
 
-            if (isHighPurity){
-                nHighPurity++;
-                conversionRadius_highPurity_allEta->Fill( ConvInfo1_r->at(i) );
-                twoProngConversionXYMap_highPurity_allEta->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
-                twoProngConversionRZMap_highPurity_allEta->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
-            }
-            if (isArbitratedMerged){
-                nArbitratedMerged++;
-                conversionRadius_arbitratedMerged_allEta->Fill( ConvInfo1_r->at(i) );
-                twoProngConversionXYMap_arbitratedMerged_allEta->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
-                twoProngConversionRZMap_arbitratedMerged_allEta->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );   
-            }
-            if (isGeneralTracksOnly){
-                nGenTracksOnly++;
-                conversionRadius_generalTracksOnly_allEta->Fill( ConvInfo1_r->at(i) );
-                twoProngConversionXYMap_generalTracksOnly_allEta->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
-                twoProngConversionRZMap_generalTracksOnly_allEta->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
-            }
-        }
-        nConversions_highPurity_allEta->Fill(1.*nHighPurity);
-        nConversions_arbitratedMerged_allEta->Fill(1.*nArbitratedMerged);
-        nConversions_generalTracksOnly_allEta->Fill(1.*nGenTracksOnly);
+        //     if (isHighPurity){
+        //         nHighPurity++;
+        //         conversionRadius_highPurity_allEta->Fill( ConvInfo1_r->at(i) );
+        //         twoProngConversionXYMap_highPurity_allEta->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
+        //         twoProngConversionRZMap_highPurity_allEta->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
+        //     }
+        //     if (isArbitratedMerged){
+        //         nArbitratedMerged++;
+        //         conversionRadius_arbitratedMerged_allEta->Fill( ConvInfo1_r->at(i) );
+        //         twoProngConversionXYMap_arbitratedMerged_allEta->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
+        //         twoProngConversionRZMap_arbitratedMerged_allEta->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );   
+        //     }
+        //     if (isGeneralTracksOnly){
+        //         nGenTracksOnly++;
+        //         conversionRadius_generalTracksOnly_allEta->Fill( ConvInfo1_r->at(i) );
+        //         twoProngConversionXYMap_generalTracksOnly_allEta->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
+        //         twoProngConversionRZMap_generalTracksOnly_allEta->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
+        //     }
+        // }
+        // nConversions_highPurity_allEta->Fill(1.*nHighPurity);
+        // nConversions_arbitratedMerged_allEta->Fill(1.*nArbitratedMerged);
+        // nConversions_generalTracksOnly_allEta->Fill(1.*nGenTracksOnly);
 
-        // subleading photon contribution
-        nConversions_allConvType_allEta->Fill( 1.*ConvInfo2_r->size() );
-        // reset counters for the subleading photon
-        nHighPurity = 0;
-        nArbitratedMerged = 0;
-        nGenTracksOnly = 0;
-        for (unsigned int i=0; i<ConvInfo2_r->size(); i++){
-            if (ConvInfo2_vtxChi2->at(i) > 16.2662) continue;
+        // // subleading photon contribution
+        // nConversions_allConvType_allEta->Fill( 1.*ConvInfo2_r->size() );
+        // // reset counters for the subleading photon
+        // nHighPurity = 0;
+        // nArbitratedMerged = 0;
+        // nGenTracksOnly = 0;
+        // for (unsigned int i=0; i<ConvInfo2_r->size(); i++){
+        //     if (ConvInfo2_vtxChi2->at(i) > 16.2662) continue;
 
-            conversionRadius_allConvType_allEta->Fill( ConvInfo2_r->at(i) );
-            twoProngConversionXYMap_allConvType_allEta->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
-            twoProngConversionRZMap_allConvType_allEta->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
+        //     conversionRadius_allConvType_allEta->Fill( ConvInfo2_r->at(i) );
+        //     twoProngConversionXYMap_allConvType_allEta->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
+        //     twoProngConversionRZMap_allConvType_allEta->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
 
-            bool isHighPurity = ConvInfo2_quality->at(i).at(4);
-            bool isArbitratedMerged = ConvInfo2_quality->at(i).at(2);
-            bool isGeneralTracksOnly = ConvInfo2_quality->at(i).at(0);
+        //     bool isHighPurity = ConvInfo2_quality->at(i).at(4);
+        //     bool isArbitratedMerged = ConvInfo2_quality->at(i).at(2);
+        //     bool isGeneralTracksOnly = ConvInfo2_quality->at(i).at(0);
 
-            if (isHighPurity){
-                nHighPurity++;
-                conversionRadius_highPurity_allEta->Fill( ConvInfo2_r->at(i) );
-                twoProngConversionXYMap_highPurity_allEta->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
-                twoProngConversionRZMap_highPurity_allEta->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
-            }
-            if (isArbitratedMerged){
-                nArbitratedMerged++;
-                conversionRadius_arbitratedMerged_allEta->Fill( ConvInfo2_r->at(i) );
-                twoProngConversionXYMap_arbitratedMerged_allEta->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
-                twoProngConversionRZMap_arbitratedMerged_allEta->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );   
-            }
-            if (isGeneralTracksOnly){
-                nGenTracksOnly++;
-                conversionRadius_generalTracksOnly_allEta->Fill( ConvInfo2_r->at(i) );
-                twoProngConversionXYMap_generalTracksOnly_allEta->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
-                twoProngConversionRZMap_generalTracksOnly_allEta->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
-            }
-        }
-        nConversions_highPurity_allEta->Fill(1.*nHighPurity);
-        nConversions_arbitratedMerged_allEta->Fill(1.*nArbitratedMerged);
-        nConversions_generalTracksOnly_allEta->Fill(1.*nGenTracksOnly);
+        //     if (isHighPurity){
+        //         nHighPurity++;
+        //         conversionRadius_highPurity_allEta->Fill( ConvInfo2_r->at(i) );
+        //         twoProngConversionXYMap_highPurity_allEta->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
+        //         twoProngConversionRZMap_highPurity_allEta->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
+        //     }
+        //     if (isArbitratedMerged){
+        //         nArbitratedMerged++;
+        //         conversionRadius_arbitratedMerged_allEta->Fill( ConvInfo2_r->at(i) );
+        //         twoProngConversionXYMap_arbitratedMerged_allEta->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
+        //         twoProngConversionRZMap_arbitratedMerged_allEta->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );   
+        //     }
+        //     if (isGeneralTracksOnly){
+        //         nGenTracksOnly++;
+        //         conversionRadius_generalTracksOnly_allEta->Fill( ConvInfo2_r->at(i) );
+        //         twoProngConversionXYMap_generalTracksOnly_allEta->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
+        //         twoProngConversionRZMap_generalTracksOnly_allEta->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
+        //     }
+        // }
+        // nConversions_highPurity_allEta->Fill(1.*nHighPurity);
+        // nConversions_arbitratedMerged_allEta->Fill(1.*nArbitratedMerged);
+        // nConversions_generalTracksOnly_allEta->Fill(1.*nGenTracksOnly);
 
-        // fill EB and EE based conversion maps
+        // // fill EB and EE based conversion maps
 
-        if( isEB(Photon1_scEta) ){
-            nConversions_allConvType_EB->Fill( 1.*ConvInfo1_r->size() );
-            int nHighPurity = 0;
-            int nArbitratedMerged = 0;
-            int nGenTracksOnly = 0;
-            for (unsigned int i=0; i<ConvInfo1_r->size(); i++){
-                if (ConvInfo1_vtxChi2->at(i) > 16.2662) continue;
+        // if( isEB(Photon1_scEta) ){
+        //     nConversions_allConvType_EB->Fill( 1.*ConvInfo1_r->size() );
+        //     int nHighPurity = 0;
+        //     int nArbitratedMerged = 0;
+        //     int nGenTracksOnly = 0;
+        //     for (unsigned int i=0; i<ConvInfo1_r->size(); i++){
+        //         if (ConvInfo1_vtxChi2->at(i) > 16.2662) continue;
 
-                conversionRadius_allConvType_EB->Fill( ConvInfo1_r->at(i) );
-                twoProngConversionXYMap_allConvType_EB->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
-                twoProngConversionRZMap_allConvType_EB->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
+        //         conversionRadius_allConvType_EB->Fill( ConvInfo1_r->at(i) );
+        //         twoProngConversionXYMap_allConvType_EB->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
+        //         twoProngConversionRZMap_allConvType_EB->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
 
-                bool isHighPurity = ConvInfo1_quality->at(i).at(4);
-                bool isArbitratedMerged = ConvInfo1_quality->at(i).at(2);
-                bool isGeneralTracksOnly = ConvInfo1_quality->at(i).at(0);
+        //         bool isHighPurity = ConvInfo1_quality->at(i).at(4);
+        //         bool isArbitratedMerged = ConvInfo1_quality->at(i).at(2);
+        //         bool isGeneralTracksOnly = ConvInfo1_quality->at(i).at(0);
 
-                if (isHighPurity){
-                    nHighPurity++;
-                    conversionRadius_highPurity_EB->Fill( ConvInfo1_r->at(i) );
-                    twoProngConversionXYMap_highPurity_EB->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
-                    twoProngConversionRZMap_highPurity_EB->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
-                }
-                if (isArbitratedMerged){
-                    nArbitratedMerged++;
-                    conversionRadius_arbitratedMerged_EB->Fill( ConvInfo1_r->at(i) );
-                    twoProngConversionXYMap_arbitratedMerged_EB->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
-                    twoProngConversionRZMap_arbitratedMerged_EB->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );   
-                }
-                if (isGeneralTracksOnly){
-                    nGenTracksOnly++;
-                    conversionRadius_generalTracksOnly_EB->Fill( ConvInfo1_r->at(i) );
-                    twoProngConversionXYMap_generalTracksOnly_EB->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
-                    twoProngConversionRZMap_generalTracksOnly_EB->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
-                }
-            }
-            nConversions_highPurity_EB->Fill(1.*nHighPurity);
-            nConversions_arbitratedMerged_EB->Fill(1.*nArbitratedMerged);
-            nConversions_generalTracksOnly_EB->Fill(1.*nGenTracksOnly);
+        //         if (isHighPurity){
+        //             nHighPurity++;
+        //             conversionRadius_highPurity_EB->Fill( ConvInfo1_r->at(i) );
+        //             twoProngConversionXYMap_highPurity_EB->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
+        //             twoProngConversionRZMap_highPurity_EB->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
+        //         }
+        //         if (isArbitratedMerged){
+        //             nArbitratedMerged++;
+        //             conversionRadius_arbitratedMerged_EB->Fill( ConvInfo1_r->at(i) );
+        //             twoProngConversionXYMap_arbitratedMerged_EB->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
+        //             twoProngConversionRZMap_arbitratedMerged_EB->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );   
+        //         }
+        //         if (isGeneralTracksOnly){
+        //             nGenTracksOnly++;
+        //             conversionRadius_generalTracksOnly_EB->Fill( ConvInfo1_r->at(i) );
+        //             twoProngConversionXYMap_generalTracksOnly_EB->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
+        //             twoProngConversionRZMap_generalTracksOnly_EB->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
+        //         }
+        //     }
+        //     nConversions_highPurity_EB->Fill(1.*nHighPurity);
+        //     nConversions_arbitratedMerged_EB->Fill(1.*nArbitratedMerged);
+        //     nConversions_generalTracksOnly_EB->Fill(1.*nGenTracksOnly);
 
-        }
-        else if ( isEE(Photon1_scEta) ){
-            nConversions_allConvType_EE->Fill( 1.*ConvInfo1_r->size() );
-            int nHighPurity = 0;
-            int nArbitratedMerged = 0;
-            int nGenTracksOnly = 0;
-            for (unsigned int i=0; i<ConvInfo1_r->size(); i++){
-                if (ConvInfo1_vtxChi2->at(i) > 16.2662) continue;
+        // }
+        // else if ( isEE(Photon1_scEta) ){
+        //     nConversions_allConvType_EE->Fill( 1.*ConvInfo1_r->size() );
+        //     int nHighPurity = 0;
+        //     int nArbitratedMerged = 0;
+        //     int nGenTracksOnly = 0;
+        //     for (unsigned int i=0; i<ConvInfo1_r->size(); i++){
+        //         if (ConvInfo1_vtxChi2->at(i) > 16.2662) continue;
 
-                conversionRadius_allConvType_EE->Fill( ConvInfo1_r->at(i) );
-                twoProngConversionXYMap_allConvType_EE->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
-                twoProngConversionRZMap_allConvType_EE->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
+        //         conversionRadius_allConvType_EE->Fill( ConvInfo1_r->at(i) );
+        //         twoProngConversionXYMap_allConvType_EE->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
+        //         twoProngConversionRZMap_allConvType_EE->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
 
-                bool isHighPurity = ConvInfo1_quality->at(i).at(4);
-                bool isArbitratedMerged = ConvInfo1_quality->at(i).at(2);
-                bool isGeneralTracksOnly = ConvInfo1_quality->at(i).at(0);
+        //         bool isHighPurity = ConvInfo1_quality->at(i).at(4);
+        //         bool isArbitratedMerged = ConvInfo1_quality->at(i).at(2);
+        //         bool isGeneralTracksOnly = ConvInfo1_quality->at(i).at(0);
 
-                if (isHighPurity){
-                    nHighPurity++;
-                    conversionRadius_highPurity_EE->Fill( ConvInfo1_r->at(i) );
-                    twoProngConversionXYMap_highPurity_EE->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
-                    twoProngConversionRZMap_highPurity_EE->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
-                }
-                if (isArbitratedMerged){
-                    nArbitratedMerged++;
-                    conversionRadius_arbitratedMerged_EE->Fill( ConvInfo1_r->at(i) );
-                    twoProngConversionXYMap_arbitratedMerged_EE->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
-                    twoProngConversionRZMap_arbitratedMerged_EE->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );   
-                }
-                if (isGeneralTracksOnly){
-                    nGenTracksOnly++;
-                    conversionRadius_generalTracksOnly_EE->Fill( ConvInfo1_r->at(i) );
-                    twoProngConversionXYMap_generalTracksOnly_EE->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
-                    twoProngConversionRZMap_generalTracksOnly_EE->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
-                }
-            }
-            nConversions_highPurity_EE->Fill(1.*nHighPurity);
-            nConversions_arbitratedMerged_EE->Fill(1.*nArbitratedMerged);
-            nConversions_generalTracksOnly_EE->Fill(1.*nGenTracksOnly);
-        }
-        if( isEB(Photon2_scEta) ){
-            nConversions_allConvType_EB->Fill( 1.*ConvInfo2_r->size() );
-            int nHighPurity = 0;
-            int nArbitratedMerged = 0;
-            int nGenTracksOnly = 0;
-            for (unsigned int i=0; i<ConvInfo2_r->size(); i++){
-                if (ConvInfo2_vtxChi2->at(i) > 16.2662) continue;
+        //         if (isHighPurity){
+        //             nHighPurity++;
+        //             conversionRadius_highPurity_EE->Fill( ConvInfo1_r->at(i) );
+        //             twoProngConversionXYMap_highPurity_EE->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
+        //             twoProngConversionRZMap_highPurity_EE->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
+        //         }
+        //         if (isArbitratedMerged){
+        //             nArbitratedMerged++;
+        //             conversionRadius_arbitratedMerged_EE->Fill( ConvInfo1_r->at(i) );
+        //             twoProngConversionXYMap_arbitratedMerged_EE->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
+        //             twoProngConversionRZMap_arbitratedMerged_EE->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );   
+        //         }
+        //         if (isGeneralTracksOnly){
+        //             nGenTracksOnly++;
+        //             conversionRadius_generalTracksOnly_EE->Fill( ConvInfo1_r->at(i) );
+        //             twoProngConversionXYMap_generalTracksOnly_EE->Fill( ConvInfo1_x->at(i), ConvInfo1_y->at(i) );
+        //             twoProngConversionRZMap_generalTracksOnly_EE->Fill( ConvInfo1_z->at(i), ConvInfo1_r->at(i) );
+        //         }
+        //     }
+        //     nConversions_highPurity_EE->Fill(1.*nHighPurity);
+        //     nConversions_arbitratedMerged_EE->Fill(1.*nArbitratedMerged);
+        //     nConversions_generalTracksOnly_EE->Fill(1.*nGenTracksOnly);
+        // }
+        // if( isEB(Photon2_scEta) ){
+        //     nConversions_allConvType_EB->Fill( 1.*ConvInfo2_r->size() );
+        //     int nHighPurity = 0;
+        //     int nArbitratedMerged = 0;
+        //     int nGenTracksOnly = 0;
+        //     for (unsigned int i=0; i<ConvInfo2_r->size(); i++){
+        //         if (ConvInfo2_vtxChi2->at(i) > 16.2662) continue;
 
-                conversionRadius_allConvType_EB->Fill( ConvInfo2_r->at(i) );
-                twoProngConversionXYMap_allConvType_EB->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
-                twoProngConversionRZMap_allConvType_EB->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
+        //         conversionRadius_allConvType_EB->Fill( ConvInfo2_r->at(i) );
+        //         twoProngConversionXYMap_allConvType_EB->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
+        //         twoProngConversionRZMap_allConvType_EB->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
 
-                bool isHighPurity = ConvInfo2_quality->at(i).at(4);
-                bool isArbitratedMerged = ConvInfo2_quality->at(i).at(2);
-                bool isGeneralTracksOnly = ConvInfo2_quality->at(i).at(0);
+        //         bool isHighPurity = ConvInfo2_quality->at(i).at(4);
+        //         bool isArbitratedMerged = ConvInfo2_quality->at(i).at(2);
+        //         bool isGeneralTracksOnly = ConvInfo2_quality->at(i).at(0);
 
-                if (isHighPurity){
-                    nHighPurity++;
-                    conversionRadius_highPurity_EB->Fill( ConvInfo2_r->at(i) );
-                    twoProngConversionXYMap_highPurity_EB->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
-                    twoProngConversionRZMap_highPurity_EB->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
-                }
-                if (isArbitratedMerged){
-                    nArbitratedMerged++;
-                    conversionRadius_arbitratedMerged_EB->Fill( ConvInfo2_r->at(i) );
-                    twoProngConversionXYMap_arbitratedMerged_EB->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
-                    twoProngConversionRZMap_arbitratedMerged_EB->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );   
-                }
-                if (isGeneralTracksOnly){
-                    nGenTracksOnly++;
-                    conversionRadius_generalTracksOnly_EB->Fill( ConvInfo2_r->at(i) );
-                    twoProngConversionXYMap_generalTracksOnly_EB->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
-                    twoProngConversionRZMap_generalTracksOnly_EB->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
-                }
-            }
-            nConversions_highPurity_EB->Fill(1.*nHighPurity);
-            nConversions_arbitratedMerged_EB->Fill(1.*nArbitratedMerged);
-            nConversions_generalTracksOnly_EB->Fill(1.*nGenTracksOnly);
-        }
-        else if ( isEE(Photon2_scEta) ){
-            nConversions_allConvType_EE->Fill( 1.*ConvInfo2_r->size() );
-            int nHighPurity = 0;
-            int nArbitratedMerged = 0;
-            int nGenTracksOnly = 0;
-            for (unsigned int i=0; i<ConvInfo2_r->size(); i++){
-                if (ConvInfo2_vtxChi2->at(i) > 16.2662) continue;
+        //         if (isHighPurity){
+        //             nHighPurity++;
+        //             conversionRadius_highPurity_EB->Fill( ConvInfo2_r->at(i) );
+        //             twoProngConversionXYMap_highPurity_EB->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
+        //             twoProngConversionRZMap_highPurity_EB->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
+        //         }
+        //         if (isArbitratedMerged){
+        //             nArbitratedMerged++;
+        //             conversionRadius_arbitratedMerged_EB->Fill( ConvInfo2_r->at(i) );
+        //             twoProngConversionXYMap_arbitratedMerged_EB->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
+        //             twoProngConversionRZMap_arbitratedMerged_EB->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );   
+        //         }
+        //         if (isGeneralTracksOnly){
+        //             nGenTracksOnly++;
+        //             conversionRadius_generalTracksOnly_EB->Fill( ConvInfo2_r->at(i) );
+        //             twoProngConversionXYMap_generalTracksOnly_EB->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
+        //             twoProngConversionRZMap_generalTracksOnly_EB->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
+        //         }
+        //     }
+        //     nConversions_highPurity_EB->Fill(1.*nHighPurity);
+        //     nConversions_arbitratedMerged_EB->Fill(1.*nArbitratedMerged);
+        //     nConversions_generalTracksOnly_EB->Fill(1.*nGenTracksOnly);
+        // }
+        // else if ( isEE(Photon2_scEta) ){
+        //     nConversions_allConvType_EE->Fill( 1.*ConvInfo2_r->size() );
+        //     int nHighPurity = 0;
+        //     int nArbitratedMerged = 0;
+        //     int nGenTracksOnly = 0;
+        //     for (unsigned int i=0; i<ConvInfo2_r->size(); i++){
+        //         if (ConvInfo2_vtxChi2->at(i) > 16.2662) continue;
 
-                conversionRadius_allConvType_EE->Fill( ConvInfo2_r->at(i) );
-                twoProngConversionXYMap_allConvType_EE->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
-                twoProngConversionRZMap_allConvType_EE->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
+        //         conversionRadius_allConvType_EE->Fill( ConvInfo2_r->at(i) );
+        //         twoProngConversionXYMap_allConvType_EE->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
+        //         twoProngConversionRZMap_allConvType_EE->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
 
-                bool isHighPurity = ConvInfo2_quality->at(i).at(4);
-                bool isArbitratedMerged = ConvInfo2_quality->at(i).at(2);
-                bool isGeneralTracksOnly = ConvInfo2_quality->at(i).at(0);
+        //         bool isHighPurity = ConvInfo2_quality->at(i).at(4);
+        //         bool isArbitratedMerged = ConvInfo2_quality->at(i).at(2);
+        //         bool isGeneralTracksOnly = ConvInfo2_quality->at(i).at(0);
 
-                if (isHighPurity){
-                    nHighPurity++;
-                    conversionRadius_highPurity_EE->Fill( ConvInfo2_r->at(i) );
-                    twoProngConversionXYMap_highPurity_EE->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
-                    twoProngConversionRZMap_highPurity_EE->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
-                }
-                if (isArbitratedMerged){
-                    nArbitratedMerged++;
-                    conversionRadius_arbitratedMerged_EE->Fill( ConvInfo2_r->at(i) );
-                    twoProngConversionXYMap_arbitratedMerged_EE->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
-                    twoProngConversionRZMap_arbitratedMerged_EE->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );   
-                }
-                if (isGeneralTracksOnly){
-                    nGenTracksOnly++;
-                    conversionRadius_generalTracksOnly_EE->Fill( ConvInfo2_r->at(i) );
-                    twoProngConversionXYMap_generalTracksOnly_EE->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
-                    twoProngConversionRZMap_generalTracksOnly_EE->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
-                }
-            }
-            nConversions_highPurity_EE->Fill(1.*nHighPurity);
-            nConversions_arbitratedMerged_EE->Fill(1.*nArbitratedMerged);
-            nConversions_generalTracksOnly_EE->Fill(1.*nGenTracksOnly);
-        }        
+        //         if (isHighPurity){
+        //             nHighPurity++;
+        //             conversionRadius_highPurity_EE->Fill( ConvInfo2_r->at(i) );
+        //             twoProngConversionXYMap_highPurity_EE->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
+        //             twoProngConversionRZMap_highPurity_EE->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
+        //         }
+        //         if (isArbitratedMerged){
+        //             nArbitratedMerged++;
+        //             conversionRadius_arbitratedMerged_EE->Fill( ConvInfo2_r->at(i) );
+        //             twoProngConversionXYMap_arbitratedMerged_EE->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
+        //             twoProngConversionRZMap_arbitratedMerged_EE->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );   
+        //         }
+        //         if (isGeneralTracksOnly){
+        //             nGenTracksOnly++;
+        //             conversionRadius_generalTracksOnly_EE->Fill( ConvInfo2_r->at(i) );
+        //             twoProngConversionXYMap_generalTracksOnly_EE->Fill( ConvInfo2_x->at(i), ConvInfo2_y->at(i) );
+        //             twoProngConversionRZMap_generalTracksOnly_EE->Fill( ConvInfo2_z->at(i), ConvInfo2_r->at(i) );
+        //         }
+        //     }
+        //     nConversions_highPurity_EE->Fill(1.*nHighPurity);
+        //     nConversions_arbitratedMerged_EE->Fill(1.*nArbitratedMerged);
+        //     nConversions_generalTracksOnly_EE->Fill(1.*nGenTracksOnly);
+        // }        
 
     } // end event loop
 
@@ -670,7 +691,7 @@ void fTree::Loop()
     // ggMass_EBEE->Draw();
     // c.SaveAs("ggMass_EBEE.pdf");
 
-    TFile f("dataplots.root","recreate");
+    TFile f(outfilename,"recreate");
     f.cd();
 
     leadingPhoPt_EBEB->Write();
@@ -680,6 +701,9 @@ void fTree::Loop()
     leadingPhoPhi_EBEB->Write();
     subleadingPhoPhi_EBEB->Write();
     ggMass_EBEB->Write();
+    ggMass_EBEB_JPBinning->Write();
+    ggMass_EBEB_30003500varbin->Write();
+    ggMass_EBEB_varbin->Write();
     leadingPhoPt_EBEE->Write();
     subleadingPhoPt_EBEE->Write();
     leadingPhoEta_EBEE->Write();
@@ -687,6 +711,8 @@ void fTree::Loop()
     leadingPhoPhi_EBEE->Write();
     subleadingPhoPhi_EBEE->Write();
     ggMass_EBEE->Write();
+    ggMass_EBEE_30003500varbin->Write();
+    ggMass_EBEE_varbin->Write();
     leadingPhoPt_VBFTagged_EBEB->Write();
     subleadingPhoPt_VBFTagged_EBEB->Write();
     leadingPhoEta_VBFTagged_EBEB->Write();
@@ -779,6 +805,8 @@ void fTree::Loop()
     twoProngConversionRZMap_generalTracksOnly_EE->Write();
     twoProngConversionXYMap_generalTracksOnly_allEta->Write();
     twoProngConversionRZMap_generalTracksOnly_allEta->Write();
+
+    // massFile.close();
 
     f.Close();
 } // end fTree::Loop() method

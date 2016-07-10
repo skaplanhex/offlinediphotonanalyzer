@@ -1,6 +1,6 @@
 #include "fTree.C"
 
-void driver() {
+void driver(TString fName) {
   // use stopwatch to time
   TStopwatch sw;
   sw.Start();
@@ -14,7 +14,11 @@ void driver() {
   // chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/ExoDiPhotonNtuples/CutTable2/Merged/Run2015D-v3.root",0);
   // chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/ExoDiPhotonNtuples/CutTable2/Merged/Run2015D-v4.root",0);
   // chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/Merged/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD/merged.root",0);
-  chain->Add("root://cmsxrootd.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/WithConversionInfo/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD.root",0);
+  // chain->Add("root://cmsxrootd.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/WithConversionInfo/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD.root",0);
+  // chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/BrandonSteveMerged/DoubleEG_Run2015D.root",0);
+  // chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/BrandonSteveMerged/DoubleEG_Run2016B_V2.root",0);
+  // chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/BrandonSteveMerged/GGJets_M-60To200_Pt-50_13TeV-sherpa.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/BrandonSteveMerged/"+fName,0);
   chain->ls();
   cout << "Total number of entries: " << chain->GetEntries() << endl; 
 

@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Wed May 25 14:56:18 2016 by ROOT version 6.02/13
+// Tue Jun 14 14:19:52 2016 by ROOT version 6.02/13
 // from TTree fTree/PhotonTree
-// found on file: root://cmsxrootd.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/WithConversionInfo/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD.root
+// found on file: root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/BrandonSteveMerged/DoubleEG_Run2016B_V2.root
 //////////////////////////////////////////////////////////
 
 #ifndef fTree_h
@@ -13,7 +13,6 @@
 #include <TFile.h>
 
 // Header file for the classes stored in the TTree if any.
-#include "vector"
 #include "vector"
 #include "vector"
 #include "vector"
@@ -610,6 +609,8 @@ public :
    vector<double>  *JetInfo_energy;
    vector<int>     *JetInfo_passLooseID;
    vector<int>     *JetInfo_passTightID;
+   Double_t        JetInfo_HT;
+   Double_t        JetInfo_missingHT;
    vector<double>  *ConvInfo1_x;
    vector<double>  *ConvInfo1_y;
    vector<double>  *ConvInfo1_z;
@@ -623,12 +624,30 @@ public :
    vector<double>  *ConvInfo1_vtxNdof;
    vector<double>  *ConvInfo1_pairCotThetaSeparation;
    vector<double>  *ConvInfo1_photonPt;
+   vector<double>  *ConvInfo1_track1InnerPx;
+   vector<double>  *ConvInfo1_track1InnerPy;
+   vector<double>  *ConvInfo1_track1InnerPz;
+   vector<double>  *ConvInfo1_track2InnerPx;
+   vector<double>  *ConvInfo1_track2InnerPy;
+   vector<double>  *ConvInfo1_track2InnerPz;
    vector<double>  *ConvInfo1_dRToSc;
    vector<unsigned char> *ConvInfo1_nSharedHits;
    vector<double>  *ConvInfo1_MVAout;
    vector<vector<float> > *ConvInfo1_oneLegMVA;
    vector<vector<unsigned char> > *ConvInfo1_nHitsBeforeVtx;
-   vector<vector<int> > *ConvInfo1_quality;
+   vector<int>     *ConvInfo1_isUndefinedAlgo;
+   vector<int>     *ConvInfo1_isEcalSeededAlgo;
+   vector<int>     *ConvInfo1_isTrackerOnlyAlgo;
+   vector<int>     *ConvInfo1_isMixedAlgo;
+   vector<int>     *ConvInfo1_isPflowAlgo;
+   vector<int>     *ConvInfo1_isGeneralTracksOnly;
+   vector<int>     *ConvInfo1_isArbitratedEcalSeeded;
+   vector<int>     *ConvInfo1_isArbitratedMerged;
+   vector<int>     *ConvInfo1_isArbitratedMergedEcalGeneral;
+   vector<int>     *ConvInfo1_isHighPurity;
+   vector<int>     *ConvInfo1_isHighEfficiency;
+   vector<int>     *ConvInfo1_isEcalMatched1Track;
+   vector<int>     *ConvInfo1_isEcalMatched2Track;
    vector<double>  *ConvInfo2_x;
    vector<double>  *ConvInfo2_y;
    vector<double>  *ConvInfo2_z;
@@ -642,12 +661,30 @@ public :
    vector<double>  *ConvInfo2_vtxNdof;
    vector<double>  *ConvInfo2_pairCotThetaSeparation;
    vector<double>  *ConvInfo2_photonPt;
+   vector<double>  *ConvInfo2_track1InnerPx;
+   vector<double>  *ConvInfo2_track1InnerPy;
+   vector<double>  *ConvInfo2_track1InnerPz;
+   vector<double>  *ConvInfo2_track2InnerPx;
+   vector<double>  *ConvInfo2_track2InnerPy;
+   vector<double>  *ConvInfo2_track2InnerPz;
    vector<double>  *ConvInfo2_dRToSc;
    vector<unsigned char> *ConvInfo2_nSharedHits;
    vector<double>  *ConvInfo2_MVAout;
    vector<vector<float> > *ConvInfo2_oneLegMVA;
    vector<vector<unsigned char> > *ConvInfo2_nHitsBeforeVtx;
-   vector<vector<int> > *ConvInfo2_quality;
+   vector<int>     *ConvInfo2_isUndefinedAlgo;
+   vector<int>     *ConvInfo2_isEcalSeededAlgo;
+   vector<int>     *ConvInfo2_isTrackerOnlyAlgo;
+   vector<int>     *ConvInfo2_isMixedAlgo;
+   vector<int>     *ConvInfo2_isPflowAlgo;
+   vector<int>     *ConvInfo2_isGeneralTracksOnly;
+   vector<int>     *ConvInfo2_isArbitratedEcalSeeded;
+   vector<int>     *ConvInfo2_isArbitratedMerged;
+   vector<int>     *ConvInfo2_isArbitratedMergedEcalGeneral;
+   vector<int>     *ConvInfo2_isHighPurity;
+   vector<int>     *ConvInfo2_isHighEfficiency;
+   vector<int>     *ConvInfo2_isEcalMatched1Track;
+   vector<int>     *ConvInfo2_isEcalMatched2Track;
    vector<double>  *ConvInfo_OneLeg1_x;
    vector<double>  *ConvInfo_OneLeg1_y;
    vector<double>  *ConvInfo_OneLeg1_z;
@@ -661,12 +698,30 @@ public :
    vector<double>  *ConvInfo_OneLeg1_vtxNdof;
    vector<double>  *ConvInfo_OneLeg1_pairCotThetaSeparation;
    vector<double>  *ConvInfo_OneLeg1_photonPt;
+   vector<double>  *ConvInfo_OneLeg1_track1InnerPx;
+   vector<double>  *ConvInfo_OneLeg1_track1InnerPy;
+   vector<double>  *ConvInfo_OneLeg1_track1InnerPz;
+   vector<double>  *ConvInfo_OneLeg1_track2InnerPx;
+   vector<double>  *ConvInfo_OneLeg1_track2InnerPy;
+   vector<double>  *ConvInfo_OneLeg1_track2InnerPz;
    vector<double>  *ConvInfo_OneLeg1_dRToSc;
    vector<unsigned char> *ConvInfo_OneLeg1_nSharedHits;
    vector<double>  *ConvInfo_OneLeg1_MVAout;
    vector<vector<float> > *ConvInfo_OneLeg1_oneLegMVA;
    vector<vector<unsigned char> > *ConvInfo_OneLeg1_nHitsBeforeVtx;
-   vector<vector<int> > *ConvInfo_OneLeg1_quality;
+   vector<int>     *ConvInfo_OneLeg1_isUndefinedAlgo;
+   vector<int>     *ConvInfo_OneLeg1_isEcalSeededAlgo;
+   vector<int>     *ConvInfo_OneLeg1_isTrackerOnlyAlgo;
+   vector<int>     *ConvInfo_OneLeg1_isMixedAlgo;
+   vector<int>     *ConvInfo_OneLeg1_isPflowAlgo;
+   vector<int>     *ConvInfo_OneLeg1_isGeneralTracksOnly;
+   vector<int>     *ConvInfo_OneLeg1_isArbitratedEcalSeeded;
+   vector<int>     *ConvInfo_OneLeg1_isArbitratedMerged;
+   vector<int>     *ConvInfo_OneLeg1_isArbitratedMergedEcalGeneral;
+   vector<int>     *ConvInfo_OneLeg1_isHighPurity;
+   vector<int>     *ConvInfo_OneLeg1_isHighEfficiency;
+   vector<int>     *ConvInfo_OneLeg1_isEcalMatched1Track;
+   vector<int>     *ConvInfo_OneLeg1_isEcalMatched2Track;
    vector<double>  *ConvInfo_OneLeg2_x;
    vector<double>  *ConvInfo_OneLeg2_y;
    vector<double>  *ConvInfo_OneLeg2_z;
@@ -680,12 +735,30 @@ public :
    vector<double>  *ConvInfo_OneLeg2_vtxNdof;
    vector<double>  *ConvInfo_OneLeg2_pairCotThetaSeparation;
    vector<double>  *ConvInfo_OneLeg2_photonPt;
+   vector<double>  *ConvInfo_OneLeg2_track1InnerPx;
+   vector<double>  *ConvInfo_OneLeg2_track1InnerPy;
+   vector<double>  *ConvInfo_OneLeg2_track1InnerPz;
+   vector<double>  *ConvInfo_OneLeg2_track2InnerPx;
+   vector<double>  *ConvInfo_OneLeg2_track2InnerPy;
+   vector<double>  *ConvInfo_OneLeg2_track2InnerPz;
    vector<double>  *ConvInfo_OneLeg2_dRToSc;
    vector<unsigned char> *ConvInfo_OneLeg2_nSharedHits;
    vector<double>  *ConvInfo_OneLeg2_MVAout;
    vector<vector<float> > *ConvInfo_OneLeg2_oneLegMVA;
    vector<vector<unsigned char> > *ConvInfo_OneLeg2_nHitsBeforeVtx;
-   vector<vector<int> > *ConvInfo_OneLeg2_quality;
+   vector<int>     *ConvInfo_OneLeg2_isUndefinedAlgo;
+   vector<int>     *ConvInfo_OneLeg2_isEcalSeededAlgo;
+   vector<int>     *ConvInfo_OneLeg2_isTrackerOnlyAlgo;
+   vector<int>     *ConvInfo_OneLeg2_isMixedAlgo;
+   vector<int>     *ConvInfo_OneLeg2_isPflowAlgo;
+   vector<int>     *ConvInfo_OneLeg2_isGeneralTracksOnly;
+   vector<int>     *ConvInfo_OneLeg2_isArbitratedEcalSeeded;
+   vector<int>     *ConvInfo_OneLeg2_isArbitratedMerged;
+   vector<int>     *ConvInfo_OneLeg2_isArbitratedMergedEcalGeneral;
+   vector<int>     *ConvInfo_OneLeg2_isHighPurity;
+   vector<int>     *ConvInfo_OneLeg2_isHighEfficiency;
+   vector<int>     *ConvInfo_OneLeg2_isEcalMatched1Track;
+   vector<int>     *ConvInfo_OneLeg2_isEcalMatched2Track;
    Double_t        Diphoton_Minv;
    Double_t        Diphoton_qt;
    Double_t        Diphoton_deltaPhi;
@@ -735,6 +808,8 @@ public :
    TBranch        *b_JetInfo_energy;   //!
    TBranch        *b_JetInfo_passLooseID;   //!
    TBranch        *b_JetInfo_passTightID;   //!
+   TBranch        *b_JetInfo_HT;   //!
+   TBranch        *b_JetInfo_missingHT;   //!
    TBranch        *b_ConvInfo1_x;   //!
    TBranch        *b_ConvInfo1_y;   //!
    TBranch        *b_ConvInfo1_z;   //!
@@ -748,12 +823,30 @@ public :
    TBranch        *b_ConvInfo1_vtxNdof;   //!
    TBranch        *b_ConvInfo1_pairCotThetaSeparation;   //!
    TBranch        *b_ConvInfo1_photonPt;   //!
+   TBranch        *b_ConvInfo1_track1InnerPx;   //!
+   TBranch        *b_ConvInfo1_track1InnerPy;   //!
+   TBranch        *b_ConvInfo1_track1InnerPz;   //!
+   TBranch        *b_ConvInfo1_track2InnerPx;   //!
+   TBranch        *b_ConvInfo1_track2InnerPy;   //!
+   TBranch        *b_ConvInfo1_track2InnerPz;   //!
    TBranch        *b_ConvInfo1_dRToSc;   //!
    TBranch        *b_ConvInfo1_nSharedHits;   //!
    TBranch        *b_ConvInfo1_MVAout;   //!
    TBranch        *b_ConvInfo1_oneLegMVA;   //!
    TBranch        *b_ConvInfo1_nHitsBeforeVtx;   //!
-   TBranch        *b_ConvInfo1_quality;   //!
+   TBranch        *b_ConvInfo1_isUndefinedAlgo;   //!
+   TBranch        *b_ConvInfo1_isEcalSeededAlgo;   //!
+   TBranch        *b_ConvInfo1_isTrackerOnlyAlgo;   //!
+   TBranch        *b_ConvInfo1_isMixedAlgo;   //!
+   TBranch        *b_ConvInfo1_isPflowAlgo;   //!
+   TBranch        *b_ConvInfo1_isGeneralTracksOnly;   //!
+   TBranch        *b_ConvInfo1_isArbitratedEcalSeeded;   //!
+   TBranch        *b_ConvInfo1_isArbitratedMerged;   //!
+   TBranch        *b_ConvInfo1_isArbitratedMergedEcalGeneral;   //!
+   TBranch        *b_ConvInfo1_isHighPurity;   //!
+   TBranch        *b_ConvInfo1_isHighEfficiency;   //!
+   TBranch        *b_ConvInfo1_isEcalMatched1Track;   //!
+   TBranch        *b_ConvInfo1_isEcalMatched2Track;   //!
    TBranch        *b_ConvInfo2_x;   //!
    TBranch        *b_ConvInfo2_y;   //!
    TBranch        *b_ConvInfo2_z;   //!
@@ -767,12 +860,30 @@ public :
    TBranch        *b_ConvInfo2_vtxNdof;   //!
    TBranch        *b_ConvInfo2_pairCotThetaSeparation;   //!
    TBranch        *b_ConvInfo2_photonPt;   //!
+   TBranch        *b_ConvInfo2_track1InnerPx;   //!
+   TBranch        *b_ConvInfo2_track1InnerPy;   //!
+   TBranch        *b_ConvInfo2_track1InnerPz;   //!
+   TBranch        *b_ConvInfo2_track2InnerPx;   //!
+   TBranch        *b_ConvInfo2_track2InnerPy;   //!
+   TBranch        *b_ConvInfo2_track2InnerPz;   //!
    TBranch        *b_ConvInfo2_dRToSc;   //!
    TBranch        *b_ConvInfo2_nSharedHits;   //!
    TBranch        *b_ConvInfo2_MVAout;   //!
    TBranch        *b_ConvInfo2_oneLegMVA;   //!
    TBranch        *b_ConvInfo2_nHitsBeforeVtx;   //!
-   TBranch        *b_ConvInfo2_quality;   //!
+   TBranch        *b_ConvInfo2_isUndefinedAlgo;   //!
+   TBranch        *b_ConvInfo2_isEcalSeededAlgo;   //!
+   TBranch        *b_ConvInfo2_isTrackerOnlyAlgo;   //!
+   TBranch        *b_ConvInfo2_isMixedAlgo;   //!
+   TBranch        *b_ConvInfo2_isPflowAlgo;   //!
+   TBranch        *b_ConvInfo2_isGeneralTracksOnly;   //!
+   TBranch        *b_ConvInfo2_isArbitratedEcalSeeded;   //!
+   TBranch        *b_ConvInfo2_isArbitratedMerged;   //!
+   TBranch        *b_ConvInfo2_isArbitratedMergedEcalGeneral;   //!
+   TBranch        *b_ConvInfo2_isHighPurity;   //!
+   TBranch        *b_ConvInfo2_isHighEfficiency;   //!
+   TBranch        *b_ConvInfo2_isEcalMatched1Track;   //!
+   TBranch        *b_ConvInfo2_isEcalMatched2Track;   //!
    TBranch        *b_ConvInfo_OneLeg1_x;   //!
    TBranch        *b_ConvInfo_OneLeg1_y;   //!
    TBranch        *b_ConvInfo_OneLeg1_z;   //!
@@ -786,12 +897,30 @@ public :
    TBranch        *b_ConvInfo_OneLeg1_vtxNdof;   //!
    TBranch        *b_ConvInfo_OneLeg1_pairCotThetaSeparation;   //!
    TBranch        *b_ConvInfo_OneLeg1_photonPt;   //!
+   TBranch        *b_ConvInfo_OneLeg1_track1InnerPx;   //!
+   TBranch        *b_ConvInfo_OneLeg1_track1InnerPy;   //!
+   TBranch        *b_ConvInfo_OneLeg1_track1InnerPz;   //!
+   TBranch        *b_ConvInfo_OneLeg1_track2InnerPx;   //!
+   TBranch        *b_ConvInfo_OneLeg1_track2InnerPy;   //!
+   TBranch        *b_ConvInfo_OneLeg1_track2InnerPz;   //!
    TBranch        *b_ConvInfo_OneLeg1_dRToSc;   //!
    TBranch        *b_ConvInfo_OneLeg1_nSharedHits;   //!
    TBranch        *b_ConvInfo_OneLeg1_MVAout;   //!
    TBranch        *b_ConvInfo_OneLeg1_oneLegMVA;   //!
    TBranch        *b_ConvInfo_OneLeg1_nHitsBeforeVtx;   //!
-   TBranch        *b_ConvInfo_OneLeg1_quality;   //!
+   TBranch        *b_ConvInfo_OneLeg1_isUndefinedAlgo;   //!
+   TBranch        *b_ConvInfo_OneLeg1_isEcalSeededAlgo;   //!
+   TBranch        *b_ConvInfo_OneLeg1_isTrackerOnlyAlgo;   //!
+   TBranch        *b_ConvInfo_OneLeg1_isMixedAlgo;   //!
+   TBranch        *b_ConvInfo_OneLeg1_isPflowAlgo;   //!
+   TBranch        *b_ConvInfo_OneLeg1_isGeneralTracksOnly;   //!
+   TBranch        *b_ConvInfo_OneLeg1_isArbitratedEcalSeeded;   //!
+   TBranch        *b_ConvInfo_OneLeg1_isArbitratedMerged;   //!
+   TBranch        *b_ConvInfo_OneLeg1_isArbitratedMergedEcalGeneral;   //!
+   TBranch        *b_ConvInfo_OneLeg1_isHighPurity;   //!
+   TBranch        *b_ConvInfo_OneLeg1_isHighEfficiency;   //!
+   TBranch        *b_ConvInfo_OneLeg1_isEcalMatched1Track;   //!
+   TBranch        *b_ConvInfo_OneLeg1_isEcalMatched2Track;   //!
    TBranch        *b_ConvInfo_OneLeg2_x;   //!
    TBranch        *b_ConvInfo_OneLeg2_y;   //!
    TBranch        *b_ConvInfo_OneLeg2_z;   //!
@@ -805,12 +934,30 @@ public :
    TBranch        *b_ConvInfo_OneLeg2_vtxNdof;   //!
    TBranch        *b_ConvInfo_OneLeg2_pairCotThetaSeparation;   //!
    TBranch        *b_ConvInfo_OneLeg2_photonPt;   //!
+   TBranch        *b_ConvInfo_OneLeg2_track1InnerPx;   //!
+   TBranch        *b_ConvInfo_OneLeg2_track1InnerPy;   //!
+   TBranch        *b_ConvInfo_OneLeg2_track1InnerPz;   //!
+   TBranch        *b_ConvInfo_OneLeg2_track2InnerPx;   //!
+   TBranch        *b_ConvInfo_OneLeg2_track2InnerPy;   //!
+   TBranch        *b_ConvInfo_OneLeg2_track2InnerPz;   //!
    TBranch        *b_ConvInfo_OneLeg2_dRToSc;   //!
    TBranch        *b_ConvInfo_OneLeg2_nSharedHits;   //!
    TBranch        *b_ConvInfo_OneLeg2_MVAout;   //!
    TBranch        *b_ConvInfo_OneLeg2_oneLegMVA;   //!
    TBranch        *b_ConvInfo_OneLeg2_nHitsBeforeVtx;   //!
-   TBranch        *b_ConvInfo_OneLeg2_quality;   //!
+   TBranch        *b_ConvInfo_OneLeg2_isUndefinedAlgo;   //!
+   TBranch        *b_ConvInfo_OneLeg2_isEcalSeededAlgo;   //!
+   TBranch        *b_ConvInfo_OneLeg2_isTrackerOnlyAlgo;   //!
+   TBranch        *b_ConvInfo_OneLeg2_isMixedAlgo;   //!
+   TBranch        *b_ConvInfo_OneLeg2_isPflowAlgo;   //!
+   TBranch        *b_ConvInfo_OneLeg2_isGeneralTracksOnly;   //!
+   TBranch        *b_ConvInfo_OneLeg2_isArbitratedEcalSeeded;   //!
+   TBranch        *b_ConvInfo_OneLeg2_isArbitratedMerged;   //!
+   TBranch        *b_ConvInfo_OneLeg2_isArbitratedMergedEcalGeneral;   //!
+   TBranch        *b_ConvInfo_OneLeg2_isHighPurity;   //!
+   TBranch        *b_ConvInfo_OneLeg2_isHighEfficiency;   //!
+   TBranch        *b_ConvInfo_OneLeg2_isEcalMatched1Track;   //!
+   TBranch        *b_ConvInfo_OneLeg2_isEcalMatched2Track;   //!
    TBranch        *b_Diphoton;   //!
    TBranch        *b_DiphotonVtx2;   //!
    TBranch        *b_DiphotonVtx3;   //!
@@ -821,7 +968,7 @@ public :
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
-   virtual void     Loop();
+   virtual void     Loop(TString outfilename);
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
 };
@@ -834,11 +981,11 @@ fTree::fTree(TTree *tree) : fChain(0)
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("root://cmsxrootd.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/WithConversionInfo/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/BrandonSteveMerged/DoubleEG_Run2016B_V2.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("root://cmsxrootd.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/WithConversionInfo/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD.root");
+         f = new TFile("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/BrandonSteveMerged/DoubleEG_Run2016B_V2.root");
       }
-      TDirectory * dir = (TDirectory*)f->Get("root://cmsxrootd.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/WithConversionInfo/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD/DoubleEG_Run2015D-16Dec2015-v2_MINIAOD.root:/diphotonAnalyzer");
+      TDirectory * dir = (TDirectory*)f->Get("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/BrandonSteveMerged/DoubleEG_Run2016B_V2.root:/diphotonAnalyzer");
       dir->GetObject("fTree",tree);
 
    }
@@ -901,12 +1048,30 @@ void fTree::Init(TTree *tree)
    ConvInfo1_vtxNdof = 0;
    ConvInfo1_pairCotThetaSeparation = 0;
    ConvInfo1_photonPt = 0;
+   ConvInfo1_track1InnerPx = 0;
+   ConvInfo1_track1InnerPy = 0;
+   ConvInfo1_track1InnerPz = 0;
+   ConvInfo1_track2InnerPx = 0;
+   ConvInfo1_track2InnerPy = 0;
+   ConvInfo1_track2InnerPz = 0;
    ConvInfo1_dRToSc = 0;
    ConvInfo1_nSharedHits = 0;
    ConvInfo1_MVAout = 0;
    ConvInfo1_oneLegMVA = 0;
    ConvInfo1_nHitsBeforeVtx = 0;
-   ConvInfo1_quality = 0;
+   ConvInfo1_isUndefinedAlgo = 0;
+   ConvInfo1_isEcalSeededAlgo = 0;
+   ConvInfo1_isTrackerOnlyAlgo = 0;
+   ConvInfo1_isMixedAlgo = 0;
+   ConvInfo1_isPflowAlgo = 0;
+   ConvInfo1_isGeneralTracksOnly = 0;
+   ConvInfo1_isArbitratedEcalSeeded = 0;
+   ConvInfo1_isArbitratedMerged = 0;
+   ConvInfo1_isArbitratedMergedEcalGeneral = 0;
+   ConvInfo1_isHighPurity = 0;
+   ConvInfo1_isHighEfficiency = 0;
+   ConvInfo1_isEcalMatched1Track = 0;
+   ConvInfo1_isEcalMatched2Track = 0;
    ConvInfo2_x = 0;
    ConvInfo2_y = 0;
    ConvInfo2_z = 0;
@@ -920,12 +1085,30 @@ void fTree::Init(TTree *tree)
    ConvInfo2_vtxNdof = 0;
    ConvInfo2_pairCotThetaSeparation = 0;
    ConvInfo2_photonPt = 0;
+   ConvInfo2_track1InnerPx = 0;
+   ConvInfo2_track1InnerPy = 0;
+   ConvInfo2_track1InnerPz = 0;
+   ConvInfo2_track2InnerPx = 0;
+   ConvInfo2_track2InnerPy = 0;
+   ConvInfo2_track2InnerPz = 0;
    ConvInfo2_dRToSc = 0;
    ConvInfo2_nSharedHits = 0;
    ConvInfo2_MVAout = 0;
    ConvInfo2_oneLegMVA = 0;
    ConvInfo2_nHitsBeforeVtx = 0;
-   ConvInfo2_quality = 0;
+   ConvInfo2_isUndefinedAlgo = 0;
+   ConvInfo2_isEcalSeededAlgo = 0;
+   ConvInfo2_isTrackerOnlyAlgo = 0;
+   ConvInfo2_isMixedAlgo = 0;
+   ConvInfo2_isPflowAlgo = 0;
+   ConvInfo2_isGeneralTracksOnly = 0;
+   ConvInfo2_isArbitratedEcalSeeded = 0;
+   ConvInfo2_isArbitratedMerged = 0;
+   ConvInfo2_isArbitratedMergedEcalGeneral = 0;
+   ConvInfo2_isHighPurity = 0;
+   ConvInfo2_isHighEfficiency = 0;
+   ConvInfo2_isEcalMatched1Track = 0;
+   ConvInfo2_isEcalMatched2Track = 0;
    ConvInfo_OneLeg1_x = 0;
    ConvInfo_OneLeg1_y = 0;
    ConvInfo_OneLeg1_z = 0;
@@ -939,12 +1122,30 @@ void fTree::Init(TTree *tree)
    ConvInfo_OneLeg1_vtxNdof = 0;
    ConvInfo_OneLeg1_pairCotThetaSeparation = 0;
    ConvInfo_OneLeg1_photonPt = 0;
+   ConvInfo_OneLeg1_track1InnerPx = 0;
+   ConvInfo_OneLeg1_track1InnerPy = 0;
+   ConvInfo_OneLeg1_track1InnerPz = 0;
+   ConvInfo_OneLeg1_track2InnerPx = 0;
+   ConvInfo_OneLeg1_track2InnerPy = 0;
+   ConvInfo_OneLeg1_track2InnerPz = 0;
    ConvInfo_OneLeg1_dRToSc = 0;
    ConvInfo_OneLeg1_nSharedHits = 0;
    ConvInfo_OneLeg1_MVAout = 0;
    ConvInfo_OneLeg1_oneLegMVA = 0;
    ConvInfo_OneLeg1_nHitsBeforeVtx = 0;
-   ConvInfo_OneLeg1_quality = 0;
+   ConvInfo_OneLeg1_isUndefinedAlgo = 0;
+   ConvInfo_OneLeg1_isEcalSeededAlgo = 0;
+   ConvInfo_OneLeg1_isTrackerOnlyAlgo = 0;
+   ConvInfo_OneLeg1_isMixedAlgo = 0;
+   ConvInfo_OneLeg1_isPflowAlgo = 0;
+   ConvInfo_OneLeg1_isGeneralTracksOnly = 0;
+   ConvInfo_OneLeg1_isArbitratedEcalSeeded = 0;
+   ConvInfo_OneLeg1_isArbitratedMerged = 0;
+   ConvInfo_OneLeg1_isArbitratedMergedEcalGeneral = 0;
+   ConvInfo_OneLeg1_isHighPurity = 0;
+   ConvInfo_OneLeg1_isHighEfficiency = 0;
+   ConvInfo_OneLeg1_isEcalMatched1Track = 0;
+   ConvInfo_OneLeg1_isEcalMatched2Track = 0;
    ConvInfo_OneLeg2_x = 0;
    ConvInfo_OneLeg2_y = 0;
    ConvInfo_OneLeg2_z = 0;
@@ -958,12 +1159,30 @@ void fTree::Init(TTree *tree)
    ConvInfo_OneLeg2_vtxNdof = 0;
    ConvInfo_OneLeg2_pairCotThetaSeparation = 0;
    ConvInfo_OneLeg2_photonPt = 0;
+   ConvInfo_OneLeg2_track1InnerPx = 0;
+   ConvInfo_OneLeg2_track1InnerPy = 0;
+   ConvInfo_OneLeg2_track1InnerPz = 0;
+   ConvInfo_OneLeg2_track2InnerPx = 0;
+   ConvInfo_OneLeg2_track2InnerPy = 0;
+   ConvInfo_OneLeg2_track2InnerPz = 0;
    ConvInfo_OneLeg2_dRToSc = 0;
    ConvInfo_OneLeg2_nSharedHits = 0;
    ConvInfo_OneLeg2_MVAout = 0;
    ConvInfo_OneLeg2_oneLegMVA = 0;
    ConvInfo_OneLeg2_nHitsBeforeVtx = 0;
-   ConvInfo_OneLeg2_quality = 0;
+   ConvInfo_OneLeg2_isUndefinedAlgo = 0;
+   ConvInfo_OneLeg2_isEcalSeededAlgo = 0;
+   ConvInfo_OneLeg2_isTrackerOnlyAlgo = 0;
+   ConvInfo_OneLeg2_isMixedAlgo = 0;
+   ConvInfo_OneLeg2_isPflowAlgo = 0;
+   ConvInfo_OneLeg2_isGeneralTracksOnly = 0;
+   ConvInfo_OneLeg2_isArbitratedEcalSeeded = 0;
+   ConvInfo_OneLeg2_isArbitratedMerged = 0;
+   ConvInfo_OneLeg2_isArbitratedMergedEcalGeneral = 0;
+   ConvInfo_OneLeg2_isHighPurity = 0;
+   ConvInfo_OneLeg2_isHighEfficiency = 0;
+   ConvInfo_OneLeg2_isEcalMatched1Track = 0;
+   ConvInfo_OneLeg2_isEcalMatched2Track = 0;
    // Set branch addresses and branch pointers
    if (!tree) return;
    fChain = tree;
@@ -993,6 +1212,8 @@ void fTree::Init(TTree *tree)
    fChain->SetBranchAddress("JetInfo.energy", &JetInfo_energy, &b_JetInfo_energy);
    fChain->SetBranchAddress("JetInfo.passLooseID", &JetInfo_passLooseID, &b_JetInfo_passLooseID);
    fChain->SetBranchAddress("JetInfo.passTightID", &JetInfo_passTightID, &b_JetInfo_passTightID);
+   fChain->SetBranchAddress("JetInfo.HT", &JetInfo_HT, &b_JetInfo_HT);
+   fChain->SetBranchAddress("JetInfo.missingHT", &JetInfo_missingHT, &b_JetInfo_missingHT);
    fChain->SetBranchAddress("ConvInfo1.x", &ConvInfo1_x, &b_ConvInfo1_x);
    fChain->SetBranchAddress("ConvInfo1.y", &ConvInfo1_y, &b_ConvInfo1_y);
    fChain->SetBranchAddress("ConvInfo1.z", &ConvInfo1_z, &b_ConvInfo1_z);
@@ -1006,12 +1227,30 @@ void fTree::Init(TTree *tree)
    fChain->SetBranchAddress("ConvInfo1.vtxNdof", &ConvInfo1_vtxNdof, &b_ConvInfo1_vtxNdof);
    fChain->SetBranchAddress("ConvInfo1.pairCotThetaSeparation", &ConvInfo1_pairCotThetaSeparation, &b_ConvInfo1_pairCotThetaSeparation);
    fChain->SetBranchAddress("ConvInfo1.photonPt", &ConvInfo1_photonPt, &b_ConvInfo1_photonPt);
+   fChain->SetBranchAddress("ConvInfo1.track1InnerPx", &ConvInfo1_track1InnerPx, &b_ConvInfo1_track1InnerPx);
+   fChain->SetBranchAddress("ConvInfo1.track1InnerPy", &ConvInfo1_track1InnerPy, &b_ConvInfo1_track1InnerPy);
+   fChain->SetBranchAddress("ConvInfo1.track1InnerPz", &ConvInfo1_track1InnerPz, &b_ConvInfo1_track1InnerPz);
+   fChain->SetBranchAddress("ConvInfo1.track2InnerPx", &ConvInfo1_track2InnerPx, &b_ConvInfo1_track2InnerPx);
+   fChain->SetBranchAddress("ConvInfo1.track2InnerPy", &ConvInfo1_track2InnerPy, &b_ConvInfo1_track2InnerPy);
+   fChain->SetBranchAddress("ConvInfo1.track2InnerPz", &ConvInfo1_track2InnerPz, &b_ConvInfo1_track2InnerPz);
    fChain->SetBranchAddress("ConvInfo1.dRToSc", &ConvInfo1_dRToSc, &b_ConvInfo1_dRToSc);
    fChain->SetBranchAddress("ConvInfo1.nSharedHits", &ConvInfo1_nSharedHits, &b_ConvInfo1_nSharedHits);
    fChain->SetBranchAddress("ConvInfo1.MVAout", &ConvInfo1_MVAout, &b_ConvInfo1_MVAout);
    fChain->SetBranchAddress("ConvInfo1.oneLegMVA", &ConvInfo1_oneLegMVA, &b_ConvInfo1_oneLegMVA);
    fChain->SetBranchAddress("ConvInfo1.nHitsBeforeVtx", &ConvInfo1_nHitsBeforeVtx, &b_ConvInfo1_nHitsBeforeVtx);
-   fChain->SetBranchAddress("ConvInfo1.quality", &ConvInfo1_quality, &b_ConvInfo1_quality);
+   fChain->SetBranchAddress("ConvInfo1.isUndefinedAlgo", &ConvInfo1_isUndefinedAlgo, &b_ConvInfo1_isUndefinedAlgo);
+   fChain->SetBranchAddress("ConvInfo1.isEcalSeededAlgo", &ConvInfo1_isEcalSeededAlgo, &b_ConvInfo1_isEcalSeededAlgo);
+   fChain->SetBranchAddress("ConvInfo1.isTrackerOnlyAlgo", &ConvInfo1_isTrackerOnlyAlgo, &b_ConvInfo1_isTrackerOnlyAlgo);
+   fChain->SetBranchAddress("ConvInfo1.isMixedAlgo", &ConvInfo1_isMixedAlgo, &b_ConvInfo1_isMixedAlgo);
+   fChain->SetBranchAddress("ConvInfo1.isPflowAlgo", &ConvInfo1_isPflowAlgo, &b_ConvInfo1_isPflowAlgo);
+   fChain->SetBranchAddress("ConvInfo1.isGeneralTracksOnly", &ConvInfo1_isGeneralTracksOnly, &b_ConvInfo1_isGeneralTracksOnly);
+   fChain->SetBranchAddress("ConvInfo1.isArbitratedEcalSeeded", &ConvInfo1_isArbitratedEcalSeeded, &b_ConvInfo1_isArbitratedEcalSeeded);
+   fChain->SetBranchAddress("ConvInfo1.isArbitratedMerged", &ConvInfo1_isArbitratedMerged, &b_ConvInfo1_isArbitratedMerged);
+   fChain->SetBranchAddress("ConvInfo1.isArbitratedMergedEcalGeneral", &ConvInfo1_isArbitratedMergedEcalGeneral, &b_ConvInfo1_isArbitratedMergedEcalGeneral);
+   fChain->SetBranchAddress("ConvInfo1.isHighPurity", &ConvInfo1_isHighPurity, &b_ConvInfo1_isHighPurity);
+   fChain->SetBranchAddress("ConvInfo1.isHighEfficiency", &ConvInfo1_isHighEfficiency, &b_ConvInfo1_isHighEfficiency);
+   fChain->SetBranchAddress("ConvInfo1.isEcalMatched1Track", &ConvInfo1_isEcalMatched1Track, &b_ConvInfo1_isEcalMatched1Track);
+   fChain->SetBranchAddress("ConvInfo1.isEcalMatched2Track", &ConvInfo1_isEcalMatched2Track, &b_ConvInfo1_isEcalMatched2Track);
    fChain->SetBranchAddress("ConvInfo2.x", &ConvInfo2_x, &b_ConvInfo2_x);
    fChain->SetBranchAddress("ConvInfo2.y", &ConvInfo2_y, &b_ConvInfo2_y);
    fChain->SetBranchAddress("ConvInfo2.z", &ConvInfo2_z, &b_ConvInfo2_z);
@@ -1025,12 +1264,30 @@ void fTree::Init(TTree *tree)
    fChain->SetBranchAddress("ConvInfo2.vtxNdof", &ConvInfo2_vtxNdof, &b_ConvInfo2_vtxNdof);
    fChain->SetBranchAddress("ConvInfo2.pairCotThetaSeparation", &ConvInfo2_pairCotThetaSeparation, &b_ConvInfo2_pairCotThetaSeparation);
    fChain->SetBranchAddress("ConvInfo2.photonPt", &ConvInfo2_photonPt, &b_ConvInfo2_photonPt);
+   fChain->SetBranchAddress("ConvInfo2.track1InnerPx", &ConvInfo2_track1InnerPx, &b_ConvInfo2_track1InnerPx);
+   fChain->SetBranchAddress("ConvInfo2.track1InnerPy", &ConvInfo2_track1InnerPy, &b_ConvInfo2_track1InnerPy);
+   fChain->SetBranchAddress("ConvInfo2.track1InnerPz", &ConvInfo2_track1InnerPz, &b_ConvInfo2_track1InnerPz);
+   fChain->SetBranchAddress("ConvInfo2.track2InnerPx", &ConvInfo2_track2InnerPx, &b_ConvInfo2_track2InnerPx);
+   fChain->SetBranchAddress("ConvInfo2.track2InnerPy", &ConvInfo2_track2InnerPy, &b_ConvInfo2_track2InnerPy);
+   fChain->SetBranchAddress("ConvInfo2.track2InnerPz", &ConvInfo2_track2InnerPz, &b_ConvInfo2_track2InnerPz);
    fChain->SetBranchAddress("ConvInfo2.dRToSc", &ConvInfo2_dRToSc, &b_ConvInfo2_dRToSc);
    fChain->SetBranchAddress("ConvInfo2.nSharedHits", &ConvInfo2_nSharedHits, &b_ConvInfo2_nSharedHits);
    fChain->SetBranchAddress("ConvInfo2.MVAout", &ConvInfo2_MVAout, &b_ConvInfo2_MVAout);
    fChain->SetBranchAddress("ConvInfo2.oneLegMVA", &ConvInfo2_oneLegMVA, &b_ConvInfo2_oneLegMVA);
    fChain->SetBranchAddress("ConvInfo2.nHitsBeforeVtx", &ConvInfo2_nHitsBeforeVtx, &b_ConvInfo2_nHitsBeforeVtx);
-   fChain->SetBranchAddress("ConvInfo2.quality", &ConvInfo2_quality, &b_ConvInfo2_quality);
+   fChain->SetBranchAddress("ConvInfo2.isUndefinedAlgo", &ConvInfo2_isUndefinedAlgo, &b_ConvInfo2_isUndefinedAlgo);
+   fChain->SetBranchAddress("ConvInfo2.isEcalSeededAlgo", &ConvInfo2_isEcalSeededAlgo, &b_ConvInfo2_isEcalSeededAlgo);
+   fChain->SetBranchAddress("ConvInfo2.isTrackerOnlyAlgo", &ConvInfo2_isTrackerOnlyAlgo, &b_ConvInfo2_isTrackerOnlyAlgo);
+   fChain->SetBranchAddress("ConvInfo2.isMixedAlgo", &ConvInfo2_isMixedAlgo, &b_ConvInfo2_isMixedAlgo);
+   fChain->SetBranchAddress("ConvInfo2.isPflowAlgo", &ConvInfo2_isPflowAlgo, &b_ConvInfo2_isPflowAlgo);
+   fChain->SetBranchAddress("ConvInfo2.isGeneralTracksOnly", &ConvInfo2_isGeneralTracksOnly, &b_ConvInfo2_isGeneralTracksOnly);
+   fChain->SetBranchAddress("ConvInfo2.isArbitratedEcalSeeded", &ConvInfo2_isArbitratedEcalSeeded, &b_ConvInfo2_isArbitratedEcalSeeded);
+   fChain->SetBranchAddress("ConvInfo2.isArbitratedMerged", &ConvInfo2_isArbitratedMerged, &b_ConvInfo2_isArbitratedMerged);
+   fChain->SetBranchAddress("ConvInfo2.isArbitratedMergedEcalGeneral", &ConvInfo2_isArbitratedMergedEcalGeneral, &b_ConvInfo2_isArbitratedMergedEcalGeneral);
+   fChain->SetBranchAddress("ConvInfo2.isHighPurity", &ConvInfo2_isHighPurity, &b_ConvInfo2_isHighPurity);
+   fChain->SetBranchAddress("ConvInfo2.isHighEfficiency", &ConvInfo2_isHighEfficiency, &b_ConvInfo2_isHighEfficiency);
+   fChain->SetBranchAddress("ConvInfo2.isEcalMatched1Track", &ConvInfo2_isEcalMatched1Track, &b_ConvInfo2_isEcalMatched1Track);
+   fChain->SetBranchAddress("ConvInfo2.isEcalMatched2Track", &ConvInfo2_isEcalMatched2Track, &b_ConvInfo2_isEcalMatched2Track);
    fChain->SetBranchAddress("ConvInfo_OneLeg1.x", &ConvInfo_OneLeg1_x, &b_ConvInfo_OneLeg1_x);
    fChain->SetBranchAddress("ConvInfo_OneLeg1.y", &ConvInfo_OneLeg1_y, &b_ConvInfo_OneLeg1_y);
    fChain->SetBranchAddress("ConvInfo_OneLeg1.z", &ConvInfo_OneLeg1_z, &b_ConvInfo_OneLeg1_z);
@@ -1044,12 +1301,30 @@ void fTree::Init(TTree *tree)
    fChain->SetBranchAddress("ConvInfo_OneLeg1.vtxNdof", &ConvInfo_OneLeg1_vtxNdof, &b_ConvInfo_OneLeg1_vtxNdof);
    fChain->SetBranchAddress("ConvInfo_OneLeg1.pairCotThetaSeparation", &ConvInfo_OneLeg1_pairCotThetaSeparation, &b_ConvInfo_OneLeg1_pairCotThetaSeparation);
    fChain->SetBranchAddress("ConvInfo_OneLeg1.photonPt", &ConvInfo_OneLeg1_photonPt, &b_ConvInfo_OneLeg1_photonPt);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.track1InnerPx", &ConvInfo_OneLeg1_track1InnerPx, &b_ConvInfo_OneLeg1_track1InnerPx);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.track1InnerPy", &ConvInfo_OneLeg1_track1InnerPy, &b_ConvInfo_OneLeg1_track1InnerPy);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.track1InnerPz", &ConvInfo_OneLeg1_track1InnerPz, &b_ConvInfo_OneLeg1_track1InnerPz);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.track2InnerPx", &ConvInfo_OneLeg1_track2InnerPx, &b_ConvInfo_OneLeg1_track2InnerPx);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.track2InnerPy", &ConvInfo_OneLeg1_track2InnerPy, &b_ConvInfo_OneLeg1_track2InnerPy);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.track2InnerPz", &ConvInfo_OneLeg1_track2InnerPz, &b_ConvInfo_OneLeg1_track2InnerPz);
    fChain->SetBranchAddress("ConvInfo_OneLeg1.dRToSc", &ConvInfo_OneLeg1_dRToSc, &b_ConvInfo_OneLeg1_dRToSc);
    fChain->SetBranchAddress("ConvInfo_OneLeg1.nSharedHits", &ConvInfo_OneLeg1_nSharedHits, &b_ConvInfo_OneLeg1_nSharedHits);
    fChain->SetBranchAddress("ConvInfo_OneLeg1.MVAout", &ConvInfo_OneLeg1_MVAout, &b_ConvInfo_OneLeg1_MVAout);
    fChain->SetBranchAddress("ConvInfo_OneLeg1.oneLegMVA", &ConvInfo_OneLeg1_oneLegMVA, &b_ConvInfo_OneLeg1_oneLegMVA);
    fChain->SetBranchAddress("ConvInfo_OneLeg1.nHitsBeforeVtx", &ConvInfo_OneLeg1_nHitsBeforeVtx, &b_ConvInfo_OneLeg1_nHitsBeforeVtx);
-   fChain->SetBranchAddress("ConvInfo_OneLeg1.quality", &ConvInfo_OneLeg1_quality, &b_ConvInfo_OneLeg1_quality);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.isUndefinedAlgo", &ConvInfo_OneLeg1_isUndefinedAlgo, &b_ConvInfo_OneLeg1_isUndefinedAlgo);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.isEcalSeededAlgo", &ConvInfo_OneLeg1_isEcalSeededAlgo, &b_ConvInfo_OneLeg1_isEcalSeededAlgo);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.isTrackerOnlyAlgo", &ConvInfo_OneLeg1_isTrackerOnlyAlgo, &b_ConvInfo_OneLeg1_isTrackerOnlyAlgo);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.isMixedAlgo", &ConvInfo_OneLeg1_isMixedAlgo, &b_ConvInfo_OneLeg1_isMixedAlgo);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.isPflowAlgo", &ConvInfo_OneLeg1_isPflowAlgo, &b_ConvInfo_OneLeg1_isPflowAlgo);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.isGeneralTracksOnly", &ConvInfo_OneLeg1_isGeneralTracksOnly, &b_ConvInfo_OneLeg1_isGeneralTracksOnly);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.isArbitratedEcalSeeded", &ConvInfo_OneLeg1_isArbitratedEcalSeeded, &b_ConvInfo_OneLeg1_isArbitratedEcalSeeded);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.isArbitratedMerged", &ConvInfo_OneLeg1_isArbitratedMerged, &b_ConvInfo_OneLeg1_isArbitratedMerged);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.isArbitratedMergedEcalGeneral", &ConvInfo_OneLeg1_isArbitratedMergedEcalGeneral, &b_ConvInfo_OneLeg1_isArbitratedMergedEcalGeneral);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.isHighPurity", &ConvInfo_OneLeg1_isHighPurity, &b_ConvInfo_OneLeg1_isHighPurity);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.isHighEfficiency", &ConvInfo_OneLeg1_isHighEfficiency, &b_ConvInfo_OneLeg1_isHighEfficiency);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.isEcalMatched1Track", &ConvInfo_OneLeg1_isEcalMatched1Track, &b_ConvInfo_OneLeg1_isEcalMatched1Track);
+   fChain->SetBranchAddress("ConvInfo_OneLeg1.isEcalMatched2Track", &ConvInfo_OneLeg1_isEcalMatched2Track, &b_ConvInfo_OneLeg1_isEcalMatched2Track);
    fChain->SetBranchAddress("ConvInfo_OneLeg2.x", &ConvInfo_OneLeg2_x, &b_ConvInfo_OneLeg2_x);
    fChain->SetBranchAddress("ConvInfo_OneLeg2.y", &ConvInfo_OneLeg2_y, &b_ConvInfo_OneLeg2_y);
    fChain->SetBranchAddress("ConvInfo_OneLeg2.z", &ConvInfo_OneLeg2_z, &b_ConvInfo_OneLeg2_z);
@@ -1063,12 +1338,30 @@ void fTree::Init(TTree *tree)
    fChain->SetBranchAddress("ConvInfo_OneLeg2.vtxNdof", &ConvInfo_OneLeg2_vtxNdof, &b_ConvInfo_OneLeg2_vtxNdof);
    fChain->SetBranchAddress("ConvInfo_OneLeg2.pairCotThetaSeparation", &ConvInfo_OneLeg2_pairCotThetaSeparation, &b_ConvInfo_OneLeg2_pairCotThetaSeparation);
    fChain->SetBranchAddress("ConvInfo_OneLeg2.photonPt", &ConvInfo_OneLeg2_photonPt, &b_ConvInfo_OneLeg2_photonPt);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.track1InnerPx", &ConvInfo_OneLeg2_track1InnerPx, &b_ConvInfo_OneLeg2_track1InnerPx);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.track1InnerPy", &ConvInfo_OneLeg2_track1InnerPy, &b_ConvInfo_OneLeg2_track1InnerPy);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.track1InnerPz", &ConvInfo_OneLeg2_track1InnerPz, &b_ConvInfo_OneLeg2_track1InnerPz);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.track2InnerPx", &ConvInfo_OneLeg2_track2InnerPx, &b_ConvInfo_OneLeg2_track2InnerPx);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.track2InnerPy", &ConvInfo_OneLeg2_track2InnerPy, &b_ConvInfo_OneLeg2_track2InnerPy);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.track2InnerPz", &ConvInfo_OneLeg2_track2InnerPz, &b_ConvInfo_OneLeg2_track2InnerPz);
    fChain->SetBranchAddress("ConvInfo_OneLeg2.dRToSc", &ConvInfo_OneLeg2_dRToSc, &b_ConvInfo_OneLeg2_dRToSc);
    fChain->SetBranchAddress("ConvInfo_OneLeg2.nSharedHits", &ConvInfo_OneLeg2_nSharedHits, &b_ConvInfo_OneLeg2_nSharedHits);
    fChain->SetBranchAddress("ConvInfo_OneLeg2.MVAout", &ConvInfo_OneLeg2_MVAout, &b_ConvInfo_OneLeg2_MVAout);
    fChain->SetBranchAddress("ConvInfo_OneLeg2.oneLegMVA", &ConvInfo_OneLeg2_oneLegMVA, &b_ConvInfo_OneLeg2_oneLegMVA);
    fChain->SetBranchAddress("ConvInfo_OneLeg2.nHitsBeforeVtx", &ConvInfo_OneLeg2_nHitsBeforeVtx, &b_ConvInfo_OneLeg2_nHitsBeforeVtx);
-   fChain->SetBranchAddress("ConvInfo_OneLeg2.quality", &ConvInfo_OneLeg2_quality, &b_ConvInfo_OneLeg2_quality);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.isUndefinedAlgo", &ConvInfo_OneLeg2_isUndefinedAlgo, &b_ConvInfo_OneLeg2_isUndefinedAlgo);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.isEcalSeededAlgo", &ConvInfo_OneLeg2_isEcalSeededAlgo, &b_ConvInfo_OneLeg2_isEcalSeededAlgo);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.isTrackerOnlyAlgo", &ConvInfo_OneLeg2_isTrackerOnlyAlgo, &b_ConvInfo_OneLeg2_isTrackerOnlyAlgo);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.isMixedAlgo", &ConvInfo_OneLeg2_isMixedAlgo, &b_ConvInfo_OneLeg2_isMixedAlgo);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.isPflowAlgo", &ConvInfo_OneLeg2_isPflowAlgo, &b_ConvInfo_OneLeg2_isPflowAlgo);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.isGeneralTracksOnly", &ConvInfo_OneLeg2_isGeneralTracksOnly, &b_ConvInfo_OneLeg2_isGeneralTracksOnly);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.isArbitratedEcalSeeded", &ConvInfo_OneLeg2_isArbitratedEcalSeeded, &b_ConvInfo_OneLeg2_isArbitratedEcalSeeded);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.isArbitratedMerged", &ConvInfo_OneLeg2_isArbitratedMerged, &b_ConvInfo_OneLeg2_isArbitratedMerged);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.isArbitratedMergedEcalGeneral", &ConvInfo_OneLeg2_isArbitratedMergedEcalGeneral, &b_ConvInfo_OneLeg2_isArbitratedMergedEcalGeneral);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.isHighPurity", &ConvInfo_OneLeg2_isHighPurity, &b_ConvInfo_OneLeg2_isHighPurity);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.isHighEfficiency", &ConvInfo_OneLeg2_isHighEfficiency, &b_ConvInfo_OneLeg2_isHighEfficiency);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.isEcalMatched1Track", &ConvInfo_OneLeg2_isEcalMatched1Track, &b_ConvInfo_OneLeg2_isEcalMatched1Track);
+   fChain->SetBranchAddress("ConvInfo_OneLeg2.isEcalMatched2Track", &ConvInfo_OneLeg2_isEcalMatched2Track, &b_ConvInfo_OneLeg2_isEcalMatched2Track);
    fChain->SetBranchAddress("Diphoton", &Diphoton_Minv, &b_Diphoton);
    fChain->SetBranchAddress("DiphotonVtx2", &DiphotonVtx2_Minv, &b_DiphotonVtx2);
    fChain->SetBranchAddress("DiphotonVtx3", &DiphotonVtx3_Minv, &b_DiphotonVtx3);

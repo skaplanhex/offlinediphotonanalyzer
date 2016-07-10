@@ -13,6 +13,12 @@ TH1D* createTH1D(TString name, TString title, Int_t nBins, Double_t lowEdge, Dou
     formatHist(hist,xTitle,yTitle);
     return hist;
 }
+TH1D* createTH1D(TString name, TString title, Int_t nBins, Double_t binEdges[], TString xTitle, TString yTitle){
+
+    TH1D* hist = new TH1D(name,title,nBins,binEdges);
+    formatHist(hist,xTitle,yTitle);
+    return hist;
+}
 TH2D* createTH2D(TString name, TString title, Int_t nBinsX, Double_t lowEdgeX, Double_t highEdgeX, Int_t nBinsY, Double_t lowEdgeY, Double_t highEdgeY, TString xTitle, TString yTitle){
 
     TH2D* hist = new TH2D(name,title,nBinsX,lowEdgeX,highEdgeX,nBinsY,lowEdgeY,highEdgeY);
