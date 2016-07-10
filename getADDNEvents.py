@@ -1,5 +1,6 @@
 import os
 from glob import glob
+import ROOT
 
 #returns string representations of the XS and uncertainty
 def getXSAndUncert(filepath):
@@ -29,6 +30,7 @@ msValues = massBinDict.keys()
 
 
 # this system of loops creates a text file with the cross sections
+o = open("ADD_nevents.txt",'w')
 for ms in msValues:
     for massBin in massBinDict[ms]:
         procName = "ADDGravToGG_MS-%i_NED-4_KK-1_M-%s_13TeV-sherpa"%(ms,massBin)
@@ -42,12 +44,14 @@ for ms in msValues:
         temp = glob(fullPath+"Exo*root")
         files = []
         for f in temp:
-            files.append( f.replace("/eos/uscms","root://cmseos.fnal.gov/") )
-        # print "%s %s"%(ms,massBin)
-        print 'else if ( ms.EqualTo("%i") && massBin.EqualTo("%s") ){'%(ms,massBin)
+            files.append( f.replace("/eos/uscms","root://cmsxrootd.fnal.gov/") )
+        eventTotal = 0.
         for f in files:
-            print '  chain->Add("%s",0);'%f
-        print "}"
+            tf = ROOT.TFile.Open(f)
+            h = tf.Get("diphotonAnalyzer/NumTotalEvents")
+            eventTotal += h.GetBinContent(3)
+            tf.Close()
+        o.write("%i   %s   %.1f\n"%(ms,massBin,eventTotal))
 
 for massBin in bkgMassBins:
     procName = "GG_M-%s_Pt-70_13TeV-sherpa"%massBin
@@ -61,12 +65,14 @@ for massBin in bkgMassBins:
     temp = glob(fullPath+"Exo*root")
     files = []
     for f in temp:
-        files.append( f.replace("/eos/uscms","root://cmseos.fnal.gov/") )
-    # print "%s %s"%(ms,massBin)
-    print 'else if ( ms.EqualTo("ADDbkg") && massBin.EqualTo("%s") ){'%(massBin)
+        files.append( f.replace("/eos/uscms","root://cmsxrootd.fnal.gov/") )
+    eventTotal = 0.
     for f in files:
-        print '  chain->Add("%s",0);'%f
-    print "}"
+        tf = ROOT.TFile.Open(f)
+        h = tf.Get("diphotonAnalyzer/NumTotalEvents")
+        eventTotal += h.GetBinContent(3)
+        tf.Close()
+    o.write("ADDBkg   %s   %.1f\n"%(massBin,eventTotal))
 
 
 

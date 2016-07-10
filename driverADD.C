@@ -11,7 +11,7 @@ void driverADD(TString ms, TString massBin, TString outfilename) {
   cout << "Running over Ms=" << ms << ", massBin=" << massBin << ", and writing out to " << outfilename << endl;  
 
   if ( ms.EqualTo("4000") && massBin.EqualTo("200To500") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/ADDGravToGG_MS-4000_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-4_KK-1_M-200To500_13TeV-sherpa/160628_214815/0000/ExoDiPhotonAnalyzer_1.root",0);
+    chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/ADDGravToGG_MS-4000_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-4_KK-1_M-200To500_13TeV-sherpa/160628_214815/0000/ExoDiPhotonAnalyzer_1.root",0);
   }
   else if ( ms.EqualTo("4000") && massBin.EqualTo("500To1000") ){
     chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/ADDGravToGG_MS-4000_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-4_KK-1_M-500To1000_13TeV-sherpa/160630_030436/0000/ExoDiPhotonAnalyzer_1.root",0);
@@ -106,27 +106,25 @@ void driverADD(TString ms, TString massBin, TString outfilename) {
   else if ( ms.EqualTo("5500") && massBin.EqualTo("4000To5500") ){
     chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/ADDGravToGG_MS-5500_NED-4_KK-1_M-4000To5500_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-4_KK-1_M-4000To5500_13TeV-sherpa/160628_215046/0000/ExoDiPhotonAnalyzer_1.root",0);
   }
-  else if ( ms.EqualTo("ADDBkg") && massBin.EqualTo("200To500") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/GG_M-200To500_Pt-70_13TeV-sherpa/crab_GG_M-200To500_Pt-70_13TeV-sherpa/160705_185759/0000/ExoDiPhotonAnalyzer_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/GG_M-200To500_Pt-70_13TeV-sherpa/crab_GG_M-200To500_Pt-70_13TeV-sherpa/160705_185759/0000/ExoDiPhotonAnalyzer_2.root",0);
+  else if ( ms.EqualTo("ADDbkg") && massBin.EqualTo("200To500") ){
+    chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/GG_M-200To500_Pt-70_13TeV-sherpa/crab_GG_M-200To500_Pt-70_13TeV-sherpa/160705_185759/0000/ExoDiPhotonAnalyzer_1.root",0);
+    chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/GG_M-200To500_Pt-70_13TeV-sherpa/crab_GG_M-200To500_Pt-70_13TeV-sherpa/160705_185759/0000/ExoDiPhotonAnalyzer_2.root",0);
   }
-  else if ( ms.EqualTo("ADDBkg") && massBin.EqualTo("500To1000") ){
+  else if ( ms.EqualTo("ADDbkg") && massBin.EqualTo("500To1000") ){
     chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/GG_M-500To1000_Pt-70_13TeV-sherpa/crab_GG_M-500To1000_Pt-70_13TeV-sherpa/160705_185820/0000/ExoDiPhotonAnalyzer_1.root",0);
     chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/GG_M-500To1000_Pt-70_13TeV-sherpa/crab_GG_M-500To1000_Pt-70_13TeV-sherpa/160705_185820/0000/ExoDiPhotonAnalyzer_2.root",0);
   }
-  else if ( ms.EqualTo("ADDBkg") && massBin.EqualTo("1000To2000") ){
+  else if ( ms.EqualTo("ADDbkg") && massBin.EqualTo("1000To2000") ){
     chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/GG_M-1000To2000_Pt-70_13TeV-sherpa/crab_GG_M-1000To2000_Pt-70_13TeV-sherpa/160705_185736/0000/ExoDiPhotonAnalyzer_1.root",0);
-    chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/GG_M-1000To2000_Pt-70_13TeV-sherpa/crab_GG_M-1000To2000_Pt-70_13TeV-sherpa/160705_185736/0000/failed",0);
   }
-  else if ( ms.EqualTo("ADDBkg") && massBin.EqualTo("2000To4000") ){
+  else if ( ms.EqualTo("ADDbkg") && massBin.EqualTo("2000To4000") ){
     chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/GG_M-2000To4000_Pt-70_13TeV-sherpa/crab_GG_M-2000To4000_Pt-70_13TeV-sherpa/160705_185747/0000/ExoDiPhotonAnalyzer_1.root",0);
     chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/GG_M-2000To4000_Pt-70_13TeV-sherpa/crab_GG_M-2000To4000_Pt-70_13TeV-sherpa/160705_185747/0000/ExoDiPhotonAnalyzer_2.root",0);
-    chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/GG_M-2000To4000_Pt-70_13TeV-sherpa/crab_GG_M-2000To4000_Pt-70_13TeV-sherpa/160705_185747/0000/failed",0);
   }
-  else if ( ms.EqualTo("ADDBkg") && massBin.EqualTo("4000To8000") ){
+  else if ( ms.EqualTo("ADDbkg") && massBin.EqualTo("4000To8000") ){
     chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/GG_M-4000To8000_Pt-70_13TeV-sherpa/crab_GG_M-4000To8000_Pt-70_13TeV-sherpa/160705_185810/0000/ExoDiPhotonAnalyzer_1.root",0);
   }
-  else if ( ms.EqualTo("ADDBkg") && massBin.EqualTo("8000To13000") ){
+  else if ( ms.EqualTo("ADDbkg") && massBin.EqualTo("8000To13000") ){
     chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/GG_M-8000To13000_Pt-70_13TeV-sherpa/crab_GG_M-8000To13000_Pt-70_13TeV-sherpa/160705_185830/0000/ExoDiPhotonAnalyzer_1.root",0);
   }
 
