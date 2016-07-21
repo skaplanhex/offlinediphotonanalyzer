@@ -61,7 +61,7 @@ for ms in msValues:
 modelPoints.append("ADDBkg")
 
 LUMI = 2.6*1000. #/pb
-outfile = TFile("ADDMergedHistos.root","recreate")
+outfile = TFile("ADDMergedHistos_witherrorbars.root","recreate")
 
 for ms in modelPoints:
     infos_EBEB=[]
