@@ -8,7 +8,7 @@
 
 
 
-void fTree::Loop(TString outfilename)
+void fTree::Loop(TString outfilename, bool applyEventWeights=false)
 {
 //   In a ROOT session, you can do:
 //      root> .L fTree.C
@@ -37,8 +37,8 @@ void fTree::Loop(TString outfilename)
     // std::ofstream massFile;
     // massFile.open("masses.txt");
 
-    Double_t bins_30003500[6] = {0.,650.,1150.,1800.,2600.,13000.};
-    Double_t bins[7] = {0.,650.,1150.,1800.,2600.,3500.,13000.};
+    Double_t bins_30003500[6] = {0.,600.,1100.,1800.,2600.,13000.};
+    Double_t bins[7] = {0.,600.,1100.,1800.,2600.,3500.,13000.};
 
     TH1D* leadingPhoPt_EBEB = createTH1D("leadingPhoPt_EBEB","leadingPhoPt_EBEB",300.,0.,1500.,"Leading Photon pT (GeV/c)","Events");
     TH1D* subleadingPhoPt_EBEB = createTH1D("subleadingPhoPt_EBEB","subleadingPhoPt_EBEB",300,0.,1500.,"Subleading Photon pT (GeV/c)","Events");
@@ -60,6 +60,8 @@ void fTree::Loop(TString outfilename)
     TH1D* ggMass_EBEE = createTH1D("ggMass_EBEE","ggMass_EBEE",651,-10.,13000.,"m_{#gamma#gamma} (GeV/c^{2})","Events");
     TH1D* ggMass_EBEE_30003500varbin = createTH1D("ggMass_EBEE_30003500varbin","ggMass_EBEE_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} (GeV/c^{2})","Events");
     TH1D* ggMass_EBEE_varbin = createTH1D("ggMass_EBEE_varbin","ggMass_EBEE_varbin",6,bins,"m_{#gamma#gamma} (GeV/c^{2})","Events");
+
+    TH1D* hEventWeight = createTH1D("hEventWeight","",101,-0.05,1.05,"Event Weight","Events");
 
     // VBF tagged histograms
     TH1D* leadingPhoPt_VBFTagged_EBEB = createTH1D("leadingPhoPt_VBFTagged_EBEB","leadingPhoPt_VBFTagged_EBEB",300.,0.,1500.,"Leading Photon pT (GeV/c)","Events");
@@ -334,6 +336,13 @@ void fTree::Loop(TString outfilename)
         // Photon1 is the leading photon, Photon2 is the second leading
         // if (jentry>10) return;
         if (!TrigHLT_HLT_DoublePhoton60_v1) continue; // only admit events that pass HLT_DoublePhoton_60 
+
+        // get event weight
+        // If running over data, some filler will be there, so set it to be 1 manually if the event weight is <= 0
+        double eventWeight = 1.;
+        if (Event_weight > 0. && applyEventWeights) eventWeight = (double)Event_weight;
+        hEventWeight->Fill(eventWeight);
+
         bool EBEB = isEBEB(Photon1_scEta,Photon2_scEta); // fabs is taken in the helper function!
         bool EBEE = isEBEE(Photon1_scEta,Photon2_scEta);
 
@@ -483,10 +492,10 @@ void fTree::Loop(TString outfilename)
             subleadingPhoEta_EBEB->Fill(Photon2_scEta);
             leadingPhoPhi_EBEB->Fill(Photon1_scPhi);
             subleadingPhoPhi_EBEB->Fill(Photon2_scPhi);
-            ggMass_EBEB->Fill(Diphoton_Minv);
-            ggMass_EBEB_JPBinning->Fill(Diphoton_Minv);
-            ggMass_EBEB_30003500varbin->Fill(Diphoton_Minv);
-            ggMass_EBEB_varbin->Fill(Diphoton_Minv);
+            ggMass_EBEB->Fill(Diphoton_Minv,eventWeight);
+            ggMass_EBEB_JPBinning->Fill(Diphoton_Minv,eventWeight);
+            ggMass_EBEB_30003500varbin->Fill(Diphoton_Minv,eventWeight);
+            ggMass_EBEB_varbin->Fill(Diphoton_Minv,eventWeight);
             // if (700. <= Diphoton_Minv && Diphoton_Minv <= 800.) massFile << Diphoton_Minv << "\n";
         } // end EBEB block
 
@@ -497,9 +506,9 @@ void fTree::Loop(TString outfilename)
             subleadingPhoEta_EBEE->Fill(Photon2_scEta);
             leadingPhoPhi_EBEE->Fill(Photon1_scPhi);
             subleadingPhoPhi_EBEE->Fill(Photon2_scPhi);
-            ggMass_EBEE->Fill(Diphoton_Minv);
-            ggMass_EBEE_30003500varbin->Fill(Diphoton_Minv);
-            ggMass_EBEE_varbin->Fill(Diphoton_Minv);
+            ggMass_EBEE->Fill(Diphoton_Minv,eventWeight);
+            ggMass_EBEE_30003500varbin->Fill(Diphoton_Minv,eventWeight);
+            ggMass_EBEE_varbin->Fill(Diphoton_Minv,eventWeight);
         } // end EBEE block
 
         // fill conversion plots for all eta
@@ -825,6 +834,7 @@ void fTree::Loop(TString outfilename)
     ggMass_EBEE->Write();
     ggMass_EBEE_30003500varbin->Write();
     ggMass_EBEE_varbin->Write();
+    hEventWeight->Write();
     leadingPhoPt_VBFTagged_EBEB->Write();
     subleadingPhoPt_VBFTagged_EBEB->Write();
     leadingPhoEta_VBFTagged_EBEB->Write();

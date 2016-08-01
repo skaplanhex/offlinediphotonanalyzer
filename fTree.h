@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Tue Jun 14 14:19:52 2016 by ROOT version 6.02/13
+// Thu Jul 28 15:39:31 2016 by ROOT version 6.02/13
 // from TTree fTree/PhotonTree
-// found on file: root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/BrandonSteveMerged/DoubleEG_Run2016B_V2.root
+// found on file: root://cmseos.fnal.gov//store/user/skaplan/noreplica/ExoDiPhotonNtuples/ADD/ADDGravToGG_MS-3500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-3500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/160727_034251/0000/ExoDiPhotonAnalyzer_1.root
 //////////////////////////////////////////////////////////
 
 #ifndef fTree_h
@@ -386,6 +386,22 @@ public :
    Int_t           TrigHLT_HLT_DoublePhoton85_v2;
    Int_t           nTightPhotons;
    Int_t           nFakeablePhotons;
+   Double_t        GenPhoton1_pt;
+   Double_t        GenPhoton1_phi;
+   Double_t        GenPhoton1_eta;
+   Double_t        GenPhoton1_mass;
+   Double_t        GenPhoton1_px;
+   Double_t        GenPhoton1_py;
+   Double_t        GenPhoton1_pz;
+   Double_t        GenPhoton1_energy;
+   Double_t        GenPhoton2_pt;
+   Double_t        GenPhoton2_phi;
+   Double_t        GenPhoton2_eta;
+   Double_t        GenPhoton2_mass;
+   Double_t        GenPhoton2_px;
+   Double_t        GenPhoton2_py;
+   Double_t        GenPhoton2_pz;
+   Double_t        GenPhoton2_energy;
    Double_t        Photon1_pt;
    Double_t        Photon1_eta;
    Double_t        Photon1_phi;
@@ -799,6 +815,8 @@ public :
    TBranch        *b_TrigHLT;   //!
    TBranch        *b_nTightPhotons;   //!
    TBranch        *b_nFakeablePhotons;   //!
+   TBranch        *b_GenPhoton1;   //!
+   TBranch        *b_GenPhoton2;   //!
    TBranch        *b_Photon1;   //!
    TBranch        *b_Photon2;   //!
    TBranch        *b_JetInfo_pt;   //!
@@ -968,7 +986,7 @@ public :
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
-   virtual void     Loop(TString outfilename);
+   virtual void     Loop(TString outfilename, bool applyEventWeights);
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
 };
@@ -981,11 +999,11 @@ fTree::fTree(TTree *tree) : fChain(0)
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/BrandonSteveMerged/DoubleEG_Run2016B_V2.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("root://cmseos.fnal.gov//store/user/skaplan/noreplica/ExoDiPhotonNtuples/ADD/ADDGravToGG_MS-3500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-3500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/160727_034251/0000/ExoDiPhotonAnalyzer_1.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/BrandonSteveMerged/DoubleEG_Run2016B_V2.root");
+         f = new TFile("root://cmseos.fnal.gov//store/user/skaplan/noreplica/ExoDiPhotonNtuples/ADD/ADDGravToGG_MS-3500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-3500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/160727_034251/0000/ExoDiPhotonAnalyzer_1.root");
       }
-      TDirectory * dir = (TDirectory*)f->Get("root://cmseos.fnal.gov//store/user/skaplan/noreplica/750GeVResonanceNtuples/BrandonSteveMerged/DoubleEG_Run2016B_V2.root:/diphotonAnalyzer");
+      TDirectory * dir = (TDirectory*)f->Get("root://cmseos.fnal.gov//store/user/skaplan/noreplica/ExoDiPhotonNtuples/ADD/ADDGravToGG_MS-3500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-3500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/160727_034251/0000/ExoDiPhotonAnalyzer_1.root:/diphotonAnalyzer");
       dir->GetObject("fTree",tree);
 
    }
@@ -1203,6 +1221,8 @@ void fTree::Init(TTree *tree)
    fChain->SetBranchAddress("TrigHLT", &TrigHLT_HLT_MinBiasBSC, &b_TrigHLT);
    fChain->SetBranchAddress("nTightPhotons", &nTightPhotons, &b_nTightPhotons);
    fChain->SetBranchAddress("nFakeablePhotons", &nFakeablePhotons, &b_nFakeablePhotons);
+   fChain->SetBranchAddress("GenPhoton1", &GenPhoton1_pt, &b_GenPhoton1);
+   fChain->SetBranchAddress("GenPhoton2", &GenPhoton2_pt, &b_GenPhoton2);
    fChain->SetBranchAddress("Photon1", &Photon1_pt, &b_Photon1);
    fChain->SetBranchAddress("Photon2", &Photon2_pt, &b_Photon2);
    fChain->SetBranchAddress("JetInfo.pt", &JetInfo_pt, &b_JetInfo_pt);

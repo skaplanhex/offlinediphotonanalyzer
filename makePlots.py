@@ -62,7 +62,7 @@ def plotMultipleHistos(graphs,legendheader,labels,outname,logy=False):
 
 
 #input histogram file
-infile = TFile("ADDMergedHistos.root","read")
+infile = TFile("ADDMergedHistos_witherrorbars.root","read")
 
 # get all the histograms
 

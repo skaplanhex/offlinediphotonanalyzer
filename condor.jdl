@@ -11,4 +11,4 @@ Output = /uscms/home/skaplan/condor/run_$(Process).stdout
 Error = /uscms/home/skaplan/condor/run_$(Process).stderr
 Log = /uscms/home/skaplan/condor/run_$(Process).condor
 Arguments = $(Process)
-Queue 37
+Queue 46

@@ -47,6 +47,7 @@ for key in file.GetListOfKeys():
 print "Printing %i histograms" % nItems
 
 c1 = r.TCanvas("c1","c1",800,600)
+c1.SetLogy()
 
 # Loop over all histograms
 for key in file.GetListOfKeys():

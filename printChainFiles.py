@@ -15,7 +15,7 @@ def getXSAndUncert(filepath):
 
 massBinDict  = {
     3000 : ["200To500","500To1000","1000To2000","2000To3000"],
-    3500 : ["200To500","500To1000","2000To3500"], # no 1000-2000 bin for some reason??
+    3500 : ["200To500","500To1000","1000To2000","2000To3500"],
     4000 : ["200To500","500To1000","1000To2000","2000To4000"],
     4500 : ["200To500","500To1000","1000To2000","2000To3000","3000To4500"],
     5000 : ["200To500","500To1000","1000To2000","2000To3000","3000To5000"],
@@ -23,7 +23,8 @@ massBinDict  = {
     6000 : ["200To500","500To1000","1000To2000","2000To4000","4000To6000"],
 }
 
-bkgMassBins = ["200To500","500To1000","1000To2000","2000To4000","4000To8000","8000To13000"]
+ADDBkgMassBins = ["200To500","500To1000","1000To2000","2000To4000","4000To8000","8000To13000"]
+GGJetsMassBins = ["60To200","200To500","500To1000","1000To2000","2000To4000","4000To6000","6000To8000","8000To13000"]
 
 msValues = massBinDict.keys()
 
@@ -32,7 +33,7 @@ msValues = massBinDict.keys()
 for ms in msValues:
     for massBin in massBinDict[ms]:
         procName = "ADDGravToGG_MS-%i_NED-4_KK-1_M-%s_13TeV-sherpa"%(ms,massBin)
-        baseDirec = "/store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/"
+        baseDirec = "/store/user/skaplan/noreplica/ExoDiPhotonNtuples/ADD/"
         direc = "/eos/uscms"+baseDirec+"%s/crab_%s/"%(procName,procName)
         # direc = "ADDXsecs/%s/crab_%s/"%(procName,procName)
         temp = glob(direc+"*")
@@ -49,9 +50,9 @@ for ms in msValues:
             print '  chain->Add("%s",0);'%f
         print "}"
 
-for massBin in bkgMassBins:
+for massBin in ADDBkgMassBins:
     procName = "GG_M-%s_Pt-70_13TeV-sherpa"%massBin
-    baseDirec = "/store/user/skaplan/noreplica/750GeVResonanceNtuples/ADD/"
+    baseDirec = "/store/user/skaplan/noreplica/ExoDiPhotonNtuples/ADD/"
     direc = "/eos/uscms"+baseDirec+"%s/crab_%s/"%(procName,procName)
     # direc = "ADDXsecs/%s/crab_%s/"%(procName,procName)
     temp = glob(direc+"*")
@@ -63,11 +64,30 @@ for massBin in bkgMassBins:
     for f in temp:
         files.append( f.replace("/eos/uscms","root://cmseos.fnal.gov/") )
     # print "%s %s"%(ms,massBin)
-    print 'else if ( ms.EqualTo("ADDbkg") && massBin.EqualTo("%s") ){'%(massBin)
+    print 'else if ( ms.EqualTo("ADDBkg") && massBin.EqualTo("%s") ){'%(massBin)
     for f in files:
         print '  chain->Add("%s",0);'%f
     print "}"
 
+for massBin in GGJetsMassBins:
+    procName = "GGJets_M-%s_Pt-50_13TeV-sherpa"%massBin
+    crabName = "crab_GGJets_M-%s_Pt-50"%massBin
+    baseDirec = "/store/user/skaplan/noreplica/ExoDiPhotonNtuples/GGJets/"
+    direc = "/eos/uscms"+baseDirec+"%s/%s/"%(procName,crabName)
+    # direc = "ADDXsecs/%s/crab_%s/"%(procName,procName)
+    temp = glob(direc+"*")
+    dateDirec = temp[0].replace(direc,"")+"/"
+    # print direc+dateDirec
+    fullPath = direc+dateDirec+"0000/"
+    temp = glob(fullPath+"Exo*root")
+    files = []
+    for f in temp:
+        files.append( f.replace("/eos/uscms","root://cmseos.fnal.gov/") )
+    # print "%s %s"%(ms,massBin)
+    print 'else if ( ms.EqualTo("GGJets") && massBin.EqualTo("%s") ){'%(massBin)
+    for f in files:
+        print '  chain->Add("%s",0);'%f
+    print "}"
 
 
 

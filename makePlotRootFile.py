@@ -42,7 +42,7 @@ def getFileName(mgg,ms="ADDBkg"):
 
 massBinDict  = {
     3000 : ["200To500","500To1000","1000To2000","2000To3000"],
-    3500 : ["200To500","500To1000","2000To3500"], # no 1000-2000 bin for some reason??
+    3500 : ["200To500","500To1000","1000To2000","2000To3500"],
     4000 : ["200To500","500To1000","1000To2000","2000To4000"],
     4500 : ["200To500","500To1000","1000To2000","2000To3000","3000To4500"],
     5000 : ["200To500","500To1000","1000To2000","2000To3000","3000To5000"],
@@ -60,7 +60,7 @@ for ms in msValues:
     modelPoints.append(ms)
 modelPoints.append("ADDBkg")
 
-LUMI = 2.6*1000. #/pb
+LUMI = (2.6+12.9)*1000. #/pb
 outfile = TFile("ADDMergedHistos_witherrorbars.root","recreate")
 
 for ms in modelPoints:

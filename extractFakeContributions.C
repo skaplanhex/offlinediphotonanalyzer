@@ -34,30 +34,44 @@ void extractFakeContributions::Loop()
     Double_t bins_30003500[6] = {0.,600.,1100.,1800.,2600.,13000.};
     Double_t bins[7] = {0.,600.,1100.,1800.,2600.,3500.,13000.};
 
-    // TH1D* ggMass_EBEB = createTH1D("ggMass_EBEB","ggMass_EBEB",651,-10.,13000.,"m_{#gamma#gamma} (GeV/c^{2})","Events");
+    TH1D* tlMass_EBEB = createTH1D("tlMass_EBEB","tlMass_EBEB",651,-10.,13000.,"m_{Tight-Loose} (GeV/c^{2})","Events");
+    TH1D* llMass_EBEB = createTH1D("llMass_EBEB","llMass_EBEB",651,-10.,13000.,"m_{Loose-Loose} (GeV/c^{2})","Events");
+    TH1D* ffMass_EBEB = createTH1D("ffMass_EBEB","ffMass_EBEB",651,-10.,13000.,"m_{fake} (GeV/c^{2})","Events");
+    TH1D* tlMass_EBEE = createTH1D("tlMass_EBEE","tlMass_EBEE",651,-10.,13000.,"m_{Tight-Loose} (GeV/c^{2})","Events");
+    TH1D* llMass_EBEE = createTH1D("llMass_EBEE","llMass_EBEE",651,-10.,13000.,"m_{Loose-Loose} (GeV/c^{2})","Events");
+    TH1D* ffMass_EBEE = createTH1D("ffMass_EBEE","ffMass_EBEE",651,-10.,13000.,"m_{fake} (GeV/c^{2})","Events");
+
+    TH1D* tlMass_EBEB_30003500varbin = createTH1D("tlMass_EBEB_30003500varbin","tlMass_EBEB",5,bins_30003500,"m_{Tight-Loose} (GeV/c^{2})","Events");
+    TH1D* llMass_EBEB_30003500varbin = createTH1D("llMass_EBEB_30003500varbin","llMass_EBEB",5,bins_30003500,"m_{Loose-Loose} (GeV/c^{2})","Events");
+    TH1D* ffMass_EBEB_30003500varbin = createTH1D("ffMass_EBEB_30003500varbin","ffMass_EBEB",5,bins_30003500,"m_{fake} (GeV/c^{2})","Events");
+    TH1D* tlMass_EBEE_30003500varbin = createTH1D("tlMass_EBEE_30003500varbin","tlMass_EBEE",5,bins_30003500,"m_{Tight-Loose} (GeV/c^{2})","Events");
+    TH1D* llMass_EBEE_30003500varbin = createTH1D("llMass_EBEE_30003500varbin","llMass_EBEE",5,bins_30003500,"m_{Loose-Loose} (GeV/c^{2})","Events");
+    TH1D* ffMass_EBEE_30003500varbin = createTH1D("ffMass_EBEE_30003500varbin","ffMass_EBEE",5,bins_30003500,"m_{fake} (GeV/c^{2})","Events");
+
+    TH1D* tlMass_EBEB_varbin = createTH1D("tlMass_EBEB_varbin","tlMass_EBEB",6,bins,"m_{Tight-Loose} (GeV/c^{2})","Events");
+    TH1D* llMass_EBEB_varbin = createTH1D("llMass_EBEB_varbin","llMass_EBEB",6,bins,"m_{Loose-Loose} (GeV/c^{2})","Events");
+    TH1D* ffMass_EBEB_varbin = createTH1D("ffMass_EBEB_varbin","ffMass_EBEB",6,bins,"m_{fake} (GeV/c^{2})","Events");
+    TH1D* tlMass_EBEE_varbin = createTH1D("tlMass_EBEE_varbin","tlMass_EBEE",6,bins,"m_{Tight-Loose} (GeV/c^{2})","Events");
+    TH1D* llMass_EBEE_varbin = createTH1D("llMass_EBEE_varbin","llMass_EBEE",6,bins,"m_{Loose-Loose} (GeV/c^{2})","Events");
+    TH1D* ffMass_EBEE_varbin = createTH1D("ffMass_EBEE_varbin","ffMass_EBEE",6,bins,"m_{fake} (GeV/c^{2})","Events");
+
     TH1D* gjMass_EBEB = createTH1D("gjMass_EBEB","gjMass_EBEB",651,-10.,13000.,"m_{#gamma+jet} (GeV/c^{2})","Events");
     TH1D* jjMass_EBEB = createTH1D("jjMass_EBEB","jjMass_EBEB",651,-10.,13000.,"m_{jet+jet} (GeV/c^{2})","Events");
     TH1D* fakeMass_EBEB = createTH1D("fakeMass_EBEB","fakeMass_EBEB",651,-10.,13000.,"m_{fake} (GeV/c^{2})","Events");
-    // TH1D* ggMass_EBEE = createTH1D("ggMass_EBEE","ggMass_EBEE",651,-10.,13000.,"m_{#gamma#gamma} (GeV/c^{2})","Events");
     TH1D* gjMass_EBEE = createTH1D("gjMass_EBEE","gjMass_EBEE",651,-10.,13000.,"m_{#gamma+jet} (GeV/c^{2})","Events");
     TH1D* jjMass_EBEE = createTH1D("jjMass_EBEE","jjMass_EBEE",651,-10.,13000.,"m_{jet+jet} (GeV/c^{2})","Events");
     TH1D* fakeMass_EBEE = createTH1D("fakeMass_EBEE","fakeMass_EBEE",651,-10.,13000.,"m_{fake} (GeV/c^{2})","Events");
 
-
-    // TH1D* ggMass_EBEB_30003500varbin = createTH1D("ggMass_EBEB_30003500varbin","ggMass_EBEB",5,bins_30003500,"m_{#gamma#gamma} (GeV/c^{2})","Events");
     TH1D* gjMass_EBEB_30003500varbin = createTH1D("gjMass_EBEB_30003500varbin","gjMass_EBEB",5,bins_30003500,"m_{#gamma+jet} (GeV/c^{2})","Events");
     TH1D* jjMass_EBEB_30003500varbin = createTH1D("jjMass_EBEB_30003500varbin","jjMass_EBEB",5,bins_30003500,"m_{jet+jet} (GeV/c^{2})","Events");
     TH1D* fakeMass_EBEB_30003500varbin = createTH1D("fakeMass_EBEB_30003500varbin","fakeMass_EBEB",5,bins_30003500,"m_{fake} (GeV/c^{2})","Events");
-    // TH1D* ggMass_EBEE_30003500varbin = createTH1D("ggMass_EBEE_30003500varbin","ggMass_EBEE",5,bins_30003500,"m_{#gamma#gamma} (GeV/c^{2})","Events");
     TH1D* gjMass_EBEE_30003500varbin = createTH1D("gjMass_EBEE_30003500varbin","gjMass_EBEE",5,bins_30003500,"m_{#gamma+jet} (GeV/c^{2})","Events");
     TH1D* jjMass_EBEE_30003500varbin = createTH1D("jjMass_EBEE_30003500varbin","jjMass_EBEE",5,bins_30003500,"m_{jet+jet} (GeV/c^{2})","Events");
     TH1D* fakeMass_EBEE_30003500varbin = createTH1D("fakeMass_EBEE_30003500varbin","fakeMass_EBEE",5,bins_30003500,"m_{fake} (GeV/c^{2})","Events");
 
-    // TH1D* ggMass_EBEB_varbin = createTH1D("ggMass_EBEB_varbin","ggMass_EBEB",6,bins,"m_{#gamma#gamma} (GeV/c^{2})","Events");
     TH1D* gjMass_EBEB_varbin = createTH1D("gjMass_EBEB_varbin","gjMass_EBEB",6,bins,"m_{#gamma+jet} (GeV/c^{2})","Events");
     TH1D* jjMass_EBEB_varbin = createTH1D("jjMass_EBEB_varbin","jjMass_EBEB",6,bins,"m_{jet+jet} (GeV/c^{2})","Events");
     TH1D* fakeMass_EBEB_varbin = createTH1D("fakeMass_EBEB_varbin","fakeMass_EBEB",6,bins,"m_{fake} (GeV/c^{2})","Events");
-    // TH1D* ggMass_EBEE_varbin = createTH1D("ggMass_EBEE_varbin","ggMass_EBEE",6,bins,"m_{#gamma#gamma} (GeV/c^{2})","Events");
     TH1D* gjMass_EBEE_varbin = createTH1D("gjMass_EBEE_varbin","gjMass_EBEE",6,bins,"m_{#gamma+jet} (GeV/c^{2})","Events");
     TH1D* jjMass_EBEE_varbin = createTH1D("jjMass_EBEE_varbin","jjMass_EBEE",6,bins,"m_{jet+jet} (GeV/c^{2})","Events");
     TH1D* fakeMass_EBEE_varbin = createTH1D("fakeMass_EBEE_varbin","fakeMass_EBEE",6,bins,"m_{fake} (GeV/c^{2})","Events");
@@ -75,19 +89,27 @@ void extractFakeContributions::Loop()
 
       // distinguising between fake-tight and tight-fake only to know which photon to evaluate the fake rate for
       // bool isTT = !isFakeable1 && !isFakeable2;
-      bool TF = !isFakeable1 && isFakeable2;
-      bool FT = isFakeable1 && !isFakeable2;
-      bool FF = isFakeable1 && isFakeable2;
+      bool TL = !isFakeable1 && isFakeable2;
+      bool LT = isFakeable1 && !isFakeable2;
+      bool LL = isFakeable1 && isFakeable2;
 
-      if (!TF && !FT && !FF){
+      if (!TL && !LT && !LL){
         cout << "No fake found in entry " << jentry << ". Investigate!!" << endl;
         return;
       }
-      else if (TF || FT){
+      else if (TL || LT){
         double fakeRate;
-        if (TF) fakeRate = getFakeRate(pt2,eta2);
-        else if (FT) fakeRate = getFakeRate(pt1,eta1);
+        if (TL) fakeRate = getFakeRate(pt2,eta2);
+        else if (LT) fakeRate = getFakeRate(pt1,eta1);
         if (isEBEB){
+            tlMass_EBEB->Fill(ggMass);
+            tlMass_EBEB_varbin->Fill(ggMass);
+            tlMass_EBEB_30003500varbin->Fill(ggMass);
+
+            ffMass_EBEB->Fill(ggMass);
+            ffMass_EBEB_varbin->Fill(ggMass);
+            ffMass_EBEB_30003500varbin->Fill(ggMass);
+
             gjMass_EBEB->Fill(ggMass,fakeRate);
             gjMass_EBEB_varbin->Fill(ggMass,fakeRate);
             gjMass_EBEB_30003500varbin->Fill(ggMass,fakeRate);
@@ -97,6 +119,14 @@ void extractFakeContributions::Loop()
             fakeMass_EBEB_30003500varbin->Fill(ggMass,fakeRate);
         }
         else if (isEBEE){
+            tlMass_EBEE->Fill(ggMass);
+            tlMass_EBEE_varbin->Fill(ggMass);
+            tlMass_EBEE_30003500varbin->Fill(ggMass);
+
+            ffMass_EBEE->Fill(ggMass);
+            ffMass_EBEE_varbin->Fill(ggMass);
+            ffMass_EBEE_30003500varbin->Fill(ggMass);            
+
             gjMass_EBEE->Fill(ggMass,fakeRate);
             gjMass_EBEE_varbin->Fill(ggMass,fakeRate);
             gjMass_EBEE_30003500varbin->Fill(ggMass,fakeRate);
@@ -105,10 +135,18 @@ void extractFakeContributions::Loop()
             fakeMass_EBEE_varbin->Fill(ggMass,fakeRate);
             fakeMass_EBEE_30003500varbin->Fill(ggMass,fakeRate);
         }
-      } // end TF || FT block
-      else if (FF){
+      } // end TL || LT block
+      else if (LL){
         double fakeRateProd = getFakeRate(pt1,eta1) * getFakeRate(pt2,eta2);
         if (isEBEB){
+            llMass_EBEB->Fill(ggMass);
+            llMass_EBEB_varbin->Fill(ggMass);
+            llMass_EBEB_30003500varbin->Fill(ggMass);
+
+            ffMass_EBEB->Fill(ggMass);
+            ffMass_EBEB_varbin->Fill(ggMass);
+            ffMass_EBEB_30003500varbin->Fill(ggMass);
+
             // fake-fake contributes to gamma-jet also
             gjMass_EBEB->Fill(ggMass,-2.*fakeRateProd);
             gjMass_EBEB_varbin->Fill(ggMass,-2.*fakeRateProd);
@@ -123,6 +161,14 @@ void extractFakeContributions::Loop()
             fakeMass_EBEB_30003500varbin->Fill(ggMass,-1.*fakeRateProd);
         }
         else if (isEBEE){
+            llMass_EBEE->Fill(ggMass);
+            llMass_EBEE_varbin->Fill(ggMass);
+            llMass_EBEE_30003500varbin->Fill(ggMass);
+
+            ffMass_EBEE->Fill(ggMass);
+            ffMass_EBEE_varbin->Fill(ggMass);
+            ffMass_EBEE_30003500varbin->Fill(ggMass);
+
             // fake-fake contributes to gamma-jet also
             gjMass_EBEE->Fill(ggMass,-2.*fakeRateProd);
             gjMass_EBEE_varbin->Fill(ggMass,-2.*fakeRateProd);
@@ -138,12 +184,30 @@ void extractFakeContributions::Loop()
 
         }
 
-      } // end FF block
+      } // end LL block
     } // end event loop
 
     TFile outfile("fakePlots.root","recreate");
     outfile.cd();
 
+    tlMass_EBEB->Write();
+    llMass_EBEB->Write();
+    ffMass_EBEB->Write();
+    tlMass_EBEE->Write();
+    llMass_EBEE->Write();
+    ffMass_EBEE->Write();
+    tlMass_EBEB_30003500varbin->Write();
+    llMass_EBEB_30003500varbin->Write();
+    ffMass_EBEB_30003500varbin->Write();
+    tlMass_EBEE_30003500varbin->Write();
+    llMass_EBEE_30003500varbin->Write();
+    ffMass_EBEE_30003500varbin->Write();
+    tlMass_EBEB_varbin->Write();
+    llMass_EBEB_varbin->Write();
+    ffMass_EBEB_varbin->Write();
+    tlMass_EBEE_varbin->Write();
+    llMass_EBEE_varbin->Write();
+    ffMass_EBEE_varbin->Write();
     gjMass_EBEB->Write();
     jjMass_EBEB->Write();
     fakeMass_EBEB->Write();

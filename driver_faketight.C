@@ -1,12 +1,12 @@
-#include "fFakeFakeTree.C"
+#include "fFakeTightTree.C"
 
-void driver_fakefake() {
+void driver_faketight() {
   // use stopwatch to time
   TStopwatch sw;
   sw.Start();
 
   // create tchain of all files to loop over
-  TChain *chain = new TChain("diphotonAnalyzer/fFakeFakeTree");
+  TChain *chain = new TChain("diphotonAnalyzer/fFakeTightTree");
   // wildcard not supported when using xrootd
   // added ",0" to print correct number of entries, not entries=1234567890
   // chain->Add("root://cmsxrootd.fnal.gov//store/user/skaplan/noreplica/FakeRateMerged/JetHT_Run2015C_25ns-16Dec2015-v1_MINIAOD/mergedFakeRateNtuple.root",0);
@@ -27,7 +27,7 @@ void driver_fakefake() {
   cout << "Total number of entries: " << chain->GetEntries() << endl; 
 
   // create instance of class, passing our chain
-  fFakeFakeTree t(chain);
+  fFakeTightTree t(chain);
 
   // loop over all entries of our tree
   t.Loop();
