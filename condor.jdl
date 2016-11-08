@@ -4,11 +4,11 @@ Should_Transfer_Files = YES
 WhenToTransferOutput = ON_EXIT
 Notification = NEVER
 x509userproxy = $ENV(X509_USER_PROXY)
-Executable = runADDPlots.sh
+Executable = runBkgPlots.sh
 should_transfer_files = YES
 transfer_input_files = /uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/fTree.C,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/fTree.h,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/driverADD.C
 Output = /uscms/home/skaplan/condor/run_$(Process).stdout
 Error = /uscms/home/skaplan/condor/run_$(Process).stderr
 Log = /uscms/home/skaplan/condor/run_$(Process).condor
 Arguments = $(Process)
-Queue 46
+Queue 30

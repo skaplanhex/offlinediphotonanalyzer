@@ -6,7 +6,7 @@ void driver_extractFakes() {
   sw.Start();
 
   // create tchain of all files to loop over
-  TChain *chain = new TChain("tree");
+  TChain *chain = new TChain("diphoton/fTree");
   // wildcard not supported when using xrootd
   // added ",0" to print correct number of entries, not entries=1234567890
   // chain->Add("root://cmsxrootd.fnal.gov//store/user/skaplan/noreplica/FakeRateMerged/JetHT_Run2015C_25ns-16Dec2015-v1_MINIAOD/mergedFakeRateNtuple.root",0);
@@ -23,9 +23,11 @@ void driver_extractFakes() {
   // chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/ExoDiPhotonNtuples/Data2016/DoubleEG_Run2016BV2.root",0);
   // chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/ExoDiPhotonNtuples/Data2016/DoubleEG_Run2016CV2.root",0);
   // chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/ExoDiPhotonNtuples/Data2016/DoubleEG_Run2016DV2.root",0);
-  chain->Add("/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/basicfaketree_tightfake.root",0);
-  chain->Add("/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/basicfaketree_faketight.root",0);
-  chain->Add("/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/basicfaketree_fakefake.root",0);
+  // chain->Add("/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/basicfaketree_tightfake.root",0);
+  // chain->Add("/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/basicfaketree_faketight.root",0);
+  // chain->Add("/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/basicfaketree_fakefake.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/DoubleEG_Run2015C.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/DoubleEG_Run2015D.root",0);
   chain->ls();
   cout << "Total number of entries: " << chain->GetEntries() << endl; 
 

@@ -51,23 +51,31 @@ double getFakeRate(double pt, double eta){
 
     // fake rate in the barrel
     if ( isEB(eta) ){
-       double P0 = 0.00225252571161;
-       double P1 = 30882.04375711645480;
-       double P2 = 3.25285076412319;
+       // double P0 = 0.00225252571161;
+       // double P1 = 30882.04375711645480;
+       // double P2 = 3.25285076412319;
+       double P0 = 0.02854062423359;
+       double P1 = 1054.67561386442435;
+       double P2 = 2.43255894722459;
        return P0 + ( P1 / TMath::Power(pt,P2) );
     }
     // fake rate in the endcaps
     else if ( isEE(eta) ){
         if (pt <= 175.){
-	  double P0 = 0.00984487675098;
-	  double P1 = 0.00001462335960;
-	  double P2 = 0.00000249248908;
-	  return P0 + P1*(pt-175.) + P2*(pt-175.)*(pt-175.);
+      // double P0 = 0.00984487675098;
+      // double P1 = 0.00001462335960;
+      // double P2 = 0.00000249248908;
+      double P0 = 0.07583295145724;
+      double P1 = 0.00003927399330;
+      double P2 = 0.00000255676015;
+      return P0 + P1*(pt-175.) + P2*(pt-175.)*(pt-175.);
         }
         else{
-	  double slope = 0.00001462335960;
-	  double yint = 0.00728578882033;
-	  return yint + slope*pt;
+      // double slope = 0.00001462335960;
+      // double yint = 0.00728578882033;
+      double slope = 0.00003927399330;
+      double yint = 0.06896000263001;
+      return yint + slope*pt;
         }
     }
     else return -1.; // something is wrong then...

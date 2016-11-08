@@ -5,7 +5,49 @@
 #include <TStyle.h>
 #include <TCanvas.h>
 
+// fits from Antonis
+double getKFactor(double m, bool EBEB){
 
+    if (EBEB){
+        double p0 = 8.90218e-01;
+        double p1 = 5.19225e-04;
+        double p2 = -1.37800e-07;
+        double p3 = 1.97496e-11;
+        double p4 = -1.04218e-15;
+
+        double kf = p0 + p1*m + p2*m*m + p3*m*m*m + p4*m*m*m*m;
+        return kf;
+    }
+
+    // EBEE
+    else{
+
+        double p0 = 9.46368e-01;
+        double p1 = 3.22040e-04;
+        double p2 = -8.06809e-08;
+        double p3 = 1.34850e-11;
+        double p4 = -8.24515e-16;
+
+        double kf = p0 + p1*m + p2*m*m + p3*m*m*m + p4*m*m*m*m;
+        return kf;
+    }
+
+}
+
+// pdf variation
+double getPDFValue(double m, bool isEBEB, int pdfNum){
+    TString etaBin = "BE";
+    if (isEBEB) etaBin = "BB";
+    TString fName = "PDF_sys_NormScaling_"+etaBin+"_long.root";
+    TFile f(fName,"read");
+    TString histName = TString::Format("DIPHOX_PDF_o_DIPHOX_Default_%i",pdfNum);
+    TH1D* pdfhist = (TH1D*)f.Get( histName );
+    int binNum = pdfhist->FindBin(m);
+    if (m >= 10100.) binNum = 100; //overflow was added to the last bin
+    double content = pdfhist->GetBinContent(binNum);
+    return content;
+
+}
 
 
 void fTree::Loop(TString outfilename, bool applyEventWeights=false)
@@ -37,6 +79,8 @@ void fTree::Loop(TString outfilename, bool applyEventWeights=false)
     // std::ofstream massFile;
     // massFile.open("masses.txt");
 
+    // Double_t bins_30003500[6] = {0.,600.,1100.,1800.,2600.,13000.};
+    // Double_t bins[7] = {0.,600.,1100.,1800.,2600.,3500.,13000.};
     Double_t bins_30003500[6] = {0.,600.,1100.,1800.,2600.,13000.};
     Double_t bins[7] = {0.,600.,1100.,1800.,2600.,3500.,13000.};
 
@@ -62,6 +106,27 @@ void fTree::Loop(TString outfilename, bool applyEventWeights=false)
     TH1D* ggMass_EBEE_varbin = createTH1D("ggMass_EBEE_varbin","ggMass_EBEE_varbin",6,bins,"m_{#gamma#gamma} (GeV/c^{2})","Events");
 
     TH1D* hEventWeight = createTH1D("hEventWeight","",101,-0.05,1.05,"Event Weight","Events");
+
+    std::vector<TH1D*> vec_ggMass_EBEB;
+    std::vector<TH1D*> vec_ggMass_EBEB_varbin;
+    std::vector<TH1D*> vec_ggMass_EBEB_30003500varbin;
+
+    std::vector<TH1D*> vec_ggMass_EBEE;
+    std::vector<TH1D*> vec_ggMass_EBEE_varbin;
+    std::vector<TH1D*> vec_ggMass_EBEE_30003500varbin;
+
+    // for the SM background: loop over pdf eigenvector number and create histograms
+    for (int i=1; i<53; i++){
+
+        vec_ggMass_EBEB.push_back( createTH1D( TString::Format("ggMass_EBEB_CT10_%i",i), TString::Format("ggMass_EBEB_CT10_%i",i),651,-10.,13000.,"m_{#gamma#gamma} (GeV/c^{2})","Events") );
+        vec_ggMass_EBEB_varbin.push_back( createTH1D(TString::Format("ggMass_EBEB_varbin_CT10_%i",i), TString::Format("ggMass_EBEB_varbin_CT10_%i",i),6,bins,"m_{#gamma#gamma} (GeV/c^{2})","Events" ) ) ;
+        vec_ggMass_EBEB_30003500varbin.push_back( createTH1D(TString::Format("ggMass_EBEB_30003500varbin_CT10_%i",i), TString::Format("ggMass_EBEB_30003500varbin_CT10_%i",i),5,bins_30003500,"m_{#gamma#gamma} (GeV/c^{2})","Events" ) );
+
+        vec_ggMass_EBEE.push_back( createTH1D( TString::Format("ggMass_EBEE_CT10_%i",i), TString::Format("ggMass_EBEE_CT10_%i",i),651,-10.,13000.,"m_{#gamma#gamma} (GeV/c^{2})","Events") );
+        vec_ggMass_EBEE_varbin.push_back( createTH1D(TString::Format("ggMass_EBEE_varbin_CT10_%i",i), TString::Format("ggMass_EBEE_varbin_CT10_%i",i),6,bins,"m_{#gamma#gamma} (GeV/c^{2})","Events" ) ) ;
+        vec_ggMass_EBEE_30003500varbin.push_back( createTH1D(TString::Format("ggMass_EBEE_30003500varbin_CT10_%i",i), TString::Format("ggMass_EBEE_30003500varbin_CT10_%i",i),5,bins_30003500,"m_{#gamma#gamma} (GeV/c^{2})","Events" ) );
+
+    }
 
     // VBF tagged histograms
     TH1D* leadingPhoPt_VBFTagged_EBEB = createTH1D("leadingPhoPt_VBFTagged_EBEB","leadingPhoPt_VBFTagged_EBEB",300.,0.,1500.,"Leading Photon pT (GeV/c)","Events");
@@ -204,6 +269,15 @@ void fTree::Loop(TString outfilename, bool applyEventWeights=false)
     // TH2D* oneProngConversionXYMap_generalTracksOnly_allEta = createTH2D("oneProngConversionXYMap_generalTracksOnly_allEta","oneProngConversionXYMap_generalTracksOnly_allEta",280,-140.,140.,280,-140.,140.,"x (cm)","y (cm)");
     // TH2D* oneProngConversionRZMap_generalTracksOnly_allEta = createTH2D("oneProngConversionRZMap_generalTracksOnly_allEta","oneProngConversionRZMap_generalTracksOnly_allEta",100,-300.,300.,240,0.,120.,"z (cm)","r (cm)");
 
+    for (int i=0; i<52; i++){
+        vec_ggMass_EBEB.at(i)->Sumw2();
+        vec_ggMass_EBEB_varbin.at(i)->Sumw2();
+        vec_ggMass_EBEB_30003500varbin.at(i)->Sumw2();
+
+        vec_ggMass_EBEE.at(i)->Sumw2();
+        vec_ggMass_EBEE_varbin.at(i)->Sumw2();
+        vec_ggMass_EBEE_30003500varbin.at(i)->Sumw2();
+    }
     leadingPhoPt_EBEB->Sumw2();
     subleadingPhoPt_EBEB->Sumw2();
     leadingPhoEta_EBEB->Sumw2();
@@ -334,181 +408,201 @@ void fTree::Loop(TString outfilename, bool applyEventWeights=false)
 
         if (jentry % 1000 == 0) cout << "Now looking at event #" << jentry << endl;
         // Photon1 is the leading photon, Photon2 is the second leading
-        // if (jentry>10) return;
-        if (!TrigHLT_HLT_DoublePhoton60_v1) continue; // only admit events that pass HLT_DoublePhoton_60 
+        if (jentry>3000) break;
+        if (!isGood) continue; // only use analysis level events
+        if (!TriggerBit_HLT_DoublePhoton60) continue; // only admit events that pass HLT_DoublePhoton_60
+        if (Photon1_pt < 75. || Photon2_pt < 75.) continue; // enforce 75 GeV pT cut
+
+        // bool EBEB = isEBEB(Photon1_scEta,Photon2_scEta); // fabs is taken in the helper function!
+        // bool EBEE = isEBEE(Photon1_scEta,Photon2_scEta);
+        bool EBEB = Diphoton_isEBEB;
+        bool EBEE = Diphoton_isEBEE || Diphoton_isEEEB;
 
         // get event weight
         // If running over data, some filler will be there, so set it to be 1 manually if the event weight is <= 0
         double eventWeight = 1.;
-        if (Event_weight > 0. && applyEventWeights) eventWeight = (double)Event_weight;
-        hEventWeight->Fill(eventWeight);
+        // if (Event_weight > 0. && applyEventWeights) eventWeight = (double)Event_weight;
+        if (applyEventWeights){
+            eventWeight = (double)Event_weightAll*2.6; // 2.6/fb
+            if (outfilename.Contains("GGJets")) eventWeight *= getKFactor(Diphoton_Minv,EBEB); // multiply SM diphoton bkg by k-factor; using RECO mass for now...
 
-        bool EBEB = isEBEB(Photon1_scEta,Photon2_scEta); // fabs is taken in the helper function!
-        bool EBEE = isEBEE(Photon1_scEta,Photon2_scEta);
+        }
+        hEventWeight->Fill(Event_weightAll);
 
-        if (EBEB) nJets_EBEB->Fill(JetInfo_pt->size());
-        else if (EBEE) nJets_EBEE->Fill(JetInfo_pt->size());
+        // if (EBEB) nJets_EBEB->Fill(JetInfo_pt->size());
+        // else if (EBEE) nJets_EBEE->Fill(JetInfo_pt->size());
 
         // VBFTag
         // first find the two jets highest in ET (need to create 4-vectors for this)
         // also perform basic jet eta cut that was not done online
         // also cut on loose jet ID
-        bool haveTwoJets = false;
+        // bool haveTwoJets = false;
 
-        int leadingIdx = -1;
-        double leadingET = -1.;
-        int subleadingIdx = -1;
-        double subleadingET = -2.;
+        // int leadingIdx = -1;
+        // double leadingET = -1.;
+        // int subleadingIdx = -1;
+        // double subleadingET = -2.;
 
-        for (unsigned int i=0; i<JetInfo_pt->size(); i++){
-            if ( fabs(JetInfo_eta->at(i)) > 4.7 ) continue;
-            if ( !JetInfo_passLooseID->at(i) ) continue;
-            TLorentzVector vec;
-            vec.SetPtEtaPhiE(JetInfo_pt->at(i),JetInfo_eta->at(i),JetInfo_phi->at(i),JetInfo_energy->at(i));
-            double et = vec.Et();
-            if (et > leadingET){
-                subleadingET = leadingET;
-                subleadingIdx = leadingIdx;
-                leadingIdx = i;
-                leadingET = et;
-            }
-            else if (et < leadingET && et > subleadingET){
-                subleadingET = et;
-                subleadingIdx = i;
-            }
+        // for (unsigned int i=0; i<JetInfo_pt->size(); i++){
+        //     if ( fabs(JetInfo_eta->at(i)) > 4.7 ) continue;
+        //     if ( !JetInfo_passLooseID->at(i) ) continue;
+        //     TLorentzVector vec;
+        //     vec.SetPtEtaPhiE(JetInfo_pt->at(i),JetInfo_eta->at(i),JetInfo_phi->at(i),JetInfo_energy->at(i));
+        //     double et = vec.Et();
+        //     if (et > leadingET){
+        //         subleadingET = leadingET;
+        //         subleadingIdx = leadingIdx;
+        //         leadingIdx = i;
+        //         leadingET = et;
+        //     }
+        //     else if (et < leadingET && et > subleadingET){
+        //         subleadingET = et;
+        //         subleadingIdx = i;
+        //     }
 
-        } // end loop over jets
+        // } // end loop over jets
 
-        if ( leadingIdx<0 || subleadingIdx<0 ){
-            haveTwoJets = false; // less than two jets passing eta and jetid cuts
-        }
-        else{
-            haveTwoJets = true;
-        }
+        // if ( leadingIdx<0 || subleadingIdx<0 ){
+        //     haveTwoJets = false; // less than two jets passing eta and jetid cuts
+        // }
+        // else{
+        //     haveTwoJets = true;
+        // }
 
-        if (haveTwoJets){
-            // first define and set TLorentzVectors
-            TLorentzVector leadingJet;
-            TLorentzVector subleadingJet;
-            TLorentzVector leadingPhoton;
-            TLorentzVector subleadingPhoton;
-            TLorentzVector dijet;
-            TLorentzVector diphoton;
+        // if (haveTwoJets){
+        //     // first define and set TLorentzVectors
+        //     TLorentzVector leadingJet;
+        //     TLorentzVector subleadingJet;
+        //     TLorentzVector leadingPhoton;
+        //     TLorentzVector subleadingPhoton;
+        //     TLorentzVector dijet;
+        //     TLorentzVector diphoton;
 
-            leadingJet.SetPtEtaPhiE(JetInfo_pt->at(leadingIdx),JetInfo_eta->at(leadingIdx),JetInfo_phi->at(leadingIdx),JetInfo_energy->at(leadingIdx));
-            subleadingJet.SetPtEtaPhiE(JetInfo_pt->at(subleadingIdx),JetInfo_eta->at(subleadingIdx),JetInfo_phi->at(subleadingIdx),JetInfo_energy->at(subleadingIdx));
-            leadingPhoton.SetPtEtaPhiM(Photon1_pt,Photon1_scEta,Photon1_phi,0.);
-            subleadingPhoton.SetPtEtaPhiM(Photon2_pt,Photon2_scEta,Photon2_phi,0.);
-            dijet = leadingJet + subleadingJet;
-            diphoton = leadingPhoton + subleadingPhoton;
+        //     leadingJet.SetPtEtaPhiE(JetInfo_pt->at(leadingIdx),JetInfo_eta->at(leadingIdx),JetInfo_phi->at(leadingIdx),JetInfo_energy->at(leadingIdx));
+        //     subleadingJet.SetPtEtaPhiE(JetInfo_pt->at(subleadingIdx),JetInfo_eta->at(subleadingIdx),JetInfo_phi->at(subleadingIdx),JetInfo_energy->at(subleadingIdx));
+        //     leadingPhoton.SetPtEtaPhiM(Photon1_pt,Photon1_scEta,Photon1_phi,0.);
+        //     subleadingPhoton.SetPtEtaPhiM(Photon2_pt,Photon2_scEta,Photon2_phi,0.);
+        //     dijet = leadingJet + subleadingJet;
+        //     diphoton = leadingPhoton + subleadingPhoton;
 
-            // now calculate the variables for the cuts
-            double jetDEta = fabs( leadingJet.Eta() - subleadingJet.Eta() );
-            double dijetMass = dijet.M();
-            double jetAvgEta = ( leadingJet.Eta() + subleadingJet.Eta() ) / 2.;
-            double diphotonEta = diphoton.Eta();
-            double jetPhoEtaDiff = fabs( jetAvgEta - diphotonEta );
-            double jetPhoDPhi = fabs( diphoton.DeltaPhi(dijet) ); // which has higher phi doesn't matter here
+        //     // now calculate the variables for the cuts
+        //     double jetDEta = fabs( leadingJet.Eta() - subleadingJet.Eta() );
+        //     double dijetMass = dijet.M();
+        //     double jetAvgEta = ( leadingJet.Eta() + subleadingJet.Eta() ) / 2.;
+        //     double diphotonEta = diphoton.Eta();
+        //     double jetPhoEtaDiff = fabs( jetAvgEta - diphotonEta );
+        //     double jetPhoDPhi = fabs( diphoton.DeltaPhi(dijet) ); // which has higher phi doesn't matter here
 
-            // pre VBF tag plots
-            if (EBEB){
-                // start with jet kinematics
-                leadingjetPt_EBEB->Fill( leadingJet.Pt() );
-                leadingjetEta_EBEB->Fill( leadingJet.Eta() );
-                leadingjetPhi_EBEB->Fill( leadingJet.Phi() );
-                leadingjetMass_EBEB->Fill( leadingJet.M() );
-                leadingjetET_EBEB->Fill( leadingET );
+        //     // pre VBF tag plots
+        //     if (EBEB){
+        //         // start with jet kinematics
+        //         leadingjetPt_EBEB->Fill( leadingJet.Pt() );
+        //         leadingjetEta_EBEB->Fill( leadingJet.Eta() );
+        //         leadingjetPhi_EBEB->Fill( leadingJet.Phi() );
+        //         leadingjetMass_EBEB->Fill( leadingJet.M() );
+        //         leadingjetET_EBEB->Fill( leadingET );
 
-                subleadingjetPt_EBEB->Fill( subleadingJet.Pt() );
-                subleadingjetEta_EBEB->Fill( subleadingJet.Eta() );
-                subleadingjetPhi_EBEB->Fill( subleadingJet.Phi() );
-                subleadingjetMass_EBEB->Fill( subleadingJet.M() );
-                subleadingjetET_EBEB->Fill( subleadingET );
+        //         subleadingjetPt_EBEB->Fill( subleadingJet.Pt() );
+        //         subleadingjetEta_EBEB->Fill( subleadingJet.Eta() );
+        //         subleadingjetPhi_EBEB->Fill( subleadingJet.Phi() );
+        //         subleadingjetMass_EBEB->Fill( subleadingJet.M() );
+        //         subleadingjetET_EBEB->Fill( subleadingET );
 
-                // cut variables
-                jetDEta_EBEB->Fill(jetDEta);
-                dijetMass_EBEB->Fill(dijetMass);
-                jetPhoEtaDiff_EBEB->Fill(jetPhoEtaDiff);
-                jetPhoDPhi_EBEB->Fill(jetPhoDPhi);
-            }
-            else if (EBEE){
-                leadingjetPt_EBEE->Fill( leadingJet.Pt() );
-                leadingjetEta_EBEE->Fill( leadingJet.Eta() );
-                leadingjetPhi_EBEE->Fill( leadingJet.Phi() );
-                leadingjetMass_EBEE->Fill( leadingJet.M() );
-                leadingjetET_EBEE->Fill( leadingET );
+        //         // cut variables
+        //         jetDEta_EBEB->Fill(jetDEta);
+        //         dijetMass_EBEB->Fill(dijetMass);
+        //         jetPhoEtaDiff_EBEB->Fill(jetPhoEtaDiff);
+        //         jetPhoDPhi_EBEB->Fill(jetPhoDPhi);
+        //     }
+        //     else if (EBEE){
+        //         leadingjetPt_EBEE->Fill( leadingJet.Pt() );
+        //         leadingjetEta_EBEE->Fill( leadingJet.Eta() );
+        //         leadingjetPhi_EBEE->Fill( leadingJet.Phi() );
+        //         leadingjetMass_EBEE->Fill( leadingJet.M() );
+        //         leadingjetET_EBEE->Fill( leadingET );
 
-                subleadingjetPt_EBEE->Fill( subleadingJet.Pt() );
-                subleadingjetEta_EBEE->Fill( subleadingJet.Eta() );
-                subleadingjetPhi_EBEE->Fill( subleadingJet.Phi() );
-                subleadingjetMass_EBEE->Fill( subleadingJet.M() );
-                subleadingjetET_EBEE->Fill( subleadingET );
+        //         subleadingjetPt_EBEE->Fill( subleadingJet.Pt() );
+        //         subleadingjetEta_EBEE->Fill( subleadingJet.Eta() );
+        //         subleadingjetPhi_EBEE->Fill( subleadingJet.Phi() );
+        //         subleadingjetMass_EBEE->Fill( subleadingJet.M() );
+        //         subleadingjetET_EBEE->Fill( subleadingET );
 
-                // cut variables
-                jetDEta_EBEE->Fill(jetDEta);
-                dijetMass_EBEE->Fill(dijetMass);
-                jetPhoEtaDiff_EBEE->Fill(jetPhoEtaDiff);
-                jetPhoDPhi_EBEE->Fill(jetPhoDPhi);                
-            }
+        //         // cut variables
+        //         jetDEta_EBEE->Fill(jetDEta);
+        //         dijetMass_EBEE->Fill(dijetMass);
+        //         jetPhoEtaDiff_EBEE->Fill(jetPhoEtaDiff);
+        //         jetPhoDPhi_EBEE->Fill(jetPhoDPhi);                
+        //     }
 
 
             
-            if (leadingET > 30. && subleadingET > 20.){
+        //     if (leadingET > 30. && subleadingET > 20.){
 
-                if (jetDEta > 3.5 && dijetMass > 350. && jetPhoEtaDiff < 2.5 && jetPhoDPhi > 2.6){
-                // if (jetDEta > 3.5 && dijetMass > 350.){
-                    // fill all histograms
-                    // if (EBEB) ggMass_VBFTagged_EBEB->Fill(diphoton.M());
-                    // else if (EBEE) ggMass_VBFTagged_EBEE->Fill(diphoton.M());
-                    if (EBEB){
-                        ggMass_VBFTagged_EBEB->Fill(Diphoton_Minv);
-                        leadingPhoPt_VBFTagged_EBEB->Fill(Photon1_pt);
-                        leadingPhoEta_VBFTagged_EBEB->Fill(Photon1_scEta);
-                        leadingPhoPhi_VBFTagged_EBEB->Fill(Photon1_scPhi);
-                        subleadingPhoPt_VBFTagged_EBEB->Fill(Photon2_pt);
-                        subleadingPhoEta_VBFTagged_EBEB->Fill(Photon2_scEta);
-                        subleadingPhoPhi_VBFTagged_EBEB->Fill(Photon2_scPhi);
-                    }
-                    else if (EBEE){
-                        ggMass_VBFTagged_EBEE->Fill(Diphoton_Minv);
-                        leadingPhoPt_VBFTagged_EBEE->Fill(Photon1_pt);
-                        leadingPhoEta_VBFTagged_EBEE->Fill(Photon1_scEta);
-                        leadingPhoPhi_VBFTagged_EBEE->Fill(Photon1_scPhi);
-                        subleadingPhoPt_VBFTagged_EBEE->Fill(Photon2_pt);
-                        subleadingPhoEta_VBFTagged_EBEE->Fill(Photon2_scEta);
-                        subleadingPhoPhi_VBFTagged_EBEE->Fill(Photon2_scPhi);
-                    }
-                } // end VBF tag block
+        //         if (jetDEta > 3.5 && dijetMass > 350. && jetPhoEtaDiff < 2.5 && jetPhoDPhi > 2.6){
+        //         // if (jetDEta > 3.5 && dijetMass > 350.){
+        //             // fill all histograms
+        //             // if (EBEB) ggMass_VBFTagged_EBEB->Fill(diphoton.M());
+        //             // else if (EBEE) ggMass_VBFTagged_EBEE->Fill(diphoton.M());
+        //             if (EBEB){
+        //                 ggMass_VBFTagged_EBEB->Fill(Diphoton_Minv);
+        //                 leadingPhoPt_VBFTagged_EBEB->Fill(Photon1_pt);
+        //                 leadingPhoEta_VBFTagged_EBEB->Fill(Photon1_scEta);
+        //                 leadingPhoPhi_VBFTagged_EBEB->Fill(Photon1_scPhi);
+        //                 subleadingPhoPt_VBFTagged_EBEB->Fill(Photon2_pt);
+        //                 subleadingPhoEta_VBFTagged_EBEB->Fill(Photon2_scEta);
+        //                 subleadingPhoPhi_VBFTagged_EBEB->Fill(Photon2_scPhi);
+        //             }
+        //             else if (EBEE){
+        //                 ggMass_VBFTagged_EBEE->Fill(Diphoton_Minv);
+        //                 leadingPhoPt_VBFTagged_EBEE->Fill(Photon1_pt);
+        //                 leadingPhoEta_VBFTagged_EBEE->Fill(Photon1_scEta);
+        //                 leadingPhoPhi_VBFTagged_EBEE->Fill(Photon1_scPhi);
+        //                 subleadingPhoPt_VBFTagged_EBEE->Fill(Photon2_pt);
+        //                 subleadingPhoEta_VBFTagged_EBEE->Fill(Photon2_scEta);
+        //                 subleadingPhoPhi_VBFTagged_EBEE->Fill(Photon2_scPhi);
+        //             }
+        //         } // end VBF tag block
 
-            } // end ET cuts for VBF tag
-        } // end haveTwoJets block
+        //     } // end ET cuts for VBF tag
+        // } // end haveTwoJets block
 
         // now other plots
 
         if (EBEB){
-            leadingPhoPt_EBEB->Fill(Photon1_pt);
-            subleadingPhoPt_EBEB->Fill(Photon2_pt);
-            leadingPhoEta_EBEB->Fill(Photon1_scEta);
-            subleadingPhoEta_EBEB->Fill(Photon2_scEta);
-            leadingPhoPhi_EBEB->Fill(Photon1_scPhi);
-            subleadingPhoPhi_EBEB->Fill(Photon2_scPhi);
+            leadingPhoPt_EBEB->Fill(Photon1_pt,eventWeight);
+            subleadingPhoPt_EBEB->Fill(Photon2_pt,eventWeight);
+            leadingPhoEta_EBEB->Fill(Photon1_scEta,eventWeight);
+            subleadingPhoEta_EBEB->Fill(Photon2_scEta,eventWeight);
+            leadingPhoPhi_EBEB->Fill(Photon1_scPhi,eventWeight);
+            subleadingPhoPhi_EBEB->Fill(Photon2_scPhi,eventWeight);
             ggMass_EBEB->Fill(Diphoton_Minv,eventWeight);
             ggMass_EBEB_JPBinning->Fill(Diphoton_Minv,eventWeight);
             ggMass_EBEB_30003500varbin->Fill(Diphoton_Minv,eventWeight);
             ggMass_EBEB_varbin->Fill(Diphoton_Minv,eventWeight);
-            // if (700. <= Diphoton_Minv && Diphoton_Minv <= 800.) massFile << Diphoton_Minv << "\n";
+            
+            for(int i=0; i<52; i++){
+                vec_ggMass_EBEB.at(i)->Fill( Diphoton_Minv,eventWeight*getPDFValue(Diphoton_Minv,EBEB,i+1) );
+                vec_ggMass_EBEB_varbin.at(i)->Fill( Diphoton_Minv,eventWeight*getPDFValue(Diphoton_Minv,EBEB,i+1) );
+                vec_ggMass_EBEB_30003500varbin.at(i)->Fill( Diphoton_Minv,eventWeight*getPDFValue(Diphoton_Minv,EBEB,i+1) );
+            }
         } // end EBEB block
 
         else if (EBEE){
-            leadingPhoPt_EBEE->Fill(Photon1_pt);
-            subleadingPhoPt_EBEE->Fill(Photon2_pt);
-            leadingPhoEta_EBEE->Fill(Photon1_scEta);
-            subleadingPhoEta_EBEE->Fill(Photon2_scEta);
-            leadingPhoPhi_EBEE->Fill(Photon1_scPhi);
-            subleadingPhoPhi_EBEE->Fill(Photon2_scPhi);
+            leadingPhoPt_EBEE->Fill(Photon1_pt,eventWeight);
+            subleadingPhoPt_EBEE->Fill(Photon2_pt,eventWeight);
+            leadingPhoEta_EBEE->Fill(Photon1_scEta,eventWeight);
+            subleadingPhoEta_EBEE->Fill(Photon2_scEta,eventWeight);
+            leadingPhoPhi_EBEE->Fill(Photon1_scPhi,eventWeight);
+            subleadingPhoPhi_EBEE->Fill(Photon2_scPhi,eventWeight);
             ggMass_EBEE->Fill(Diphoton_Minv,eventWeight);
             ggMass_EBEE_30003500varbin->Fill(Diphoton_Minv,eventWeight);
             ggMass_EBEE_varbin->Fill(Diphoton_Minv,eventWeight);
+
+            for(int i=0; i<52; i++){
+                vec_ggMass_EBEE.at(i)->Fill( Diphoton_Minv,eventWeight*getPDFValue(Diphoton_Minv,EBEB,i+1) );
+                vec_ggMass_EBEE_varbin.at(i)->Fill( Diphoton_Minv,eventWeight*getPDFValue(Diphoton_Minv,EBEB,i+1) );
+                vec_ggMass_EBEE_30003500varbin.at(i)->Fill( Diphoton_Minv,eventWeight*getPDFValue(Diphoton_Minv,EBEB,i+1) );
+            }
         } // end EBEE block
 
         // fill conversion plots for all eta
@@ -811,122 +905,131 @@ void fTree::Loop(TString outfilename, bool applyEventWeights=false)
     // c.Clear();
     // ggMass_EBEE->Draw();
     // c.SaveAs("ggMass_EBEE.pdf");
-
+    cout << "got here 1" << endl;
     TFile f(outfilename,"recreate");
     f.cd();
-
+    cout << "got here 2" << endl;
     leadingPhoPt_EBEB->Write();
     subleadingPhoPt_EBEB->Write();
     leadingPhoEta_EBEB->Write();
     subleadingPhoEta_EBEB->Write();
     leadingPhoPhi_EBEB->Write();
     subleadingPhoPhi_EBEB->Write();
-    ggMass_EBEB->Write();
-    ggMass_EBEB_JPBinning->Write();
-    ggMass_EBEB_30003500varbin->Write();
-    ggMass_EBEB_varbin->Write();
     leadingPhoPt_EBEE->Write();
     subleadingPhoPt_EBEE->Write();
     leadingPhoEta_EBEE->Write();
     subleadingPhoEta_EBEE->Write();
     leadingPhoPhi_EBEE->Write();
     subleadingPhoPhi_EBEE->Write();
+    ggMass_EBEB->Write();
+    ggMass_EBEB_JPBinning->Write();
+    ggMass_EBEB_30003500varbin->Write();
+    ggMass_EBEB_varbin->Write();
     ggMass_EBEE->Write();
     ggMass_EBEE_30003500varbin->Write();
     ggMass_EBEE_varbin->Write();
+    for(int i=0; i<52; i++){
+        vec_ggMass_EBEB.at(i)->Write();
+        vec_ggMass_EBEB_varbin.at(i)->Write();
+        vec_ggMass_EBEB_30003500varbin.at(i)->Write();
+
+        vec_ggMass_EBEE.at(i)->Write();
+        vec_ggMass_EBEE_varbin.at(i)->Write();
+        vec_ggMass_EBEE_30003500varbin.at(i)->Write();
+    }
     hEventWeight->Write();
-    leadingPhoPt_VBFTagged_EBEB->Write();
-    subleadingPhoPt_VBFTagged_EBEB->Write();
-    leadingPhoEta_VBFTagged_EBEB->Write();
-    subleadingPhoEta_VBFTagged_EBEB->Write();
-    leadingPhoPhi_VBFTagged_EBEB->Write();
-    subleadingPhoPhi_VBFTagged_EBEB->Write();
-    ggMass_VBFTagged_EBEB->Write();
-    leadingPhoPt_VBFTagged_EBEE->Write();
-    subleadingPhoPt_VBFTagged_EBEE->Write();
-    leadingPhoEta_VBFTagged_EBEE->Write();
-    subleadingPhoEta_VBFTagged_EBEE->Write();
-    leadingPhoPhi_VBFTagged_EBEE->Write();
-    subleadingPhoPhi_VBFTagged_EBEE->Write();
-    ggMass_VBFTagged_EBEE->Write();
-    nJets_EBEB->Write();
-    leadingjetPt_EBEB->Write();
-    leadingjetEta_EBEB->Write();
-    leadingjetPhi_EBEB->Write();
-    leadingjetET_EBEB->Write();
-    leadingjetMass_EBEB->Write();
-    nJets_EBEE->Write();
-    leadingjetPt_EBEE->Write();
-    leadingjetEta_EBEE->Write();
-    leadingjetPhi_EBEE->Write();
-    leadingjetET_EBEE->Write();
-    leadingjetMass_EBEE->Write();
-    subleadingjetPt_EBEB->Write();
-    subleadingjetEta_EBEB->Write();
-    subleadingjetPhi_EBEB->Write();
-    subleadingjetET_EBEB->Write();
-    subleadingjetMass_EBEB->Write();
-    subleadingjetPt_EBEE->Write();
-    subleadingjetEta_EBEE->Write();
-    subleadingjetPhi_EBEE->Write();
-    subleadingjetET_EBEE->Write();
-    subleadingjetMass_EBEE->Write();
-    jetDEta_EBEB->Write();
-    dijetMass_EBEB->Write();
-    jetPhoEtaDiff_EBEB->Write();
-    jetPhoDPhi_EBEB->Write();
-    jetDEta_EBEE->Write();
-    dijetMass_EBEE->Write();
-    jetPhoEtaDiff_EBEE->Write();
-    jetPhoDPhi_EBEE->Write();
-    nConversions_allConvType_EB->Write();
-    nConversions_allConvType_EE->Write();
-    nConversions_allConvType_allEta->Write();
-    nConversions_arbitratedMerged_EB->Write();
-    nConversions_arbitratedMerged_EE->Write();
-    nConversions_arbitratedMerged_allEta->Write();
-    nConversions_highPurity_EB->Write();
-    nConversions_highPurity_EE->Write();
-    nConversions_highPurity_allEta->Write();
-    nConversions_generalTracksOnly_EB->Write();
-    nConversions_generalTracksOnly_EE->Write();
-    nConversions_generalTracksOnly_allEta->Write();
-    conversionRadius_allConvType_EB->Write();
-    conversionRadius_allConvType_EE->Write();
-    conversionRadius_allConvType_allEta->Write();
-    conversionRadius_arbitratedMerged_EB->Write();
-    conversionRadius_arbitratedMerged_EE->Write();
-    conversionRadius_arbitratedMerged_allEta->Write();
-    conversionRadius_highPurity_EB->Write();
-    conversionRadius_highPurity_EE->Write();
-    conversionRadius_highPurity_allEta->Write();
-    conversionRadius_generalTracksOnly_EB->Write();
-    conversionRadius_generalTracksOnly_EE->Write();
-    conversionRadius_generalTracksOnly_allEta->Write();
-    twoProngConversionXYMap_allConvType_EB->Write();
-    twoProngConversionRZMap_allConvType_EB->Write();
-    twoProngConversionXYMap_allConvType_EE->Write();
-    twoProngConversionRZMap_allConvType_EE->Write();
-    twoProngConversionXYMap_allConvType_allEta->Write();
-    twoProngConversionRZMap_allConvType_allEta->Write();
-    twoProngConversionXYMap_arbitratedMerged_EB->Write();
-    twoProngConversionRZMap_arbitratedMerged_EB->Write();
-    twoProngConversionXYMap_arbitratedMerged_EE->Write();
-    twoProngConversionRZMap_arbitratedMerged_EE->Write();
-    twoProngConversionXYMap_arbitratedMerged_allEta->Write();
-    twoProngConversionRZMap_arbitratedMerged_allEta->Write();
-    twoProngConversionXYMap_highPurity_EB->Write();
-    twoProngConversionRZMap_highPurity_EB->Write();
-    twoProngConversionXYMap_highPurity_EE->Write();
-    twoProngConversionRZMap_highPurity_EE->Write();
-    twoProngConversionXYMap_highPurity_allEta->Write();
-    twoProngConversionRZMap_highPurity_allEta->Write();
-    twoProngConversionXYMap_generalTracksOnly_EB->Write();
-    twoProngConversionRZMap_generalTracksOnly_EB->Write();
-    twoProngConversionXYMap_generalTracksOnly_EE->Write();
-    twoProngConversionRZMap_generalTracksOnly_EE->Write();
-    twoProngConversionXYMap_generalTracksOnly_allEta->Write();
-    twoProngConversionRZMap_generalTracksOnly_allEta->Write();
+    // leadingPhoPt_VBFTagged_EBEB->Write();
+    // subleadingPhoPt_VBFTagged_EBEB->Write();
+    // leadingPhoEta_VBFTagged_EBEB->Write();
+    // subleadingPhoEta_VBFTagged_EBEB->Write();
+    // leadingPhoPhi_VBFTagged_EBEB->Write();
+    // subleadingPhoPhi_VBFTagged_EBEB->Write();
+    // ggMass_VBFTagged_EBEB->Write();
+    // leadingPhoPt_VBFTagged_EBEE->Write();
+    // subleadingPhoPt_VBFTagged_EBEE->Write();
+    // leadingPhoEta_VBFTagged_EBEE->Write();
+    // subleadingPhoEta_VBFTagged_EBEE->Write();
+    // leadingPhoPhi_VBFTagged_EBEE->Write();
+    // subleadingPhoPhi_VBFTagged_EBEE->Write();
+    // ggMass_VBFTagged_EBEE->Write();
+    // nJets_EBEB->Write();
+    // leadingjetPt_EBEB->Write();
+    // leadingjetEta_EBEB->Write();
+    // leadingjetPhi_EBEB->Write();
+    // leadingjetET_EBEB->Write();
+    // leadingjetMass_EBEB->Write();
+    // nJets_EBEE->Write();
+    // leadingjetPt_EBEE->Write();
+    // leadingjetEta_EBEE->Write();
+    // leadingjetPhi_EBEE->Write();
+    // leadingjetET_EBEE->Write();
+    // leadingjetMass_EBEE->Write();
+    // subleadingjetPt_EBEB->Write();
+    // subleadingjetEta_EBEB->Write();
+    // subleadingjetPhi_EBEB->Write();
+    // subleadingjetET_EBEB->Write();
+    // subleadingjetMass_EBEB->Write();
+    // subleadingjetPt_EBEE->Write();
+    // subleadingjetEta_EBEE->Write();
+    // subleadingjetPhi_EBEE->Write();
+    // subleadingjetET_EBEE->Write();
+    // subleadingjetMass_EBEE->Write();
+    // jetDEta_EBEB->Write();
+    // dijetMass_EBEB->Write();
+    // jetPhoEtaDiff_EBEB->Write();
+    // jetPhoDPhi_EBEB->Write();
+    // jetDEta_EBEE->Write();
+    // dijetMass_EBEE->Write();
+    // jetPhoEtaDiff_EBEE->Write();
+    // jetPhoDPhi_EBEE->Write();
+    // nConversions_allConvType_EB->Write();
+    // nConversions_allConvType_EE->Write();
+    // nConversions_allConvType_allEta->Write();
+    // nConversions_arbitratedMerged_EB->Write();
+    // nConversions_arbitratedMerged_EE->Write();
+    // nConversions_arbitratedMerged_allEta->Write();
+    // nConversions_highPurity_EB->Write();
+    // nConversions_highPurity_EE->Write();
+    // nConversions_highPurity_allEta->Write();
+    // nConversions_generalTracksOnly_EB->Write();
+    // nConversions_generalTracksOnly_EE->Write();
+    // nConversions_generalTracksOnly_allEta->Write();
+    // conversionRadius_allConvType_EB->Write();
+    // conversionRadius_allConvType_EE->Write();
+    // conversionRadius_allConvType_allEta->Write();
+    // conversionRadius_arbitratedMerged_EB->Write();
+    // conversionRadius_arbitratedMerged_EE->Write();
+    // conversionRadius_arbitratedMerged_allEta->Write();
+    // conversionRadius_highPurity_EB->Write();
+    // conversionRadius_highPurity_EE->Write();
+    // conversionRadius_highPurity_allEta->Write();
+    // conversionRadius_generalTracksOnly_EB->Write();
+    // conversionRadius_generalTracksOnly_EE->Write();
+    // conversionRadius_generalTracksOnly_allEta->Write();
+    // twoProngConversionXYMap_allConvType_EB->Write();
+    // twoProngConversionRZMap_allConvType_EB->Write();
+    // twoProngConversionXYMap_allConvType_EE->Write();
+    // twoProngConversionRZMap_allConvType_EE->Write();
+    // twoProngConversionXYMap_allConvType_allEta->Write();
+    // twoProngConversionRZMap_allConvType_allEta->Write();
+    // twoProngConversionXYMap_arbitratedMerged_EB->Write();
+    // twoProngConversionRZMap_arbitratedMerged_EB->Write();
+    // twoProngConversionXYMap_arbitratedMerged_EE->Write();
+    // twoProngConversionRZMap_arbitratedMerged_EE->Write();
+    // twoProngConversionXYMap_arbitratedMerged_allEta->Write();
+    // twoProngConversionRZMap_arbitratedMerged_allEta->Write();
+    // twoProngConversionXYMap_highPurity_EB->Write();
+    // twoProngConversionRZMap_highPurity_EB->Write();
+    // twoProngConversionXYMap_highPurity_EE->Write();
+    // twoProngConversionRZMap_highPurity_EE->Write();
+    // twoProngConversionXYMap_highPurity_allEta->Write();
+    // twoProngConversionRZMap_highPurity_allEta->Write();
+    // twoProngConversionXYMap_generalTracksOnly_EB->Write();
+    // twoProngConversionRZMap_generalTracksOnly_EB->Write();
+    // twoProngConversionXYMap_generalTracksOnly_EE->Write();
+    // twoProngConversionRZMap_generalTracksOnly_EE->Write();
+    // twoProngConversionXYMap_generalTracksOnly_allEta->Write();
+    // twoProngConversionRZMap_generalTracksOnly_allEta->Write();
 
     // massFile.close();
 

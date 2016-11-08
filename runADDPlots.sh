@@ -145,5 +145,71 @@ then
 elif [ $1 -eq 45 ]
 then
     root -l -q -b 'driverADD.C("GGJets","8000To13000","ADDPlots_GGJets_Mgg8000To13000.root",true)'
+elif [ $1 -eq 46 ]
+then
+    root -l -q -b 'driverADD.C("GJets","40To100","ADDPlots_GJets_HT40To100.root",true)'
+elif [ $1 -eq 47 ]
+then
+    root -l -q -b 'driverADD.C("GJets","100To200","ADDPlots_GJets_HT100To200.root",true)'
+elif [ $1 -eq 48 ]
+then
+    root -l -q -b 'driverADD.C("GJets","200To400","ADDPlots_GJets_HT200To400.root",true)'
+elif [ $1 -eq 49 ]
+then
+    root -l -q -b 'driverADD.C("GJets","400To600","ADDPlots_GJets_HT400To600.root",true)'
+elif [ $1 -eq 50 ]
+then
+    root -l -q -b 'driverADD.C("GJets","600ToInf","ADDPlots_GJets_HT600ToInf.root",true)'
+elif [ $1 -eq 51 ]
+then
+    root -l -q -b 'driverADD.C("QCD","5to10","ADDPlots_QCD_Pt5to10.root",true)'
+elif [ $1 -eq 52 ]
+then
+    root -l -q -b 'driverADD.C("QCD","10to15","ADDPlots_QCD_Pt10to15.root",true)'
+elif [ $1 -eq 53 ]
+then
+    root -l -q -b 'driverADD.C("QCD","15to30","ADDPlots_QCD_Pt15to30.root",true)'
+elif [ $1 -eq 54 ]
+then
+    root -l -q -b 'driverADD.C("QCD","30to50","ADDPlots_QCD_Pt30to50.root",true)'
+elif [ $1 -eq 55 ]
+then
+    root -l -q -b 'driverADD.C("QCD","50to80","ADDPlots_QCD_Pt50to80.root",true)'
+elif [ $1 -eq 56 ]
+then
+    root -l -q -b 'driverADD.C("QCD","80to120","ADDPlots_QCD_Pt80to120.root",true)'
+elif [ $1 -eq 57 ]
+then
+    root -l -q -b 'driverADD.C("QCD","120to170","ADDPlots_QCD_Pt120to170.root",true)'
+elif [ $1 -eq 58 ]
+then
+    root -l -q -b 'driverADD.C("QCD","170to300","ADDPlots_QCD_Pt170to300.root",true)'
+elif [ $1 -eq 59 ]
+then
+    root -l -q -b 'driverADD.C("QCD","300to470","ADDPlots_QCD_Pt300to470.root",true)'
+elif [ $1 -eq 60 ]
+then
+    root -l -q -b 'driverADD.C("QCD","470to600","ADDPlots_QCD_Pt470to600.root",true)'
+elif [ $1 -eq 61 ]
+then
+    root -l -q -b 'driverADD.C("QCD","600to800","ADDPlots_QCD_Pt600to800.root",true)'
+elif [ $1 -eq 62 ]
+then
+    root -l -q -b 'driverADD.C("QCD","800to1000","ADDPlots_QCD_Pt800to1000.root",true)'
+elif [ $1 -eq 63 ]
+then
+    root -l -q -b 'driverADD.C("QCD","1000to1400","ADDPlots_QCD_Pt1000to1400.root",true)'
+elif [ $1 -eq 64 ]
+then
+    root -l -q -b 'driverADD.C("QCD","1400to1800","ADDPlots_QCD_Pt1400to1800.root",true)'
+elif [ $1 -eq 65 ]
+then
+    root -l -q -b 'driverADD.C("QCD","1800to2400","ADDPlots_QCD_Pt1800to2400.root",true)'
+elif [ $1 -eq 66 ]
+then
+    root -l -q -b 'driverADD.C("QCD","2400to3200","ADDPlots_QCD_Pt2400to3200.root",true)'
+elif [ $1 -eq 67 ]
+then
+    root -l -q -b 'driverADD.C("QCD","3200toInf","ADDPlots_QCD_Pt3200toInf.root",true)'
 fi
 
