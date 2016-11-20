@@ -5,6 +5,13 @@
 #include <TStyle.h>
 #include <TCanvas.h>
 
+double getEffCorr(double pt, TH1D* hist){
+  int binNum = hist->FindBin(pt);
+  double eff = hist->GetBinContent(binNum);
+  if (eff == 0.) eff = 1.; //this only happens at high pT where we're just limited by statistics, but should be fully efficient
+  return 1./eff;
+}
+
 void extractFakeContributions::Loop()
 {
 //   In a ROOT session, you can do:
@@ -100,20 +107,32 @@ void extractFakeContributions::Loop()
     TH1D* jjMass_EBEE_varbin = createTH1D("jjMass_EBEE_varbin","jjMass_EBEE",6,bins,"m_{jet+jet} (GeV/c^{2})","Events");
     TH1D* fakeMass_EBEE_varbin = createTH1D("fakeMass_EBEE_varbin","fakeMass_EBEE",6,bins,"m_{fake} (GeV/c^{2})","Events");
 
-    ofstream allstream_EBEB("all_EBEB.txt");
-    ofstream gjstream_EBEB("gj_EBEB.txt");
-    ofstream jgstream_EBEB("jg_EBEB.txt");
+    // ofstream allstream_EBEB("all_EBEB.txt");
+    // ofstream gjstream_EBEB("gj_EBEB.txt");
+    // ofstream jgstream_EBEB("jg_EBEB.txt");
 
-    ofstream allstream_EBEE("all_EBEE.txt");
-    ofstream gjstream_EBEE("gj_EBEE.txt");
-    ofstream jgstream_EBEE("jg_EBEE.txt");
+    // ofstream allstream_EBEE("all_EBEE.txt");
+    // ofstream gjstream_EBEE("gj_EBEE.txt");
+    // ofstream jgstream_EBEE("jg_EBEE.txt");
 
-    ofstream gjstream_EEEB("gj_EEEB.txt");
-    ofstream jgstream_EEEB("jg_EEEB.txt");
+    // ofstream gjstream_EEEB("gj_EEEB.txt");
+    // ofstream jgstream_EEEB("jg_EEEB.txt");
 
-    ofstream jjstream_EBEB("jj_EBEB.txt");
-    ofstream jjstream_EBEE("jj_EBEE.txt");
-    ofstream jjstream_EEEB("jj_EEEB.txt");
+    // ofstream jjstream_EBEB("jj_EBEB.txt");
+    // ofstream jjstream_EBEE("jj_EBEE.txt");
+    // ofstream jjstream_EEEB("jj_EEEB.txt");
+
+    // fake efficiency histos
+    TFile effFile("hadronicOverEmEffPlots_20152016_pt75.root","read");
+    TH1D* effTF_pt1_EBEB = (TH1D*)effFile.Get("effTF_loose_hadronicOverEm010_pt1_EBEB");
+    TH1D* effTF_pt2_EBEB = (TH1D*)effFile.Get("effTF_loose_hadronicOverEm010_pt2_EBEB");
+    TH1D* effTF_pt1_EBEE = (TH1D*)effFile.Get("effTF_loose_hadronicOverEm010_pt1_EBEE");
+    TH1D* effTF_pt2_EBEE = (TH1D*)effFile.Get("effTF_loose_hadronicOverEm010_pt2_EBEE");
+
+    TH1D* effFF_pt1_EBEB = (TH1D*)effFile.Get("effFF_loose_hadronicOverEm010_pt1_EBEB");
+    TH1D* effFF_pt2_EBEB = (TH1D*)effFile.Get("effFF_loose_hadronicOverEm010_pt2_EBEB");
+    TH1D* effFF_pt1_EBEE = (TH1D*)effFile.Get("effFF_loose_hadronicOverEm010_pt1_EBEE");
+    TH1D* effFF_pt2_EBEE = (TH1D*)effFile.Get("effFF_loose_hadronicOverEm010_pt2_EBEE");
 
 
     if (fChain == 0) return;
@@ -215,6 +234,7 @@ void extractFakeContributions::Loop()
         double ggMass;
         bool isEBEB;
         bool isEBEE;
+        bool effCorr = getEffCorr(Photon2_pt,);
         if (TL){
             fakeRate = getFakeRate(TFPhoton2_pt,TFPhoton2_scEta);
             ggMass = TFDiphoton_Minv;
@@ -248,7 +268,7 @@ void extractFakeContributions::Loop()
             fakeMass_EBEB_varbin->Fill(ggMass,fakeRate);
             fakeMass_EBEB_30003500varbin->Fill(ggMass,fakeRate);
 
-            allstream_EBEB << ggMass << " " << fakeRate << "\n";
+            // allstream_EBEB << ggMass << " " << fakeRate << "\n";
 
             if (TL){
               counter++;
@@ -260,7 +280,7 @@ void extractFakeContributions::Loop()
               justgjMass_EBEB_varbin->Fill(ggMass,fakeRate);
               justgjMass_EBEB_30003500varbin->Fill(ggMass,fakeRate);
 
-              gjstream_EBEB << ggMass << " " << fakeRate << "\n";
+              // gjstream_EBEB << ggMass << " " << fakeRate << "\n";
 
             }
             else if (LT){
@@ -273,7 +293,7 @@ void extractFakeContributions::Loop()
               jgMass_EBEB_varbin->Fill(ggMass,fakeRate);
               jgMass_EBEB_30003500varbin->Fill(ggMass,fakeRate);
 
-              jgstream_EBEB << ggMass << " " << fakeRate << "\n";
+              // jgstream_EBEB << ggMass << " " << fakeRate << "\n";
 
             }
 
@@ -302,7 +322,7 @@ void extractFakeContributions::Loop()
             fakeMass_EBEE_varbin->Fill(ggMass,fakeRate);
             fakeMass_EBEE_30003500varbin->Fill(ggMass,fakeRate);
 
-            allstream_EBEE << ggMass << " " << fakeRate << "\n";
+            // allstream_EBEE << ggMass << " " << fakeRate << "\n";
 
             if (TL){
               counter++;
@@ -313,8 +333,8 @@ void extractFakeContributions::Loop()
               justgjMass_EBEE->Fill(ggMass,fakeRate);
               justgjMass_EBEE_varbin->Fill(ggMass,fakeRate);
               justgjMass_EBEE_30003500varbin->Fill(ggMass,fakeRate);
-              if (TFDiphoton_isEBEE) gjstream_EBEE << ggMass << " " << fakeRate << "\n";
-              else if (TFDiphoton_isEEEB) gjstream_EEEB << ggMass << " " << fakeRate << "\n";
+              // if (TFDiphoton_isEBEE) gjstream_EBEE << ggMass << " " << fakeRate << "\n";
+              // else if (TFDiphoton_isEEEB) gjstream_EEEB << ggMass << " " << fakeRate << "\n";
 
             }
             else if (LT){
@@ -327,8 +347,8 @@ void extractFakeContributions::Loop()
               jgMass_EBEE_varbin->Fill(ggMass,fakeRate);
               jgMass_EBEE_30003500varbin->Fill(ggMass,fakeRate);
 
-              if (FTDiphoton_isEBEE) jgstream_EBEE << ggMass << " " << fakeRate << "\n";
-              else if (FTDiphoton_isEEEB) jgstream_EEEB << ggMass << " " << fakeRate << "\n";
+              // if (FTDiphoton_isEBEE) jgstream_EBEE << ggMass << " " << fakeRate << "\n";
+              // else if (FTDiphoton_isEEEB) jgstream_EEEB << ggMass << " " << fakeRate << "\n";
             }
         }
       } // end TL || LT block
