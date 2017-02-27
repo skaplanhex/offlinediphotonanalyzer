@@ -1,6 +1,6 @@
 #include "fTree.C"
 
-void driverADD(TString ms, TString massBin, TString outfilename, bool applyEventWeights=false) {
+void driverMC(TString ms, TString massBin, TString outfilename, bool applyEventWeights=false) {
   // use stopwatch to time
   TStopwatch sw;
   sw.Start();
@@ -8,212 +8,370 @@ void driverADD(TString ms, TString massBin, TString outfilename, bool applyEvent
   // create tchain of all files to loop over
   TChain *chain = new TChain("diphoton/fTree");
 
-  cout << "Running over Ms=" << ms << ", massBin=" << massBin << ", and writing out to " << outfilename << endl;  
+  cout << "Running over sample: " << ms << ", massBin=" << massBin << ", and writing out to " << outfilename << endl;  
   cout << "applyEventWeights = " << applyEventWeights << endl;
   
-if ( ms.EqualTo("4000") && massBin.EqualTo("200To500") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-4000_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-4_KK-1_M-200To500_13TeV-sherpa/161021_034856/0000/ADDGravToGG_MS-4000_NED-4_KK-1_M-200To500_13TeV-sherpa_1.root",0);
+if ( ms.EqualTo("4000_GRW") && massBin.EqualTo("200To500") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4000_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-4_KK-1_M-200To500_13TeV-sherpa/161122_162633/0000/ADDGravToGG_MS-4000_NED-4_KK-1_M-200To500_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("4000") && massBin.EqualTo("500To1000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-4000_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-4_KK-1_M-500To1000_13TeV-sherpa/161021_034914/0000/ADDGravToGG_MS-4000_NED-4_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-4000_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-4_KK-1_M-500To1000_13TeV-sherpa/161021_034914/0000/ADDGravToGG_MS-4000_NED-4_KK-1_M-500To1000_13TeV-sherpa_2.root",0);
+else if ( ms.EqualTo("4000_GRW") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4000_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-4_KK-1_M-500To1000_13TeV-sherpa/161122_162657/0000/ADDGravToGG_MS-4000_NED-4_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4000_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-4_KK-1_M-500To1000_13TeV-sherpa/161122_162657/0000/ADDGravToGG_MS-4000_NED-4_KK-1_M-500To1000_13TeV-sherpa_2.root",0);
 }
-else if ( ms.EqualTo("4000") && massBin.EqualTo("1000To2000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-4000_NED-4_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-4_KK-1_M-1000To2000_13TeV-sherpa/161021_034821/0000/ADDGravToGG_MS-4000_NED-4_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("4000_GRW") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4000_NED-4_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-4_KK-1_M-1000To2000_13TeV-sherpa/161122_162545/0000/ADDGravToGG_MS-4000_NED-4_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("4000") && massBin.EqualTo("2000To4000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-4000_NED-4_KK-1_M-2000To4000_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-4_KK-1_M-2000To4000_13TeV-sherpa/161021_034839/0000/ADDGravToGG_MS-4000_NED-4_KK-1_M-2000To4000_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("4000_GRW") && massBin.EqualTo("2000To4000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4000_NED-4_KK-1_M-2000To4000_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-4_KK-1_M-2000To4000_13TeV-sherpa/161122_162607/0000/ADDGravToGG_MS-4000_NED-4_KK-1_M-2000To4000_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("5000") && massBin.EqualTo("200To500") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-5000_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-4_KK-1_M-200To500_13TeV-sherpa/161021_035620/0000/ADDGravToGG_MS-5000_NED-4_KK-1_M-200To500_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("5000_GRW") && massBin.EqualTo("200To500") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5000_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-4_KK-1_M-200To500_13TeV-sherpa/161122_163626/0000/ADDGravToGG_MS-5000_NED-4_KK-1_M-200To500_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("5000") && massBin.EqualTo("500To1000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-5000_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-4_KK-1_M-500To1000_13TeV-sherpa/161021_035658/0000/ADDGravToGG_MS-5000_NED-4_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("5000_GRW") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5000_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-4_KK-1_M-500To1000_13TeV-sherpa/161122_163714/0000/ADDGravToGG_MS-5000_NED-4_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("5000") && massBin.EqualTo("1000To2000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-5000_NED-4_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-4_KK-1_M-1000To2000_13TeV-sherpa/161021_035544/0000/ADDGravToGG_MS-5000_NED-4_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("5000_GRW") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5000_NED-4_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-4_KK-1_M-1000To2000_13TeV-sherpa/161122_163539/0000/ADDGravToGG_MS-5000_NED-4_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("5000") && massBin.EqualTo("2000To3000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-5000_NED-4_KK-1_M-2000To3000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-4_KK-1_M-2000To3000_13TeV-sherpa/161021_035602/0000/ADDGravToGG_MS-5000_NED-4_KK-1_M-2000To3000_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("5000_GRW") && massBin.EqualTo("2000To3000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5000_NED-4_KK-1_M-2000To3000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-4_KK-1_M-2000To3000_13TeV-sherpa/161122_163602/0000/ADDGravToGG_MS-5000_NED-4_KK-1_M-2000To3000_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("5000") && massBin.EqualTo("3000To5000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-5000_NED-4_KK-1_M-3000To5000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-4_KK-1_M-3000To5000_13TeV-sherpa/161021_035641/0000/ADDGravToGG_MS-5000_NED-4_KK-1_M-3000To5000_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("5000_GRW") && massBin.EqualTo("3000To5000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5000_NED-4_KK-1_M-3000To5000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-4_KK-1_M-3000To5000_13TeV-sherpa/161122_163650/0000/ADDGravToGG_MS-5000_NED-4_KK-1_M-3000To5000_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("3500") && massBin.EqualTo("200To500") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-3500_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-3500_NED-4_KK-1_M-200To500_13TeV-sherpa/161021_034559/0000/ADDGravToGG_MS-3500_NED-4_KK-1_M-200To500_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("3500_GRW") && massBin.EqualTo("200To500") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3500_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-3500_NED-4_KK-1_M-200To500_13TeV-sherpa/161122_162236/0000/ADDGravToGG_MS-3500_NED-4_KK-1_M-200To500_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("3500") && massBin.EqualTo("500To1000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-3500_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-3500_NED-4_KK-1_M-500To1000_13TeV-sherpa/161021_034618/0000/ADDGravToGG_MS-3500_NED-4_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("3500_GRW") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3500_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-3500_NED-4_KK-1_M-500To1000_13TeV-sherpa/161122_162300/0000/ADDGravToGG_MS-3500_NED-4_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("3500") && massBin.EqualTo("1000To2000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-3500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-3500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/161021_034523/0000/ADDGravToGG_MS-3500_NED-4_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("3500_GRW") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-3500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/161122_162148/0000/ADDGravToGG_MS-3500_NED-4_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("3500") && massBin.EqualTo("2000To3500") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-3500_NED-4_KK-1_M-2000To3500_13TeV-sherpa/crab_ADDGravToGG_MS-3500_NED-4_KK-1_M-2000To3500_13TeV-sherpa/161021_034541/0000/ADDGravToGG_MS-3500_NED-4_KK-1_M-2000To3500_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("3500_GRW") && massBin.EqualTo("2000To3500") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3500_NED-4_KK-1_M-2000To3500_13TeV-sherpa/crab_ADDGravToGG_MS-3500_NED-4_KK-1_M-2000To3500_13TeV-sherpa/161122_162211/0000/ADDGravToGG_MS-3500_NED-4_KK-1_M-2000To3500_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("6000") && massBin.EqualTo("200To500") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-6000_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-4_KK-1_M-200To500_13TeV-sherpa/161027_155606/0000/ADDGravToGG_MS-6000_NED-4_KK-1_M-200To500_13TeV-sherpa_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-6000_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-4_KK-1_M-200To500_13TeV-sherpa/161027_155606/0000/ADDGravToGG_MS-6000_NED-4_KK-1_M-200To500_13TeV-sherpa_2.root",0);
+else if ( ms.EqualTo("6000_GRW") && massBin.EqualTo("200To500") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-6000_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-4_KK-1_M-200To500_13TeV-sherpa/161122_164635/0000/ADDGravToGG_MS-6000_NED-4_KK-1_M-200To500_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-6000_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-4_KK-1_M-200To500_13TeV-sherpa/161122_164635/0000/ADDGravToGG_MS-6000_NED-4_KK-1_M-200To500_13TeV-sherpa_2.root",0);
 }
-else if ( ms.EqualTo("6000") && massBin.EqualTo("500To1000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-6000_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-4_KK-1_M-500To1000_13TeV-sherpa/161027_155652/0000/ADDGravToGG_MS-6000_NED-4_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("6000_GRW") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-6000_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-4_KK-1_M-500To1000_13TeV-sherpa/161122_164724/0000/ADDGravToGG_MS-6000_NED-4_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("6000") && massBin.EqualTo("1000To2000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-6000_NED-4_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-4_KK-1_M-1000To2000_13TeV-sherpa/161027_155524/0000/ADDGravToGG_MS-6000_NED-4_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("6000_GRW") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-6000_NED-4_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-4_KK-1_M-1000To2000_13TeV-sherpa/161122_164547/0000/ADDGravToGG_MS-6000_NED-4_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("6000") && massBin.EqualTo("2000To4000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-6000_NED-4_KK-1_M-2000To4000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-4_KK-1_M-2000To4000_13TeV-sherpa/161027_155548/0000/ADDGravToGG_MS-6000_NED-4_KK-1_M-2000To4000_13TeV-sherpa_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-6000_NED-4_KK-1_M-2000To4000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-4_KK-1_M-2000To4000_13TeV-sherpa/161027_155548/0000/ADDGravToGG_MS-6000_NED-4_KK-1_M-2000To4000_13TeV-sherpa_2.root",0);
+else if ( ms.EqualTo("6000_GRW") && massBin.EqualTo("2000To4000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-6000_NED-4_KK-1_M-2000To4000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-4_KK-1_M-2000To4000_13TeV-sherpa/161122_164612/0000/ADDGravToGG_MS-6000_NED-4_KK-1_M-2000To4000_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("6000") && massBin.EqualTo("4000To6000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-6000_NED-4_KK-1_M-4000To6000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-4_KK-1_M-4000To6000_13TeV-sherpa/161027_155631/0000/ADDGravToGG_MS-6000_NED-4_KK-1_M-4000To6000_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("6000_GRW") && massBin.EqualTo("4000To6000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-6000_NED-4_KK-1_M-4000To6000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-4_KK-1_M-4000To6000_13TeV-sherpa/161122_164659/0000/ADDGravToGG_MS-6000_NED-4_KK-1_M-4000To6000_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("4500") && massBin.EqualTo("200To500") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-4500_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-4_KK-1_M-200To500_13TeV-sherpa/161021_035232/0000/ADDGravToGG_MS-4500_NED-4_KK-1_M-200To500_13TeV-sherpa_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-4500_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-4_KK-1_M-200To500_13TeV-sherpa/161021_035232/0000/ADDGravToGG_MS-4500_NED-4_KK-1_M-200To500_13TeV-sherpa_2.root",0);
+else if ( ms.EqualTo("4500_GRW") && massBin.EqualTo("200To500") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4500_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-4_KK-1_M-200To500_13TeV-sherpa/161122_163122/0000/ADDGravToGG_MS-4500_NED-4_KK-1_M-200To500_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4500_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-4_KK-1_M-200To500_13TeV-sherpa/161122_163122/0000/ADDGravToGG_MS-4500_NED-4_KK-1_M-200To500_13TeV-sherpa_2.root",0);
 }
-else if ( ms.EqualTo("4500") && massBin.EqualTo("500To1000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-4500_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-4_KK-1_M-500To1000_13TeV-sherpa/161021_035307/0000/ADDGravToGG_MS-4500_NED-4_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("4500_GRW") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4500_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-4_KK-1_M-500To1000_13TeV-sherpa/161122_163211/0000/ADDGravToGG_MS-4500_NED-4_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("4500") && massBin.EqualTo("1000To2000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-4500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/161021_035158/0000/ADDGravToGG_MS-4500_NED-4_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("4500_GRW") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/161122_163034/0000/ADDGravToGG_MS-4500_NED-4_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("4500") && massBin.EqualTo("2000To3000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-4500_NED-4_KK-1_M-2000To3000_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-4_KK-1_M-2000To3000_13TeV-sherpa/161021_035216/0000/ADDGravToGG_MS-4500_NED-4_KK-1_M-2000To3000_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("4500_GRW") && massBin.EqualTo("2000To3000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4500_NED-4_KK-1_M-2000To3000_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-4_KK-1_M-2000To3000_13TeV-sherpa/161122_163058/0000/ADDGravToGG_MS-4500_NED-4_KK-1_M-2000To3000_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("4500") && massBin.EqualTo("3000To4500") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-4500_NED-4_KK-1_M-3000To4500_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-4_KK-1_M-3000To4500_13TeV-sherpa/161021_035250/0000/ADDGravToGG_MS-4500_NED-4_KK-1_M-3000To4500_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("4500_GRW") && massBin.EqualTo("3000To4500") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4500_NED-4_KK-1_M-3000To4500_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-4_KK-1_M-3000To4500_13TeV-sherpa/161122_163145/0000/ADDGravToGG_MS-4500_NED-4_KK-1_M-3000To4500_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("3000") && massBin.EqualTo("200To500") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-3000_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-4_KK-1_M-200To500_13TeV-sherpa/161021_034304/0000/ADDGravToGG_MS-3000_NED-4_KK-1_M-200To500_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("3000_GRW") && massBin.EqualTo("200To500") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3000_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-4_KK-1_M-200To500_13TeV-sherpa/161122_161843/0000/ADDGravToGG_MS-3000_NED-4_KK-1_M-200To500_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("3000") && massBin.EqualTo("500To1000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-3000_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-4_KK-1_M-500To1000_13TeV-sherpa/161021_034322/0000/ADDGravToGG_MS-3000_NED-4_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-3000_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-4_KK-1_M-500To1000_13TeV-sherpa/161021_034322/0000/ADDGravToGG_MS-3000_NED-4_KK-1_M-500To1000_13TeV-sherpa_2.root",0);
+else if ( ms.EqualTo("3000_GRW") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3000_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-4_KK-1_M-500To1000_13TeV-sherpa/161122_161907/0000/ADDGravToGG_MS-3000_NED-4_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3000_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-4_KK-1_M-500To1000_13TeV-sherpa/161122_161907/0000/ADDGravToGG_MS-3000_NED-4_KK-1_M-500To1000_13TeV-sherpa_2.root",0);
 }
-else if ( ms.EqualTo("3000") && massBin.EqualTo("1000To2000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-3000_NED-4_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-4_KK-1_M-1000To2000_13TeV-sherpa/161021_034228/0000/ADDGravToGG_MS-3000_NED-4_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("3000_GRW") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3000_NED-4_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-4_KK-1_M-1000To2000_13TeV-sherpa/161122_161800/0000/ADDGravToGG_MS-3000_NED-4_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("3000") && massBin.EqualTo("2000To3000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-3000_NED-4_KK-1_M-2000To3000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-4_KK-1_M-2000To3000_13TeV-sherpa/161021_034246/0000/ADDGravToGG_MS-3000_NED-4_KK-1_M-2000To3000_13TeV-sherpa_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-3000_NED-4_KK-1_M-2000To3000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-4_KK-1_M-2000To3000_13TeV-sherpa/161021_034246/0000/ADDGravToGG_MS-3000_NED-4_KK-1_M-2000To3000_13TeV-sherpa_2.root",0);
+else if ( ms.EqualTo("3000_GRW") && massBin.EqualTo("2000To3000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3000_NED-4_KK-1_M-2000To3000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-4_KK-1_M-2000To3000_13TeV-sherpa/161122_161822/0000/ADDGravToGG_MS-3000_NED-4_KK-1_M-2000To3000_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3000_NED-4_KK-1_M-2000To3000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-4_KK-1_M-2000To3000_13TeV-sherpa/161122_161822/0000/ADDGravToGG_MS-3000_NED-4_KK-1_M-2000To3000_13TeV-sherpa_2.root",0);
 }
-else if ( ms.EqualTo("5500") && massBin.EqualTo("200To500") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-5500_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-4_KK-1_M-200To500_13TeV-sherpa/161021_040033/0000/ADDGravToGG_MS-5500_NED-4_KK-1_M-200To500_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("5500_GRW") && massBin.EqualTo("200To500") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5500_NED-4_KK-1_M-200To500_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-4_KK-1_M-200To500_13TeV-sherpa/161122_164126/0000/ADDGravToGG_MS-5500_NED-4_KK-1_M-200To500_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("5500") && massBin.EqualTo("500To1000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-5500_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-4_KK-1_M-500To1000_13TeV-sherpa/161021_040111/0000/ADDGravToGG_MS-5500_NED-4_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-5500_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-4_KK-1_M-500To1000_13TeV-sherpa/161021_040111/0000/ADDGravToGG_MS-5500_NED-4_KK-1_M-500To1000_13TeV-sherpa_2.root",0);
+else if ( ms.EqualTo("5500_GRW") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5500_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-4_KK-1_M-500To1000_13TeV-sherpa/161122_164214/0000/ADDGravToGG_MS-5500_NED-4_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5500_NED-4_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-4_KK-1_M-500To1000_13TeV-sherpa/161122_164214/0000/ADDGravToGG_MS-5500_NED-4_KK-1_M-500To1000_13TeV-sherpa_2.root",0);
 }
-else if ( ms.EqualTo("5500") && massBin.EqualTo("1000To2000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-5500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/161021_035945/0000/ADDGravToGG_MS-5500_NED-4_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("5500_GRW") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-4_KK-1_M-1000To2000_13TeV-sherpa/161122_164042/0000/ADDGravToGG_MS-5500_NED-4_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("5500") && massBin.EqualTo("2000To4000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-5500_NED-4_KK-1_M-2000To4000_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-4_KK-1_M-2000To4000_13TeV-sherpa/161021_040003/0000/ADDGravToGG_MS-5500_NED-4_KK-1_M-2000To4000_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("5500_GRW") && massBin.EqualTo("2000To4000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5500_NED-4_KK-1_M-2000To4000_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-4_KK-1_M-2000To4000_13TeV-sherpa/161122_164107/0000/ADDGravToGG_MS-5500_NED-4_KK-1_M-2000To4000_13TeV-sherpa_1.root",0);
 }
-else if ( ms.EqualTo("5500") && massBin.EqualTo("4000To5500") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/ADDGravToGG_MS-5500_NED-4_KK-1_M-4000To5500_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-4_KK-1_M-4000To5500_13TeV-sherpa/161021_040052/0000/ADDGravToGG_MS-5500_NED-4_KK-1_M-4000To5500_13TeV-sherpa_1.root",0);
+else if ( ms.EqualTo("5500_GRW") && massBin.EqualTo("4000To5500") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5500_NED-4_KK-1_M-4000To5500_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-4_KK-1_M-4000To5500_13TeV-sherpa/161122_164150/0000/ADDGravToGG_MS-5500_NED-4_KK-1_M-4000To5500_13TeV-sherpa_1.root",0);
 }
-
+else if ( ms.EqualTo("4000_HLZ") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4000_NED-2_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-2_KK-1_M-500To1000_13TeV-sherpa/161122_162414/0000/ADDGravToGG_MS-4000_NED-2_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("4000_HLZ") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4000_NED-2_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-2_KK-1_M-1000To2000_13TeV-sherpa/161122_162326/0000/ADDGravToGG_MS-4000_NED-2_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4000_NED-2_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-2_KK-1_M-1000To2000_13TeV-sherpa/161122_162326/0000/ADDGravToGG_MS-4000_NED-2_KK-1_M-1000To2000_13TeV-sherpa_2.root",0);
+}
+else if ( ms.EqualTo("4000_HLZ") && massBin.EqualTo("2000To4000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4000_NED-2_KK-1_M-2000To4000_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-2_KK-1_M-2000To4000_13TeV-sherpa/161122_162350/0000/ADDGravToGG_MS-4000_NED-2_KK-1_M-2000To4000_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4000_NED-2_KK-1_M-2000To4000_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-2_KK-1_M-2000To4000_13TeV-sherpa/161122_162350/0000/ADDGravToGG_MS-4000_NED-2_KK-1_M-2000To4000_13TeV-sherpa_2.root",0);
+}
+else if ( ms.EqualTo("5000_HLZ") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5000_NED-2_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-2_KK-1_M-500To1000_13TeV-sherpa/161122_163350/0000/ADDGravToGG_MS-5000_NED-2_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5000_NED-2_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-2_KK-1_M-500To1000_13TeV-sherpa/161122_163350/0000/ADDGravToGG_MS-5000_NED-2_KK-1_M-500To1000_13TeV-sherpa_2.root",0);
+}
+else if ( ms.EqualTo("5000_HLZ") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5000_NED-2_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-2_KK-1_M-1000To2000_13TeV-sherpa/161122_163237/0000/ADDGravToGG_MS-5000_NED-2_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("5000_HLZ") && massBin.EqualTo("2000To3000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5000_NED-2_KK-1_M-2000To3000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-2_KK-1_M-2000To3000_13TeV-sherpa/161122_163306/0000/ADDGravToGG_MS-5000_NED-2_KK-1_M-2000To3000_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5000_NED-2_KK-1_M-2000To3000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-2_KK-1_M-2000To3000_13TeV-sherpa/161122_163306/0000/ADDGravToGG_MS-5000_NED-2_KK-1_M-2000To3000_13TeV-sherpa_2.root",0);
+}
+else if ( ms.EqualTo("5000_HLZ") && massBin.EqualTo("3000To5000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5000_NED-2_KK-1_M-3000To5000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-2_KK-1_M-3000To5000_13TeV-sherpa/161122_163331/0000/ADDGravToGG_MS-5000_NED-2_KK-1_M-3000To5000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("3500_HLZ") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3500_NED-2_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-3500_NED-2_KK-1_M-500To1000_13TeV-sherpa/161122_162020/0000/ADDGravToGG_MS-3500_NED-2_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("3500_HLZ") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3500_NED-2_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-3500_NED-2_KK-1_M-1000To2000_13TeV-sherpa/161122_161931/0000/ADDGravToGG_MS-3500_NED-2_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("3500_HLZ") && massBin.EqualTo("2000To3500") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3500_NED-2_KK-1_M-2000To3500_13TeV-sherpa/crab_ADDGravToGG_MS-3500_NED-2_KK-1_M-2000To3500_13TeV-sherpa/161122_161956/0000/ADDGravToGG_MS-3500_NED-2_KK-1_M-2000To3500_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("6000_HLZ") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-6000_NED-2_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-2_KK-1_M-500To1000_13TeV-sherpa/161122_164346/0000/ADDGravToGG_MS-6000_NED-2_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("6000_HLZ") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-6000_NED-2_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-2_KK-1_M-1000To2000_13TeV-sherpa/161122_164238/0000/ADDGravToGG_MS-6000_NED-2_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("6000_HLZ") && massBin.EqualTo("2000To4000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-6000_NED-2_KK-1_M-2000To4000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-2_KK-1_M-2000To4000_13TeV-sherpa/161122_164303/0000/ADDGravToGG_MS-6000_NED-2_KK-1_M-2000To4000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("6000_HLZ") && massBin.EqualTo("4000To6000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-6000_NED-2_KK-1_M-4000To6000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-2_KK-1_M-4000To6000_13TeV-sherpa/161122_164321/0000/ADDGravToGG_MS-6000_NED-2_KK-1_M-4000To6000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("4500_HLZ") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4500_NED-2_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-2_KK-1_M-500To1000_13TeV-sherpa/161122_162834/0000/ADDGravToGG_MS-4500_NED-2_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4500_NED-2_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-2_KK-1_M-500To1000_13TeV-sherpa/161122_162834/0000/ADDGravToGG_MS-4500_NED-2_KK-1_M-500To1000_13TeV-sherpa_2.root",0);
+}
+else if ( ms.EqualTo("4500_HLZ") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4500_NED-2_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-2_KK-1_M-1000To2000_13TeV-sherpa/161122_162721/0000/ADDGravToGG_MS-4500_NED-2_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("4500_HLZ") && massBin.EqualTo("2000To3000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4500_NED-2_KK-1_M-2000To3000_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-2_KK-1_M-2000To3000_13TeV-sherpa/161122_162745/0000/ADDGravToGG_MS-4500_NED-2_KK-1_M-2000To3000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("4500_HLZ") && massBin.EqualTo("3000To4500") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4500_NED-2_KK-1_M-3000To4500_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-2_KK-1_M-3000To4500_13TeV-sherpa/161122_162809/0000/ADDGravToGG_MS-4500_NED-2_KK-1_M-3000To4500_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("3000_HLZ") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3000_NED-2_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-2_KK-1_M-500To1000_13TeV-sherpa/161122_161635/0000/ADDGravToGG_MS-3000_NED-2_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("3000_HLZ") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3000_NED-2_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-2_KK-1_M-1000To2000_13TeV-sherpa/161122_161553/0000/ADDGravToGG_MS-3000_NED-2_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("3000_HLZ") && massBin.EqualTo("2000To3000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3000_NED-2_KK-1_M-2000To3000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-2_KK-1_M-2000To3000_13TeV-sherpa/161122_161614/0000/ADDGravToGG_MS-3000_NED-2_KK-1_M-2000To3000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("5500_HLZ") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5500_NED-2_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-2_KK-1_M-500To1000_13TeV-sherpa/161122_163846/0000/ADDGravToGG_MS-5500_NED-2_KK-1_M-500To1000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("5500_HLZ") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5500_NED-2_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-2_KK-1_M-1000To2000_13TeV-sherpa/161122_163738/0000/ADDGravToGG_MS-5500_NED-2_KK-1_M-1000To2000_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5500_NED-2_KK-1_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-2_KK-1_M-1000To2000_13TeV-sherpa/161122_163738/0000/ADDGravToGG_MS-5500_NED-2_KK-1_M-1000To2000_13TeV-sherpa_2.root",0);
+}
+else if ( ms.EqualTo("5500_HLZ") && massBin.EqualTo("2000To4000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5500_NED-2_KK-1_M-2000To4000_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-2_KK-1_M-2000To4000_13TeV-sherpa/161122_163802/0000/ADDGravToGG_MS-5500_NED-2_KK-1_M-2000To4000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("5500_HLZ") && massBin.EqualTo("4000To5500") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5500_NED-2_KK-1_M-4000To5500_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-2_KK-1_M-4000To5500_13TeV-sherpa/161122_163821/0000/ADDGravToGG_MS-5500_NED-2_KK-1_M-4000To5500_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5500_NED-2_KK-1_M-4000To5500_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-2_KK-1_M-4000To5500_13TeV-sherpa/161122_163821/0000/ADDGravToGG_MS-5500_NED-2_KK-1_M-4000To5500_13TeV-sherpa_2.root",0);
+}
+else if ( ms.EqualTo("4000_Hewett") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4000_NED-2_KK-4_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-2_KK-4_M-500To1000_13TeV-sherpa/161122_162521/0000/ADDGravToGG_MS-4000_NED-2_KK-4_M-500To1000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("4000_Hewett") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4000_NED-2_KK-4_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-2_KK-4_M-1000To2000_13TeV-sherpa/161122_162432/0000/ADDGravToGG_MS-4000_NED-2_KK-4_M-1000To2000_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4000_NED-2_KK-4_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-2_KK-4_M-1000To2000_13TeV-sherpa/161122_162432/0000/ADDGravToGG_MS-4000_NED-2_KK-4_M-1000To2000_13TeV-sherpa_2.root",0);
+}
+else if ( ms.EqualTo("4000_Hewett") && massBin.EqualTo("2000To4000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4000_NED-2_KK-4_M-2000To4000_13TeV-sherpa/crab_ADDGravToGG_MS-4000_NED-2_KK-4_M-2000To4000_13TeV-sherpa/161122_162456/0000/ADDGravToGG_MS-4000_NED-2_KK-4_M-2000To4000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("5000_Hewett") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5000_NED-2_KK-4_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-2_KK-4_M-500To1000_13TeV-sherpa/161122_163515/0000/ADDGravToGG_MS-5000_NED-2_KK-4_M-500To1000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("5000_Hewett") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5000_NED-2_KK-4_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-2_KK-4_M-1000To2000_13TeV-sherpa/161122_163414/0000/ADDGravToGG_MS-5000_NED-2_KK-4_M-1000To2000_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5000_NED-2_KK-4_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-2_KK-4_M-1000To2000_13TeV-sherpa/161122_163414/0000/ADDGravToGG_MS-5000_NED-2_KK-4_M-1000To2000_13TeV-sherpa_2.root",0);
+}
+else if ( ms.EqualTo("5000_Hewett") && massBin.EqualTo("2000To3000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5000_NED-2_KK-4_M-2000To3000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-2_KK-4_M-2000To3000_13TeV-sherpa/161122_163432/0000/ADDGravToGG_MS-5000_NED-2_KK-4_M-2000To3000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("5000_Hewett") && massBin.EqualTo("3000To5000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5000_NED-2_KK-4_M-3000To5000_13TeV-sherpa/crab_ADDGravToGG_MS-5000_NED-2_KK-4_M-3000To5000_13TeV-sherpa/161122_163451/0000/ADDGravToGG_MS-5000_NED-2_KK-4_M-3000To5000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("3500_Hewett") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3500_NED-2_KK-4_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-3500_NED-2_KK-4_M-500To1000_13TeV-sherpa/161122_162123/0000/ADDGravToGG_MS-3500_NED-2_KK-4_M-500To1000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("3500_Hewett") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3500_NED-2_KK-4_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-3500_NED-2_KK-4_M-1000To2000_13TeV-sherpa/161122_162039/0000/ADDGravToGG_MS-3500_NED-2_KK-4_M-1000To2000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("3500_Hewett") && massBin.EqualTo("2000To3500") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3500_NED-2_KK-4_M-2000To3500_13TeV-sherpa/crab_ADDGravToGG_MS-3500_NED-2_KK-4_M-2000To3500_13TeV-sherpa/161122_162059/0000/ADDGravToGG_MS-3500_NED-2_KK-4_M-2000To3500_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("6000_Hewett") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-6000_NED-2_KK-4_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-2_KK-4_M-500To1000_13TeV-sherpa/161122_164523/0000/ADDGravToGG_MS-6000_NED-2_KK-4_M-500To1000_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-6000_NED-2_KK-4_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-2_KK-4_M-500To1000_13TeV-sherpa/161122_164523/0000/ADDGravToGG_MS-6000_NED-2_KK-4_M-500To1000_13TeV-sherpa_2.root",0);
+}
+else if ( ms.EqualTo("6000_Hewett") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-6000_NED-2_KK-4_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-2_KK-4_M-1000To2000_13TeV-sherpa/161122_164410/0000/ADDGravToGG_MS-6000_NED-2_KK-4_M-1000To2000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("6000_Hewett") && massBin.EqualTo("2000To4000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-6000_NED-2_KK-4_M-2000To4000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-2_KK-4_M-2000To4000_13TeV-sherpa/161122_164434/0000/ADDGravToGG_MS-6000_NED-2_KK-4_M-2000To4000_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-6000_NED-2_KK-4_M-2000To4000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-2_KK-4_M-2000To4000_13TeV-sherpa/161122_164434/0000/ADDGravToGG_MS-6000_NED-2_KK-4_M-2000To4000_13TeV-sherpa_2.root",0);
+}
+else if ( ms.EqualTo("6000_Hewett") && massBin.EqualTo("4000To6000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-6000_NED-2_KK-4_M-4000To6000_13TeV-sherpa/crab_ADDGravToGG_MS-6000_NED-2_KK-4_M-4000To6000_13TeV-sherpa/161122_164459/0000/ADDGravToGG_MS-6000_NED-2_KK-4_M-4000To6000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("4500_Hewett") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4500_NED-2_KK-4_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-2_KK-4_M-500To1000_13TeV-sherpa/161122_163010/0000/ADDGravToGG_MS-4500_NED-2_KK-4_M-500To1000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("4500_Hewett") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4500_NED-2_KK-4_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-2_KK-4_M-1000To2000_13TeV-sherpa/161122_162858/0000/ADDGravToGG_MS-4500_NED-2_KK-4_M-1000To2000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("4500_Hewett") && massBin.EqualTo("2000To3000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4500_NED-2_KK-4_M-2000To3000_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-2_KK-4_M-2000To3000_13TeV-sherpa/161122_162922/0000/ADDGravToGG_MS-4500_NED-2_KK-4_M-2000To3000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("4500_Hewett") && massBin.EqualTo("3000To4500") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-4500_NED-2_KK-4_M-3000To4500_13TeV-sherpa/crab_ADDGravToGG_MS-4500_NED-2_KK-4_M-3000To4500_13TeV-sherpa/161122_162946/0000/ADDGravToGG_MS-4500_NED-2_KK-4_M-3000To4500_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("3000_Hewett") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3000_NED-2_KK-4_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-2_KK-4_M-500To1000_13TeV-sherpa/161122_161739/0000/ADDGravToGG_MS-3000_NED-2_KK-4_M-500To1000_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3000_NED-2_KK-4_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-2_KK-4_M-500To1000_13TeV-sherpa/161122_161739/0000/ADDGravToGG_MS-3000_NED-2_KK-4_M-500To1000_13TeV-sherpa_2.root",0);
+}
+else if ( ms.EqualTo("3000_Hewett") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3000_NED-2_KK-4_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-2_KK-4_M-1000To2000_13TeV-sherpa/161122_161655/0000/ADDGravToGG_MS-3000_NED-2_KK-4_M-1000To2000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("3000_Hewett") && massBin.EqualTo("2000To3000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-3000_NED-2_KK-4_M-2000To3000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-2_KK-4_M-2000To3000_13TeV-sherpa/161122_161717/0000/ADDGravToGG_MS-3000_NED-2_KK-4_M-2000To3000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("5500_Hewett") && massBin.EqualTo("500To1000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5500_NED-2_KK-4_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-2_KK-4_M-500To1000_13TeV-sherpa/161122_164022/0000/ADDGravToGG_MS-5500_NED-2_KK-4_M-500To1000_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5500_NED-2_KK-4_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-2_KK-4_M-500To1000_13TeV-sherpa/161122_164022/0000/ADDGravToGG_MS-5500_NED-2_KK-4_M-500To1000_13TeV-sherpa_2.root",0);
+}
+else if ( ms.EqualTo("5500_Hewett") && massBin.EqualTo("1000To2000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5500_NED-2_KK-4_M-1000To2000_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-2_KK-4_M-1000To2000_13TeV-sherpa/161122_163910/0000/ADDGravToGG_MS-5500_NED-2_KK-4_M-1000To2000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("5500_Hewett") && massBin.EqualTo("2000To4000") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5500_NED-2_KK-4_M-2000To4000_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-2_KK-4_M-2000To4000_13TeV-sherpa/161122_163933/0000/ADDGravToGG_MS-5500_NED-2_KK-4_M-2000To4000_13TeV-sherpa_1.root",0);
+}
+else if ( ms.EqualTo("5500_Hewett") && massBin.EqualTo("4000To5500") ){
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/ADDGravToGG_MS-5500_NED-2_KK-4_M-4000To5500_13TeV-sherpa/crab_ADDGravToGG_MS-5500_NED-2_KK-4_M-4000To5500_13TeV-sherpa/161122_163958/0000/ADDGravToGG_MS-5500_NED-2_KK-4_M-4000To5500_13TeV-sherpa_1.root",0);
+}
 else if ( ms.EqualTo("ADDBkg") && massBin.EqualTo("200To500") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GG_M-200To500_Pt-70_13TeV-sherpa/crab_GG_M-200To500_Pt-70_13TeV-sherpa/161021_124514/0000/GG_M-200To500_Pt-70_13TeV-sherpa_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GG_M-200To500_Pt-70_13TeV-sherpa/crab_GG_M-200To500_Pt-70_13TeV-sherpa/161021_124514/0000/GG_M-200To500_Pt-70_13TeV-sherpa_2.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GG_M-200To500_Pt-70_13TeV-sherpa/crab_GG_M-200To500_Pt-70_13TeV-sherpa/161122_164744/0000/GG_M-200To500_Pt-70_13TeV-sherpa_1.root",0);
 }
 else if ( ms.EqualTo("ADDBkg") && massBin.EqualTo("500To1000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GG_M-500To1000_Pt-70_13TeV-sherpa/crab_GG_M-500To1000_Pt-70_13TeV-sherpa/161021_124532/0000/GG_M-500To1000_Pt-70_13TeV-sherpa_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GG_M-500To1000_Pt-70_13TeV-sherpa/crab_GG_M-500To1000_Pt-70_13TeV-sherpa/161021_124532/0000/GG_M-500To1000_Pt-70_13TeV-sherpa_2.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GG_M-500To1000_Pt-70_13TeV-sherpa/crab_GG_M-500To1000_Pt-70_13TeV-sherpa/161122_164803/0000/GG_M-500To1000_Pt-70_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GG_M-500To1000_Pt-70_13TeV-sherpa/crab_GG_M-500To1000_Pt-70_13TeV-sherpa/161122_164803/0000/GG_M-500To1000_Pt-70_13TeV-sherpa_2.root",0);
 }
 else if ( ms.EqualTo("ADDBkg") && massBin.EqualTo("1000To2000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GG_M-1000To2000_Pt-70_13TeV-sherpa/crab_GG_M-1000To2000_Pt-70_13TeV-sherpa/161021_124549/0000/GG_M-1000To2000_Pt-70_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GG_M-1000To2000_Pt-70_13TeV-sherpa/crab_GG_M-1000To2000_Pt-70_13TeV-sherpa/161122_164826/0000/GG_M-1000To2000_Pt-70_13TeV-sherpa_1.root",0);
 }
 else if ( ms.EqualTo("ADDBkg") && massBin.EqualTo("2000To4000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GG_M-2000To4000_Pt-70_13TeV-sherpa/crab_GG_M-2000To4000_Pt-70_13TeV-sherpa/161021_124606/0000/GG_M-2000To4000_Pt-70_13TeV-sherpa_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GG_M-2000To4000_Pt-70_13TeV-sherpa/crab_GG_M-2000To4000_Pt-70_13TeV-sherpa/161021_124606/0000/GG_M-2000To4000_Pt-70_13TeV-sherpa_2.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GG_M-2000To4000_Pt-70_13TeV-sherpa/crab_GG_M-2000To4000_Pt-70_13TeV-sherpa/161122_164850/0000/GG_M-2000To4000_Pt-70_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GG_M-2000To4000_Pt-70_13TeV-sherpa/crab_GG_M-2000To4000_Pt-70_13TeV-sherpa/161122_164850/0000/GG_M-2000To4000_Pt-70_13TeV-sherpa_2.root",0);
 }
 else if ( ms.EqualTo("ADDBkg") && massBin.EqualTo("4000To8000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GG_M-4000To8000_Pt-70_13TeV-sherpa/crab_GG_M-4000To8000_Pt-70_13TeV-sherpa/161021_124623/0000/GG_M-4000To8000_Pt-70_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GG_M-4000To8000_Pt-70_13TeV-sherpa/crab_GG_M-4000To8000_Pt-70_13TeV-sherpa/161122_164916/0000/GG_M-4000To8000_Pt-70_13TeV-sherpa_1.root",0);
 }
 else if ( ms.EqualTo("ADDBkg") && massBin.EqualTo("8000To13000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GG_M-8000To13000_Pt-70_13TeV-sherpa/crab_GG_M-8000To13000_Pt-70_13TeV-sherpa/161021_124640/0000/GG_M-8000To13000_Pt-70_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GG_M-8000To13000_Pt-70_13TeV-sherpa/crab_GG_M-8000To13000_Pt-70_13TeV-sherpa/161122_164940/0000/GG_M-8000To13000_Pt-70_13TeV-sherpa_1.root",0);
 }
 else if ( ms.EqualTo("GGJets") && massBin.EqualTo("60To200") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161021_033803/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161021_033803/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_10.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161021_033803/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_2.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161021_033803/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_3.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161021_033803/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_4.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161021_033803/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_5.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161021_033803/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_6.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161021_033803/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_7.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161021_033803/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_8.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161021_033803/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_9.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161114_233132/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161114_233132/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_10.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161114_233132/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_2.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161114_233132/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_3.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161114_233132/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_4.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161114_233132/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_5.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161114_233132/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_6.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161114_233132/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_7.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161114_233132/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_8.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-60To200_Pt-50_13TeV-sherpa/crab_GGJets_M-60To200_Pt-50_13TeV-sherpa/161114_233132/0000/GGJets_M-60To200_Pt-50_13TeV-sherpa_9.root",0);
 }
 else if ( ms.EqualTo("GGJets") && massBin.EqualTo("200To500") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_10.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_11.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_12.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_13.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_14.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_15.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_16.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_17.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_18.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_19.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_2.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_20.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_21.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_22.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_23.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_24.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_3.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_4.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_5.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_6.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_7.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_8.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161021_033826/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_9.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_10.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_11.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_12.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_13.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_14.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_15.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_16.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_17.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_18.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_19.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_2.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_20.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_21.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_22.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_23.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_24.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_3.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_4.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_5.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_6.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_7.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_8.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-200To500_Pt-50_13TeV-sherpa/crab_GGJets_M-200To500_Pt-50_13TeV-sherpa/161118_180730/0000/GGJets_M-200To500_Pt-50_13TeV-sherpa_9.root",0);
 }
 else if ( ms.EqualTo("GGJets") && massBin.EqualTo("500To1000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161021_033844/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161021_033844/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_10.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161021_033844/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_11.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161021_033844/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_2.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161021_033844/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_3.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161021_033844/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_4.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161021_033844/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_5.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161021_033844/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_6.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161021_033844/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_7.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161021_033844/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_8.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161021_033844/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_9.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161114_233158/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161114_233158/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_10.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161114_233158/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_2.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161114_233158/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_3.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161114_233158/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_4.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161114_233158/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_5.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161114_233158/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_6.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161114_233158/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_7.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161114_233158/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_8.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa/161114_233158/0000/GGJets_M-500To1000_Pt-50_13TeV-sherpa_9.root",0);
 }
 else if ( ms.EqualTo("GGJets") && massBin.EqualTo("1000To2000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-1000To2000_Pt-50_13TeV-sherpa/crab_GGJets_M-1000To2000_Pt-50_13TeV-sherpa/161021_033901/0000/GGJets_M-1000To2000_Pt-50_13TeV-sherpa_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-1000To2000_Pt-50_13TeV-sherpa/crab_GGJets_M-1000To2000_Pt-50_13TeV-sherpa/161021_033901/0000/GGJets_M-1000To2000_Pt-50_13TeV-sherpa_2.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-1000To2000_Pt-50_13TeV-sherpa/crab_GGJets_M-1000To2000_Pt-50_13TeV-sherpa/161021_033901/0000/GGJets_M-1000To2000_Pt-50_13TeV-sherpa_3.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-1000To2000_Pt-50_13TeV-sherpa/crab_GGJets_M-1000To2000_Pt-50_13TeV-sherpa/161021_033901/0000/GGJets_M-1000To2000_Pt-50_13TeV-sherpa_4.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-1000To2000_Pt-50_13TeV-sherpa/crab_GGJets_M-1000To2000_Pt-50_13TeV-sherpa/161021_033901/0000/GGJets_M-1000To2000_Pt-50_13TeV-sherpa_5.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-1000To2000_Pt-50_13TeV-sherpa/crab_GGJets_M-1000To2000_Pt-50_13TeV-sherpa/161021_033901/0000/GGJets_M-1000To2000_Pt-50_13TeV-sherpa_6.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-1000To2000_Pt-50_13TeV-sherpa/crab_GGJets_M-1000To2000_Pt-50_13TeV-sherpa/161118_180741/0000/GGJets_M-1000To2000_Pt-50_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-1000To2000_Pt-50_13TeV-sherpa/crab_GGJets_M-1000To2000_Pt-50_13TeV-sherpa/161118_180741/0000/GGJets_M-1000To2000_Pt-50_13TeV-sherpa_2.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-1000To2000_Pt-50_13TeV-sherpa/crab_GGJets_M-1000To2000_Pt-50_13TeV-sherpa/161118_180741/0000/GGJets_M-1000To2000_Pt-50_13TeV-sherpa_3.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-1000To2000_Pt-50_13TeV-sherpa/crab_GGJets_M-1000To2000_Pt-50_13TeV-sherpa/161118_180741/0000/GGJets_M-1000To2000_Pt-50_13TeV-sherpa_4.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-1000To2000_Pt-50_13TeV-sherpa/crab_GGJets_M-1000To2000_Pt-50_13TeV-sherpa/161118_180741/0000/GGJets_M-1000To2000_Pt-50_13TeV-sherpa_5.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-1000To2000_Pt-50_13TeV-sherpa/crab_GGJets_M-1000To2000_Pt-50_13TeV-sherpa/161118_180741/0000/GGJets_M-1000To2000_Pt-50_13TeV-sherpa_6.root",0);
 }
 else if ( ms.EqualTo("GGJets") && massBin.EqualTo("2000To4000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-2000To4000_Pt-50_13TeV-sherpa/crab_GGJets_M-2000To4000_Pt-50_13TeV-sherpa/161021_033918/0000/GGJets_M-2000To4000_Pt-50_13TeV-sherpa_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-2000To4000_Pt-50_13TeV-sherpa/crab_GGJets_M-2000To4000_Pt-50_13TeV-sherpa/161021_033918/0000/GGJets_M-2000To4000_Pt-50_13TeV-sherpa_2.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-2000To4000_Pt-50_13TeV-sherpa/crab_GGJets_M-2000To4000_Pt-50_13TeV-sherpa/161021_033918/0000/GGJets_M-2000To4000_Pt-50_13TeV-sherpa_3.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-2000To4000_Pt-50_13TeV-sherpa/crab_GGJets_M-2000To4000_Pt-50_13TeV-sherpa/161118_180753/0000/GGJets_M-2000To4000_Pt-50_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-2000To4000_Pt-50_13TeV-sherpa/crab_GGJets_M-2000To4000_Pt-50_13TeV-sherpa/161118_180753/0000/GGJets_M-2000To4000_Pt-50_13TeV-sherpa_2.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-2000To4000_Pt-50_13TeV-sherpa/crab_GGJets_M-2000To4000_Pt-50_13TeV-sherpa/161118_180753/0000/GGJets_M-2000To4000_Pt-50_13TeV-sherpa_3.root",0);
 }
 else if ( ms.EqualTo("GGJets") && massBin.EqualTo("4000To6000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-4000To6000_Pt-50_13TeV-sherpa/crab_GGJets_M-4000To6000_Pt-50_13TeV-sherpa/161021_033936/0000/GGJets_M-4000To6000_Pt-50_13TeV-sherpa_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-4000To6000_Pt-50_13TeV-sherpa/crab_GGJets_M-4000To6000_Pt-50_13TeV-sherpa/161021_033936/0000/GGJets_M-4000To6000_Pt-50_13TeV-sherpa_2.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-4000To6000_Pt-50_13TeV-sherpa/crab_GGJets_M-4000To6000_Pt-50_13TeV-sherpa/161021_033936/0000/GGJets_M-4000To6000_Pt-50_13TeV-sherpa_3.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-4000To6000_Pt-50_13TeV-sherpa/crab_GGJets_M-4000To6000_Pt-50_13TeV-sherpa/161021_033936/0000/GGJets_M-4000To6000_Pt-50_13TeV-sherpa_4.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-4000To6000_Pt-50_13TeV-sherpa/crab_GGJets_M-4000To6000_Pt-50_13TeV-sherpa/161114_233238/0000/GGJets_M-4000To6000_Pt-50_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-4000To6000_Pt-50_13TeV-sherpa/crab_GGJets_M-4000To6000_Pt-50_13TeV-sherpa/161114_233238/0000/GGJets_M-4000To6000_Pt-50_13TeV-sherpa_2.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-4000To6000_Pt-50_13TeV-sherpa/crab_GGJets_M-4000To6000_Pt-50_13TeV-sherpa/161114_233238/0000/GGJets_M-4000To6000_Pt-50_13TeV-sherpa_3.root",0);
 }
 else if ( ms.EqualTo("GGJets") && massBin.EqualTo("6000To8000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-6000To8000_Pt-50_13TeV-sherpa/crab_GGJets_M-6000To8000_Pt-50_13TeV-sherpa/161021_033953/0000/GGJets_M-6000To8000_Pt-50_13TeV-sherpa_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-6000To8000_Pt-50_13TeV-sherpa/crab_GGJets_M-6000To8000_Pt-50_13TeV-sherpa/161021_033953/0000/GGJets_M-6000To8000_Pt-50_13TeV-sherpa_2.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-6000To8000_Pt-50_13TeV-sherpa/crab_GGJets_M-6000To8000_Pt-50_13TeV-sherpa/161021_033953/0000/GGJets_M-6000To8000_Pt-50_13TeV-sherpa_3.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-6000To8000_Pt-50_13TeV-sherpa/crab_GGJets_M-6000To8000_Pt-50_13TeV-sherpa/161114_233250/0000/GGJets_M-6000To8000_Pt-50_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-6000To8000_Pt-50_13TeV-sherpa/crab_GGJets_M-6000To8000_Pt-50_13TeV-sherpa/161114_233250/0000/GGJets_M-6000To8000_Pt-50_13TeV-sherpa_2.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-6000To8000_Pt-50_13TeV-sherpa/crab_GGJets_M-6000To8000_Pt-50_13TeV-sherpa/161114_233250/0000/GGJets_M-6000To8000_Pt-50_13TeV-sherpa_3.root",0);
 }
 else if ( ms.EqualTo("GGJets") && massBin.EqualTo("8000To13000") ){
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-8000To13000_Pt-50_13TeV-sherpa/crab_GGJets_M-8000To13000_Pt-50_13TeV-sherpa/161021_034010/0000/GGJets_M-8000To13000_Pt-50_13TeV-sherpa_1.root",0);
-  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/GGJets_M-8000To13000_Pt-50_13TeV-sherpa/crab_GGJets_M-8000To13000_Pt-50_13TeV-sherpa/161021_034010/0000/GGJets_M-8000To13000_Pt-50_13TeV-sherpa_2.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-8000To13000_Pt-50_13TeV-sherpa/crab_GGJets_M-8000To13000_Pt-50_13TeV-sherpa/161114_233303/0000/GGJets_M-8000To13000_Pt-50_13TeV-sherpa_1.root",0);
+  chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/GGJets_M-8000To13000_Pt-50_13TeV-sherpa/crab_GGJets_M-8000To13000_Pt-50_13TeV-sherpa/161114_233303/0000/GGJets_M-8000To13000_Pt-50_13TeV-sherpa_2.root",0);
 }
 
 else if ( ms.EqualTo("GJets") && massBin.EqualTo("40To100") ){

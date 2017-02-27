@@ -14,8 +14,8 @@ def bkgPdfCT10SystematicName(pdfNum):
     return nameDict[pdfNum]
 
 for conv in ("GRW","HLZ","Hewett"):
-    print "Now making theta input file for %s"%conv
-    outfile = TFile("thetainput_%s.root"%conv,"recreate")
+    print "Now making sanity check file for %s"%conv
+    outfile = TFile("thetainput_%s_20GeVbinning.root"%conv,"recreate")
 
     # first write signal
     msVals = [3000,3500,4000,4500,5000,5500,6000]
@@ -23,9 +23,9 @@ for conv in ("GRW","HLZ","Hewett"):
         sigFileName = "ADD_Ms%i_signal_%s.root"%(ms,conv)
         f = TFile(sigFileName,"read")
         f.cd()
-        EBEB = f.Get("ggMass_EBEB_varbin")
+        EBEB = f.Get("ggMass_EBEB")
         # EBEB_30003500 = f.Get("ggMass_EBEB_30003500varbin")
-        EBEE = f.Get("ggMass_EBEE_varbin")
+        EBEE = f.Get("ggMass_EBEE")
         # EBEE_30003500 = f.Get("ggMass_EBEE_30003500varbin")
 
         EBEB.SetName("mggEBEB__Ms%i"%ms)
@@ -39,8 +39,8 @@ for conv in ("GRW","HLZ","Hewett"):
         # EBEE_30003500.Write()
         f.cd()
         for i in range(1,53):
-            EBEBs = f.Get("ggMass_EBEB_varbin_CT10_%i"%i)
-            EBEEs = f.Get("ggMass_EBEE_varbin_CT10_%i"%i)
+            EBEBs = f.Get("ggMass_EBEB_CT10_%i"%i)
+            EBEEs = f.Get("ggMass_EBEE_CT10_%i"%i)
 
             sysName = bkgPdfCT10SystematicName(i)
             EBEBs.SetName("mggEBEB__Ms%i__"%ms+sysName)
@@ -53,9 +53,9 @@ for conv in ("GRW","HLZ","Hewett"):
     #now write background
     bkgFile = TFile("GGJets_merged.root","read")
     bkgFile.cd()
-    EBEBbkg = bkgFile.Get("ggMass_EBEB_varbin")
+    EBEBbkg = bkgFile.Get("ggMass_EBEB")
     # EBEB_30003500bkg = bkgFile.Get("ggMass_EBEB_30003500varbin")
-    EBEEbkg = bkgFile.Get("ggMass_EBEE_varbin")
+    EBEEbkg = bkgFile.Get("ggMass_EBEE")
     # EBEE_30003500bkg = bkgFile.Get("ggMass_EBEE_30003500varbin")
 
     EBEBbkg.SetName("mggEBEB__SMDiphoton")
@@ -114,9 +114,9 @@ for conv in ("GRW","HLZ","Hewett"):
     ## bkg pdf systematics
     bkgFile.cd()
     for i in range(1,53):
-        EBEB = bkgFile.Get("ggMass_EBEB_varbin_CT10_%i"%i)
+        EBEB = bkgFile.Get("ggMass_EBEB_CT10_%i"%i)
         # EBEB_30003500 = bkgFile.Get("ggMass_EBEB_30003500varbin_CT10_%i"%i)
-        EBEE = bkgFile.Get("ggMass_EBEE_varbin_CT10_%i"%i)
+        EBEE = bkgFile.Get("ggMass_EBEE_CT10_%i"%i)
         # EBEE_30003500 = bkgFile.Get("ggMass_EBEE_30003500varbin_CT10_%i"%i)
 
         sysName = bkgPdfCT10SystematicName(i)
@@ -135,10 +135,10 @@ for conv in ("GRW","HLZ","Hewett"):
     bkgFile.cd()
     for sys in ("fs","renor"):
 
-        EBEBlow = bkgFile.Get("ggMass_"+sys+"0p5"+"_EBEB_varbin")
-        EBEElow = bkgFile.Get("ggMass_"+sys+"0p5"+"_EBEE_varbin")
-        EBEBhigh = bkgFile.Get("ggMass_"+sys+"2"+"_EBEB_varbin")
-        EBEEhigh = bkgFile.Get("ggMass_"+sys+"2"+"_EBEE_varbin")
+        EBEBlow = bkgFile.Get("ggMass_"+sys+"0p5"+"_EBEB")
+        EBEElow = bkgFile.Get("ggMass_"+sys+"0p5"+"_EBEE")
+        EBEBhigh = bkgFile.Get("ggMass_"+sys+"2"+"_EBEB")
+        EBEEhigh = bkgFile.Get("ggMass_"+sys+"2"+"_EBEE")
 
         EBEBlow.SetName("mggEBEB__SMDiphoton__"+sys+"__minus")
         EBEElow.SetName("mggEBEE__SMDiphoton__"+sys+"__minus")
@@ -154,18 +154,18 @@ for conv in ("GRW","HLZ","Hewett"):
 
     fakeFile = TFile("fakePlotsNew5.root","read")
     fakeFile.cd()
-    EBEBfake = fakeFile.Get("fakeMass_EBEB_varbin")
+    EBEBfake = fakeFile.Get("fakeMass_EBEB")
     # EBEB_30003500fake = fakeFile.Get("fakeMass_EBEB_30003500varbin")
-    EBEEfake = fakeFile.Get("fakeMass_EBEE_varbin")
+    EBEEfake = fakeFile.Get("fakeMass_EBEE")
     # EBEE_30003500fake = fakeFile.Get("fakeMass_EBEE_30003500varbin")
 
     # fake systematics
-    EBEBfake_EBDown = fakeFile.Get("fakeMass_EBEB_EBDown_varbin")
-    EBEBfake_EBUp = fakeFile.Get("fakeMass_EBEB_EBUp_varbin")
-    EBEEfake_EBDown = fakeFile.Get("fakeMass_EBEE_EBDown_varbin")
-    EBEEfake_EBUp = fakeFile.Get("fakeMass_EBEE_EBUp_varbin")
-    EBEEfake_EEDown = fakeFile.Get("fakeMass_EBEE_EEDown_varbin")
-    EBEEfake_EEUp = fakeFile.Get("fakeMass_EBEE_EEUp_varbin")
+    EBEBfake_EBDown = fakeFile.Get("fakeMass_EBEB_EBDown")
+    EBEBfake_EBUp = fakeFile.Get("fakeMass_EBEB_EBUp")
+    EBEEfake_EBDown = fakeFile.Get("fakeMass_EBEE_EBDown")
+    EBEEfake_EBUp = fakeFile.Get("fakeMass_EBEE_EBUp")
+    EBEEfake_EEDown = fakeFile.Get("fakeMass_EBEE_EEDown")
+    EBEEfake_EEUp = fakeFile.Get("fakeMass_EBEE_EEUp")
 
     EBEBfake.SetName("mggEBEB__Fake")
     # EBEB_30003500fake.SetName("mgg30003500EBEB__Fake")
@@ -193,9 +193,9 @@ for conv in ("GRW","HLZ","Hewett"):
     dataFile = TFile("data2015plots_new3.root","read")
     dataFile.cd()
 
-    EBEBdata = dataFile.Get("ggMass_EBEB_varbin")
+    EBEBdata = dataFile.Get("ggMass_EBEB")
     # EBEB_30003500data = dataFile.Get("ggMass_EBEB_30003500varbin")
-    EBEEdata = dataFile.Get("ggMass_EBEE_varbin")
+    EBEEdata = dataFile.Get("ggMass_EBEE")
     # EBEE_30003500data = dataFile.Get("ggMass_EBEE_30003500varbin")
 
     EBEBdata.SetName("mggEBEB__DATA")
@@ -208,13 +208,6 @@ for conv in ("GRW","HLZ","Hewett"):
     EBEEdata.Write()
     # EBEE_30003500data.Write()
 
-    # add null histograms
-    bins = np.array([0.,600.,1100.,1800.,2600.,3500.,13000.])
-    nullEBEB = TH1D("mggEBEB__MsNULL","mggEBEB__MsNULL",6,bins)
-    nullEBEE = TH1D("mggEBEE__MsNULL","mggEBEE__MsNULL",6,bins)
-    nullEBEB.Write()
-    nullEBEE.Write()
-
 
     outfile.Close()
 
@@ -222,7 +215,7 @@ for conv in ("GRW","HLZ","Hewett"):
 
 
 # f = TFile("ADDHistos_sherpahighstats.root","read")
-# fCT10 = TFile("ct10_varbin.root","read")
+# fCT10 = TFile("ct10.root","read")
 # outfile = TFile("thetainput_new.root","recreate")
 
 
@@ -237,17 +230,17 @@ for conv in ("GRW","HLZ","Hewett"):
 # h6500 = f.Get("signal_LambdaT6500_sherpa")
 # h7000 = f.Get("signal_LambdaT7000_sherpa")
 # hbkg = f.Get("sigplusbkg_LambdaT100000_sherpa")
-# hvar2500 = f.Get("signal_LambdaT2500_sherpa_varbin")
-# hvar3000 = f.Get("signal_LambdaT3000_sherpa_varbin")
-# hvar3500 = f.Get("signal_LambdaT3500_sherpa_varbin")
-# hvar4000 = f.Get("signal_LambdaT4000_sherpa_varbin")
-# hvar4500 = f.Get("signal_LambdaT4500_sherpa_varbin")
-# hvar5000 = f.Get("signal_LambdaT5000_sherpa_varbin")
-# hvar5500 = f.Get("signal_LambdaT5500_sherpa_varbin")
-# hvar6000 = f.Get("signal_LambdaT6000_sherpa_varbin")
-# hvar6500 = f.Get("signal_LambdaT6500_sherpa_varbin")
-# hvar7000 = f.Get("signal_LambdaT7000_sherpa_varbin")
-# # hbkgvar = f.Get("sigplusbkg_LambdaT100000_sherpa_varbin")
+# hvar2500 = f.Get("signal_LambdaT2500_sherpa")
+# hvar3000 = f.Get("signal_LambdaT3000_sherpa")
+# hvar3500 = f.Get("signal_LambdaT3500_sherpa")
+# hvar4000 = f.Get("signal_LambdaT4000_sherpa")
+# hvar4500 = f.Get("signal_LambdaT4500_sherpa")
+# hvar5000 = f.Get("signal_LambdaT5000_sherpa")
+# hvar5500 = f.Get("signal_LambdaT5500_sherpa")
+# hvar6000 = f.Get("signal_LambdaT6000_sherpa")
+# hvar6500 = f.Get("signal_LambdaT6500_sherpa")
+# hvar7000 = f.Get("signal_LambdaT7000_sherpa")
+# # hbkgvar = f.Get("sigplusbkg_LambdaT100000_sherpa")
 # hbkgvar = fCT10.Get("BB0")
 # sigDict = {
 #     2500 : h2500,
@@ -358,7 +351,7 @@ for conv in ("GRW","HLZ","Hewett"):
 # # bins30003500 = np.array([650.,1150.,1800.,2600.,13000.])
 # # bins = np.array([650.,1150.,1800.,2600.,3500.,13000.])
 
-# # fCT10 = TFile("ct10_varbin.root","read")
+# # fCT10 = TFile("ct10.root","read")
 
 # # def bkgPdfCT10SystematicName(pdfNum):
 # #     nameDict = {}
