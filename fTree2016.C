@@ -1,5 +1,5 @@
-#define fTree_cxx
-#include "fTree.h"
+#define fTree2016_cxx
+#include "fTree2016.h"
 #include "helperFunctions.h"
 #include <TH2.h>
 #include <TStyle.h>
@@ -67,11 +67,11 @@ double getAvgSF(double pt, double eta, TH1D* tempEB, TH1D* tempEE, double lumi20
     return retVal;
 }
 
-void fTree::Loop(TString outfilename, bool isMC=false)
+void fTree2016::Loop(TString outfilename, bool isMC=false)
 {
 //   In a ROOT session, you can do:
-//      root> .L fTree.C
-//      root> fTree t
+//      root> .L fTree2016.C
+//      root> fTree2016 t
 //      root> t.GetEntry(12); // Fill t data members with entry number 12
 //      root> t.Show();       // Show values of entry 12
 //      root> t.Show(16);     // Read and show values of entry 16
@@ -329,10 +329,8 @@ void fTree::Loop(TString outfilename, bool isMC=false)
         // If running over data, some filler will be there, so set it to be 1 manually if the event weight is <= 0
         double eventWeight = 1.;
         double nominalKFactor = 1.;
-        // const double LUMI2015 = 2.620674712485; // /fb
-        const double LUMI2015 = 0.; // /fb
-        const double LUMI2016 = 35.867059982506; // /fb
-        // const double LUMITOTAL = LUMI2015 + LUMI2016;
+        const double LUMI2015 = 2.691; // /fb
+        const double LUMI2016 = 0.; // /fb
         const double LUMITOTAL = LUMI2015 + LUMI2016;
 
         if (isMC){
@@ -466,4 +464,4 @@ void fTree::Loop(TString outfilename, bool isMC=false)
     pdfVarFileEBEE.Close();
 
     f.Close();
-} // end fTree::Loop() method
+} // end fTree2016::Loop() method

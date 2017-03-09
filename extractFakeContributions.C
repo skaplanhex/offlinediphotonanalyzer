@@ -27,7 +27,7 @@ double getEffCorr(double pt, TH1D* hist){
   if (eff == 0.) eff = 1.; //this only happens at high pT where we're just limited by statistics, but should be fully efficient
   return 1./eff;
 }
-double getFakeRate(double pt, double eta){
+double getFakeRate2015(double pt, double eta){
 
     // fake rate in the barrel
     if ( isEB(eta) ){
@@ -239,7 +239,7 @@ void extractFakeContributions::Loop()
       if (LL && (FFDiphoton_isEEEB||FFDiphoton_isEBEE) && FFDiphoton_Minv < 320.) continue;
       
       // if (TL){
-      //   double fakeRate = getFakeRate(TFPhoton2_pt,TFPhoton2_scEta);
+      //   double fakeRate = getFakeRate2015(TFPhoton2_pt,TFPhoton2_scEta);
       //   double ggMass = TFDiphoton_Minv;
       //   bool isEBEB = TFPhoton1_isEB && TFPhoton2_isEB;
       //   bool isEBEE = (TFPhoton1_isEB && TFPhoton2_isEE) || (TFPhoton1_isEE && TFPhoton2_isEB);
@@ -271,7 +271,7 @@ void extractFakeContributions::Loop()
       //   }
       // } // end TL contribution
       // if (LT){
-      //   double fakeRate = getFakeRate(FTPhoton1_pt,FTPhoton1_scEta);
+      //   double fakeRate = getFakeRate2015(FTPhoton1_pt,FTPhoton1_scEta);
       //   double ggMass = FTDiphoton_Minv;
       //   bool isEBEB = FTPhoton1_isEB && FTPhoton2_isEB;
       //   bool isEBEE = (FTPhoton1_isEB && FTPhoton2_isEE) || (FTPhoton1_isEE && FTPhoton2_isEB);
@@ -313,14 +313,14 @@ void extractFakeContributions::Loop()
         bool isEBEE;
         // bool effCorr = getEffCorr(Photon2_pt,);
         if (TL){
-            fakeRate = getFakeRate(TFPhoton2_pt,TFPhoton2_scEta);
+            fakeRate = getFakeRate2015(TFPhoton2_pt,TFPhoton2_scEta);
             ggMass = TFDiphoton_Minv;
             isEBEB = TFDiphoton_isEBEB;
             // isEBEE = (TFPhoton1_isEB && TFPhoton2_isEE) || (TFPhoton1_isEE && TFPhoton2_isEB);
             isEBEE = TFDiphoton_isEEEB || TFDiphoton_isEBEE;
         }
         else if (LT){
-            fakeRate = getFakeRate(FTPhoton1_pt,FTPhoton1_scEta);
+            fakeRate = getFakeRate2015(FTPhoton1_pt,FTPhoton1_scEta);
             ggMass = FTDiphoton_Minv;
             isEBEB = FTDiphoton_isEBEB;
             // isEBEE = (FTPhoton1_isEB && FTPhoton2_isEE) || (FTPhoton1_isEE && FTPhoton2_isEB);
@@ -486,7 +486,7 @@ void extractFakeContributions::Loop()
         }
       } // end TL || LT block
       else if (LL){
-        double fakeRateProd = getFakeRate(FFPhoton1_pt,FFPhoton1_scEta) * getFakeRate(FFPhoton2_pt,FFPhoton2_scEta);
+        double fakeRateProd = getFakeRate2015(FFPhoton1_pt,FFPhoton1_scEta) * getFakeRate2015(FFPhoton2_pt,FFPhoton2_scEta);
         double ggMass = FFDiphoton_Minv;
         bool isEBEB = FFDiphoton_isEBEB;
         bool isEBEE = (FFDiphoton_isEBEE) || (FFDiphoton_isEEEB);

@@ -1,6 +1,6 @@
-#include "extractFakeContributions2016.C"
+#include "fTree2016.C"
 
-void driver_extractFakes(int jobNum) {
+void driverData2016(int jobNum) {
   // use stopwatch to time
   TStopwatch sw;
   sw.Start();
@@ -23,9 +23,6 @@ void driver_extractFakes(int jobNum) {
   // chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/ExoDiPhotonNtuples/Data2016/DoubleEG_Run2016BV2.root",0);
   // chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/ExoDiPhotonNtuples/Data2016/DoubleEG_Run2016CV2.root",0);
   // chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/ExoDiPhotonNtuples/Data2016/DoubleEG_Run2016DV2.root",0);
-  // chain->Add("/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/basicfaketree_tightfake.root",0);
-  // chain->Add("/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/basicfaketree_faketight.root",0);
-  // chain->Add("/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/basicfaketree_fakefake.root",0);
   // chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/DoubleEG_Run2015C.root",0);
   // chain->Add("root://cmseos.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/DoubleEG_Run2015D.root",0);
   if (jobNum == 0){
@@ -103,11 +100,10 @@ void driver_extractFakes(int jobNum) {
   cout << "Total number of entries: " << chain->GetEntries() << endl; 
 
   // create instance of class, passing our chain
-  extractFakeContributions2016 t(chain);
+  fTree2016 t(chain);
 
   // loop over all entries of our tree
-  TString outname = TString::Format("fakeplots2016_%i.root",jobNum);
-  t.Loop(outname);
+  t.Loop(TString::Format("data2016plots_%i.root",jobNum),false);
 
   // stop stopwatch
   sw.Stop();

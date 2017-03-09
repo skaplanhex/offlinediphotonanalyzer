@@ -152,7 +152,7 @@ for conv in ("GRW","HLZ","Hewett"):
         EBEEhigh.Write()
 
 
-    fakeFile = TFile("fakePlotsNew5.root","read")
+    fakeFile = TFile("fakeplots2016.root","read")
     fakeFile.cd()
     EBEBfake = fakeFile.Get("fakeMass_EBEB_varbin")
     # EBEB_30003500fake = fakeFile.Get("fakeMass_EBEB_30003500varbin")
@@ -190,7 +190,8 @@ for conv in ("GRW","HLZ","Hewett"):
     EBEEfake_EEDown.Write()
     EBEEfake_EEUp.Write()
 
-    dataFile = TFile("data2015plots_new3.root","read")
+    # dataFile = TFile("data2015plots_new3.root","read")
+    dataFile = TFile("data2016plots.root","read")
     dataFile.cd()
 
     EBEBdata = dataFile.Get("ggMass_EBEB_varbin")
