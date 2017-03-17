@@ -151,6 +151,24 @@ for conv in ("GRW","HLZ","Hewett"):
         EBEElow.Write()
         EBEEhigh.Write()
 
+    # NLO shape systematic
+    bkgFile.cd()
+    EBEBdown = bkgFile.Get("ggMass_NLODown_EBEB")
+    EBEBup = bkgFile.Get("ggMass_NLOUp_EBEB")
+    EBEEdown = bkgFile.Get("ggMass_NLODown_EBEE")
+    EBEEup = bkgFile.Get("ggMass_NLOUp_EBEE")
+
+    EBEBdown.SetName("mggEBEB__SMDiphoton__NLO__minus")
+    EBEBup.SetName("mggEBEB__SMDiphoton__NLO__plus")
+    EBEEdown.SetName("mggEBEE__SMDiphoton__NLO__minus")
+    EBEEup.SetName("mggEBEE__SMDiphoton__NLO__plus")
+
+    outfile.cd()
+    EBEBdown.Write()
+    EBEBup.Write()
+    EBEEdown.Write()
+    EBEEup.Write()
+
 
     fakeFile = TFile("fakeplots2016.root","read")
     fakeFile.cd()

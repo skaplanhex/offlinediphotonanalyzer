@@ -34,6 +34,18 @@ double getKFactorOld(double m, bool EBEB){
 
 }
 
+double getKFactor(TF1* fit, double m, bool isMCFM = true){
+    double mTemp = m;
+    if (isMCFM){ //correction for the fact that MCFM k-factors only go from 500 to 4000 GeV
+        if (m<500.)
+            mTemp = 500.;
+        else if (m>4000.)
+            mTemp = 4000.;
+    }
+    double kFactor = fit->Eval(mTemp);
+    return kFactor;
+}
+
 // pdf variation
 double getPDFValue(double m, bool EBEB, TH1D* pdfHist){
     int binNum = pdfHist->FindBin(m);
@@ -149,6 +161,18 @@ void fTree::Loop(TString outfilename, bool isMC=false)
     std::vector<TH1D*> vec_scaleVar_ggMass_EBEE_varbin;
     std::vector<TH1D*> vec_scaleVar_ggMass_EBEE_30003500varbin;
 
+    // "NLO" variation: handle on shape variation
+
+    TH1D* ggMass_NLODown_EBEB = createTH1D("ggMass_NLODown_EBEB","ggMass_NLODown_EBEB",650,0.,13000.,"m_{#gamma#gamma} (GeV/c^{2})","Events");
+    TH1D* ggMass_NLODown_EBEB_varbin = createTH1D("ggMass_NLODown_EBEB_varbin","ggMass_NLODown_EBEB_varbin",6,bins,"m_{#gamma#gamma} (GeV/c^{2})","Events");
+    TH1D* ggMass_NLOUp_EBEB = createTH1D("ggMass_NLOUp_EBEB","ggMass_NLOUp_EBEB",650,0.,13000.,"m_{#gamma#gamma} (GeV/c^{2})","Events");
+    TH1D* ggMass_NLOUp_EBEB_varbin = createTH1D("ggMass_NLOUp_EBEB_varbin","ggMass_NLOUp_EBEB_varbin",6,bins,"m_{#gamma#gamma} (GeV/c^{2})","Events");
+
+    TH1D* ggMass_NLODown_EBEE = createTH1D("ggMass_NLODown_EBEE","ggMass_NLODown_EBEE",650,0.,13000.,"m_{#gamma#gamma} (GeV/c^{2})","Events");
+    TH1D* ggMass_NLODown_EBEE_varbin = createTH1D("ggMass_NLODown_EBEE_varbin","ggMass_NLODown_EBEE_varbin",6,bins,"m_{#gamma#gamma} (GeV/c^{2})","Events");
+    TH1D* ggMass_NLOUp_EBEE = createTH1D("ggMass_NLOUp_EBEE","ggMass_NLOUp_EBEE",650,0.,13000.,"m_{#gamma#gamma} (GeV/c^{2})","Events");
+    TH1D* ggMass_NLOUp_EBEE_varbin = createTH1D("ggMass_NLOUp_EBEE_varbin","ggMass_NLOUp_EBEE_varbin",6,bins,"m_{#gamma#gamma} (GeV/c^{2})","Events");
+
     //scale variation
     TH1D* ggMass_fs0p5_EBEB = createTH1D("ggMass_fs0p5_EBEB","ggMass_fs0p5_EBEB",650,0.,13000.,"m_{#gamma#gamma} (GeV/c^{2})","Events");
     TH1D* ggMass_fs0p5_EBEB_30003500varbin = createTH1D("ggMass_fs0p5_EBEB_30003500varbin","ggMass_fs0p5_EBEB_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} (GeV/c^{2})","Events");
@@ -219,6 +243,10 @@ void fTree::Loop(TString outfilename, bool isMC=false)
         ggMass_renor2_EBEB->Sumw2();
         ggMass_renor2_EBEB_30003500varbin->Sumw2();
         ggMass_renor2_EBEB_varbin->Sumw2();
+        ggMass_NLODown_EBEB->Sumw2();
+        ggMass_NLODown_EBEB_varbin->Sumw2();
+        ggMass_NLOUp_EBEB->Sumw2();
+        ggMass_NLOUp_EBEB_varbin->Sumw2();
         ggMass_fs0p5_EBEE->Sumw2();
         ggMass_fs0p5_EBEE_30003500varbin->Sumw2();
         ggMass_fs0p5_EBEE_varbin->Sumw2();
@@ -231,6 +259,10 @@ void fTree::Loop(TString outfilename, bool isMC=false)
         ggMass_renor2_EBEE->Sumw2();
         ggMass_renor2_EBEE_30003500varbin->Sumw2();
         ggMass_renor2_EBEE_varbin->Sumw2();
+        ggMass_NLODown_EBEE->Sumw2();
+        ggMass_NLODown_EBEE_varbin->Sumw2();
+        ggMass_NLOUp_EBEE->Sumw2();
+        ggMass_NLOUp_EBEE_varbin->Sumw2();
     } // end calcPDFWeights block
 
     leadingPhoPt_EBEB->Sumw2();
@@ -257,18 +289,32 @@ void fTree::Loop(TString outfilename, bool isMC=false)
     ggMass_EBEE_20004000->Sumw2();
 
     // get the kfactor fits
-    TFile kFactorFile("kFactorFits.root","read");
-    TF1* kFactor_default_EBEB = (TF1*)kFactorFile.Get("kFactor_default_EBEB");
-    TF1* kFactor_fs0p5_EBEB = (TF1*)kFactorFile.Get("kFactor_fs0p5_EBEB");
-    TF1* kFactor_fs2_EBEB = (TF1*)kFactorFile.Get("kFactor_fs2_EBEB");
-    TF1* kFactor_renor0p5_EBEB = (TF1*)kFactorFile.Get("kFactor_renor0p5_EBEB");
-    TF1* kFactor_renor2_EBEB = (TF1*)kFactorFile.Get("kFactor_renor2_EBEB");
+    TFile kFactorFile_Diphox("kFactorFits.root","read");
 
-    TF1* kFactor_default_EBEE = (TF1*)kFactorFile.Get("kFactor_default_EBEE");
-    TF1* kFactor_fs0p5_EBEE = (TF1*)kFactorFile.Get("kFactor_fs0p5_EBEE");
-    TF1* kFactor_fs2_EBEE = (TF1*)kFactorFile.Get("kFactor_fs2_EBEE");
-    TF1* kFactor_renor0p5_EBEE = (TF1*)kFactorFile.Get("kFactor_renor0p5_EBEE");
-    TF1* kFactor_renor2_EBEE = (TF1*)kFactorFile.Get("kFactor_renor2_EBEE");
+    // MCFM
+    TFile kFactorFile_EBEB_default("kfactor_BB_R1F1.root","read");
+    TFile kFactorFile_EBEB_scaledown("kfactor_BB_R0p5F0p5.root","read"); 
+    TFile kFactorFile_EBEB_scaleup("kfactor_BB_R2F2.root","read"); 
+
+    TFile kFactorFile_EBEE_default("kfactor_BE_R1F1.root","read");
+    TFile kFactorFile_EBEE_scaledown("kfactor_BE_R0p5F0p5.root","read"); 
+    TFile kFactorFile_EBEE_scaleup("kfactor_BE_R2F2.root","read");    
+
+    TF1* kFactor_default_EBEB = (TF1*)kFactorFile_EBEB_default.Get("pol3");
+    TF1* kFactor_fs0p5_EBEB = (TF1*)kFactorFile_EBEB_scaledown.Get("pol3");
+    TF1* kFactor_fs2_EBEB = (TF1*)kFactorFile_EBEB_scaleup.Get("pol3");
+    // TF1* kFactor_renor0p5_EBEB = (TF1*)kFactorFile.Get("kFactor_renor0p5_EBEB");
+    // TF1* kFactor_renor2_EBEB = (TF1*)kFactorFile.Get("kFactor_renor2_EBEB");
+    TF1* kFactor_NLODown_EBEB = (TF1*)kFactorFile_Diphox.Get("kFactor_default_EBEB");
+    TF1* kFactor_NLOUp_EBEB = (TF1*)kFactorFile_EBEB_default.Get("pol3_NLO");
+
+    TF1* kFactor_default_EBEE = (TF1*)kFactorFile_EBEE_default.Get("pol3");
+    TF1* kFactor_fs0p5_EBEE = (TF1*)kFactorFile_EBEE_scaledown.Get("pol3");
+    TF1* kFactor_fs2_EBEE = (TF1*)kFactorFile_EBEE_scaleup.Get("pol3");
+    // TF1* kFactor_renor0p5_EBEE = (TF1*)kFactorFile.Get("kFactor_renor0p5_EBEE");
+    // TF1* kFactor_renor2_EBEE = (TF1*)kFactorFile.Get("kFactor_renor2_EBEE");
+    TF1* kFactor_NLODown_EBEE = (TF1*)kFactorFile_Diphox.Get("kFactor_default_EBEE");
+    TF1* kFactor_NLOUp_EBEE = (TF1*)kFactorFile_EBEE_default.Get("pol3_NLO");
 
 
     // get all pdf variation histos
@@ -314,7 +360,7 @@ void fTree::Loop(TString outfilename, bool isMC=false)
         // if (jentry>3000) break;
         if (!isGood) continue; // only use analysis level events
         if (!TriggerBit_HLT_DoublePhoton60) continue; // only admit events that pass HLT_DoublePhoton_60
-        if (Photon1_pt < 130. || Photon2_pt < 130.) continue; // enforce 130 GeV pT cut
+        if (Photon1_pt < 75. || Photon2_pt < 75.) continue; // enforce 75 GeV pT cut
 
         // bool EBEB = isEBEB(Photon1_scEta,Photon2_scEta); // fabs is taken in the helper function!
         // bool EBEE = isEBEE(Photon1_scEta,Photon2_scEta);
@@ -332,6 +378,7 @@ void fTree::Loop(TString outfilename, bool isMC=false)
         // const double LUMI2015 = 2.620674712485; // /fb
         const double LUMI2015 = 0.; // /fb
         const double LUMI2016 = 35.867059982506; // /fb
+        // const double LUMI2016 = 0.; // /fb
         // const double LUMITOTAL = LUMI2015 + LUMI2016;
         const double LUMITOTAL = LUMI2015 + LUMI2016;
 
@@ -339,8 +386,8 @@ void fTree::Loop(TString outfilename, bool isMC=false)
             double avgSFProd = getAvgSF(Photon1_pt,Photon1_scEta,sfEB,sfEE,LUMI2015,LUMI2016) * getAvgSF(Photon2_pt,Photon2_scEta,sfEB,sfEE,LUMI2015,LUMI2016); // selection efficiency scale factors, will equal 1 for only 2015
             eventWeight = (double)Event_weightAll*avgSFProd*LUMITOTAL;
             // multiply SM diphoton by k-factor; using RECO mass for now...
-            if (applyKFactor && EBEB) nominalKFactor = kFactor_default_EBEB->Eval(Diphoton_Minv);
-            else if (applyKFactor && EBEE) nominalKFactor = kFactor_default_EBEE->Eval(Diphoton_Minv);
+            if (applyKFactor && EBEB) nominalKFactor = getKFactor(kFactor_default_EBEB,Diphoton_Minv);
+            else if (applyKFactor && EBEE) nominalKFactor = getKFactor(kFactor_default_EBEE,Diphoton_Minv);
             if (applyKFactor) eventWeight *= nominalKFactor;
         }
         hEventWeight->Fill(Event_weightAll);
@@ -365,15 +412,19 @@ void fTree::Loop(TString outfilename, bool isMC=false)
                     vec_pdfVar_ggMass_EBEB_varbin.at(i)->Fill( Diphoton_Minv,eventWeight*getPDFValue(Diphoton_Minv,EBEB,pdfVarEBEB.at(i)) );
                     vec_pdfVar_ggMass_EBEB_30003500varbin.at(i)->Fill( Diphoton_Minv,eventWeight*getPDFValue(Diphoton_Minv,EBEB,pdfVarEBEB.at(i)) );
                 }
-                ggMass_renor0p5_EBEB->Fill( Diphoton_Minv,eventWeight*kFactor_renor0p5_EBEB->Eval(Diphoton_Minv) / nominalKFactor );
-                ggMass_renor2_EBEB->Fill( Diphoton_Minv,eventWeight*kFactor_renor2_EBEB->Eval(Diphoton_Minv) / nominalKFactor );
-                ggMass_fs0p5_EBEB->Fill( Diphoton_Minv,eventWeight*kFactor_fs0p5_EBEB->Eval(Diphoton_Minv) / nominalKFactor );
-                ggMass_fs2_EBEB->Fill( Diphoton_Minv,eventWeight*kFactor_fs2_EBEB->Eval(Diphoton_Minv) / nominalKFactor );
+                ggMass_renor0p5_EBEB->Fill( Diphoton_Minv,eventWeight );
+                ggMass_renor2_EBEB->Fill( Diphoton_Minv,eventWeight );
+                ggMass_fs0p5_EBEB->Fill( Diphoton_Minv,eventWeight*getKFactor(kFactor_fs0p5_EBEB,Diphoton_Minv) / nominalKFactor );
+                ggMass_fs2_EBEB->Fill( Diphoton_Minv,eventWeight*getKFactor(kFactor_fs2_EBEB,Diphoton_Minv) / nominalKFactor );
+                ggMass_NLODown_EBEB->Fill(Diphoton_Minv,eventWeight*getKFactor(kFactor_NLODown_EBEB,Diphoton_Minv,false) / nominalKFactor);
+                ggMass_NLOUp_EBEB->Fill(Diphoton_Minv,eventWeight*getKFactor(kFactor_NLOUp_EBEB,Diphoton_Minv) / nominalKFactor);
 
-                ggMass_renor0p5_EBEB_varbin->Fill( Diphoton_Minv,eventWeight*kFactor_renor0p5_EBEB->Eval(Diphoton_Minv) / nominalKFactor );
-                ggMass_renor2_EBEB_varbin->Fill( Diphoton_Minv,eventWeight*kFactor_renor2_EBEB->Eval(Diphoton_Minv) / nominalKFactor );
-                ggMass_fs0p5_EBEB_varbin->Fill( Diphoton_Minv,eventWeight*kFactor_fs0p5_EBEB->Eval(Diphoton_Minv) / nominalKFactor );
-                ggMass_fs2_EBEB_varbin->Fill( Diphoton_Minv,eventWeight*kFactor_fs2_EBEB->Eval(Diphoton_Minv) / nominalKFactor );
+                ggMass_renor0p5_EBEB_varbin->Fill( Diphoton_Minv,eventWeight );
+                ggMass_renor2_EBEB_varbin->Fill( Diphoton_Minv,eventWeight );
+                ggMass_fs0p5_EBEB_varbin->Fill( Diphoton_Minv,eventWeight*getKFactor(kFactor_fs0p5_EBEB,Diphoton_Minv) / nominalKFactor );
+                ggMass_fs2_EBEB_varbin->Fill( Diphoton_Minv,eventWeight*getKFactor(kFactor_fs2_EBEB,Diphoton_Minv) / nominalKFactor );
+                ggMass_NLODown_EBEB_varbin->Fill(Diphoton_Minv,eventWeight*getKFactor(kFactor_NLODown_EBEB,Diphoton_Minv,false) / nominalKFactor);
+                ggMass_NLOUp_EBEB_varbin->Fill(Diphoton_Minv,eventWeight*getKFactor(kFactor_NLOUp_EBEB,Diphoton_Minv) / nominalKFactor);
             }
         } // end EBEB block
 
@@ -396,15 +447,19 @@ void fTree::Loop(TString outfilename, bool isMC=false)
                     vec_pdfVar_ggMass_EBEE_varbin.at(i)->Fill( Diphoton_Minv,eventWeight*getPDFValue(Diphoton_Minv,EBEB,pdfVarEBEE.at(i)) );
                     vec_pdfVar_ggMass_EBEE_30003500varbin.at(i)->Fill( Diphoton_Minv,eventWeight*getPDFValue(Diphoton_Minv,EBEB,pdfVarEBEE.at(i)) );
                 }
-                ggMass_renor0p5_EBEE->Fill( Diphoton_Minv,eventWeight*kFactor_renor0p5_EBEE->Eval(Diphoton_Minv) / nominalKFactor );
-                ggMass_renor2_EBEE->Fill( Diphoton_Minv,eventWeight*kFactor_renor2_EBEE->Eval(Diphoton_Minv) / nominalKFactor );
-                ggMass_fs0p5_EBEE->Fill( Diphoton_Minv,eventWeight*kFactor_fs0p5_EBEE->Eval(Diphoton_Minv) / nominalKFactor );
-                ggMass_fs2_EBEE->Fill( Diphoton_Minv,eventWeight*kFactor_fs2_EBEE->Eval(Diphoton_Minv) / nominalKFactor );
+                ggMass_renor0p5_EBEE->Fill( Diphoton_Minv,eventWeight );
+                ggMass_renor2_EBEE->Fill( Diphoton_Minv,eventWeight );
+                ggMass_fs0p5_EBEE->Fill( Diphoton_Minv,eventWeight*getKFactor(kFactor_fs0p5_EBEE,Diphoton_Minv) / nominalKFactor );
+                ggMass_fs2_EBEE->Fill( Diphoton_Minv,eventWeight*getKFactor(kFactor_fs2_EBEE,Diphoton_Minv) / nominalKFactor );
+                ggMass_NLODown_EBEE->Fill(Diphoton_Minv,eventWeight*getKFactor(kFactor_NLODown_EBEE,Diphoton_Minv,false) / nominalKFactor);
+                ggMass_NLOUp_EBEE->Fill(Diphoton_Minv,eventWeight*getKFactor(kFactor_NLOUp_EBEE,Diphoton_Minv) / nominalKFactor);
 
-                ggMass_renor0p5_EBEE_varbin->Fill( Diphoton_Minv,eventWeight*kFactor_renor0p5_EBEE->Eval(Diphoton_Minv) / nominalKFactor );
-                ggMass_renor2_EBEE_varbin->Fill( Diphoton_Minv,eventWeight*kFactor_renor2_EBEE->Eval(Diphoton_Minv) / nominalKFactor );
-                ggMass_fs0p5_EBEE_varbin->Fill( Diphoton_Minv,eventWeight*kFactor_fs0p5_EBEE->Eval(Diphoton_Minv) / nominalKFactor );
-                ggMass_fs2_EBEE_varbin->Fill( Diphoton_Minv,eventWeight*kFactor_fs2_EBEE->Eval(Diphoton_Minv) / nominalKFactor );
+                ggMass_renor0p5_EBEE_varbin->Fill( Diphoton_Minv,eventWeight );
+                ggMass_renor2_EBEE_varbin->Fill( Diphoton_Minv,eventWeight );
+                ggMass_fs0p5_EBEE_varbin->Fill( Diphoton_Minv,eventWeight*getKFactor(kFactor_fs0p5_EBEE,Diphoton_Minv) / nominalKFactor );
+                ggMass_fs2_EBEE_varbin->Fill( Diphoton_Minv,eventWeight*getKFactor(kFactor_fs2_EBEE,Diphoton_Minv) / nominalKFactor );
+                ggMass_NLODown_EBEE_varbin->Fill(Diphoton_Minv,eventWeight*getKFactor(kFactor_NLODown_EBEE,Diphoton_Minv,false) / nominalKFactor);
+                ggMass_NLOUp_EBEE_varbin->Fill(Diphoton_Minv,eventWeight*getKFactor(kFactor_NLOUp_EBEE,Diphoton_Minv) / nominalKFactor);
 
             }
         } // end EBEE block
@@ -444,6 +499,14 @@ void fTree::Loop(TString outfilename, bool isMC=false)
             vec_pdfVar_ggMass_EBEE_30003500varbin.at(i)->Write();
         }
     }
+    ggMass_NLODown_EBEB->Write();
+    ggMass_NLODown_EBEB_varbin->Write();
+    ggMass_NLOUp_EBEB->Write();
+    ggMass_NLOUp_EBEB_varbin->Write();
+    ggMass_NLODown_EBEE->Write();
+    ggMass_NLODown_EBEE_varbin->Write();
+    ggMass_NLOUp_EBEE->Write();
+    ggMass_NLOUp_EBEE_varbin->Write();
     ggMass_fs0p5_EBEB->Write();
     ggMass_fs0p5_EBEB_varbin->Write();
     ggMass_fs2_EBEB->Write();

@@ -7,6 +7,8 @@ cd /uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src
 eval `scramv1 runtime -sh`
 cd ${_CONDOR_SCRATCH_DIR}
 
+unzip kFactorFits.zip
+
 if [ $1 -eq 0 ]
 then
     root -l -q -b 'driverMC.C("4000_GRW","200To500","ADDPlots_Ms4000_Mgg200To500_GRW.root",true)'

@@ -225,9 +225,9 @@ void extractFakeContributions::Loop()
       // bool LL = isFF && FFPhoton1_hadronicOverEm < 0.10 && FFPhoton2_hadronicOverEm < 0.10 && FFPhoton1_isEE;
 
       // pt cuts
-      if (TL && (TFPhoton1_pt<130. || TFPhoton2_pt<130.)) continue;
-      if (LT && (FTPhoton1_pt<130. || FTPhoton2_pt<130.)) continue;
-      if (LL && (FFPhoton1_pt<130. || FFPhoton2_pt<130.)) continue;
+      if (TL && (TFPhoton1_pt<75. || TFPhoton2_pt<75.)) continue;
+      if (LT && (FTPhoton1_pt<75. || FTPhoton2_pt<75.)) continue;
+      if (LL && (FFPhoton1_pt<75. || FFPhoton2_pt<75.)) continue;
 
       // mass cuts
       if (TL && TFDiphoton_isEBEB && TFDiphoton_Minv < 230.) continue;
@@ -555,7 +555,7 @@ void extractFakeContributions::Loop()
       // if (TL || LT) cout << "Counter = " << counter << " Event = " << Event_evnum << endl;
     } // end event loop
 
-    TFile outfile("deletethis2.root","recreate");
+    TFile outfile("fakeplots2015_pt75.root","recreate");
     // TFile outfile("fakePlotsNew_endcapleading.root","recreate");
     // TFile outfile("fakePlotsNew.root","recreate");
     outfile.cd();

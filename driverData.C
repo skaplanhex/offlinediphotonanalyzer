@@ -32,7 +32,7 @@ void driverData() {
   fTree t(chain);
 
   // loop over all entries of our tree
-  t.Loop("data2015plots_new3.root",false);
+  t.Loop("data2015plots_pt75.root",false);
 
   // stop stopwatch
   sw.Stop();
