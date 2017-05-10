@@ -1,5 +1,5 @@
-#define extractFakeContributions_cxx
-#include "extractFakeContributions.h"
+#define extractFakeContributions2016_cxx
+#include "extractFakeContributions2016.h"
 #include "helperFunctions.h"
 #include <TH2.h>
 #include <TStyle.h>
@@ -127,11 +127,11 @@ double getFakeRate2016(double pt, double eta){
     else return 0.;
 }
 
-void extractFakeContributions::Loop(TString outname = "fakeplots.root")
+void extractFakeContributions2016::Loop(TString outname = "fakeplots.root")
 {
 //   In a ROOT session, you can do:
-//      root> .L extractFakeContributions.C
-//      root> extractFakeContributions t
+//      root> .L extractFakeContributions2016.C
+//      root> extractFakeContributions2016 t
 //      root> t.GetEntry(12); // Fill t data members with entry number 12
 //      root> t.Show();       // Show values of entry 12
 //      root> t.Show(16);     // Read and show values of entry 16
@@ -268,7 +268,7 @@ void extractFakeContributions::Loop(TString outname = "fakeplots.root")
     // TH1D* effFF_pt1_EBEE = (TH1D*)effFile.Get("effFF_loose_hadronicOverEm010_pt1_EBEE");
     // TH1D* effFF_pt2_EBEE = (TH1D*)effFile.Get("effFF_loose_hadronicOverEm010_pt2_EBEE");
 
-    TFile* sysFile = new TFile("avgFR2015.root","read");
+    TFile* sysFile = new TFile("avgFR2016.root","read");
     TH1D* jetEB = (TH1D*)sysFile->Get("JetHT_fakeRateEB_chIso5To10"); 
     TH1D* jetEE = (TH1D*)sysFile->Get("JetHT_fakeRateEE_chIso5To10"); 
     TH1D* muonEB = (TH1D*)sysFile->Get("DoubleMuon_fakeRateEB_chIso5To10"); 
@@ -343,7 +343,7 @@ void extractFakeContributions::Loop(TString outname = "fakeplots.root")
       sysFactorVec.push_back(sysFactorMap2);
       
       // if (TL){
-      //   double fakeRate = getFakeRate2015(TFPhoton2_pt,TFPhoton2_scEta);
+      //   double fakeRate = getFakeRate2016(TFPhoton2_pt,TFPhoton2_scEta);
       //   double ggMass = TFDiphoton_Minv;
       //   bool isEBEB = TFPhoton1_isEB && TFPhoton2_isEB;
       //   bool isEBEE = (TFPhoton1_isEB && TFPhoton2_isEE) || (TFPhoton1_isEE && TFPhoton2_isEB);
@@ -375,7 +375,7 @@ void extractFakeContributions::Loop(TString outname = "fakeplots.root")
       //   }
       // } // end TL contribution
       // if (LT){
-      //   double fakeRate = getFakeRate2015(FTPhoton1_pt,FTPhoton1_scEta);
+      //   double fakeRate = getFakeRate2016(FTPhoton1_pt,FTPhoton1_scEta);
       //   double ggMass = FTDiphoton_Minv;
       //   bool isEBEB = FTPhoton1_isEB && FTPhoton2_isEB;
       //   bool isEBEE = (FTPhoton1_isEB && FTPhoton2_isEE) || (FTPhoton1_isEE && FTPhoton2_isEB);
@@ -418,7 +418,7 @@ void extractFakeContributions::Loop(TString outname = "fakeplots.root")
         bool isEBEE;
         // bool effCorr = getEffCorr(Photon2_pt,);
         if (TL){
-            fakeRate = getFakeRate2015(TFPhoton2_pt,TFPhoton2_scEta);
+            fakeRate = getFakeRate2016(TFPhoton2_pt,TFPhoton2_scEta);
             sysFactorMap = sysFactorVec[1];
             ggMass = TFDiphoton_Minv;
             isEBEB = TFDiphoton_isEBEB;
@@ -426,7 +426,7 @@ void extractFakeContributions::Loop(TString outname = "fakeplots.root")
             isEBEE = TFDiphoton_isEEEB || TFDiphoton_isEBEE;
         }
         else if (LT){
-            fakeRate = getFakeRate2015(FTPhoton1_pt,FTPhoton1_scEta);
+            fakeRate = getFakeRate2016(FTPhoton1_pt,FTPhoton1_scEta);
             sysFactorMap = sysFactorVec[0];
             ggMass = FTDiphoton_Minv;
             isEBEB = FTDiphoton_isEBEB;
@@ -593,8 +593,8 @@ void extractFakeContributions::Loop(TString outname = "fakeplots.root")
         }
       } // end TL || LT block
       else if (LL){
-        double fakeRate1 = getFakeRate2015(FFPhoton1_pt,FFPhoton1_scEta);
-        double fakeRate2 = getFakeRate2015(FFPhoton2_pt,FFPhoton2_scEta);
+        double fakeRate1 = getFakeRate2016(FFPhoton1_pt,FFPhoton1_scEta);
+        double fakeRate2 = getFakeRate2016(FFPhoton2_pt,FFPhoton2_scEta);
         double fakeRateProd = fakeRate1 * fakeRate2;
         double ggMass = FFDiphoton_Minv;
         bool isEBEB = FFDiphoton_isEBEB;

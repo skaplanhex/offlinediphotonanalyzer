@@ -11,7 +11,8 @@ unzip kFactorFits.zip
 
 if [ $1 -eq 0 ]
 then
-    root -l -q -b 'driverMC.C("4000_GRW","200To500","ADDPlots_Ms4000_Mgg200To500_GRW.root",true)'
+    # root -l -q -b 'driverMC.C("4000_GRW","200To500","ADDPlots_Ms4000_Mgg200To500_GRW.root",true)'
+    echo "skipped"
 elif [ $1 -eq 1 ]
 then
     root -l -q -b 'driverMC.C("4000_GRW","500To1000","ADDPlots_Ms4000_Mgg500To1000_GRW.root",true)'
@@ -41,7 +42,8 @@ then
     root -l -q -b 'driverMC.C("4000_Hewett","2000To4000","ADDPlots_Ms4000_Mgg2000To4000_Hewett.root",true)'
 elif [ $1 -eq 10 ]
 then
-    root -l -q -b 'driverMC.C("5000_GRW","200To500","ADDPlots_Ms5000_Mgg200To500_GRW.root",true)'
+    # root -l -q -b 'driverMC.C("5000_GRW","200To500","ADDPlots_Ms5000_Mgg200To500_GRW.root",true)'
+    echo "skipped"
 elif [ $1 -eq 11 ]
 then
     root -l -q -b 'driverMC.C("5000_GRW","500To1000","ADDPlots_Ms5000_Mgg500To1000_GRW.root",true)'
@@ -80,7 +82,8 @@ then
     root -l -q -b 'driverMC.C("5000_Hewett","3000To5000","ADDPlots_Ms5000_Mgg3000To5000_Hewett.root",true)'
 elif [ $1 -eq 23 ]
 then
-    root -l -q -b 'driverMC.C("3500_GRW","200To500","ADDPlots_Ms3500_Mgg200To500_GRW.root",true)'
+    # root -l -q -b 'driverMC.C("3500_GRW","200To500","ADDPlots_Ms3500_Mgg200To500_GRW.root",true)'
+    echo "skipped"
 elif [ $1 -eq 24 ]
 then
     root -l -q -b 'driverMC.C("3500_GRW","500To1000","ADDPlots_Ms3500_Mgg500To1000_GRW.root",true)'
@@ -110,7 +113,8 @@ then
     root -l -q -b 'driverMC.C("3500_Hewett","2000To3500","ADDPlots_Ms3500_Mgg2000To3500_Hewett.root",true)'
 elif [ $1 -eq 33 ]
 then
-    root -l -q -b 'driverMC.C("6000_GRW","200To500","ADDPlots_Ms6000_Mgg200To500_GRW.root",true)'
+    # root -l -q -b 'driverMC.C("6000_GRW","200To500","ADDPlots_Ms6000_Mgg200To500_GRW.root",true)'
+    echo "skipped"
 elif [ $1 -eq 34 ]
 then
     root -l -q -b 'driverMC.C("6000_GRW","500To1000","ADDPlots_Ms6000_Mgg500To1000_GRW.root",true)'
@@ -149,7 +153,8 @@ then
     root -l -q -b 'driverMC.C("6000_Hewett","4000To6000","ADDPlots_Ms6000_Mgg4000To6000_Hewett.root",true)'
 elif [ $1 -eq 46 ]
 then
-    root -l -q -b 'driverMC.C("4500_GRW","200To500","ADDPlots_Ms4500_Mgg200To500_GRW.root",true)'
+    # root -l -q -b 'driverMC.C("4500_GRW","200To500","ADDPlots_Ms4500_Mgg200To500_GRW.root",true)'
+    echo "skipped"
 elif [ $1 -eq 47 ]
 then
     root -l -q -b 'driverMC.C("4500_GRW","500To1000","ADDPlots_Ms4500_Mgg500To1000_GRW.root",true)'
@@ -188,7 +193,8 @@ then
     root -l -q -b 'driverMC.C("4500_Hewett","3000To4500","ADDPlots_Ms4500_Mgg3000To4500_Hewett.root",true)'
 elif [ $1 -eq 59 ]
 then
-    root -l -q -b 'driverMC.C("3000_GRW","200To500","ADDPlots_Ms3000_Mgg200To500_GRW.root",true)'
+    # root -l -q -b 'driverMC.C("3000_GRW","200To500","ADDPlots_Ms3000_Mgg200To500_GRW.root",true)'
+    echo "skipped"
 elif [ $1 -eq 60 ]
 then
     root -l -q -b 'driverMC.C("3000_GRW","500To1000","ADDPlots_Ms3000_Mgg500To1000_GRW.root",true)'
@@ -218,7 +224,8 @@ then
     root -l -q -b 'driverMC.C("3000_Hewett","2000To3000","ADDPlots_Ms3000_Mgg2000To3000_Hewett.root",true)'
 elif [ $1 -eq 69 ]
 then
-    root -l -q -b 'driverMC.C("5500_GRW","200To500","ADDPlots_Ms5500_Mgg200To500_GRW.root",true)'
+    # root -l -q -b 'driverMC.C("5500_GRW","200To500","ADDPlots_Ms5500_Mgg200To500_GRW.root",true)'
+    echo "skipped"
 elif [ $1 -eq 70 ]
 then
     root -l -q -b 'driverMC.C("5500_GRW","500To1000","ADDPlots_Ms5500_Mgg500To1000_GRW.root",true)'
@@ -257,7 +264,8 @@ then
     root -l -q -b 'driverMC.C("5500_Hewett","4000To5500","ADDPlots_Ms5500_Mgg4000To5500_Hewett.root",true)'
 elif [ $1 -eq 82 ]
 then
-    root -l -q -b 'driverMC.C("ADDBkg","200To500","ADDPlots_ADDBkg_Mgg200To500.root",true)'
+    # root -l -q -b 'driverMC.C("ADDBkg","200To500","ADDPlots_ADDBkg_Mgg200To500.root",true)'
+    echo "skipped"
 elif [ $1 -eq 83 ]
 then
     root -l -q -b 'driverMC.C("ADDBkg","500To1000","ADDPlots_ADDBkg_Mgg500To1000.root",true)'
