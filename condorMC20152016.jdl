@@ -7,8 +7,8 @@ x509userproxy = $ENV(X509_USER_PROXY)
 Executable = runMCPlots.sh
 should_transfer_files = YES
 transfer_input_files = /uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/fTree.C,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/fTree.h,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/driverMC.C,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/PDF_sys_NormScaling_BB_long_22_2_17.root,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/PDF_sys_NormScaling_BE_long_22_2_17.root,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/kFactorFits.zip,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/scalefactors2016.root
-Output = /uscms/home/skaplan/condor/run_$(Process).stdout
-Error = /uscms/home/skaplan/condor/run_$(Process).stderr
-Log = /uscms/home/skaplan/condor/run_$(Process).condor
+Output = /uscms/home/skaplan/condor/mcplotter20152016_$(Process).stdout
+Error = /uscms/home/skaplan/condor/mcplotter20152016_$(Process).stderr
+Log = /uscms/home/skaplan/condor/mcplotter20152016_$(Process).condor
 Arguments = $(Process)
-Queue 96
+Queue 128

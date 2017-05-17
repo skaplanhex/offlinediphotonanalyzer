@@ -22,13 +22,12 @@ def getMassBins(ms):
         4500 : ["500To1000","1000To2000","2000To3000","3000To4500"],
         5000 : ["500To1000","1000To2000","2000To3000","3000To5000"],
         5500 : ["500To1000","1000To2000","2000To4000","4000To5500"],
-        6000 : ["500To1000","1000To2000","2000To4000","4000To6000"],
+        6000 : ["500To1000","1000To2000","2000To4000","4000To6000"]
     }
-    if ms in massBinDict.keys():
-        return massBinDict[ms]
-    else:
-        return ["500To1000","1000To2000","2000To4000","4000To%i"%ms]
 
+    for ms2 in (7000,8000,9000,10000,11000):
+        massBinDict[ms2] = ["500To1000","1000To2000","2000To4000","4000To%i"%ms2]
+    return massBinDict[ms]
 
 msValues = (3000,3500,4000,4500,5000,5500,6000,7000,8000,9000,10000,11000)
 
@@ -46,14 +45,16 @@ kkDict = {
     "NED-2_KK-4" : "Hewett"
 }
 
+counter = 0
 # Signal
 for ms in msValues:
     for kk in kkDict.keys():
-        for massBin in getMassBins(ms):
-            # print ms,kk,massBin
+        massBins = getMassBins(ms)
+        for massBin in massBins:
             # no hewett samples beyond Ms =6 TeV
             if ms > 6000 and kkDict[kk] == "Hewett":
                 continue
+            counter += 1
             procName = "ADDGravToGG_MS-%i_%s_M-%s_13TeV-sherpa"%(ms,kk,massBin)
             direc = "/eos/uscms"+baseDirec+"%s/crab_%s__80XMiniAODv2__MINIAODSIM/"%(procName,procName)
             temp = glob(direc+"*")
@@ -72,6 +73,7 @@ for ms in msValues:
 
 # ADD bkg subtraction
 for massBin in ADDBkgMassBins:
+    counter += 1
     procName = "GG_M-%s_Pt-70_13TeV-sherpa"%massBin
     # baseDirec = "/store/user/skaplan/noreplica/ExoDiPhotonNtuples/ADD/"
     # baseDirec = "/store/user/skaplan/noreplica/NewCodeNtuples/"
@@ -93,6 +95,7 @@ for massBin in ADDBkgMassBins:
 
 # sherpa diphoton
 for massBin in GGJetsMassBins:
+    counter += 1
     procName = "GGJets_M-%s_Pt-50_13TeV-sherpa"%massBin
     # baseDirec = "/store/user/skaplan/noreplica/NewCodeNtuples/"
     direc = glob( "/eos/uscms%s%s/*"%(baseDirec,procName) )[0] + "/"
@@ -109,6 +112,8 @@ for massBin in GGJetsMassBins:
     for f in files:
         print '  chain->Add("%s",0);'%f
     print "}"
+print " "
+print "Number of jobs to run: "+str(counter)
 
 # # GRW
 # for ms in msValues:

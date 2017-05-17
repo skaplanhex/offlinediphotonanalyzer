@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Wed Oct 26 18:45:24 2016 by ROOT version 6.02/13
+// Fri May 12 14:56:28 2017 by ROOT version 6.02/13
 // from TTree fTree/DiPhotonTree
-// found on file: root://cmsxrootd.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/DoubleEG/crab_DoubleEG_Run2015D-16Dec2015-v2_MiniAOD/161021_033700/0000/DoubleEG_Run2015D-16Dec2015-v2_MiniAOD_99.root
+// found on file: root://cmseos.fnal.gov//store/user/skaplan/noreplica/FINALNTUPLES/DoubleEG/crab_DoubleEG__Run2016E-03Feb2017-v1__MINIAOD/170505_201721/0000/out_DoubleEG_Run2016E-03Feb2017-v1_numEvent100_21.root
 //////////////////////////////////////////////////////////
 
 #ifndef extractFakeContributions_h
@@ -976,6 +976,7 @@ public :
    Bool_t          Photon1_isNumeratorObjCand;
    Bool_t          Photon1_isDenominatorObj;
    Bool_t          Photon1_isSaturated;
+   Bool_t          Photon1_isMCTruthFake;
    Double_t        Photon2_pt;
    Double_t        Photon2_eta;
    Double_t        Photon2_phi;
@@ -1031,12 +1032,12 @@ public :
    Bool_t          Photon2_isNumeratorObjCand;
    Bool_t          Photon2_isDenominatorObj;
    Bool_t          Photon2_isSaturated;
+   Bool_t          Photon2_isMCTruthFake;
    Double_t        GenPhoton1_pt;
    Double_t        GenPhoton1_eta;
    Double_t        GenPhoton1_phi;
    Double_t        GenPhoton1_deltaR_match;
    Double_t        GenPhoton1_deltaR_matchDau;
-   Double_t        GenPhoton1_deltaR_FSR;
    Double_t        GenPhoton1_ptDiff_match;
    Int_t           GenPhoton1_matchCategory;
    Int_t           GenPhoton1_matchType;
@@ -1052,7 +1053,6 @@ public :
    Double_t        GenPhoton2_phi;
    Double_t        GenPhoton2_deltaR_match;
    Double_t        GenPhoton2_deltaR_matchDau;
-   Double_t        GenPhoton2_deltaR_FSR;
    Double_t        GenPhoton2_ptDiff_match;
    Int_t           GenPhoton2_matchCategory;
    Int_t           GenPhoton2_matchType;
@@ -1140,6 +1140,7 @@ public :
    Bool_t          TTPhoton1_isNumeratorObjCand;
    Bool_t          TTPhoton1_isDenominatorObj;
    Bool_t          TTPhoton1_isSaturated;
+   Bool_t          TTPhoton1_isMCTruthFake;
    Double_t        TTPhoton2_pt;
    Double_t        TTPhoton2_eta;
    Double_t        TTPhoton2_phi;
@@ -1195,6 +1196,7 @@ public :
    Bool_t          TTPhoton2_isNumeratorObjCand;
    Bool_t          TTPhoton2_isDenominatorObj;
    Bool_t          TTPhoton2_isSaturated;
+   Bool_t          TTPhoton2_isMCTruthFake;
    Double_t        TTDiphoton_Minv;
    Double_t        TTDiphoton_qt;
    Double_t        TTDiphoton_deltaPhi;
@@ -1261,6 +1263,7 @@ public :
    Bool_t          TFPhoton1_isNumeratorObjCand;
    Bool_t          TFPhoton1_isDenominatorObj;
    Bool_t          TFPhoton1_isSaturated;
+   Bool_t          TFPhoton1_isMCTruthFake;
    Double_t        TFPhoton2_pt;
    Double_t        TFPhoton2_eta;
    Double_t        TFPhoton2_phi;
@@ -1316,6 +1319,7 @@ public :
    Bool_t          TFPhoton2_isNumeratorObjCand;
    Bool_t          TFPhoton2_isDenominatorObj;
    Bool_t          TFPhoton2_isSaturated;
+   Bool_t          TFPhoton2_isMCTruthFake;
    Double_t        TFDiphoton_Minv;
    Double_t        TFDiphoton_qt;
    Double_t        TFDiphoton_deltaPhi;
@@ -1382,6 +1386,7 @@ public :
    Bool_t          FTPhoton1_isNumeratorObjCand;
    Bool_t          FTPhoton1_isDenominatorObj;
    Bool_t          FTPhoton1_isSaturated;
+   Bool_t          FTPhoton1_isMCTruthFake;
    Double_t        FTPhoton2_pt;
    Double_t        FTPhoton2_eta;
    Double_t        FTPhoton2_phi;
@@ -1437,6 +1442,7 @@ public :
    Bool_t          FTPhoton2_isNumeratorObjCand;
    Bool_t          FTPhoton2_isDenominatorObj;
    Bool_t          FTPhoton2_isSaturated;
+   Bool_t          FTPhoton2_isMCTruthFake;
    Double_t        FTDiphoton_Minv;
    Double_t        FTDiphoton_qt;
    Double_t        FTDiphoton_deltaPhi;
@@ -1503,6 +1509,7 @@ public :
    Bool_t          FFPhoton1_isNumeratorObjCand;
    Bool_t          FFPhoton1_isDenominatorObj;
    Bool_t          FFPhoton1_isSaturated;
+   Bool_t          FFPhoton1_isMCTruthFake;
    Double_t        FFPhoton2_pt;
    Double_t        FFPhoton2_eta;
    Double_t        FFPhoton2_phi;
@@ -1558,6 +1565,7 @@ public :
    Bool_t          FFPhoton2_isNumeratorObjCand;
    Bool_t          FFPhoton2_isDenominatorObj;
    Bool_t          FFPhoton2_isSaturated;
+   Bool_t          FFPhoton2_isMCTruthFake;
    Double_t        FFDiphoton_Minv;
    Double_t        FFDiphoton_qt;
    Double_t        FFDiphoton_deltaPhi;
@@ -1615,8 +1623,7 @@ public :
    virtual Int_t    GetEntry(Long64_t entry);
    virtual Long64_t LoadTree(Long64_t entry);
    virtual void     Init(TTree *tree);
-   // virtual void     Loop();
-   virtual void     Loop(TString outname = "fakeplots.root");
+   virtual void     Loop(TString outname, TString mode);
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
 };
@@ -1629,11 +1636,11 @@ extractFakeContributions::extractFakeContributions(TTree *tree) : fChain(0)
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("root://cmsxrootd.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/DoubleEG/crab_DoubleEG_Run2015D-16Dec2015-v2_MiniAOD/161021_033700/0000/DoubleEG_Run2015D-16Dec2015-v2_MiniAOD_99.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("root://cmseos.fnal.gov//store/user/skaplan/noreplica/FINALNTUPLES/DoubleEG/crab_DoubleEG__Run2016E-03Feb2017-v1__MINIAOD/170505_201721/0000/out_DoubleEG_Run2016E-03Feb2017-v1_numEvent100_21.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("root://cmsxrootd.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/DoubleEG/crab_DoubleEG_Run2015D-16Dec2015-v2_MiniAOD/161021_033700/0000/DoubleEG_Run2015D-16Dec2015-v2_MiniAOD_99.root");
+         f = new TFile("root://cmseos.fnal.gov//store/user/skaplan/noreplica/FINALNTUPLES/DoubleEG/crab_DoubleEG__Run2016E-03Feb2017-v1__MINIAOD/170505_201721/0000/out_DoubleEG_Run2016E-03Feb2017-v1_numEvent100_21.root");
       }
-      TDirectory * dir = (TDirectory*)f->Get("root://cmsxrootd.fnal.gov//store/user/skaplan/noreplica/NewCodeNtuples/DoubleEG/crab_DoubleEG_Run2015D-16Dec2015-v2_MiniAOD/161021_033700/0000/DoubleEG_Run2015D-16Dec2015-v2_MiniAOD_99.root:/diphoton");
+      TDirectory * dir = (TDirectory*)f->Get("root://cmseos.fnal.gov//store/user/skaplan/noreplica/FINALNTUPLES/DoubleEG/crab_DoubleEG__Run2016E-03Feb2017-v1__MINIAOD/170505_201721/0000/out_DoubleEG_Run2016E-03Feb2017-v1_numEvent100_21.root:/diphoton");
       dir->GetObject("fTree",tree);
 
    }

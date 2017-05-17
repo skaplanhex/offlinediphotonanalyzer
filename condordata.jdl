@@ -4,11 +4,11 @@ Should_Transfer_Files = YES
 WhenToTransferOutput = ON_EXIT
 Notification = NEVER
 x509userproxy = $ENV(X509_USER_PROXY)
-Executable = runData2016Plots.sh
+Executable = runDataPlots.sh
 should_transfer_files = YES
-transfer_input_files = /uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/fTree2016.C,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/fTree2016.h,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/driverData2016.C,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/PDF_sys_NormScaling_BB_long_22_2_17.root,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/PDF_sys_NormScaling_BE_long_22_2_17.root,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/kFactorFits.zip,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/scalefactors2016.root
-Output = /uscms/home/skaplan/condor/run_$(Process).stdout
-Error = /uscms/home/skaplan/condor/run_$(Process).stderr
-Log = /uscms/home/skaplan/condor/run_$(Process).condor
+transfer_input_files = /uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/fTree.C,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/fTree.h,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/driverData.C,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/PDF_sys_NormScaling_BB_long_22_2_17.root,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/PDF_sys_NormScaling_BE_long_22_2_17.root,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/kFactorFits.zip,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/scalefactors2016.root
+Output = /uscms/home/skaplan/condor/data_$(Process).stdout
+Error = /uscms/home/skaplan/condor/data_$(Process).stderr
+Log = /uscms/home/skaplan/condor/data_$(Process).condor
 Arguments = $(Process)
-Queue 7
+Queue 8

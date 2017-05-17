@@ -4,11 +4,11 @@ Should_Transfer_Files = YES
 WhenToTransferOutput = ON_EXIT
 Notification = NEVER
 x509userproxy = $ENV(X509_USER_PROXY)
-Executable = runFakes2016.sh
+Executable = runFakes.sh
 should_transfer_files = YES
-transfer_input_files = /uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/extractFakeContributions2016.C,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/extractFakeContributions2016.h,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/driver_extractFakes.C,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/avgFR2016.root
-Output = /uscms/home/skaplan/condor/run_$(Process).stdout
-Error = /uscms/home/skaplan/condor/run_$(Process).stderr
-Log = /uscms/home/skaplan/condor/run_$(Process).condor
+transfer_input_files = /uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/extractFakeContributions.C,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/extractFakeContributions.h,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/driver_extractFakes.C,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/avgFR2015.root,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/avgFR2016.root
+Output = /uscms/home/skaplan/condor/fake_$(Process).stdout
+Error = /uscms/home/skaplan/condor/fake_$(Process).stderr
+Log = /uscms/home/skaplan/condor/fake_$(Process).condor
 Arguments = $(Process)
-Queue 7
+Queue 8

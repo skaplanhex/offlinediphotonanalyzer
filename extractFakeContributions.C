@@ -126,8 +126,13 @@ double getFakeRate2016(double pt, double eta){
     }
     else return 0.;
 }
+double getFakeRate(double pt, double eta, TString mode){
+  if ( mode.EqualTo("2015") ) return getFakeRate2015(pt,eta);
+  else if ( mode.EqualTo("2016") ) return getFakeRate2016(pt,eta);
+  else return 0.; // output will be blank for fake bkg
+}
 
-void extractFakeContributions::Loop(TString outname = "fakeplots.root")
+void extractFakeContributions::Loop(TString outname, TString mode)
 {
 //   In a ROOT session, you can do:
 //      root> .L extractFakeContributions.C
@@ -153,19 +158,19 @@ void extractFakeContributions::Loop(TString outname = "fakeplots.root")
 //    fChain->GetEntry(jentry);       //read all branches
 //by  b_branchname->GetEntry(ientry); //read only this branch
 
-    Double_t bins_30003500[6] = {500.,600.,1100.,1800.,2600.,13000.};
-    Double_t bins[7] = {500.,600.,1100.,1800.,2600.,3500.,13000.};
+    Double_t bins_30003500[6] = {0.,600.,1100.,1800.,2600.,13000.};
+    Double_t bins[7] = {0.,600.,1100.,1800.,2600.,3500.,13000.};
 
-    TH1D* justtlMass_EBEB = createTH1D("justtlMass_EBEB","justtlMass_EBEB",625,500.,13000.,"m_{Tight-Loose} (GeV/c^{2})","Events");
-    TH1D* ltMass_EBEB = createTH1D("ltMass_EBEB","ltMass_EBEB",625,500.,13000.,"m_{Loose-Tight} (GeV/c^{2})","Events");
-    TH1D* tlMass_EBEB = createTH1D("tlMass_EBEB","tlMass_EBEB",625,500.,13000.,"m_{Tight-Loose} (GeV/c^{2})","Events");
-    TH1D* llMass_EBEB = createTH1D("llMass_EBEB","llMass_EBEB",625,500.,13000.,"m_{Loose-Loose} (GeV/c^{2})","Events");
-    TH1D* ffMass_EBEB = createTH1D("ffMass_EBEB","ffMass_EBEB",625,500.,13000.,"m_{fake} (GeV/c^{2})","Events");
-    TH1D* justtlMass_EBEE = createTH1D("justtlMass_EBEE","justtlMass_EBEE",625,500.,13000.,"m_{Tight-Loose} (GeV/c^{2})","Events");
-    TH1D* ltMass_EBEE = createTH1D("ltMass_EBEE","ltMass_EBEE",625,500.,13000.,"m_{Loose-Tight} (GeV/c^{2})","Events");
-    TH1D* tlMass_EBEE = createTH1D("tlMass_EBEE","tlMass_EBEE",625,500.,13000.,"m_{Tight-Loose} (GeV/c^{2})","Events");
-    TH1D* llMass_EBEE = createTH1D("llMass_EBEE","llMass_EBEE",625,500.,13000.,"m_{Loose-Loose} (GeV/c^{2})","Events");
-    TH1D* ffMass_EBEE = createTH1D("ffMass_EBEE","ffMass_EBEE",625,500.,13000.,"m_{fake} (GeV/c^{2})","Events");
+    TH1D* justtlMass_EBEB = createTH1D("justtlMass_EBEB","justtlMass_EBEB",650,0.,13000.,"m_{Tight-Loose} (GeV/c^{2})","Events");
+    TH1D* ltMass_EBEB = createTH1D("ltMass_EBEB","ltMass_EBEB",650,0.,13000.,"m_{Loose-Tight} (GeV/c^{2})","Events");
+    TH1D* tlMass_EBEB = createTH1D("tlMass_EBEB","tlMass_EBEB",650,0.,13000.,"m_{Tight-Loose} (GeV/c^{2})","Events");
+    TH1D* llMass_EBEB = createTH1D("llMass_EBEB","llMass_EBEB",650,0.,13000.,"m_{Loose-Loose} (GeV/c^{2})","Events");
+    TH1D* ffMass_EBEB = createTH1D("ffMass_EBEB","ffMass_EBEB",650,0.,13000.,"m_{fake} (GeV/c^{2})","Events");
+    TH1D* justtlMass_EBEE = createTH1D("justtlMass_EBEE","justtlMass_EBEE",650,0.,13000.,"m_{Tight-Loose} (GeV/c^{2})","Events");
+    TH1D* ltMass_EBEE = createTH1D("ltMass_EBEE","ltMass_EBEE",650,0.,13000.,"m_{Loose-Tight} (GeV/c^{2})","Events");
+    TH1D* tlMass_EBEE = createTH1D("tlMass_EBEE","tlMass_EBEE",650,0.,13000.,"m_{Tight-Loose} (GeV/c^{2})","Events");
+    TH1D* llMass_EBEE = createTH1D("llMass_EBEE","llMass_EBEE",650,0.,13000.,"m_{Loose-Loose} (GeV/c^{2})","Events");
+    TH1D* ffMass_EBEE = createTH1D("ffMass_EBEE","ffMass_EBEE",650,0.,13000.,"m_{fake} (GeV/c^{2})","Events");
 
     TH1D* justtlMass_EBEB_30003500varbin = createTH1D("justtlMass_EBEB_30003500varbin","justtlMass_EBEB",5,bins_30003500,"m_{Tight-Loose} (GeV/c^{2})","Events");
     TH1D* ltMass_EBEB_30003500varbin = createTH1D("ltMass_EBEB_30003500varbin","ltMass_EBEB",5,bins_30003500,"m_{Loose-Tight} (GeV/c^{2})","Events");
@@ -189,16 +194,16 @@ void extractFakeContributions::Loop(TString outname = "fakeplots.root")
     TH1D* llMass_EBEE_varbin = createTH1D("llMass_EBEE_varbin","llMass_EBEE",6,bins,"m_{Loose-Loose} (GeV/c^{2})","Events");
     TH1D* ffMass_EBEE_varbin = createTH1D("ffMass_EBEE_varbin","ffMass_EBEE",6,bins,"m_{fake} (GeV/c^{2})","Events");
 
-    TH1D* justgjMass_EBEB = createTH1D("justgjMass_EBEB","justgjMass_EBEB",625,500.,13000.,"m_{#gamma+jet} (GeV/c^{2})","Events");
-    TH1D* jgMass_EBEB = createTH1D("jgMass_EBEB","jgMass_EBEB",625,500.,13000.,"m_{jet+#gamma} (GeV/c^{2})","Events");
-    TH1D* gjMass_EBEB = createTH1D("gjMass_EBEB","gjMass_EBEB",625,500.,13000.,"m_{#gamma+jet} (GeV/c^{2})","Events");
-    TH1D* jjMass_EBEB = createTH1D("jjMass_EBEB","jjMass_EBEB",625,500.,13000.,"m_{jet+jet} (GeV/c^{2})","Events");
-    TH1D* fakeMass_EBEB = createTH1D("fakeMass_EBEB","fakeMass_EBEB",625,500.,13000.,"m_{fake} (GeV/c^{2})","Events");
-    TH1D* justgjMass_EBEE = createTH1D("justgjMass_EBEE","justgjMass_EBEE",625,500.,13000.,"m_{#gamma+jet} (GeV/c^{2})","Events");
-    TH1D* jgMass_EBEE = createTH1D("jgMass_EBEE","jgMass_EBEE",625,500.,13000.,"m_{jet+#gamma} (GeV/c^{2})","Events");
-    TH1D* gjMass_EBEE = createTH1D("gjMass_EBEE","gjMass_EBEE",625,500.,13000.,"m_{#gamma+jet} (GeV/c^{2})","Events");
-    TH1D* jjMass_EBEE = createTH1D("jjMass_EBEE","jjMass_EBEE",625,500.,13000.,"m_{jet+jet} (GeV/c^{2})","Events");
-    TH1D* fakeMass_EBEE = createTH1D("fakeMass_EBEE","fakeMass_EBEE",625,500.,13000.,"m_{fake} (GeV/c^{2})","Events");
+    TH1D* justgjMass_EBEB = createTH1D("justgjMass_EBEB","justgjMass_EBEB",650,0.,13000.,"m_{#gamma+jet} (GeV/c^{2})","Events");
+    TH1D* jgMass_EBEB = createTH1D("jgMass_EBEB","jgMass_EBEB",650,0.,13000.,"m_{jet+#gamma} (GeV/c^{2})","Events");
+    TH1D* gjMass_EBEB = createTH1D("gjMass_EBEB","gjMass_EBEB",650,0.,13000.,"m_{#gamma+jet} (GeV/c^{2})","Events");
+    TH1D* jjMass_EBEB = createTH1D("jjMass_EBEB","jjMass_EBEB",650,0.,13000.,"m_{jet+jet} (GeV/c^{2})","Events");
+    TH1D* fakeMass_EBEB = createTH1D("fakeMass_EBEB","fakeMass_EBEB",650,0.,13000.,"m_{fake} (GeV/c^{2})","Events");
+    TH1D* justgjMass_EBEE = createTH1D("justgjMass_EBEE","justgjMass_EBEE",650,0.,13000.,"m_{#gamma+jet} (GeV/c^{2})","Events");
+    TH1D* jgMass_EBEE = createTH1D("jgMass_EBEE","jgMass_EBEE",650,0.,13000.,"m_{jet+#gamma} (GeV/c^{2})","Events");
+    TH1D* gjMass_EBEE = createTH1D("gjMass_EBEE","gjMass_EBEE",650,0.,13000.,"m_{#gamma+jet} (GeV/c^{2})","Events");
+    TH1D* jjMass_EBEE = createTH1D("jjMass_EBEE","jjMass_EBEE",650,0.,13000.,"m_{jet+jet} (GeV/c^{2})","Events");
+    TH1D* fakeMass_EBEE = createTH1D("fakeMass_EBEE","fakeMass_EBEE",650,0.,13000.,"m_{fake} (GeV/c^{2})","Events");
 
     TH1D* justgjMass_EBEB_30003500varbin = createTH1D("justgjMass_EBEB_30003500varbin","justgjMass_EBEB",5,bins_30003500,"m_{#gamma+jet} (GeV/c^{2})","Events");
     TH1D* jgMass_EBEB_30003500varbin = createTH1D("jgMass_EBEB_30003500varbin","jgMass_EBEB",5,bins_30003500,"m_{jet+#gamma} (GeV/c^{2})","Events");
@@ -223,13 +228,13 @@ void extractFakeContributions::Loop(TString outname = "fakeplots.root")
     TH1D* fakeMass_EBEE_varbin = createTH1D("fakeMass_EBEE_varbin","fakeMass_EBEE",6,bins,"m_{fake} (GeV/c^{2})","Events");
 
     // systematics
-    TH1D* fakeMass_EBEB_EBUp = createTH1D("fakeMass_EBEB_EBUp","fakeMass_EBEB",625,500.,13000.,"m_{fake} (GeV/c^{2})","Events");
-    TH1D* fakeMass_EBEB_EBDown = createTH1D("fakeMass_EBEB_EBDown","fakeMass_EBEB",625,500.,13000.,"m_{fake} (GeV/c^{2})","Events");
+    TH1D* fakeMass_EBEB_EBUp = createTH1D("fakeMass_EBEB_EBUp","fakeMass_EBEB",650,0.,13000.,"m_{fake} (GeV/c^{2})","Events");
+    TH1D* fakeMass_EBEB_EBDown = createTH1D("fakeMass_EBEB_EBDown","fakeMass_EBEB",650,0.,13000.,"m_{fake} (GeV/c^{2})","Events");
 
-    TH1D* fakeMass_EBEE_EBUp = createTH1D("fakeMass_EBEE_EBUp","fakeMass_EBEE",625,500.,13000.,"m_{fake} (GeV/c^{2})","Events");
-    TH1D* fakeMass_EBEE_EBDown = createTH1D("fakeMass_EBEE_EBDown","fakeMass_EBEE",625,500.,13000.,"m_{fake} (GeV/c^{2})","Events");
-    TH1D* fakeMass_EBEE_EEUp = createTH1D("fakeMass_EBEE_EEUp","fakeMass_EBEE",625,500.,13000.,"m_{fake} (GeV/c^{2})","Events");
-    TH1D* fakeMass_EBEE_EEDown = createTH1D("fakeMass_EBEE_EEDown","fakeMass_EBEE",625,500.,13000.,"m_{fake} (GeV/c^{2})","Events");
+    TH1D* fakeMass_EBEE_EBUp = createTH1D("fakeMass_EBEE_EBUp","fakeMass_EBEE",650,0.,13000.,"m_{fake} (GeV/c^{2})","Events");
+    TH1D* fakeMass_EBEE_EBDown = createTH1D("fakeMass_EBEE_EBDown","fakeMass_EBEE",650,0.,13000.,"m_{fake} (GeV/c^{2})","Events");
+    TH1D* fakeMass_EBEE_EEUp = createTH1D("fakeMass_EBEE_EEUp","fakeMass_EBEE",650,0.,13000.,"m_{fake} (GeV/c^{2})","Events");
+    TH1D* fakeMass_EBEE_EEDown = createTH1D("fakeMass_EBEE_EEDown","fakeMass_EBEE",650,0.,13000.,"m_{fake} (GeV/c^{2})","Events");
 
     TH1D* fakeMass_EBEB_EBUp_varbin = createTH1D("fakeMass_EBEB_EBUp_varbin","fakeMass_EBEB",6,bins,"m_{fake} (GeV/c^{2})","Events");
     TH1D* fakeMass_EBEB_EBDown_varbin = createTH1D("fakeMass_EBEB_EBDown_varbin","fakeMass_EBEB",6,bins,"m_{fake} (GeV/c^{2})","Events");
@@ -268,7 +273,10 @@ void extractFakeContributions::Loop(TString outname = "fakeplots.root")
     // TH1D* effFF_pt1_EBEE = (TH1D*)effFile.Get("effFF_loose_hadronicOverEm010_pt1_EBEE");
     // TH1D* effFF_pt2_EBEE = (TH1D*)effFile.Get("effFF_loose_hadronicOverEm010_pt2_EBEE");
 
-    TFile* sysFile = new TFile("avgFR2015.root","read");
+    TString sysFileName = "avgFR"+mode+".root";
+
+    // TFile* sysFile = new TFile("avgFR2015.root","read");
+    TFile* sysFile = new TFile(sysFileName,"read");
     TH1D* jetEB = (TH1D*)sysFile->Get("JetHT_fakeRateEB_chIso5To10"); 
     TH1D* jetEE = (TH1D*)sysFile->Get("JetHT_fakeRateEE_chIso5To10"); 
     TH1D* muonEB = (TH1D*)sysFile->Get("DoubleMuon_fakeRateEB_chIso5To10"); 
@@ -312,13 +320,13 @@ void extractFakeContributions::Loop(TString outname = "fakeplots.root")
       if (LL && (FFPhoton1_pt<75. || FFPhoton2_pt<75.)) continue;
 
       // mass cuts
-      if (TL && TFDiphoton_isEBEB && TFDiphoton_Minv < 230.) continue;
-      if (LT && FTDiphoton_isEBEB && FTDiphoton_Minv < 230.) continue;
-      if (LL && FFDiphoton_isEBEB && FFDiphoton_Minv < 230.) continue;
+      if (TL && TFDiphoton_isEBEB && TFDiphoton_Minv < 500.) continue;
+      if (LT && FTDiphoton_isEBEB && FTDiphoton_Minv < 500.) continue;
+      if (LL && FFDiphoton_isEBEB && FFDiphoton_Minv < 500.) continue;
 
-      if (TL && (TFDiphoton_isEEEB||TFDiphoton_isEBEE) && TFDiphoton_Minv < 320.) continue;
-      if (LT && (FTDiphoton_isEEEB||FTDiphoton_isEBEE) && FTDiphoton_Minv < 320.) continue;
-      if (LL && (FFDiphoton_isEEEB||FFDiphoton_isEBEE) && FFDiphoton_Minv < 320.) continue;
+      if (TL && (TFDiphoton_isEEEB||TFDiphoton_isEBEE) && TFDiphoton_Minv < 500.) continue;
+      if (LT && (FTDiphoton_isEEEB||FTDiphoton_isEBEE) && FTDiphoton_Minv < 500.) continue;
+      if (LL && (FFDiphoton_isEEEB||FFDiphoton_isEBEE) && FFDiphoton_Minv < 500.) continue;
 
       // build systematic map
       double pt1;
@@ -343,7 +351,7 @@ void extractFakeContributions::Loop(TString outname = "fakeplots.root")
       sysFactorVec.push_back(sysFactorMap2);
       
       // if (TL){
-      //   double fakeRate = getFakeRate2015(TFPhoton2_pt,TFPhoton2_scEta);
+      //   double fakeRate = getFakeRate(TFPhoton2_pt,TFPhoton2_scEta);
       //   double ggMass = TFDiphoton_Minv;
       //   bool isEBEB = TFPhoton1_isEB && TFPhoton2_isEB;
       //   bool isEBEE = (TFPhoton1_isEB && TFPhoton2_isEE) || (TFPhoton1_isEE && TFPhoton2_isEB);
@@ -375,7 +383,7 @@ void extractFakeContributions::Loop(TString outname = "fakeplots.root")
       //   }
       // } // end TL contribution
       // if (LT){
-      //   double fakeRate = getFakeRate2015(FTPhoton1_pt,FTPhoton1_scEta);
+      //   double fakeRate = getFakeRate(FTPhoton1_pt,FTPhoton1_scEta);
       //   double ggMass = FTDiphoton_Minv;
       //   bool isEBEB = FTPhoton1_isEB && FTPhoton2_isEB;
       //   bool isEBEE = (FTPhoton1_isEB && FTPhoton2_isEE) || (FTPhoton1_isEE && FTPhoton2_isEB);
@@ -418,7 +426,7 @@ void extractFakeContributions::Loop(TString outname = "fakeplots.root")
         bool isEBEE;
         // bool effCorr = getEffCorr(Photon2_pt,);
         if (TL){
-            fakeRate = getFakeRate2015(TFPhoton2_pt,TFPhoton2_scEta);
+            fakeRate = getFakeRate(TFPhoton2_pt,TFPhoton2_scEta,mode);
             sysFactorMap = sysFactorVec[1];
             ggMass = TFDiphoton_Minv;
             isEBEB = TFDiphoton_isEBEB;
@@ -426,7 +434,7 @@ void extractFakeContributions::Loop(TString outname = "fakeplots.root")
             isEBEE = TFDiphoton_isEEEB || TFDiphoton_isEBEE;
         }
         else if (LT){
-            fakeRate = getFakeRate2015(FTPhoton1_pt,FTPhoton1_scEta);
+            fakeRate = getFakeRate(FTPhoton1_pt,FTPhoton1_scEta,mode);
             sysFactorMap = sysFactorVec[0];
             ggMass = FTDiphoton_Minv;
             isEBEB = FTDiphoton_isEBEB;
@@ -593,8 +601,8 @@ void extractFakeContributions::Loop(TString outname = "fakeplots.root")
         }
       } // end TL || LT block
       else if (LL){
-        double fakeRate1 = getFakeRate2015(FFPhoton1_pt,FFPhoton1_scEta);
-        double fakeRate2 = getFakeRate2015(FFPhoton2_pt,FFPhoton2_scEta);
+        double fakeRate1 = getFakeRate(FFPhoton1_pt,FFPhoton1_scEta,mode);
+        double fakeRate2 = getFakeRate(FFPhoton2_pt,FFPhoton2_scEta,mode);
         double fakeRateProd = fakeRate1 * fakeRate2;
         double ggMass = FFDiphoton_Minv;
         bool isEBEB = FFDiphoton_isEBEB;

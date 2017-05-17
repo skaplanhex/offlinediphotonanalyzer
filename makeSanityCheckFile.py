@@ -18,7 +18,9 @@ for conv in ("GRW","HLZ","Hewett"):
     outfile = TFile("thetainput_%s_20GeVbinning.root"%conv,"recreate")
 
     # first write signal
-    msVals = [3000,3500,4000,4500,5000,5500,6000]
+    msVals = [3000,3500,4000,4500,5000,5500,6000,7000,8000,9000,10000,11000]
+    if conv == "Hewett":
+        msVals = [3000,3500,4000,4500,5000,5500,6000]
     for ms in msVals:
         sigFileName = "ADD_Ms%i_signal_%s.root"%(ms,conv)
         f = TFile(sigFileName,"read")
@@ -170,7 +172,7 @@ for conv in ("GRW","HLZ","Hewett"):
     EBEEup.Write()
 
 
-    fakeFile = TFile("fakeplots20152016_pt75_mgg500.root","read")
+    fakeFile = TFile("fakeplots20152016.root","read")
     fakeFile.cd()
     EBEBfake = fakeFile.Get("fakeMass_EBEB")
     # EBEB_30003500fake = fakeFile.Get("fakeMass_EBEB_30003500varbin")
@@ -209,7 +211,7 @@ for conv in ("GRW","HLZ","Hewett"):
     EBEEfake_EEUp.Write()
 
     # dataFile = TFile("data2015plots_new3.root","read")
-    dataFile = TFile("dataplots20152016_pt75_mgg500.root","read")
+    dataFile = TFile("dataplots20152016.root","read")
     dataFile.cd()
 
     EBEBdata = dataFile.Get("ggMass_EBEB")
