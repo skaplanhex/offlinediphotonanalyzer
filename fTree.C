@@ -127,14 +127,15 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
     Double_t bins[7] = {0.,600.,1100.,1800.,2600.,3500.,13000.};
 
     bool calcPDFWeights = outfilename.Contains("ADDPlots_GGJets") || outfilename.Contains("ADDPlots_Ms") || outfilename.Contains("ADDPlots_ADDBkg");
+    bool isADD = outfilename.Contains("ADDPlots_Ms") || outfilename.Contains("ADDPlots_ADDBkg");
     bool applyKFactor = outfilename.Contains("ADDPlots_GGJets");
 
     cout << "mode: " << mode.Data() << endl;
     cout << "applyKFactor: " << 1.*applyKFactor << endl;
     cout << "calcPDFWeights: " << 1.*calcPDFWeights << endl;
 
-    TH1D* leadingPhoPt_EBEB = createTH1D("leadingPhoPt_EBEB","leadingPhoPt_EBEB",300.,0.,1500.,"Leading Photon pT (GeV/c)","Events");
-    TH1D* subleadingPhoPt_EBEB = createTH1D("subleadingPhoPt_EBEB","subleadingPhoPt_EBEB",300,0.,1500.,"Subleading Photon pT (GeV/c)","Events");
+    TH1D* leadingPhoPt_EBEB = createTH1D("leadingPhoPt_EBEB","leadingPhoPt_EBEB",300.,0.,1500.,"Leading Photon pT (GeV)","Events");
+    TH1D* subleadingPhoPt_EBEB = createTH1D("subleadingPhoPt_EBEB","subleadingPhoPt_EBEB",300,0.,1500.,"Subleading Photon pT (GeV)","Events");
     TH1D* leadingPhoEta_EBEB = createTH1D("leadingPhoEta_EBEB","leadingPhoEta_EBEB",100,-5.,5.,"Leading Photon #eta","Events");
     TH1D* subleadingPhoEta_EBEB = createTH1D("subleadingPhoEta_EBEB","subleadingPhoEta_EBEB",100,-5.,5.,"Subleading Photon #eta","Events");
     TH1D* leadingPhoPhi_EBEB = createTH1D("leadingPhoPhi_EBEB","leadingPhoPhi_EBEB",100,-3.141593,3.141593,"Leading Photon #phi","Events");
@@ -146,8 +147,8 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
 
     TH1D* ggMass_EBEB_20004000 = createTH1D("ggMass_EBEB_20004000","ggMass_EBEB_20004000 (raw yield)",1,2000.,4000.,"m_{#gamma#gamma} (GeV)","Events");
     TH1D* ggMass_EBEE_20004000 = createTH1D("ggMass_EBEE_20004000","ggMass_EBEE_20004000 (raw yield)",1,2000.,4000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* leadingPhoPt_EBEE = createTH1D("leadingPhoPt_EBEE","leadingPhoPt_EBEE",300.,0.,1500.,"Leading Photon pT (GeV/c)","Events");
-    TH1D* subleadingPhoPt_EBEE = createTH1D("subleadingPhoPt_EBEE","subleadingPhoPt_EBEE",300,0.,1500.,"Subleading Photon pT (GeV/c)","Events");
+    TH1D* leadingPhoPt_EBEE = createTH1D("leadingPhoPt_EBEE","leadingPhoPt_EBEE",300.,0.,1500.,"Leading Photon pT (GeV)","Events");
+    TH1D* subleadingPhoPt_EBEE = createTH1D("subleadingPhoPt_EBEE","subleadingPhoPt_EBEE",300,0.,1500.,"Subleading Photon pT (GeV)","Events");
     TH1D* leadingPhoEta_EBEE = createTH1D("leadingPhoEta_EBEE","leadingPhoEta_EBEE",100,-5.,5.,"Leading Photon #eta","Events");
     TH1D* subleadingPhoEta_EBEE = createTH1D("subleadingPhoEta_EBEE","subleadingPhoEta_EBEE",100,-5.,5.,"Subleading Photon #eta","Events");
     TH1D* leadingPhoPhi_EBEE = createTH1D("leadingPhoPhi_EBEE","leadingPhoPhi_EBEE",100,-3.141593,3.141593,"Leading Photon #phi","Events");
@@ -160,9 +161,13 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
 
     TH1D* hEventWeight = createTH1D("hEventWeight","",101,-0.05,1.05,"Event Weight","Events");
 
-    TH1D* cosThetaStar_EBEB_mgg680To740 = new TH1D("cosThetaStar_EBEB_mgg680To740",";|cos(#theta^*)|;Events",100,0.,1.);
+    TH1D* cosThetaStar_EBEB = new TH1D("cosThetaStar_EBEB",";|cos(#theta^*)|;Events",50,0.,1.);
+    TH1D* cosThetaStar_EBEE = new TH1D("cosThetaStar_EBEE",";|cos(#theta^*)|;Events",50,0.,1.);
+    TH1D* cosThetaStar_EBEB_mgg500To740 = new TH1D("cosThetaStar_EBEB_mgg500To740",";|cos(#theta^*)|;Events",100,0.,1.);
     TH1D* cosThetaStar_EBEB_mgg740To760 = new TH1D("cosThetaStar_EBEB_mgg740To760",";|cos(#theta^*)|;Events",100,0.,1.);
     TH1D* cosThetaStar_EBEB_mgg760To820 = new TH1D("cosThetaStar_EBEB_mgg760To820",";|cos(#theta^*)|;Events",100,0.,1.);
+
+    TH2D* eta1Vseta2_EBEB_mgg500To740 = new TH2D("eta1Vseta2_EBEB_mgg500To740",";#eta_{1};#eta_{2}",20,-1.4442,1.4442,20,-1.4442,1.4442);
 
     // pdf variation
     std::vector<TH1D*> vec_pdfVar_ggMass_EBEB;
@@ -242,6 +247,9 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
     // dPhi distributions
     TH1D* dPhi_EBEB = createTH1D("dPhi_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
     TH1D* dPhi_EBEE = createTH1D("dPhi_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
+    // dEta distributions
+    TH1D* dEta_EBEB = createTH1D("dEta_EBEB","",50,-2.89,2.89,"#Delta#eta","Events");
+    TH1D* dEta_EBEE = createTH1D("dEta_EBEE","",80,-5.,5.,"#Delta#eta","Events");
 
     TH1D* dPhi_raw_mgg320To500_EBEB = createTH1D("dPhi_raw_mgg320To500_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
     TH1D* dPhi_raw_mgg500To750_EBEB = createTH1D("dPhi_raw_mgg500To750_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
@@ -275,6 +283,28 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
     TH1D* dPhi_Diphox_mgg500To750_EBEE = createTH1D("dPhi_Diphox_mgg500To750_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
     TH1D* dPhi_Diphox_mgg750To1000_EBEE = createTH1D("dPhi_Diphox_mgg750To1000_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
     TH1D* dPhi_Diphox_mgg500To1000_EBEE = createTH1D("dPhi_Diphox_mgg500To1000_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
+
+    // other id variables
+
+    TH1D* hOverE_photon1_EBEB = new TH1D("hOverE_photon1_EBEB",";H/E;Events",25,0.,0.05);
+    TH1D* chIso_photon1_EBEB = new TH1D("chIso_photon1_EBEB",";Iso_{ch} (GeV);Events",12,0.,5.);
+    TH1D* phoIso_photon1_EBEB = new TH1D("phoIso_photon1_EBEB",";#overline{Iso}_{#gamma} (GeV);Events",16,0.,2.75);
+    TH1D* sieie_photon1_EBEB = new TH1D("sieie_photon1_EBEB",";#sigma_{i#etai#eta};Events",50,0.,0.0112);
+
+    TH1D* hOverE_photon1_EBEE = new TH1D("hOverE_photon1_EBEE",";H/E;Events",25,0.,0.05);
+    TH1D* chIso_photon1_EBEE = new TH1D("chIso_photon1_EBEE",";Iso_{ch} (GeV);Events",12,0.,5.);
+    TH1D* phoIso_photon1_EBEE = new TH1D("phoIso_photon1_EBEE",";#overline{Iso}_{#gamma} (GeV);Events",16,0.,2.);
+    TH1D* sieie_photon1_EBEE = new TH1D("sieie_photon1_EBEE",";#sigma_{i#etai#eta};Events",50,0.,0.03);
+
+    TH1D* hOverE_photon2_EBEB = new TH1D("hOverE_photon2_EBEB",";H/E;Events",25,0.,0.05);
+    TH1D* chIso_photon2_EBEB = new TH1D("chIso_photon2_EBEB",";Iso_{ch} (GeV);Events",12,0.,5.);
+    TH1D* phoIso_photon2_EBEB = new TH1D("phoIso_photon2_EBEB",";#overline{Iso}_{#gamma} (GeV);Events",16,0.,2.75);
+    TH1D* sieie_photon2_EBEB = new TH1D("sieie_photon2_EBEB",";#sigma_{i#etai#eta};Events",50,0.,0.0112);
+
+    TH1D* hOverE_photon2_EBEE = new TH1D("hOverE_photon2_EBEE",";H/E;Events",25,0.,0.05);
+    TH1D* chIso_photon2_EBEE = new TH1D("chIso_photon2_EBEE",";Iso_{ch} (GeV);Events",12,0.,5.);
+    TH1D* phoIso_photon2_EBEE = new TH1D("phoIso_photon2_EBEE",";#overline{Iso}_{#gamma} (GeV);Events",16,0.,2.);
+    TH1D* sieie_photon2_EBEE = new TH1D("sieie_photon2_EBEE",";#sigma_{i#etai#eta};Events",50,0.,0.03);
 
     if (calcPDFWeights){
 
@@ -362,9 +392,34 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
     ggMass_sat_EBEB->Sumw2();
     ggMass_sat_EBEE->Sumw2();
 
-    cosThetaStar_EBEB_mgg680To740->Sumw2();
+    hOverE_photon1_EBEB->Sumw2();
+    chIso_photon1_EBEB->Sumw2();
+    phoIso_photon1_EBEB->Sumw2();
+    sieie_photon1_EBEB->Sumw2();
+    hOverE_photon1_EBEE->Sumw2();
+    chIso_photon1_EBEE->Sumw2();
+    phoIso_photon1_EBEE->Sumw2();
+    sieie_photon1_EBEE->Sumw2();
+
+    hOverE_photon2_EBEB->Sumw2();
+    chIso_photon2_EBEB->Sumw2();
+    phoIso_photon2_EBEB->Sumw2();
+    sieie_photon2_EBEB->Sumw2();
+    hOverE_photon2_EBEE->Sumw2();
+    chIso_photon2_EBEE->Sumw2();
+    phoIso_photon2_EBEE->Sumw2();
+    sieie_photon2_EBEE->Sumw2();
+
+    cosThetaStar_EBEB->Sumw2();
+    cosThetaStar_EBEE->Sumw2();
+
+    cosThetaStar_EBEB_mgg500To740->Sumw2();
     cosThetaStar_EBEB_mgg740To760->Sumw2();
     cosThetaStar_EBEB_mgg760To820->Sumw2();
+    eta1Vseta2_EBEB_mgg500To740->Sumw2();
+
+    dEta_EBEB->Sumw2();
+    dEta_EBEE->Sumw2();
 
     dPhi_EBEB->Sumw2();
     dPhi_EBEE->Sumw2();
@@ -511,6 +566,10 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
         // if neither an EBEB nor an EBEE event, ignore it.
         if (!EBEB && !EBEE) continue;
 
+        // print out high mass events in data to make fireworks printouts
+        if (mode.EqualTo("DATA") && Diphoton_Minv > 1900.){
+            cout << "(mgg, run:ls:eventNum) = " << "(" << Diphoton_Minv << ", " << Event_run << ":" << Event_LS << ":" << Event_evnum << ")" << endl;
+        }
         // set event weights, luminosity, k-factor, etc.
         double eventWeight = 1.;
         double nominalKFactor = 1.;
@@ -529,19 +588,23 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
             if (applyKFactor && EBEB) nominalKFactor = getKFactor(kFactor_default_EBEB,GenDiphoton_Minv);
             else if (applyKFactor && EBEE) nominalKFactor = getKFactor(kFactor_default_EBEE,GenDiphoton_Minv);
             if (applyKFactor) eventWeight *= nominalKFactor;
+            // for clockwork model
+            //if (isADD) eventWeight *= (1./(GenDiphoton_Minv*GenDiphoton_Minv*GenDiphoton_Minv*GenDiphoton_Minv*GenDiphoton_Minv));
         }
         hEventWeight->Fill(Event_weightAll);
 
         // calculate dPhi
         double dPhi = fabs( Diphoton_deltaPhi );
+        // double cosThetaStar = tanh( fabs(  (Photon1_eta - Photon2_eta) / 2.  )  );
+        double cosThetaStar = sqrt(       ( cosh(Photon1_eta - Photon2_eta) - 1. ) / (  cosh(Photon1_eta - Photon2_eta) - cos(Photon1_phi - Photon2_phi)    )       );
 
         if (EBEB){
             leadingPhoPt_EBEB->Fill(Photon1_pt,eventWeight);
             subleadingPhoPt_EBEB->Fill(Photon2_pt,eventWeight);
-            leadingPhoEta_EBEB->Fill(Photon1_scEta,eventWeight);
-            subleadingPhoEta_EBEB->Fill(Photon2_scEta,eventWeight);
-            leadingPhoPhi_EBEB->Fill(Photon1_scPhi,eventWeight);
-            subleadingPhoPhi_EBEB->Fill(Photon2_scPhi,eventWeight);
+            leadingPhoEta_EBEB->Fill(Photon1_eta,eventWeight);
+            subleadingPhoEta_EBEB->Fill(Photon2_eta,eventWeight);
+            leadingPhoPhi_EBEB->Fill(Photon1_phi,eventWeight);
+            subleadingPhoPhi_EBEB->Fill(Photon2_phi,eventWeight);
             ggMass_EBEB->Fill(Diphoton_Minv,eventWeight);
             ggMass_EBEB_JPBinning->Fill(Diphoton_Minv,eventWeight);
             ggMass_EBEB_30003500varbin->Fill(Diphoton_Minv,eventWeight);
@@ -554,10 +617,24 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
             ggMass_EBEB_20004000->Fill(Diphoton_Minv); //no weight because we want the raw yield!
 
             dPhi_EBEB->Fill(dPhi,eventWeight);
+            dEta_EBEB->Fill(Diphoton_deltaEta,eventWeight);
             dRgg_EBEB->Fill(Diphoton_deltaR,eventWeight);
 
-            double cosThetaStar = tanh( fabs(  (Photon1_scEta - Photon2_scEta) / 2.  )  );
-            if (680. < Diphoton_Minv && Diphoton_Minv < 740.) cosThetaStar_EBEB_mgg680To740->Fill(cosThetaStar,eventWeight);
+            hOverE_photon1_EBEB->Fill(Photon1_hadTowerOverEm,eventWeight);
+            chIso_photon1_EBEB->Fill(Photon1_chargedHadIso03,eventWeight);
+            phoIso_photon1_EBEB->Fill(Photon1_corPhotonIso03,eventWeight);
+            sieie_photon1_EBEB->Fill(Photon1_sigmaIetaIeta5x5,eventWeight);
+
+            hOverE_photon2_EBEB->Fill(Photon2_hadTowerOverEm,eventWeight);
+            chIso_photon2_EBEB->Fill(Photon2_chargedHadIso03,eventWeight);
+            phoIso_photon2_EBEB->Fill(Photon2_corPhotonIso03,eventWeight);
+            sieie_photon2_EBEB->Fill(Photon2_sigmaIetaIeta5x5,eventWeight);
+
+            cosThetaStar_EBEB->Fill(cosThetaStar,eventWeight);
+            if (500. < Diphoton_Minv && Diphoton_Minv < 740.){
+                cosThetaStar_EBEB_mgg500To740->Fill(cosThetaStar,eventWeight);
+                eta1Vseta2_EBEB_mgg500To740->Fill(Photon1_scEta,Photon2_scEta,eventWeight);
+            }
             else if (740. < Diphoton_Minv && Diphoton_Minv < 760.) cosThetaStar_EBEB_mgg740To760->Fill(cosThetaStar,eventWeight);
             else if (760. < Diphoton_Minv && Diphoton_Minv < 820.) cosThetaStar_EBEB_mgg760To820->Fill(cosThetaStar,eventWeight);
 
@@ -630,12 +707,23 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
 
             ggMass_EBEE_20004000->Fill(Diphoton_Minv); //no weight because we want the raw yield!
 
+            hOverE_photon1_EBEE->Fill(Photon1_hadTowerOverEm,eventWeight);
+            chIso_photon1_EBEE->Fill(Photon1_chargedHadIso03,eventWeight);
+            phoIso_photon1_EBEE->Fill(Photon1_corPhotonIso03,eventWeight);
+            sieie_photon1_EBEE->Fill(Photon1_sigmaIetaIeta5x5,eventWeight);
+            hOverE_photon2_EBEE->Fill(Photon2_hadTowerOverEm,eventWeight);
+            chIso_photon2_EBEE->Fill(Photon2_chargedHadIso03,eventWeight);
+            phoIso_photon2_EBEE->Fill(Photon2_corPhotonIso03,eventWeight);
+            sieie_photon2_EBEE->Fill(Photon2_sigmaIetaIeta5x5,eventWeight);
+
             if (Photon1_isSaturated || Photon2_isSaturated){
                 ggMass_sat_EBEE->Fill(Diphoton_Minv,eventWeight);
             }
 
             dPhi_EBEE->Fill(dPhi,eventWeight);
+            dEta_EBEE->Fill(Diphoton_deltaEta,eventWeight);
             dRgg_EBEE->Fill(Diphoton_deltaR,eventWeight);
+            cosThetaStar_EBEE->Fill(cosThetaStar,eventWeight);
 
             if (320. < Diphoton_Minv && Diphoton_Minv < 500.){
                 dPhi_raw_mgg320To500_EBEE->Fill(dPhi,eventWeight/nominalKFactor);
@@ -767,6 +855,24 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
     dPhi_EBEE->Write();
     dRgg_EBEB->Write();
     dRgg_EBEE->Write();
+    dEta_EBEB->Write();
+    dEta_EBEE->Write();
+    hOverE_photon1_EBEB->Write();
+    chIso_photon1_EBEB->Write();
+    phoIso_photon1_EBEB->Write();
+    sieie_photon1_EBEB->Write();
+    hOverE_photon1_EBEE->Write();
+    chIso_photon1_EBEE->Write();
+    phoIso_photon1_EBEE->Write();
+    sieie_photon1_EBEE->Write();
+    hOverE_photon2_EBEB->Write();
+    chIso_photon2_EBEB->Write();
+    phoIso_photon2_EBEB->Write();
+    sieie_photon2_EBEB->Write();
+    hOverE_photon2_EBEE->Write();
+    chIso_photon2_EBEE->Write();
+    phoIso_photon2_EBEE->Write();
+    sieie_photon2_EBEE->Write();
     dPhi_raw_mgg320To500_EBEB->Write();
     dPhi_raw_mgg500To750_EBEB->Write();
     dPhi_raw_mgg750To1000_EBEB->Write();
@@ -806,9 +912,12 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
     allEBEE_pt2->Write();
     allIncl_pt2->Write();
 
-    cosThetaStar_EBEB_mgg680To740->Write();
+    cosThetaStar_EBEB->Write();
+    cosThetaStar_EBEE->Write();
+    cosThetaStar_EBEB_mgg500To740->Write();
     cosThetaStar_EBEB_mgg740To760->Write();
     cosThetaStar_EBEB_mgg760To820->Write();
+    eta1Vseta2_EBEB_mgg500To740->Write();
    
     pdfVarFileEBEB.Close();
     pdfVarFileEBEE.Close();
