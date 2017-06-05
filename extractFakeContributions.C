@@ -246,49 +246,50 @@ void extractFakeContributions::Loop(TString outname, TString mode)
 
     TH1D* hOverE_photon1_EBEB = new TH1D("hOverE_photon1_EBEB",";H/E;Events",25,0.,0.05);
     TH1D* chIso_photon1_EBEB = new TH1D("chIso_photon1_EBEB",";Iso_{ch} (GeV);Events",12,0.,5.);
-    TH1D* phoIso_photon1_EBEB = new TH1D("phoIso_photon1_EBEB",";#overline{Iso}_{#gamma} (GeV);Events",16,0.,2.75);
+    TH1D* phoIso_photon1_EBEB = new TH1D("phoIso_photon1_EBEB",";#bar{Iso}_{#gamma} (GeV);Events",16,0.,2.75);
     TH1D* sieie_photon1_EBEB = new TH1D("sieie_photon1_EBEB",";#sigma_{i#etai#eta};Events",50,0.,0.0112);
 
     TH1D* hOverE_photon1_EBEE = new TH1D("hOverE_photon1_EBEE",";H/E;Events",25,0.,0.05);
     TH1D* chIso_photon1_EBEE = new TH1D("chIso_photon1_EBEE",";Iso_{ch} (GeV);Events",12,0.,5.);
-    TH1D* phoIso_photon1_EBEE = new TH1D("phoIso_photon1_EBEE",";#overline{Iso}_{#gamma} (GeV);Events",16,0.,2.);
+    TH1D* phoIso_photon1_EBEE = new TH1D("phoIso_photon1_EBEE",";#bar{Iso}_{#gamma} (GeV);Events",16,0.,2.75);
     TH1D* sieie_photon1_EBEE = new TH1D("sieie_photon1_EBEE",";#sigma_{i#etai#eta};Events",50,0.,0.03);
 
     TH1D* hOverE_photon2_EBEB = new TH1D("hOverE_photon2_EBEB",";H/E;Events",25,0.,0.05);
     TH1D* chIso_photon2_EBEB = new TH1D("chIso_photon2_EBEB",";Iso_{ch} (GeV);Events",12,0.,5.);
-    TH1D* phoIso_photon2_EBEB = new TH1D("phoIso_photon2_EBEB",";#overline{Iso}_{#gamma} (GeV);Events",16,0.,2.75);
+    TH1D* phoIso_photon2_EBEB = new TH1D("phoIso_photon2_EBEB",";#bar{Iso}_{#gamma} (GeV);Events",16,0.,2.75);
     TH1D* sieie_photon2_EBEB = new TH1D("sieie_photon2_EBEB",";#sigma_{i#etai#eta};Events",50,0.,0.0112);
 
     TH1D* hOverE_photon2_EBEE = new TH1D("hOverE_photon2_EBEE",";H/E;Events",25,0.,0.05);
     TH1D* chIso_photon2_EBEE = new TH1D("chIso_photon2_EBEE",";Iso_{ch} (GeV);Events",12,0.,5.);
-    TH1D* phoIso_photon2_EBEE = new TH1D("phoIso_photon2_EBEE",";#overline{Iso}_{#gamma} (GeV);Events",16,0.,2.);
+    TH1D* phoIso_photon2_EBEE = new TH1D("phoIso_photon2_EBEE",";#bar{Iso}_{#gamma} (GeV);Events",16,0.,2.75);
     TH1D* sieie_photon2_EBEE = new TH1D("sieie_photon2_EBEE",";#sigma_{i#etai#eta};Events",50,0.,0.03);
 
-    TH1D* leadingPhoPt_EBEB = createTH1D("leadingPhoPt_EBEB","leadingPhoPt_EBEB",300.,0.,1500.,"Leading Photon pT (GeV)","Events");
-    TH1D* subleadingPhoPt_EBEB = createTH1D("subleadingPhoPt_EBEB","subleadingPhoPt_EBEB",300,0.,1500.,"Subleading Photon pT (GeV)","Events");
-    TH1D* leadingPhoEta_EBEB = createTH1D("leadingPhoEta_EBEB","leadingPhoEta_EBEB",100,-5.,5.,"Leading Photon #eta","Events");
-    TH1D* subleadingPhoEta_EBEB = createTH1D("subleadingPhoEta_EBEB","subleadingPhoEta_EBEB",100,-5.,5.,"Subleading Photon #eta","Events");
-    TH1D* leadingPhoPhi_EBEB = createTH1D("leadingPhoPhi_EBEB","leadingPhoPhi_EBEB",100,-3.141593,3.141593,"Leading Photon #phi","Events");
-    TH1D* subleadingPhoPhi_EBEB = createTH1D("subleadingPhoPhi_EBEB","subleadingPhoPhi_EBEB",100,-3.141593,3.141593,"Subleading Photon #phi","Events");
-    TH1D* leadingPhoPt_EBEE = createTH1D("leadingPhoPt_EBEE","leadingPhoPt_EBEE",300.,0.,1500.,"Leading Photon pT (GeV)","Events");
-    TH1D* subleadingPhoPt_EBEE = createTH1D("subleadingPhoPt_EBEE","subleadingPhoPt_EBEE",300,0.,1500.,"Subleading Photon pT (GeV)","Events");
-    TH1D* leadingPhoEta_EBEE = createTH1D("leadingPhoEta_EBEE","leadingPhoEta_EBEE",100,-5.,5.,"Leading Photon #eta","Events");
-    TH1D* subleadingPhoEta_EBEE = createTH1D("subleadingPhoEta_EBEE","subleadingPhoEta_EBEE",100,-5.,5.,"Subleading Photon #eta","Events");
-    TH1D* leadingPhoPhi_EBEE = createTH1D("leadingPhoPhi_EBEE","leadingPhoPhi_EBEE",100,-3.141593,3.141593,"Leading Photon #phi","Events");
-    TH1D* subleadingPhoPhi_EBEE = createTH1D("subleadingPhoPhi_EBEE","subleadingPhoPhi_EBEE",100,-3.141593,3.141593,"Subleading Photon #phi","Events");
+    TH1D* leadingPhoPt_EBEB = createTH1D("leadingPhoPt_EBEB","leadingPhoPt_EBEB",50,75.,1500.,"p_{T}(#gamma_{1}) [GeV]","Events");
+    TH1D* subleadingPhoPt_EBEB = createTH1D("subleadingPhoPt_EBEB","subleadingPhoPt_EBEB",50,75.,1500.,"p_{T}(#gamma_{2}) [GeV]","Events");
+    TH1D* leadingPhoEta_EBEB = createTH1D("leadingPhoEta_EBEB","leadingPhoEta_EBEB",100,-5.,5.,"#eta(#gamma_{1})","Events");
+    TH1D* subleadingPhoEta_EBEB = createTH1D("subleadingPhoEta_EBEB","subleadingPhoEta_EBEB",100,-5.,5.,"#eta(#gamma_{2})","Events");
+    TH1D* leadingPhoPhi_EBEB = createTH1D("leadingPhoPhi_EBEB","leadingPhoPhi_EBEB",25,-3.141593,3.141593,"#phi(#gamma_{1})","Events");
+    TH1D* subleadingPhoPhi_EBEB = createTH1D("subleadingPhoPhi_EBEB","subleadingPhoPhi_EBEB",25,-3.141593,3.141593,"#phi(#gamma_{2})","Events");
+
+    TH1D* leadingPhoPt_EBEE = createTH1D("leadingPhoPt_EBEE","leadingPhoPt_EBEE",50,75.,1500.,"p_{T}(#gamma_{1}) [GeV]","Events");
+    TH1D* subleadingPhoPt_EBEE = createTH1D("subleadingPhoPt_EBEE","subleadingPhoPt_EBEE",50,75.,1500.,"p_{T}(#gamma_{2}) [GeV]","Events");
+    TH1D* leadingPhoEta_EBEE = createTH1D("leadingPhoEta_EBEE","leadingPhoEta_EBEE",100,-5.,5.,"#eta(#gamma_{1})","Events");
+    TH1D* subleadingPhoEta_EBEE = createTH1D("subleadingPhoEta_EBEE","subleadingPhoEta_EBEE",100,-5.,5.,"#eta(#gamma_{2})","Events");
+    TH1D* leadingPhoPhi_EBEE = createTH1D("leadingPhoPhi_EBEE","leadingPhoPhi_EBEE",25,-3.141593,3.141593,"#phi(#gamma_{1})","Events");
+    TH1D* subleadingPhoPhi_EBEE = createTH1D("subleadingPhoPhi_EBEE","subleadingPhoPhi_EBEE",25,-3.141593,3.141593,"#phi(#gamma_{2})","Events");;
 
     // dPhi distributions
-    TH1D* dPhi_EBEB = createTH1D("dPhi_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_EBEE = createTH1D("dPhi_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
+    TH1D* dPhi_EBEB = createTH1D("dPhi_EBEB","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_EBEE = createTH1D("dPhi_EBEE","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
     // dEta distributions
-    TH1D* dEta_EBEB = createTH1D("dEta_EBEB","",50,-2.89,2.89,"#Delta#eta","Events");
-    TH1D* dEta_EBEE = createTH1D("dEta_EBEE","",80,-5.,5.,"#Delta#eta","Events");
+    TH1D* dEta_EBEB = createTH1D("dEta_EBEB","",40,0.,2.89,"|#Delta#eta_{#gamma#gamma}|","Events");
+    TH1D* dEta_EBEE = createTH1D("dEta_EBEE","",60,0.,5.,"|#Delta#eta_{#gamma#gamma}|","Events");
     // dR
-    TH1D* dRgg_EBEB = createTH1D("dRgg_EBEB","",100,0.,6," #DeltaR_{#gamma#gamma}","Events");
-    TH1D* dRgg_EBEE = createTH1D("dRgg_EBEE","",100,0.,6," #DeltaR_{#gamma#gamma}","Events");
+    TH1D* dRgg_EBEB = createTH1D("dRgg_EBEB","",30,0.,6," #DeltaR_{#gamma#gamma}","Events");
+    TH1D* dRgg_EBEE = createTH1D("dRgg_EBEE","",30,0.,6," #DeltaR_{#gamma#gamma}","Events");
     // cos(theta*)
-    TH1D* cosThetaStar_EBEB = new TH1D("cosThetaStar_EBEB",";|cos(#theta^*)|;Events",50,0.,1.);
-    TH1D* cosThetaStar_EBEE = new TH1D("cosThetaStar_EBEE",";|cos(#theta^*)|;Events",50,0.,1.);
+    TH1D* cosThetaStar_EBEB = new TH1D("cosThetaStar_EBEB",";|cos(#theta*)|;Events",25,0.,1.);
+    TH1D* cosThetaStar_EBEE = new TH1D("cosThetaStar_EBEE",";|cos(#theta*)|;Events",25,0.,1.);
 
 
     // leadingPhoPt_EBEB->Sumw2();
@@ -415,7 +416,18 @@ void extractFakeContributions::Loop(TString outname, TString mode)
       if (LT && (FTDiphoton_isEEEB||FTDiphoton_isEBEE) && FTDiphoton_Minv < 500.) continue;
       if (LL && (FFDiphoton_isEEEB||FFDiphoton_isEBEE) && FFDiphoton_Minv < 500.) continue;
 
-      // for fireworks printout
+      // dR cut
+      if (TL && TFDiphoton_isEBEB && TFDiphoton_deltaR < 0.45) continue;
+      if (LT && FTDiphoton_isEBEB && FTDiphoton_deltaR < 0.45) continue;
+      if (LL && FFDiphoton_isEBEB && FFDiphoton_deltaR < 0.45) continue;
+
+      if (TL && (TFDiphoton_isEEEB||TFDiphoton_isEBEE) && TFDiphoton_deltaR < 0.45) continue;
+      if (LT && (FTDiphoton_isEEEB||FTDiphoton_isEBEE) && FTDiphoton_deltaR < 0.45) continue;
+      if (LL && (FFDiphoton_isEEEB||FFDiphoton_isEBEE) && FFDiphoton_deltaR < 0.45) continue;
+
+
+
+      // for fireworks printout.  Not perfect, need to check the etas!!!
       if (TFDiphoton_Minv > 2600.){
           cout << "tight-loose (mgg, run:ls:eventNum) = " << "(" << TFDiphoton_Minv << ", " << Event_run << ":" << Event_LS << ":" << Event_evnum << ")" << endl;
       }
@@ -585,7 +597,7 @@ void extractFakeContributions::Loop(TString outname, TString mode)
               sieie_photon2_EBEB->Fill(TFPhoton2_sigmaIetaIeta5x5,fakeRate);
 
               dPhi_EBEB->Fill(fabs(TFDiphoton_deltaPhi),fakeRate);
-              dEta_EBEB->Fill(TFDiphoton_deltaEta,fakeRate);
+              dEta_EBEB->Fill(fabs(TFDiphoton_deltaEta),fakeRate);
               dRgg_EBEB->Fill(TFDiphoton_deltaR,fakeRate);
 
               double cosThetaStar = sqrt(       ( cosh(TFPhoton1_eta - TFPhoton2_eta) - 1. ) / (  cosh(TFPhoton1_eta - TFPhoton2_eta) - cos(TFPhoton1_phi - TFPhoton2_phi)    )       );
@@ -614,7 +626,7 @@ void extractFakeContributions::Loop(TString outname, TString mode)
               sieie_photon1_EBEB->Fill(FTPhoton1_sigmaIetaIeta5x5,fakeRate);
 
               dPhi_EBEB->Fill(fabs(FTDiphoton_deltaPhi),fakeRate);
-              dEta_EBEB->Fill(FTDiphoton_deltaEta,fakeRate);
+              dEta_EBEB->Fill(fabs(FTDiphoton_deltaEta),fakeRate);
               dRgg_EBEB->Fill(FTDiphoton_deltaR,fakeRate);
 
               double cosThetaStar = sqrt(       ( cosh(FTPhoton1_eta - FTPhoton2_eta) - 1. ) / (  cosh(FTPhoton1_eta - FTPhoton2_eta) - cos(FTPhoton1_phi - FTPhoton2_phi)    )       );
@@ -671,7 +683,7 @@ void extractFakeContributions::Loop(TString outname, TString mode)
               sieie_photon2_EBEE->Fill(TFPhoton2_sigmaIetaIeta5x5,fakeRate);
 
               dPhi_EBEE->Fill(fabs(TFDiphoton_deltaPhi),fakeRate);
-              dEta_EBEE->Fill(TFDiphoton_deltaEta,fakeRate);
+              dEta_EBEE->Fill(fabs(TFDiphoton_deltaEta),fakeRate);
               dRgg_EBEE->Fill(TFDiphoton_deltaR,fakeRate);
 
               double cosThetaStar = sqrt(       ( cosh(TFPhoton1_eta - TFPhoton2_eta) - 1. ) / (  cosh(TFPhoton1_eta - TFPhoton2_eta) - cos(TFPhoton1_phi - TFPhoton2_phi)    )       );
@@ -726,7 +738,7 @@ void extractFakeContributions::Loop(TString outname, TString mode)
               sieie_photon1_EBEE->Fill(FTPhoton1_sigmaIetaIeta5x5,fakeRate);
 
               dPhi_EBEE->Fill(fabs(FTDiphoton_deltaPhi),fakeRate);
-              dEta_EBEE->Fill(FTDiphoton_deltaEta,fakeRate);
+              dEta_EBEE->Fill(fabs(FTDiphoton_deltaEta),fakeRate);
               dRgg_EBEE->Fill(FTDiphoton_deltaR,fakeRate);
 
               double cosThetaStar = sqrt(       ( cosh(FTPhoton1_eta - FTPhoton2_eta) - 1. ) / (  cosh(FTPhoton1_eta - FTPhoton2_eta) - cos(FTPhoton1_phi - FTPhoton2_phi)    )       );
@@ -811,7 +823,7 @@ void extractFakeContributions::Loop(TString outname, TString mode)
             sieie_photon2_EBEB->Fill(FFPhoton2_sigmaIetaIeta5x5,-1.*fakeRateProd);
 
             dPhi_EBEB->Fill(fabs(FFDiphoton_deltaPhi),-1.*fakeRateProd);
-            dEta_EBEB->Fill(FFDiphoton_deltaEta,-1.*fakeRateProd);
+            dEta_EBEB->Fill(fabs(FFDiphoton_deltaEta),-1.*fakeRateProd);
             dRgg_EBEB->Fill(FFDiphoton_deltaR,-1.*fakeRateProd);
             cosThetaStar_EBEB->Fill(cosThetaStar,-1.*fakeRateProd);
 
@@ -862,7 +874,7 @@ void extractFakeContributions::Loop(TString outname, TString mode)
             sieie_photon2_EBEE->Fill(FFPhoton2_sigmaIetaIeta5x5,-1.*fakeRateProd);
 
             dPhi_EBEE->Fill(fabs(FFDiphoton_deltaPhi),-1.*fakeRateProd);
-            dEta_EBEE->Fill(FFDiphoton_deltaEta,-1.*fakeRateProd);
+            dEta_EBEE->Fill(fabs(FFDiphoton_deltaEta),-1.*fakeRateProd);
             dRgg_EBEE->Fill(FFDiphoton_deltaR,-1.*fakeRateProd);
             cosThetaStar_EBEE->Fill(cosThetaStar,-1.*fakeRateProd);
 

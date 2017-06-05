@@ -134,38 +134,38 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
     cout << "applyKFactor: " << 1.*applyKFactor << endl;
     cout << "calcPDFWeights: " << 1.*calcPDFWeights << endl;
 
-    TH1D* leadingPhoPt_EBEB = createTH1D("leadingPhoPt_EBEB","leadingPhoPt_EBEB",300.,0.,1500.,"Leading Photon pT (GeV)","Events");
-    TH1D* subleadingPhoPt_EBEB = createTH1D("subleadingPhoPt_EBEB","subleadingPhoPt_EBEB",300,0.,1500.,"Subleading Photon pT (GeV)","Events");
-    TH1D* leadingPhoEta_EBEB = createTH1D("leadingPhoEta_EBEB","leadingPhoEta_EBEB",100,-5.,5.,"Leading Photon #eta","Events");
-    TH1D* subleadingPhoEta_EBEB = createTH1D("subleadingPhoEta_EBEB","subleadingPhoEta_EBEB",100,-5.,5.,"Subleading Photon #eta","Events");
-    TH1D* leadingPhoPhi_EBEB = createTH1D("leadingPhoPhi_EBEB","leadingPhoPhi_EBEB",100,-3.141593,3.141593,"Leading Photon #phi","Events");
-    TH1D* subleadingPhoPhi_EBEB = createTH1D("subleadingPhoPhi_EBEB","subleadingPhoPhi_EBEB",100,-3.141593,3.141593,"Subleading Photon #phi","Events");
-    TH1D* ggMass_EBEB = createTH1D("ggMass_EBEB","ggMass_EBEB",650,0.,13000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_EBEB_JPBinning = createTH1D("ggMass_EBEB_JPBinning","ggMass_EBEB",34,320.,1000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_EBEB_30003500varbin = createTH1D("ggMass_EBEB_30003500varbin","ggMass_EBEB_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_EBEB_varbin = createTH1D("ggMass_EBEB_varbin","ggMass_EBEB_varbin",6,bins,"m_{#gamma#gamma} (GeV)","Events");
+    TH1D* leadingPhoPt_EBEB = createTH1D("leadingPhoPt_EBEB","leadingPhoPt_EBEB",50,75.,1500.,"p_{T}(#gamma_{1}) [GeV]","Events");
+    TH1D* subleadingPhoPt_EBEB = createTH1D("subleadingPhoPt_EBEB","subleadingPhoPt_EBEB",50,75.,1500.,"p_{T}(#gamma_{2}) [GeV]","Events");
+    TH1D* leadingPhoEta_EBEB = createTH1D("leadingPhoEta_EBEB","leadingPhoEta_EBEB",100,-5.,5.,"#eta(#gamma_{1})","Events");
+    TH1D* subleadingPhoEta_EBEB = createTH1D("subleadingPhoEta_EBEB","subleadingPhoEta_EBEB",100,-5.,5.,"#eta(#gamma_{2})","Events");
+    TH1D* leadingPhoPhi_EBEB = createTH1D("leadingPhoPhi_EBEB","leadingPhoPhi_EBEB",25,-3.141593,3.141593,"#phi(#gamma_{1})","Events");
+    TH1D* subleadingPhoPhi_EBEB = createTH1D("subleadingPhoPhi_EBEB","subleadingPhoPhi_EBEB",25,-3.141593,3.141593,"#phi(#gamma_{2})","Events");
+    TH1D* ggMass_EBEB = createTH1D("ggMass_EBEB","ggMass_EBEB",650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_EBEB_JPBinning = createTH1D("ggMass_EBEB_JPBinning","ggMass_EBEB",34,320.,1000.,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_EBEB_30003500varbin = createTH1D("ggMass_EBEB_30003500varbin","ggMass_EBEB_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_EBEB_varbin = createTH1D("ggMass_EBEB_varbin","ggMass_EBEB_varbin",6,bins,"m_{#gamma#gamma} [GeV]","Events");
 
-    TH1D* ggMass_EBEB_20004000 = createTH1D("ggMass_EBEB_20004000","ggMass_EBEB_20004000 (raw yield)",1,2000.,4000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_EBEE_20004000 = createTH1D("ggMass_EBEE_20004000","ggMass_EBEE_20004000 (raw yield)",1,2000.,4000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* leadingPhoPt_EBEE = createTH1D("leadingPhoPt_EBEE","leadingPhoPt_EBEE",300.,0.,1500.,"Leading Photon pT (GeV)","Events");
-    TH1D* subleadingPhoPt_EBEE = createTH1D("subleadingPhoPt_EBEE","subleadingPhoPt_EBEE",300,0.,1500.,"Subleading Photon pT (GeV)","Events");
-    TH1D* leadingPhoEta_EBEE = createTH1D("leadingPhoEta_EBEE","leadingPhoEta_EBEE",100,-5.,5.,"Leading Photon #eta","Events");
-    TH1D* subleadingPhoEta_EBEE = createTH1D("subleadingPhoEta_EBEE","subleadingPhoEta_EBEE",100,-5.,5.,"Subleading Photon #eta","Events");
-    TH1D* leadingPhoPhi_EBEE = createTH1D("leadingPhoPhi_EBEE","leadingPhoPhi_EBEE",100,-3.141593,3.141593,"Leading Photon #phi","Events");
-    TH1D* subleadingPhoPhi_EBEE = createTH1D("subleadingPhoPhi_EBEE","subleadingPhoPhi_EBEE",100,-3.141593,3.141593,"Subleading Photon #phi","Events");
-    TH1D* dRgg_EBEB = createTH1D("dRgg_EBEB","",100,0.,6," #DeltaR_{#gamma#gamma}","Events");
-    TH1D* dRgg_EBEE = createTH1D("dRgg_EBEE","",100,0.,6," #DeltaR_{#gamma#gamma}","Events");
-    TH1D* ggMass_EBEE = createTH1D("ggMass_EBEE","ggMass_EBEE",650,0.,13000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_EBEE_30003500varbin = createTH1D("ggMass_EBEE_30003500varbin","ggMass_EBEE_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_EBEE_varbin = createTH1D("ggMass_EBEE_varbin","ggMass_EBEE_varbin",6,bins,"m_{#gamma#gamma} (GeV)","Events");
+    TH1D* ggMass_EBEB_20004000 = createTH1D("ggMass_EBEB_20004000","ggMass_EBEB_20004000 (raw yield)",1,2000.,4000.,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_EBEE_20004000 = createTH1D("ggMass_EBEE_20004000","ggMass_EBEE_20004000 (raw yield)",1,2000.,4000.,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* leadingPhoPt_EBEE = createTH1D("leadingPhoPt_EBEE","leadingPhoPt_EBEE",50,75.,1500.,"p_{T}(#gamma_{1}) [GeV]","Events");
+    TH1D* subleadingPhoPt_EBEE = createTH1D("subleadingPhoPt_EBEE","subleadingPhoPt_EBEE",50,75.,1500.,"p_{T}(#gamma_{2}) [GeV]","Events");
+    TH1D* leadingPhoEta_EBEE = createTH1D("leadingPhoEta_EBEE","leadingPhoEta_EBEE",100,-5.,5.,"#eta(#gamma_{1})","Events");
+    TH1D* subleadingPhoEta_EBEE = createTH1D("subleadingPhoEta_EBEE","subleadingPhoEta_EBEE",100,-5.,5.,"#eta(#gamma_{2})","Events");
+    TH1D* leadingPhoPhi_EBEE = createTH1D("leadingPhoPhi_EBEE","leadingPhoPhi_EBEE",25,-3.141593,3.141593,"#phi(#gamma_{1})","Events");
+    TH1D* subleadingPhoPhi_EBEE = createTH1D("subleadingPhoPhi_EBEE","subleadingPhoPhi_EBEE",25,-3.141593,3.141593,"#phi(#gamma_{2})","Events");
+    TH1D* dRgg_EBEB = createTH1D("dRgg_EBEB","",30,0.,6," #DeltaR_{#gamma#gamma}","Events");
+    TH1D* dRgg_EBEE = createTH1D("dRgg_EBEE","",30,0.,6," #DeltaR_{#gamma#gamma}","Events");
+    TH1D* ggMass_EBEE = createTH1D("ggMass_EBEE","ggMass_EBEE",650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_EBEE_30003500varbin = createTH1D("ggMass_EBEE_30003500varbin","ggMass_EBEE_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_EBEE_varbin = createTH1D("ggMass_EBEE_varbin","ggMass_EBEE_varbin",6,bins,"m_{#gamma#gamma} [GeV]","Events");
 
     TH1D* hEventWeight = createTH1D("hEventWeight","",101,-0.05,1.05,"Event Weight","Events");
 
-    TH1D* cosThetaStar_EBEB = new TH1D("cosThetaStar_EBEB",";|cos(#theta^*)|;Events",50,0.,1.);
-    TH1D* cosThetaStar_EBEE = new TH1D("cosThetaStar_EBEE",";|cos(#theta^*)|;Events",50,0.,1.);
-    TH1D* cosThetaStar_EBEB_mgg500To740 = new TH1D("cosThetaStar_EBEB_mgg500To740",";|cos(#theta^*)|;Events",100,0.,1.);
-    TH1D* cosThetaStar_EBEB_mgg740To760 = new TH1D("cosThetaStar_EBEB_mgg740To760",";|cos(#theta^*)|;Events",100,0.,1.);
-    TH1D* cosThetaStar_EBEB_mgg760To820 = new TH1D("cosThetaStar_EBEB_mgg760To820",";|cos(#theta^*)|;Events",100,0.,1.);
+    TH1D* cosThetaStar_EBEB = new TH1D("cosThetaStar_EBEB",";|cos(#theta*)|;Events",25,0.,1.);
+    TH1D* cosThetaStar_EBEE = new TH1D("cosThetaStar_EBEE",";|cos(#theta*)|;Events",25,0.,1.);
+    TH1D* cosThetaStar_EBEB_mgg500To740 = new TH1D("cosThetaStar_EBEB_mgg500To740",";|cos(#theta*)|;Events",100,0.,1.);
+    TH1D* cosThetaStar_EBEB_mgg740To760 = new TH1D("cosThetaStar_EBEB_mgg740To760",";|cos(#theta*)|;Events",100,0.,1.);
+    TH1D* cosThetaStar_EBEB_mgg760To820 = new TH1D("cosThetaStar_EBEB_mgg760To820",";|cos(#theta*)|;Events",100,0.,1.);
 
     TH2D* eta1Vseta2_EBEB_mgg500To740 = new TH2D("eta1Vseta2_EBEB_mgg500To740",";#eta_{1};#eta_{2}",20,-1.4442,1.4442,20,-1.4442,1.4442);
 
@@ -188,52 +188,52 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
 
     // "NLO" variation: handle on shape variation
 
-    TH1D* ggMass_NLODown_EBEB = createTH1D("ggMass_NLODown_EBEB","ggMass_NLODown_EBEB",650,0.,13000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_NLODown_EBEB_varbin = createTH1D("ggMass_NLODown_EBEB_varbin","ggMass_NLODown_EBEB_varbin",6,bins,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_NLOUp_EBEB = createTH1D("ggMass_NLOUp_EBEB","ggMass_NLOUp_EBEB",650,0.,13000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_NLOUp_EBEB_varbin = createTH1D("ggMass_NLOUp_EBEB_varbin","ggMass_NLOUp_EBEB_varbin",6,bins,"m_{#gamma#gamma} (GeV)","Events");
+    TH1D* ggMass_NLODown_EBEB = createTH1D("ggMass_NLODown_EBEB","ggMass_NLODown_EBEB",650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_NLODown_EBEB_varbin = createTH1D("ggMass_NLODown_EBEB_varbin","ggMass_NLODown_EBEB_varbin",6,bins,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_NLOUp_EBEB = createTH1D("ggMass_NLOUp_EBEB","ggMass_NLOUp_EBEB",650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_NLOUp_EBEB_varbin = createTH1D("ggMass_NLOUp_EBEB_varbin","ggMass_NLOUp_EBEB_varbin",6,bins,"m_{#gamma#gamma} [GeV]","Events");
 
-    TH1D* ggMass_NLODown_EBEE = createTH1D("ggMass_NLODown_EBEE","ggMass_NLODown_EBEE",650,0.,13000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_NLODown_EBEE_varbin = createTH1D("ggMass_NLODown_EBEE_varbin","ggMass_NLODown_EBEE_varbin",6,bins,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_NLOUp_EBEE = createTH1D("ggMass_NLOUp_EBEE","ggMass_NLOUp_EBEE",650,0.,13000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_NLOUp_EBEE_varbin = createTH1D("ggMass_NLOUp_EBEE_varbin","ggMass_NLOUp_EBEE_varbin",6,bins,"m_{#gamma#gamma} (GeV)","Events");
+    TH1D* ggMass_NLODown_EBEE = createTH1D("ggMass_NLODown_EBEE","ggMass_NLODown_EBEE",650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_NLODown_EBEE_varbin = createTH1D("ggMass_NLODown_EBEE_varbin","ggMass_NLODown_EBEE_varbin",6,bins,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_NLOUp_EBEE = createTH1D("ggMass_NLOUp_EBEE","ggMass_NLOUp_EBEE",650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_NLOUp_EBEE_varbin = createTH1D("ggMass_NLOUp_EBEE_varbin","ggMass_NLOUp_EBEE_varbin",6,bins,"m_{#gamma#gamma} [GeV]","Events");
 
     //scale variation
-    TH1D* ggMass_fs0p5_EBEB = createTH1D("ggMass_fs0p5_EBEB","ggMass_fs0p5_EBEB",650,0.,13000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_fs0p5_EBEB_30003500varbin = createTH1D("ggMass_fs0p5_EBEB_30003500varbin","ggMass_fs0p5_EBEB_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_fs0p5_EBEB_varbin = createTH1D("ggMass_fs0p5_EBEB_varbin","ggMass_fs0p5_EBEB_varbin",6,bins,"m_{#gamma#gamma} (GeV)","Events");
+    TH1D* ggMass_fs0p5_EBEB = createTH1D("ggMass_fs0p5_EBEB","ggMass_fs0p5_EBEB",650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_fs0p5_EBEB_30003500varbin = createTH1D("ggMass_fs0p5_EBEB_30003500varbin","ggMass_fs0p5_EBEB_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_fs0p5_EBEB_varbin = createTH1D("ggMass_fs0p5_EBEB_varbin","ggMass_fs0p5_EBEB_varbin",6,bins,"m_{#gamma#gamma} [GeV]","Events");
 
-    TH1D* ggMass_fs2_EBEB = createTH1D("ggMass_fs2_EBEB","ggMass_fs2_EBEB",650,0.,13000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_fs2_EBEB_30003500varbin = createTH1D("ggMass_fs2_EBEB_30003500varbin","ggMass_fs2_EBEB_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_fs2_EBEB_varbin = createTH1D("ggMass_fs2_EBEB_varbin","ggMass_fs2_EBEB_varbin",6,bins,"m_{#gamma#gamma} (GeV)","Events");
+    TH1D* ggMass_fs2_EBEB = createTH1D("ggMass_fs2_EBEB","ggMass_fs2_EBEB",650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_fs2_EBEB_30003500varbin = createTH1D("ggMass_fs2_EBEB_30003500varbin","ggMass_fs2_EBEB_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_fs2_EBEB_varbin = createTH1D("ggMass_fs2_EBEB_varbin","ggMass_fs2_EBEB_varbin",6,bins,"m_{#gamma#gamma} [GeV]","Events");
 
-    TH1D* ggMass_renor0p5_EBEB = createTH1D("ggMass_renor0p5_EBEB","ggMass_renor0p5_EBEB",650,0.,13000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_renor0p5_EBEB_30003500varbin = createTH1D("ggMass_renor0p5_EBEB_30003500varbin","ggMass_renor0p5_EBEB_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_renor0p5_EBEB_varbin = createTH1D("ggMass_renor0p5_EBEB_varbin","ggMass_renor0p5_EBEB_varbin",6,bins,"m_{#gamma#gamma} (GeV)","Events");
+    TH1D* ggMass_renor0p5_EBEB = createTH1D("ggMass_renor0p5_EBEB","ggMass_renor0p5_EBEB",650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_renor0p5_EBEB_30003500varbin = createTH1D("ggMass_renor0p5_EBEB_30003500varbin","ggMass_renor0p5_EBEB_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_renor0p5_EBEB_varbin = createTH1D("ggMass_renor0p5_EBEB_varbin","ggMass_renor0p5_EBEB_varbin",6,bins,"m_{#gamma#gamma} [GeV]","Events");
 
-    TH1D* ggMass_renor2_EBEB = createTH1D("ggMass_renor2_EBEB","ggMass_renor2_EBEB",650,0.,13000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_renor2_EBEB_30003500varbin = createTH1D("ggMass_renor2_EBEB_30003500varbin","ggMass_renor2_EBEB_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_renor2_EBEB_varbin = createTH1D("ggMass_renor2_EBEB_varbin","ggMass_renor2_EBEB_varbin",6,bins,"m_{#gamma#gamma} (GeV)","Events");
+    TH1D* ggMass_renor2_EBEB = createTH1D("ggMass_renor2_EBEB","ggMass_renor2_EBEB",650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_renor2_EBEB_30003500varbin = createTH1D("ggMass_renor2_EBEB_30003500varbin","ggMass_renor2_EBEB_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_renor2_EBEB_varbin = createTH1D("ggMass_renor2_EBEB_varbin","ggMass_renor2_EBEB_varbin",6,bins,"m_{#gamma#gamma} [GeV]","Events");
 
-    TH1D* ggMass_fs0p5_EBEE = createTH1D("ggMass_fs0p5_EBEE","ggMass_fs0p5_EBEE",650,0.,13000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_fs0p5_EBEE_30003500varbin = createTH1D("ggMass_fs0p5_EBEE_30003500varbin","ggMass_fs0p5_EBEE_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_fs0p5_EBEE_varbin = createTH1D("ggMass_fs0p5_EBEE_varbin","ggMass_fs0p5_EBEE_varbin",6,bins,"m_{#gamma#gamma} (GeV)","Events");
+    TH1D* ggMass_fs0p5_EBEE = createTH1D("ggMass_fs0p5_EBEE","ggMass_fs0p5_EBEE",650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_fs0p5_EBEE_30003500varbin = createTH1D("ggMass_fs0p5_EBEE_30003500varbin","ggMass_fs0p5_EBEE_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_fs0p5_EBEE_varbin = createTH1D("ggMass_fs0p5_EBEE_varbin","ggMass_fs0p5_EBEE_varbin",6,bins,"m_{#gamma#gamma} [GeV]","Events");
 
-    TH1D* ggMass_fs2_EBEE = createTH1D("ggMass_fs2_EBEE","ggMass_fs2_EBEE",650,0.,13000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_fs2_EBEE_30003500varbin = createTH1D("ggMass_fs2_EBEE_30003500varbin","ggMass_fs2_EBEE_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_fs2_EBEE_varbin = createTH1D("ggMass_fs2_EBEE_varbin","ggMass_fs2_EBEE_varbin",6,bins,"m_{#gamma#gamma} (GeV)","Events");
+    TH1D* ggMass_fs2_EBEE = createTH1D("ggMass_fs2_EBEE","ggMass_fs2_EBEE",650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_fs2_EBEE_30003500varbin = createTH1D("ggMass_fs2_EBEE_30003500varbin","ggMass_fs2_EBEE_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_fs2_EBEE_varbin = createTH1D("ggMass_fs2_EBEE_varbin","ggMass_fs2_EBEE_varbin",6,bins,"m_{#gamma#gamma} [GeV]","Events");
 
-    TH1D* ggMass_renor0p5_EBEE = createTH1D("ggMass_renor0p5_EBEE","ggMass_renor0p5_EBEE",650,0.,13000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_renor0p5_EBEE_30003500varbin = createTH1D("ggMass_renor0p5_EBEE_30003500varbin","ggMass_renor0p5_EBEE_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_renor0p5_EBEE_varbin = createTH1D("ggMass_renor0p5_EBEE_varbin","ggMass_renor0p5_EBEE_varbin",6,bins,"m_{#gamma#gamma} (GeV)","Events");
+    TH1D* ggMass_renor0p5_EBEE = createTH1D("ggMass_renor0p5_EBEE","ggMass_renor0p5_EBEE",650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_renor0p5_EBEE_30003500varbin = createTH1D("ggMass_renor0p5_EBEE_30003500varbin","ggMass_renor0p5_EBEE_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_renor0p5_EBEE_varbin = createTH1D("ggMass_renor0p5_EBEE_varbin","ggMass_renor0p5_EBEE_varbin",6,bins,"m_{#gamma#gamma} [GeV]","Events");
 
-    TH1D* ggMass_renor2_EBEE = createTH1D("ggMass_renor2_EBEE","ggMass_renor2_EBEE",650,0.,13000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_renor2_EBEE_30003500varbin = createTH1D("ggMass_renor2_EBEE_30003500varbin","ggMass_renor2_EBEE_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_renor2_EBEE_varbin = createTH1D("ggMass_renor2_EBEE_varbin","ggMass_renor2_EBEE_varbin",6,bins,"m_{#gamma#gamma} (GeV)","Events");
+    TH1D* ggMass_renor2_EBEE = createTH1D("ggMass_renor2_EBEE","ggMass_renor2_EBEE",650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_renor2_EBEE_30003500varbin = createTH1D("ggMass_renor2_EBEE_30003500varbin","ggMass_renor2_EBEE_30003500varbin",5,bins_30003500,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_renor2_EBEE_varbin = createTH1D("ggMass_renor2_EBEE_varbin","ggMass_renor2_EBEE_varbin",6,bins,"m_{#gamma#gamma} [GeV]","Events");
 
     // saturation histos
-    TH1D* ggMass_sat_EBEB = createTH1D("ggMass_sat_EBEB","ggMass_sat_EBEB",650,0.,13000.,"m_{#gamma#gamma} (GeV)","Events");
-    TH1D* ggMass_sat_EBEE = createTH1D("ggMass_sat_EBEE","ggMass_sat_EBEE",650,0.,13000.,"m_{#gamma#gamma} (GeV)","Events");
+    TH1D* ggMass_sat_EBEB = createTH1D("ggMass_sat_EBEB","ggMass_sat_EBEB",650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events");
+    TH1D* ggMass_sat_EBEE = createTH1D("ggMass_sat_EBEE","ggMass_sat_EBEE",650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events");
 
     // trigger efficiency inputs
     TH1D* passEBEB_pt2 = new TH1D("passEBEB_pt2","",28,0.,700.);
@@ -245,65 +245,65 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
     TH1D* allIncl_pt2 = new TH1D("allIncl_pt2","",28,0.,700.);
 
     // dPhi distributions
-    TH1D* dPhi_EBEB = createTH1D("dPhi_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_EBEE = createTH1D("dPhi_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
+    TH1D* dPhi_EBEB = createTH1D("dPhi_EBEB","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_EBEE = createTH1D("dPhi_EBEE","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
     // dEta distributions
-    TH1D* dEta_EBEB = createTH1D("dEta_EBEB","",50,-2.89,2.89,"#Delta#eta","Events");
-    TH1D* dEta_EBEE = createTH1D("dEta_EBEE","",80,-5.,5.,"#Delta#eta","Events");
+    TH1D* dEta_EBEB = createTH1D("dEta_EBEB","",40,0.,2.89,"|#Delta#eta_{#gamma#gamma}|","Events");
+    TH1D* dEta_EBEE = createTH1D("dEta_EBEE","",60,0.,5.,"|#Delta#eta_{#gamma#gamma}|","Events");
 
-    TH1D* dPhi_raw_mgg320To500_EBEB = createTH1D("dPhi_raw_mgg320To500_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_raw_mgg500To750_EBEB = createTH1D("dPhi_raw_mgg500To750_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_raw_mgg750To1000_EBEB = createTH1D("dPhi_raw_mgg750To1000_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_raw_mgg500To1000_EBEB = createTH1D("dPhi_raw_mgg500To1000_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_MCFMNLO_mgg320To500_EBEB = createTH1D("dPhi_MCFMNLO_mgg320To500_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_MCFMNLO_mgg500To750_EBEB = createTH1D("dPhi_MCFMNLO_mgg500To750_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_MCFMNLO_mgg750To1000_EBEB = createTH1D("dPhi_MCFMNLO_mgg750To1000_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_MCFMNLO_mgg500To1000_EBEB = createTH1D("dPhi_MCFMNLO_mgg500To1000_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_MCFMNNLO_mgg320To500_EBEB = createTH1D("dPhi_MCFMNNLO_mgg320To500_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_MCFMNNLO_mgg500To750_EBEB = createTH1D("dPhi_MCFMNNLO_mgg500To750_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_MCFMNNLO_mgg750To1000_EBEB = createTH1D("dPhi_MCFMNNLO_mgg750To1000_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_MCFMNNLO_mgg500To1000_EBEB = createTH1D("dPhi_MCFMNNLO_mgg500To1000_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_Diphox_mgg320To500_EBEB = createTH1D("dPhi_Diphox_mgg320To500_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_Diphox_mgg500To750_EBEB = createTH1D("dPhi_Diphox_mgg500To750_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_Diphox_mgg750To1000_EBEB = createTH1D("dPhi_Diphox_mgg750To1000_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_Diphox_mgg500To1000_EBEB = createTH1D("dPhi_Diphox_mgg500To1000_EBEB","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_raw_mgg320To500_EBEE = createTH1D("dPhi_raw_mgg320To500_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_raw_mgg500To750_EBEE = createTH1D("dPhi_raw_mgg500To750_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_raw_mgg750To1000_EBEE = createTH1D("dPhi_raw_mgg750To1000_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_raw_mgg500To1000_EBEE = createTH1D("dPhi_raw_mgg500To1000_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_MCFMNLO_mgg320To500_EBEE = createTH1D("dPhi_MCFMNLO_mgg320To500_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_MCFMNLO_mgg500To750_EBEE = createTH1D("dPhi_MCFMNLO_mgg500To750_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_MCFMNLO_mgg750To1000_EBEE = createTH1D("dPhi_MCFMNLO_mgg750To1000_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_MCFMNLO_mgg500To1000_EBEE = createTH1D("dPhi_MCFMNLO_mgg500To1000_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_MCFMNNLO_mgg320To500_EBEE = createTH1D("dPhi_MCFMNNLO_mgg320To500_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_MCFMNNLO_mgg500To750_EBEE = createTH1D("dPhi_MCFMNNLO_mgg500To750_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_MCFMNNLO_mgg750To1000_EBEE = createTH1D("dPhi_MCFMNNLO_mgg750To1000_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_MCFMNNLO_mgg500To1000_EBEE = createTH1D("dPhi_MCFMNNLO_mgg500To1000_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_Diphox_mgg320To500_EBEE = createTH1D("dPhi_Diphox_mgg320To500_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_Diphox_mgg500To750_EBEE = createTH1D("dPhi_Diphox_mgg500To750_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_Diphox_mgg750To1000_EBEE = createTH1D("dPhi_Diphox_mgg750To1000_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
-    TH1D* dPhi_Diphox_mgg500To1000_EBEE = createTH1D("dPhi_Diphox_mgg500To1000_EBEE","",40,0.,3.1415927,"|#Delta#phi|","Events");
+    TH1D* dPhi_raw_mgg320To500_EBEB = createTH1D("dPhi_raw_mgg320To500_EBEB","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_raw_mgg500To750_EBEB = createTH1D("dPhi_raw_mgg500To750_EBEB","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_raw_mgg750To1000_EBEB = createTH1D("dPhi_raw_mgg750To1000_EBEB","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_raw_mgg500To1000_EBEB = createTH1D("dPhi_raw_mgg500To1000_EBEB","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_MCFMNLO_mgg320To500_EBEB = createTH1D("dPhi_MCFMNLO_mgg320To500_EBEB","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_MCFMNLO_mgg500To750_EBEB = createTH1D("dPhi_MCFMNLO_mgg500To750_EBEB","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_MCFMNLO_mgg750To1000_EBEB = createTH1D("dPhi_MCFMNLO_mgg750To1000_EBEB","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_MCFMNLO_mgg500To1000_EBEB = createTH1D("dPhi_MCFMNLO_mgg500To1000_EBEB","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_MCFMNNLO_mgg320To500_EBEB = createTH1D("dPhi_MCFMNNLO_mgg320To500_EBEB","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_MCFMNNLO_mgg500To750_EBEB = createTH1D("dPhi_MCFMNNLO_mgg500To750_EBEB","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_MCFMNNLO_mgg750To1000_EBEB = createTH1D("dPhi_MCFMNNLO_mgg750To1000_EBEB","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_MCFMNNLO_mgg500To1000_EBEB = createTH1D("dPhi_MCFMNNLO_mgg500To1000_EBEB","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_Diphox_mgg320To500_EBEB = createTH1D("dPhi_Diphox_mgg320To500_EBEB","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_Diphox_mgg500To750_EBEB = createTH1D("dPhi_Diphox_mgg500To750_EBEB","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_Diphox_mgg750To1000_EBEB = createTH1D("dPhi_Diphox_mgg750To1000_EBEB","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_Diphox_mgg500To1000_EBEB = createTH1D("dPhi_Diphox_mgg500To1000_EBEB","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_raw_mgg320To500_EBEE = createTH1D("dPhi_raw_mgg320To500_EBEE","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_raw_mgg500To750_EBEE = createTH1D("dPhi_raw_mgg500To750_EBEE","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_raw_mgg750To1000_EBEE = createTH1D("dPhi_raw_mgg750To1000_EBEE","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_raw_mgg500To1000_EBEE = createTH1D("dPhi_raw_mgg500To1000_EBEE","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_MCFMNLO_mgg320To500_EBEE = createTH1D("dPhi_MCFMNLO_mgg320To500_EBEE","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_MCFMNLO_mgg500To750_EBEE = createTH1D("dPhi_MCFMNLO_mgg500To750_EBEE","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_MCFMNLO_mgg750To1000_EBEE = createTH1D("dPhi_MCFMNLO_mgg750To1000_EBEE","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_MCFMNLO_mgg500To1000_EBEE = createTH1D("dPhi_MCFMNLO_mgg500To1000_EBEE","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_MCFMNNLO_mgg320To500_EBEE = createTH1D("dPhi_MCFMNNLO_mgg320To500_EBEE","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_MCFMNNLO_mgg500To750_EBEE = createTH1D("dPhi_MCFMNNLO_mgg500To750_EBEE","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_MCFMNNLO_mgg750To1000_EBEE = createTH1D("dPhi_MCFMNNLO_mgg750To1000_EBEE","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_MCFMNNLO_mgg500To1000_EBEE = createTH1D("dPhi_MCFMNNLO_mgg500To1000_EBEE","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_Diphox_mgg320To500_EBEE = createTH1D("dPhi_Diphox_mgg320To500_EBEE","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_Diphox_mgg500To750_EBEE = createTH1D("dPhi_Diphox_mgg500To750_EBEE","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_Diphox_mgg750To1000_EBEE = createTH1D("dPhi_Diphox_mgg750To1000_EBEE","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
+    TH1D* dPhi_Diphox_mgg500To1000_EBEE = createTH1D("dPhi_Diphox_mgg500To1000_EBEE","",40,0.,3.1415927,"|#Delta#phi_{#gamma#gamma}|","Events");
 
     // other id variables
 
     TH1D* hOverE_photon1_EBEB = new TH1D("hOverE_photon1_EBEB",";H/E;Events",25,0.,0.05);
-    TH1D* chIso_photon1_EBEB = new TH1D("chIso_photon1_EBEB",";Iso_{ch} (GeV);Events",12,0.,5.);
-    TH1D* phoIso_photon1_EBEB = new TH1D("phoIso_photon1_EBEB",";#overline{Iso}_{#gamma} (GeV);Events",16,0.,2.75);
+    TH1D* chIso_photon1_EBEB = new TH1D("chIso_photon1_EBEB",";Iso_{ch} [GeV];Events",12,0.,5.);
+    TH1D* phoIso_photon1_EBEB = new TH1D("phoIso_photon1_EBEB",";#bar{Iso}_{#gamma} [GeV];Events",16,0.,2.75);
     TH1D* sieie_photon1_EBEB = new TH1D("sieie_photon1_EBEB",";#sigma_{i#etai#eta};Events",50,0.,0.0112);
 
     TH1D* hOverE_photon1_EBEE = new TH1D("hOverE_photon1_EBEE",";H/E;Events",25,0.,0.05);
-    TH1D* chIso_photon1_EBEE = new TH1D("chIso_photon1_EBEE",";Iso_{ch} (GeV);Events",12,0.,5.);
-    TH1D* phoIso_photon1_EBEE = new TH1D("phoIso_photon1_EBEE",";#overline{Iso}_{#gamma} (GeV);Events",16,0.,2.);
+    TH1D* chIso_photon1_EBEE = new TH1D("chIso_photon1_EBEE",";Iso_{ch} [GeV];Events",12,0.,5.);
+    TH1D* phoIso_photon1_EBEE = new TH1D("phoIso_photon1_EBEE",";#bar{Iso}_{#gamma} [GeV];Events",16,0.,2.75);
     TH1D* sieie_photon1_EBEE = new TH1D("sieie_photon1_EBEE",";#sigma_{i#etai#eta};Events",50,0.,0.03);
 
     TH1D* hOverE_photon2_EBEB = new TH1D("hOverE_photon2_EBEB",";H/E;Events",25,0.,0.05);
-    TH1D* chIso_photon2_EBEB = new TH1D("chIso_photon2_EBEB",";Iso_{ch} (GeV);Events",12,0.,5.);
-    TH1D* phoIso_photon2_EBEB = new TH1D("phoIso_photon2_EBEB",";#overline{Iso}_{#gamma} (GeV);Events",16,0.,2.75);
+    TH1D* chIso_photon2_EBEB = new TH1D("chIso_photon2_EBEB",";Iso_{ch} [GeV];Events",12,0.,5.);
+    TH1D* phoIso_photon2_EBEB = new TH1D("phoIso_photon2_EBEB",";#bar{Iso}_{#gamma} [GeV];Events",16,0.,2.75);
     TH1D* sieie_photon2_EBEB = new TH1D("sieie_photon2_EBEB",";#sigma_{i#etai#eta};Events",50,0.,0.0112);
 
     TH1D* hOverE_photon2_EBEE = new TH1D("hOverE_photon2_EBEE",";H/E;Events",25,0.,0.05);
-    TH1D* chIso_photon2_EBEE = new TH1D("chIso_photon2_EBEE",";Iso_{ch} (GeV);Events",12,0.,5.);
-    TH1D* phoIso_photon2_EBEE = new TH1D("phoIso_photon2_EBEE",";#overline{Iso}_{#gamma} (GeV);Events",16,0.,2.);
+    TH1D* chIso_photon2_EBEE = new TH1D("chIso_photon2_EBEE",";Iso_{ch} [GeV];Events",12,0.,5.);
+    TH1D* phoIso_photon2_EBEE = new TH1D("phoIso_photon2_EBEE",";#bar{Iso}_{#gamma} [GeV];Events",16,0.,2.75);
     TH1D* sieie_photon2_EBEE = new TH1D("sieie_photon2_EBEE",";#sigma_{i#etai#eta};Events",50,0.,0.03);
 
     if (calcPDFWeights){
@@ -311,13 +311,13 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
         // for the SM background: loop over pdf eigenvector number and create histograms
         for (int i=1; i<53; i++){
 
-            vec_pdfVar_ggMass_EBEB.push_back( createTH1D( TString::Format("ggMass_EBEB_CT10_%i",i), TString::Format("ggMass_EBEB_CT10_%i",i),650,0.,13000.,"m_{#gamma#gamma} (GeV)","Events") );
-            vec_pdfVar_ggMass_EBEB_varbin.push_back( createTH1D(TString::Format("ggMass_EBEB_varbin_CT10_%i",i), TString::Format("ggMass_EBEB_varbin_CT10_%i",i),6,bins,"m_{#gamma#gamma} (GeV)","Events" ) ) ;
-            vec_pdfVar_ggMass_EBEB_30003500varbin.push_back( createTH1D(TString::Format("ggMass_EBEB_30003500varbin_CT10_%i",i), TString::Format("ggMass_EBEB_30003500varbin_CT10_%i",i),5,bins_30003500,"m_{#gamma#gamma} (GeV)","Events" ) );
+            vec_pdfVar_ggMass_EBEB.push_back( createTH1D( TString::Format("ggMass_EBEB_CT10_%i",i), TString::Format("ggMass_EBEB_CT10_%i",i),650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events") );
+            vec_pdfVar_ggMass_EBEB_varbin.push_back( createTH1D(TString::Format("ggMass_EBEB_varbin_CT10_%i",i), TString::Format("ggMass_EBEB_varbin_CT10_%i",i),6,bins,"m_{#gamma#gamma} [GeV]","Events" ) ) ;
+            vec_pdfVar_ggMass_EBEB_30003500varbin.push_back( createTH1D(TString::Format("ggMass_EBEB_30003500varbin_CT10_%i",i), TString::Format("ggMass_EBEB_30003500varbin_CT10_%i",i),5,bins_30003500,"m_{#gamma#gamma} [GeV]","Events" ) );
 
-            vec_pdfVar_ggMass_EBEE.push_back( createTH1D( TString::Format("ggMass_EBEE_CT10_%i",i), TString::Format("ggMass_EBEE_CT10_%i",i),650,0.,13000.,"m_{#gamma#gamma} (GeV)","Events") );
-            vec_pdfVar_ggMass_EBEE_varbin.push_back( createTH1D(TString::Format("ggMass_EBEE_varbin_CT10_%i",i), TString::Format("ggMass_EBEE_varbin_CT10_%i",i),6,bins,"m_{#gamma#gamma} (GeV)","Events" ) ) ;
-            vec_pdfVar_ggMass_EBEE_30003500varbin.push_back( createTH1D(TString::Format("ggMass_EBEE_30003500varbin_CT10_%i",i), TString::Format("ggMass_EBEE_30003500varbin_CT10_%i",i),5,bins_30003500,"m_{#gamma#gamma} (GeV)","Events" ) );
+            vec_pdfVar_ggMass_EBEE.push_back( createTH1D( TString::Format("ggMass_EBEE_CT10_%i",i), TString::Format("ggMass_EBEE_CT10_%i",i),650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events") );
+            vec_pdfVar_ggMass_EBEE_varbin.push_back( createTH1D(TString::Format("ggMass_EBEE_varbin_CT10_%i",i), TString::Format("ggMass_EBEE_varbin_CT10_%i",i),6,bins,"m_{#gamma#gamma} [GeV]","Events" ) ) ;
+            vec_pdfVar_ggMass_EBEE_30003500varbin.push_back( createTH1D(TString::Format("ggMass_EBEE_30003500varbin_CT10_%i",i), TString::Format("ggMass_EBEE_30003500varbin_CT10_%i",i),5,bins_30003500,"m_{#gamma#gamma} [GeV]","Events" ) );
 
         }
 
@@ -559,12 +559,8 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
         if (!TriggerBit_HLT_DoublePhoton60) continue; // only admit events that pass HLT_DoublePhoton_60
         if (Photon1_pt < 75. || Photon2_pt < 75.) continue; // enforce 75 GeV pT cut
         if (Diphoton_Minv < 500.) continue; // mass cut
-
-        // bool EBEB = isEBEB(Photon1_scEta,Photon2_scEta); // fabs is taken in the helper function!
-        // bool EBEE = isEBEE(Photon1_scEta,Photon2_scEta);
-
-        // if neither an EBEB nor an EBEE event, ignore it.
-        if (!EBEB && !EBEE) continue;
+        if (Diphoton_deltaR < 0.45) continue; // dR cut
+        if (!EBEB && !EBEE) continue; // if neither an EBEB nor an EBEE event, ignore it.
 
         // print out high mass events in data to make fireworks printouts
         if (mode.EqualTo("DATA") && Diphoton_Minv > 1900.){
@@ -617,7 +613,7 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
             ggMass_EBEB_20004000->Fill(Diphoton_Minv); //no weight because we want the raw yield!
 
             dPhi_EBEB->Fill(dPhi,eventWeight);
-            dEta_EBEB->Fill(Diphoton_deltaEta,eventWeight);
+            dEta_EBEB->Fill(fabs(Diphoton_deltaEta),eventWeight);
             dRgg_EBEB->Fill(Diphoton_deltaR,eventWeight);
 
             hOverE_photon1_EBEB->Fill(Photon1_hadTowerOverEm,eventWeight);
@@ -721,7 +717,7 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
             }
 
             dPhi_EBEE->Fill(dPhi,eventWeight);
-            dEta_EBEE->Fill(Diphoton_deltaEta,eventWeight);
+            dEta_EBEE->Fill(fabs(Diphoton_deltaEta),eventWeight);
             dRgg_EBEE->Fill(Diphoton_deltaR,eventWeight);
             cosThetaStar_EBEE->Fill(cosThetaStar,eventWeight);
 
