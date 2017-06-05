@@ -586,11 +586,13 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
             if (applyKFactor) eventWeight *= nominalKFactor;
             // for clockwork model
             if (isADD){
-                // do this in steps to make sure it's right
                 double k = 500.; // GeV
-                eventWeight *= (1./(GenDiphoton_Minv*GenDiphoton_Minv*GenDiphoton_Minv*GenDiphoton_Minv*GenDiphoton_Minv));
-                eventWeight *= sqrt( 1 - ( k*k/(GenDiphoton_Minv*GenDiphoton_Minv) ) );
-                if (GenDiphoton_Minv < k) eventWeight *= 0.; // theta(mgg-k)
+                if (GenDiphoton_Minv > k){
+                    // do this in steps to make sure it's right
+                    eventWeight *= (1./(GenDiphoton_Minv*GenDiphoton_Minv*GenDiphoton_Minv*GenDiphoton_Minv*GenDiphoton_Minv));
+                    eventWeight *= sqrt( 1. - ( k*k/(GenDiphoton_Minv*GenDiphoton_Minv) ) );
+                }
+                else eventWeight = 0.; // theta(mgg-k)
             }
         }
         hEventWeight->Fill(Event_weightAll);
