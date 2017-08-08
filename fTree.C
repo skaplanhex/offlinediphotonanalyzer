@@ -235,6 +235,15 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
     TH1D* ggMass_sat_EBEB = createTH1D("ggMass_sat_EBEB","ggMass_sat_EBEB",650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events");
     TH1D* ggMass_sat_EBEE = createTH1D("ggMass_sat_EBEE","ggMass_sat_EBEE",650,0.,13000.,"m_{#gamma#gamma} [GeV]","Events");
 
+    // pileup reweighting histos
+    TH1D* ggMass_puDown_EBEB = new TH1D("ggMass_puDown_EBEB",";m_{#gamma#gamma} [GeV];Events",650,0.,13000.);
+    TH1D* ggMass_pu_EBEB = new TH1D("ggMass_pu_EBEB",";m_{#gamma#gamma} [GeV];Events",650,0.,13000.);
+    TH1D* ggMass_puUp_EBEB = new TH1D("ggMass_puUp_EBEB",";m_{#gamma#gamma} [GeV];Events",650,0.,13000.);
+
+    TH1D* ggMass_puDown_EBEE = new TH1D("ggMass_puDown_EBEE",";m_{#gamma#gamma} [GeV];Events",650,0.,13000.);
+    TH1D* ggMass_pu_EBEE = new TH1D("ggMass_pu_EBEE",";m_{#gamma#gamma} [GeV];Events",650,0.,13000.);
+    TH1D* ggMass_puUp_EBEE = new TH1D("ggMass_puUp_EBEE",";m_{#gamma#gamma} [GeV];Events",650,0.,13000.);
+
     // trigger efficiency inputs
     TH1D* passEBEB_pt2 = new TH1D("passEBEB_pt2","",28,0.,700.);
     TH1D* passEBEE_pt2 = new TH1D("passEBEE_pt2","",28,0.,700.);
@@ -391,6 +400,13 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
 
     ggMass_sat_EBEB->Sumw2();
     ggMass_sat_EBEE->Sumw2();
+
+    ggMass_puDown_EBEB->Sumw2();
+    ggMass_pu_EBEB->Sumw2();
+    ggMass_puUp_EBEB->Sumw2();
+    ggMass_puDown_EBEE->Sumw2();
+    ggMass_pu_EBEE->Sumw2();
+    ggMass_puUp_EBEE->Sumw2();
 
     hOverE_photon1_EBEB->Sumw2();
     chIso_photon1_EBEB->Sumw2();
@@ -616,6 +632,10 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
                 ggMass_sat_EBEB->Fill(Diphoton_Minv,eventWeight);
             }
 
+            ggMass_puDown_EBEB->Fill(Diphoton_Minv,eventWeight*Event_weightPuDown);
+            ggMass_pu_EBEB->Fill(Diphoton_Minv,eventWeight*Event_weightPu);
+            ggMass_puUp_EBEB->Fill(Diphoton_Minv,eventWeight*Event_weightPuUp);
+
             ggMass_EBEB_20004000->Fill(Diphoton_Minv); //no weight because we want the raw yield!
 
             dPhi_EBEB->Fill(dPhi,eventWeight);
@@ -722,6 +742,10 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
                 ggMass_sat_EBEE->Fill(Diphoton_Minv,eventWeight);
             }
 
+            ggMass_puDown_EBEE->Fill(Diphoton_Minv,eventWeight*Event_weightPuDown);
+            ggMass_pu_EBEE->Fill(Diphoton_Minv,eventWeight*Event_weightPu);
+            ggMass_puUp_EBEE->Fill(Diphoton_Minv,eventWeight*Event_weightPuUp);
+            
             dPhi_EBEE->Fill(dPhi,eventWeight);
             dEta_EBEE->Fill(fabs(Diphoton_deltaEta),eventWeight);
             dRgg_EBEE->Fill(Diphoton_deltaR,eventWeight);
@@ -852,6 +876,12 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
     ggMass_renor2_EBEE_varbin->Write();
     ggMass_sat_EBEB->Write();
     ggMass_sat_EBEE->Write();
+    ggMass_puDown_EBEB->Write();
+    ggMass_pu_EBEB->Write();
+    ggMass_puUp_EBEB->Write();
+    ggMass_puDown_EBEE->Write();
+    ggMass_pu_EBEE->Write();
+    ggMass_puUp_EBEE->Write();
     hEventWeight->Write();
     dPhi_EBEB->Write();
     dPhi_EBEE->Write();
