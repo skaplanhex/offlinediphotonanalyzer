@@ -104,9 +104,13 @@ double getFakeRate2016(double pt, double eta){
       // double P2 = 2.12836383295641;
 
       // coeffs for JetHT/DoubleMuon avg
-      double P0 = 2.42696e-02;
-      double P1 = 5.97337e+02;
-      double P2 = 2.19677e+00;
+      // double P0 = 2.42696e-02;
+      // double P1 = 5.97337e+02;
+      // double P2 = 2.19677e+00;
+      double P0 = 2.32901e-02;
+      double P1 = 3.12843e+02;
+      double P2 = 1.94784e+00;
+
       return P0 + ( P1 / TMath::Power(pt,P2) );
     }
     // fake rate in the endcaps
@@ -118,9 +122,14 @@ double getFakeRate2016(double pt, double eta){
       // double P2 = 1.58780425789786;
 
       // coeffs for JetHT/DoubleMuon avg
-      double P0 = 3.47570e-01;
-      double P1 = 3.77734e+11;
-      double P2 = 7.11732e+00;
+      // double P0 = 3.47570e-01;
+      // double P1 = 3.77734e+11;
+      // double P2 = 7.11732e+00;
+
+      double P0 = 3.26495e-01;
+      double P1 = 1.68679e+13;
+      double P2 = 7.94502e+00;
+
       return P0 + ( P1 / TMath::Power(pt,P2) );
       
     }

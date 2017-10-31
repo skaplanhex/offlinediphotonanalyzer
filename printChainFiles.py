@@ -37,7 +37,7 @@ GJetsHTBins = ["40To100","100To200","200To400","400To600","600ToInf"]
 QCDPtBins = ["5to10","10to15","15to30","30to50","50to80","80to120","120to170","170to300","300to470","470to600","600to800","800to1000","1000to1400","1400to1800","1800to2400","2400to3200","3200toInf"]
 
 # baseDirec = "/store/user/skaplan/noreplica/NewCodeNtuples_correctGENinfo/"
-baseDirec = "/store/user/skaplan/noreplica/FINALNTUPLES/"
+baseDirec = "/store/user/agarabag/noreplica/SimoneCheck_VertexUnique/"
 
 kkDict = {
     "NED-4_KK-1" : "GRW",

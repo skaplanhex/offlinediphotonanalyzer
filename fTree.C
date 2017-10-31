@@ -6,6 +6,10 @@
 #include <TCanvas.h>
 #include <TMath.h>
 
+void writeLine(std::ofstream& s, long run, long ls, long evt, TString whichPhoton,  TString region, TString cat, double pt, double scEta, double eta, double phi, double mass, double chIsoHiggs, double chIso03, double phoIso, double rhoCorPhoIso, double vz){
+
+    s << run << ":" << ls << ":" << evt << "_" << whichPhoton.Data() <<  ", " << region.Data() << ", " << cat.Data() << ", " << pt << ", " << scEta << ", " << eta << ", " << phi << ", " << mass << ", " << chIsoHiggs << ", " << chIso03 << ", " << phoIso << ", " << rhoCorPhoIso << ", " << vz << "\n";
+}
 // fits from Antonis
 double getKFactorOld(double m, bool EBEB){
 
@@ -116,6 +120,10 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
 
     // std::ofstream massFile;
     // massFile.open("masses.txt");
+    std::ofstream out;
+    TString tempName = outfilename;
+    tempName.ReplaceAll(".root",".csv");
+    out.open(tempName.Data());
     bool is2015MC     = mode.EqualTo("2015MC");
     bool is2016MC     = mode.EqualTo("2016MC");
     bool is20152016MC = mode.EqualTo("20152016MC");
@@ -571,12 +579,26 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
                 allEBEE_pt2->Fill(ptTemp);
             }
         }
-
-        if (!TriggerBit_HLT_DoublePhoton60) continue; // only admit events that pass HLT_DoublePhoton_60
+        bool passTrigger = TriggerBit_HLT_DoublePhoton60 || TriggerBit_HLT_ECALHT800;
+        if ( !passTrigger ) continue; // only admit events that pass HLT_DoublePhoton_60 or HLT_ECALHT800
         if (Photon1_pt < 75. || Photon2_pt < 75.) continue; // enforce 75 GeV pT cut
+        if (Photon1_r9_5x5 < 0.8 || Photon2_r9_5x5 < 0.8) continue; // enforce r9>0.8 cut
         if (Diphoton_Minv < 500.) continue; // mass cut
         if (Diphoton_deltaR < 0.45) continue; // dR cut
+        if (Photon1_r9_5x5 < 0.8 || Photon2_r9_5x5 < 0.8) continue; // enforce r9>0.8 for both photons
         if (!EBEB && !EBEE) continue; // if neither an EBEB nor an EBEE event, ignore it.
+
+        // double cut1;
+        // double cut2;
+        // if (Photon1_isEB) cut1 = 2.75;
+        // else if (Photon1_isEE) cut1 = 2.;
+
+        // if (Photon2_isEB) cut2 = 2.75;
+        // else if (Photon2_isEE) cut2 = 2.;
+
+        // double phoIso1 = 2.5 + Photon1_photonIso03 - (Photon1_rho*Photon1_phoEAHighPtID) - (Photon1_pt*Photon1_kappaHighPtID);
+        // double phoIso2 = 2.5 + Photon2_photonIso03 - (Photon2_rho*Photon2_phoEAHighPtID) - (Photon2_pt*Photon2_kappaHighPtID);
+        // if (phoIso1 > cut1 || phoIso2 > cut2) continue;
 
         // print out high mass events in data to make fireworks printouts
         if (mode.EqualTo("DATA") && Diphoton_Minv > 1900.){
@@ -714,6 +736,9 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
                 ggMass_NLODown_EBEB_varbin->Fill(Diphoton_Minv,eventWeight*getKFactor(kFactor_NLODown_EBEB,GenDiphoton_Minv,false) / nominalKFactor);
                 ggMass_NLOUp_EBEB_varbin->Fill(Diphoton_Minv,eventWeight*getKFactor(kFactor_NLOUp_EBEB,GenDiphoton_Minv) / nominalKFactor);
             }
+            // write out info for each photon
+            writeLine(out,Event_run,Event_LS,Event_evnum,"lead","EB","EBEB",Photon1_pt,Photon1_scEta,Photon1_eta,Photon1_phi,Diphoton_Minv,Photon1_chargedHadIso,Photon1_chargedHadIso03,Photon1_corPhotonIso03,Photon1_photonIso03,HiggsVertex_vz);
+            writeLine(out,Event_run,Event_LS,Event_evnum,"sublead","EB","EBEB",Photon2_pt,Photon2_scEta,Photon2_eta,Photon2_phi,Diphoton_Minv,Photon2_chargedHadIso,Photon2_chargedHadIso03,Photon2_corPhotonIso03,Photon2_photonIso03,HiggsVertex_vz);
         } // end EBEB block
 
         else if (EBEE){
@@ -806,8 +831,21 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
                 ggMass_NLOUp_EBEE_varbin->Fill(Diphoton_Minv,eventWeight*getKFactor(kFactor_NLOUp_EBEE,GenDiphoton_Minv) / nominalKFactor);
 
             }
+            // void writeLine(std::ofstream& s, long run, long ls, long evt, TString whichPhoton,  TString region, TString cat, double pt, double scEta, double eta, double phi, double mass, double chIsoHiggs, double chIso03, double phoIso, double rhoCorPhoIso, double vz)
+            TString r1,r2;
+            if (Diphoton_isEEEB){
+                r1 = "EE";
+                r2 = "EB";
+            }
+            else if (Diphoton_isEBEE){
+                r1="EB";
+                r2="EE";
+            }
+            writeLine(out,Event_run,Event_LS,Event_evnum,"lead",r1,"EBEE",Photon1_pt,Photon1_scEta,Photon1_eta,Photon1_phi,Diphoton_Minv,Photon1_chargedHadIso,Photon1_chargedHadIso03,Photon1_corPhotonIso03,Photon1_photonIso03,HiggsVertex_vz);
+            writeLine(out,Event_run,Event_LS,Event_evnum,"sublead",r2,"EBEE",Photon2_pt,Photon2_scEta,Photon2_eta,Photon2_phi,Diphoton_Minv,Photon2_chargedHadIso,Photon2_chargedHadIso03,Photon2_corPhotonIso03,Photon2_photonIso03,HiggsVertex_vz);
         } // end EBEE block
     } // end event loop
+    out.close();
 
     // append lumi to outfilename for MC
     if (isMC){

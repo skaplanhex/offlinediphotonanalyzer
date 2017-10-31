@@ -6,9 +6,9 @@ Notification = NEVER
 x509userproxy = $ENV(X509_USER_PROXY)
 Executable = runFakes.sh
 should_transfer_files = YES
-transfer_input_files = /uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/extractFakeContributions.C,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/extractFakeContributions.h,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/driver_extractFakes.C,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/avgFR2015.root,/uscms_data/d3/skaplan/diphotons/offlineanalysis/CMSSW_7_6_4/src/avgFR2016.root
+transfer_input_files = /uscms_data/d3/skaplan/diphotons/offlineanalysis2016/CMSSW_7_6_4/src/extractFakeContributions.C,/uscms_data/d3/skaplan/diphotons/offlineanalysis2016/CMSSW_7_6_4/src/extractFakeContributions.h,/uscms_data/d3/skaplan/diphotons/offlineanalysis2016/CMSSW_7_6_4/src/driver_extractFakes.C,/uscms_data/d3/skaplan/diphotons/offlineanalysis2016/CMSSW_7_6_4/src/avgFR2016.root
 Output = /uscms/home/skaplan/condor/fake_$(Process).stdout
 Error = /uscms/home/skaplan/condor/fake_$(Process).stderr
 Log = /uscms/home/skaplan/condor/fake_$(Process).condor
 Arguments = $(Process)
-Queue 8
+Queue 7

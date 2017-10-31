@@ -1,8 +1,8 @@
 //////////////////////////////////////////////////////////
 // This class has been automatically generated on
-// Wed May 10 12:08:26 2017 by ROOT version 6.02/13
+// Thu Sep  7 11:48:54 2017 by ROOT version 6.02/13
 // from TTree fTree/DiPhotonTree
-// found on file: root://cmseos.fnal.gov//store/user/skaplan/noreplica/FINALNTUPLES/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa__RunIIFall15MiniAODv2-PU25nsData2015v1_76X_mcRun2_asymptotic_/170503_031435/0000/out_GGJets_M-500To1000_Pt-50_13TeV-sherpa_RunIIFall15MiniAODv2-PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1_numEvent100_3.root
+// found on file: root://cmseos.fnal.gov//store/user/agarabag/noreplica/SimoneCheck_VertexUnique/ADDGravToGG_MS-3000_NED-2_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-2_KK-1_M-500To1000_13TeV-sherpa__80XMiniAODv2__MINIAODSIM/170825_172548/0000/out_ADDGravToGG_MS-3000_NED-2_KK-1_M-500To1000_13TeV-sherpa_RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1_numEvent100_1.root
 //////////////////////////////////////////////////////////
 
 #ifndef fTree_h
@@ -79,6 +79,16 @@ public :
    Double_t        PrimaryVertex_d0;
    Int_t           PrimaryVertex_nTracks;
    Bool_t          PrimaryVertex_isFake;
+   Double_t        HiggsVertex_vx;
+   Double_t        HiggsVertex_vy;
+   Double_t        HiggsVertex_vz;
+   Double_t        HiggsVertex_vxError;
+   Double_t        HiggsVertex_vyError;
+   Double_t        HiggsVertex_vzError;
+   Double_t        HiggsVertex_ndof;
+   Double_t        HiggsVertex_d0;
+   Int_t           HiggsVertex_nTracks;
+   Bool_t          HiggsVertex_isFake;
    Float_t         Jet_jetHT;
    Float_t         Jet_leadingJetPt;
    Float_t         Jet_leadingJetEta;
@@ -927,6 +937,7 @@ public :
    Double_t        Photon1_scEta;
    Double_t        Photon1_scPhi;
    Double_t        Photon1_rho;
+   Double_t        Photon1_chargedHadIso;
    Double_t        Photon1_chargedHadIso03;
    Double_t        Photon1_neutralHadIso03;
    Double_t        Photon1_photonIso03;
@@ -951,6 +962,7 @@ public :
    Double_t        Photon1_alphaHighPtID;
    Double_t        Photon1_kappaHighPtID;
    Double_t        Photon1_phoEAHighPtID;
+   Double_t        Photon1_phoIsoExtraHighPtID;
    Double_t        Photon1_chEAegmID;
    Double_t        Photon1_nhEAegmID;
    Double_t        Photon1_phoEAegmID;
@@ -983,6 +995,7 @@ public :
    Double_t        Photon2_scEta;
    Double_t        Photon2_scPhi;
    Double_t        Photon2_rho;
+   Double_t        Photon2_chargedHadIso;
    Double_t        Photon2_chargedHadIso03;
    Double_t        Photon2_neutralHadIso03;
    Double_t        Photon2_photonIso03;
@@ -1007,6 +1020,7 @@ public :
    Double_t        Photon2_alphaHighPtID;
    Double_t        Photon2_kappaHighPtID;
    Double_t        Photon2_phoEAHighPtID;
+   Double_t        Photon2_phoIsoExtraHighPtID;
    Double_t        Photon2_chEAegmID;
    Double_t        Photon2_nhEAegmID;
    Double_t        Photon2_phoEAegmID;
@@ -1091,6 +1105,7 @@ public :
    Double_t        TTPhoton1_scEta;
    Double_t        TTPhoton1_scPhi;
    Double_t        TTPhoton1_rho;
+   Double_t        TTPhoton1_chargedHadIso;
    Double_t        TTPhoton1_chargedHadIso03;
    Double_t        TTPhoton1_neutralHadIso03;
    Double_t        TTPhoton1_photonIso03;
@@ -1115,6 +1130,7 @@ public :
    Double_t        TTPhoton1_alphaHighPtID;
    Double_t        TTPhoton1_kappaHighPtID;
    Double_t        TTPhoton1_phoEAHighPtID;
+   Double_t        TTPhoton1_phoIsoExtraHighPtID;
    Double_t        TTPhoton1_chEAegmID;
    Double_t        TTPhoton1_nhEAegmID;
    Double_t        TTPhoton1_phoEAegmID;
@@ -1147,6 +1163,7 @@ public :
    Double_t        TTPhoton2_scEta;
    Double_t        TTPhoton2_scPhi;
    Double_t        TTPhoton2_rho;
+   Double_t        TTPhoton2_chargedHadIso;
    Double_t        TTPhoton2_chargedHadIso03;
    Double_t        TTPhoton2_neutralHadIso03;
    Double_t        TTPhoton2_photonIso03;
@@ -1171,6 +1188,7 @@ public :
    Double_t        TTPhoton2_alphaHighPtID;
    Double_t        TTPhoton2_kappaHighPtID;
    Double_t        TTPhoton2_phoEAHighPtID;
+   Double_t        TTPhoton2_phoIsoExtraHighPtID;
    Double_t        TTPhoton2_chEAegmID;
    Double_t        TTPhoton2_nhEAegmID;
    Double_t        TTPhoton2_phoEAegmID;
@@ -1214,6 +1232,7 @@ public :
    Double_t        TFPhoton1_scEta;
    Double_t        TFPhoton1_scPhi;
    Double_t        TFPhoton1_rho;
+   Double_t        TFPhoton1_chargedHadIso;
    Double_t        TFPhoton1_chargedHadIso03;
    Double_t        TFPhoton1_neutralHadIso03;
    Double_t        TFPhoton1_photonIso03;
@@ -1238,6 +1257,7 @@ public :
    Double_t        TFPhoton1_alphaHighPtID;
    Double_t        TFPhoton1_kappaHighPtID;
    Double_t        TFPhoton1_phoEAHighPtID;
+   Double_t        TFPhoton1_phoIsoExtraHighPtID;
    Double_t        TFPhoton1_chEAegmID;
    Double_t        TFPhoton1_nhEAegmID;
    Double_t        TFPhoton1_phoEAegmID;
@@ -1270,6 +1290,7 @@ public :
    Double_t        TFPhoton2_scEta;
    Double_t        TFPhoton2_scPhi;
    Double_t        TFPhoton2_rho;
+   Double_t        TFPhoton2_chargedHadIso;
    Double_t        TFPhoton2_chargedHadIso03;
    Double_t        TFPhoton2_neutralHadIso03;
    Double_t        TFPhoton2_photonIso03;
@@ -1294,6 +1315,7 @@ public :
    Double_t        TFPhoton2_alphaHighPtID;
    Double_t        TFPhoton2_kappaHighPtID;
    Double_t        TFPhoton2_phoEAHighPtID;
+   Double_t        TFPhoton2_phoIsoExtraHighPtID;
    Double_t        TFPhoton2_chEAegmID;
    Double_t        TFPhoton2_nhEAegmID;
    Double_t        TFPhoton2_phoEAegmID;
@@ -1337,6 +1359,7 @@ public :
    Double_t        FTPhoton1_scEta;
    Double_t        FTPhoton1_scPhi;
    Double_t        FTPhoton1_rho;
+   Double_t        FTPhoton1_chargedHadIso;
    Double_t        FTPhoton1_chargedHadIso03;
    Double_t        FTPhoton1_neutralHadIso03;
    Double_t        FTPhoton1_photonIso03;
@@ -1361,6 +1384,7 @@ public :
    Double_t        FTPhoton1_alphaHighPtID;
    Double_t        FTPhoton1_kappaHighPtID;
    Double_t        FTPhoton1_phoEAHighPtID;
+   Double_t        FTPhoton1_phoIsoExtraHighPtID;
    Double_t        FTPhoton1_chEAegmID;
    Double_t        FTPhoton1_nhEAegmID;
    Double_t        FTPhoton1_phoEAegmID;
@@ -1393,6 +1417,7 @@ public :
    Double_t        FTPhoton2_scEta;
    Double_t        FTPhoton2_scPhi;
    Double_t        FTPhoton2_rho;
+   Double_t        FTPhoton2_chargedHadIso;
    Double_t        FTPhoton2_chargedHadIso03;
    Double_t        FTPhoton2_neutralHadIso03;
    Double_t        FTPhoton2_photonIso03;
@@ -1417,6 +1442,7 @@ public :
    Double_t        FTPhoton2_alphaHighPtID;
    Double_t        FTPhoton2_kappaHighPtID;
    Double_t        FTPhoton2_phoEAHighPtID;
+   Double_t        FTPhoton2_phoIsoExtraHighPtID;
    Double_t        FTPhoton2_chEAegmID;
    Double_t        FTPhoton2_nhEAegmID;
    Double_t        FTPhoton2_phoEAegmID;
@@ -1460,6 +1486,7 @@ public :
    Double_t        FFPhoton1_scEta;
    Double_t        FFPhoton1_scPhi;
    Double_t        FFPhoton1_rho;
+   Double_t        FFPhoton1_chargedHadIso;
    Double_t        FFPhoton1_chargedHadIso03;
    Double_t        FFPhoton1_neutralHadIso03;
    Double_t        FFPhoton1_photonIso03;
@@ -1484,6 +1511,7 @@ public :
    Double_t        FFPhoton1_alphaHighPtID;
    Double_t        FFPhoton1_kappaHighPtID;
    Double_t        FFPhoton1_phoEAHighPtID;
+   Double_t        FFPhoton1_phoIsoExtraHighPtID;
    Double_t        FFPhoton1_chEAegmID;
    Double_t        FFPhoton1_nhEAegmID;
    Double_t        FFPhoton1_phoEAegmID;
@@ -1516,6 +1544,7 @@ public :
    Double_t        FFPhoton2_scEta;
    Double_t        FFPhoton2_scPhi;
    Double_t        FFPhoton2_rho;
+   Double_t        FFPhoton2_chargedHadIso;
    Double_t        FFPhoton2_chargedHadIso03;
    Double_t        FFPhoton2_neutralHadIso03;
    Double_t        FFPhoton2_photonIso03;
@@ -1540,6 +1569,7 @@ public :
    Double_t        FFPhoton2_alphaHighPtID;
    Double_t        FFPhoton2_kappaHighPtID;
    Double_t        FFPhoton2_phoEAHighPtID;
+   Double_t        FFPhoton2_phoIsoExtraHighPtID;
    Double_t        FFPhoton2_chEAegmID;
    Double_t        FFPhoton2_nhEAegmID;
    Double_t        FFPhoton2_phoEAegmID;
@@ -1589,6 +1619,7 @@ public :
    TBranch        *b_BeamSpot;   //!
    TBranch        *b_Vertex0;   //!
    TBranch        *b_PrimaryVertex;   //!
+   TBranch        *b_HiggsVertex;   //!
    TBranch        *b_Jet;   //!
    TBranch        *b_TriggerBit;   //!
    TBranch        *b_TriggerPrescale;   //!
@@ -1637,11 +1668,11 @@ fTree::fTree(TTree *tree) : fChain(0)
 // if parameter tree is not specified (or zero), connect the file
 // used to generate this class and read the Tree.
    if (tree == 0) {
-      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("root://cmseos.fnal.gov//store/user/skaplan/noreplica/FINALNTUPLES/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa__RunIIFall15MiniAODv2-PU25nsData2015v1_76X_mcRun2_asymptotic_/170503_031435/0000/out_GGJets_M-500To1000_Pt-50_13TeV-sherpa_RunIIFall15MiniAODv2-PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1_numEvent100_3.root");
+      TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("root://cmseos.fnal.gov//store/user/agarabag/noreplica/SimoneCheck_VertexUnique/ADDGravToGG_MS-3000_NED-2_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-2_KK-1_M-500To1000_13TeV-sherpa__80XMiniAODv2__MINIAODSIM/170825_172548/0000/out_ADDGravToGG_MS-3000_NED-2_KK-1_M-500To1000_13TeV-sherpa_RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1_numEvent100_1.root");
       if (!f || !f->IsOpen()) {
-         f = new TFile("root://cmseos.fnal.gov//store/user/skaplan/noreplica/FINALNTUPLES/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa__RunIIFall15MiniAODv2-PU25nsData2015v1_76X_mcRun2_asymptotic_/170503_031435/0000/out_GGJets_M-500To1000_Pt-50_13TeV-sherpa_RunIIFall15MiniAODv2-PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1_numEvent100_3.root");
+         f = new TFile("root://cmseos.fnal.gov//store/user/agarabag/noreplica/SimoneCheck_VertexUnique/ADDGravToGG_MS-3000_NED-2_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-2_KK-1_M-500To1000_13TeV-sherpa__80XMiniAODv2__MINIAODSIM/170825_172548/0000/out_ADDGravToGG_MS-3000_NED-2_KK-1_M-500To1000_13TeV-sherpa_RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1_numEvent100_1.root");
       }
-      TDirectory * dir = (TDirectory*)f->Get("root://cmseos.fnal.gov//store/user/skaplan/noreplica/FINALNTUPLES/GGJets_M-500To1000_Pt-50_13TeV-sherpa/crab_GGJets_M-500To1000_Pt-50_13TeV-sherpa__RunIIFall15MiniAODv2-PU25nsData2015v1_76X_mcRun2_asymptotic_/170503_031435/0000/out_GGJets_M-500To1000_Pt-50_13TeV-sherpa_RunIIFall15MiniAODv2-PU25nsData2015v1_76X_mcRun2_asymptotic_v12-v1_numEvent100_3.root:/diphoton");
+      TDirectory * dir = (TDirectory*)f->Get("root://cmseos.fnal.gov//store/user/agarabag/noreplica/SimoneCheck_VertexUnique/ADDGravToGG_MS-3000_NED-2_KK-1_M-500To1000_13TeV-sherpa/crab_ADDGravToGG_MS-3000_NED-2_KK-1_M-500To1000_13TeV-sherpa__80XMiniAODv2__MINIAODSIM/170825_172548/0000/out_ADDGravToGG_MS-3000_NED-2_KK-1_M-500To1000_13TeV-sherpa_RunIISummer16MiniAODv2-PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1_numEvent100_1.root:/diphoton");
       dir->GetObject("fTree",tree);
 
    }
@@ -1693,6 +1724,7 @@ void fTree::Init(TTree *tree)
    fChain->SetBranchAddress("BeamSpot", &BeamSpot_x0, &b_BeamSpot);
    fChain->SetBranchAddress("Vertex0", &Vertex0_vx, &b_Vertex0);
    fChain->SetBranchAddress("PrimaryVertex", &PrimaryVertex_vx, &b_PrimaryVertex);
+   fChain->SetBranchAddress("HiggsVertex", &HiggsVertex_vx, &b_HiggsVertex);
    fChain->SetBranchAddress("Jet", &Jet_jetHT, &b_Jet);
    fChain->SetBranchAddress("TriggerBit", &TriggerBit_HLT_AK4PFDJet60_Eta2p1ForPPRef, &b_TriggerBit);
    fChain->SetBranchAddress("TriggerPrescale", &TriggerPrescale_HLT_AK4PFDJet60_Eta2p1ForPPRef, &b_TriggerPrescale);
