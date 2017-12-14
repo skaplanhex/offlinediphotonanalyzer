@@ -585,7 +585,7 @@ void fTree::Loop(TString outfilename, TString mode = "DATA")
         if (Photon1_r9_5x5 < 0.8 || Photon2_r9_5x5 < 0.8) continue; // enforce r9>0.8 cut
         if (Diphoton_Minv < 500.) continue; // mass cut
         if (Diphoton_deltaR < 0.45) continue; // dR cut
-        if (Photon1_r9_5x5 < 0.8 || Photon2_r9_5x5 < 0.8) continue; // enforce r9>0.8 for both photons
+        // if (Photon1_r9_5x5 < 0.8 || Photon2_r9_5x5 < 0.8) continue; // enforce r9>0.8 for both photons
         if (!EBEB && !EBEE) continue; // if neither an EBEB nor an EBEE event, ignore it.
 
         // double cut1;
